@@ -1,155 +1,357 @@
 package com.ashikha.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
- * Response structure for Mutual Fund-related data based on the data dictionary.
+ * Full response for Mutual Fund data containing profile, summary, and transactions.
  */
 public class MFResponse {
 
-    @JsonProperty("ucc")
-    private String ucc;
+    @JsonProperty("profile")
+    private Profile profile;
 
-    @JsonProperty("maskedDematID")
-    private String maskedDematID;
+    @JsonProperty("summary")
+    private List<Summary> summary;
 
-    @JsonProperty("nav")
-    private Float nav;
+    @JsonProperty("transactions")
+    private Transactions transactions;
 
-    @JsonProperty("maskedAccNumber")
-    private String maskedAccNumber;
+    // ================== Profile ==================
+    public static class Profile {
+        @JsonProperty("address")
+        private String address;
 
-    @JsonProperty("isin")
-    private String isin;
+        @JsonProperty("dematId")
+        private String dematId;
 
-    @JsonProperty("isinDescription")
-    private String isinDescription;
+        @JsonProperty("dob")
+        private Long dob;
 
-    @JsonProperty("schemeCode")
-    private String schemeCode;
+        @JsonProperty("email")
+        private String email;
 
-    @JsonProperty("folioNo")
-    private String folioNo;
+        @JsonProperty("folioNo")
+        private String folioNo;
 
-    @JsonProperty("account_type")
-    private String accountType;
+        @JsonProperty("kycCompliance")
+        private Boolean kycCompliance;
 
-    @JsonProperty("costValue")
-    private Float costValue;
+        @JsonProperty("landline")
+        private String landline;
 
-    @JsonProperty("closingUnits")
-    private String closingUnits;
+        @JsonProperty("mobile")
+        private String mobile;
 
-    @JsonProperty("amc")
-    private String amc;
+        @JsonProperty("name")
+        private String name;
 
-    @JsonProperty("registrar")
-    private String registrar;
+        @JsonProperty("nominee")
+        private String nominee;
 
-    @JsonProperty("schemeOption")
-    private String schemeOption;
+        @JsonProperty("pan")
+        private String pan;
 
-    @JsonProperty("schemeCategory")
-    private String schemeCategory;
+        // Getters and Setters
+        public String getAddress() { return address; }
+        public void setAddress(String address) { this.address = address; }
 
-    @JsonProperty("fatcaStatus")
-    private String fatcaStatus;
+        public String getDematId() { return dematId; }
+        public void setDematId(String dematId) { this.dematId = dematId; }
 
-    @JsonProperty("lienUnits")
-    private String lienUnits;
+        public Long getDob() { return dob; }
+        public void setDob(Long dob) { this.dob = dob; }
 
-    @JsonProperty("lockinUnits")
-    private String lockinUnits;
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
 
-    @JsonProperty("navDate")
-    private String navDate;  // You can use Long if it's in epoch format
+        public String getFolioNo() { return folioNo; }
+        public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
 
-    @JsonProperty("linkedAccRef")
-    private String linkedAccRef;
+        public Boolean getKycCompliance() { return kycCompliance; }
+        public void setKycCompliance(Boolean kycCompliance) { this.kycCompliance = kycCompliance; }
 
-    @JsonProperty("currentValue")
-    private Float currentValue;
+        public String getLandline() { return landline; }
+        public void setLandline(String landline) { this.landline = landline; }
 
-    @JsonProperty("schemeTypes")
-    private String schemeTypes;
+        public String getMobile() { return mobile; }
+        public void setMobile(String mobile) { this.mobile = mobile; }
 
-    @JsonProperty("maskedFolioNo")
-    private String maskedFolioNo;
+        public String getName() { return name; }
+        public void setName(String name) { this.name = name; }
 
-    @JsonProperty("amfiCode")
-    private String amfiCode;
+        public String getNominee() { return nominee; }
+        public void setNominee(String nominee) { this.nominee = nominee; }
 
-    // Getters and Setters
+        public String getPan() { return pan; }
+        public void setPan(String pan) { this.pan = pan; }
+    }
 
-    public String getUcc() { return ucc; }
-    public void setUcc(String ucc) { this.ucc = ucc; }
+    // ================== Summary ==================
+    public static class Summary {
+        @JsonProperty("costValue")
+        private Double costValue;
 
-    public String getMaskedDematID() { return maskedDematID; }
-    public void setMaskedDematID(String maskedDematID) { this.maskedDematID = maskedDematID; }
+        @JsonProperty("currentValue")
+        private Double currentValue;
 
-    public Float getNav() { return nav; }
-    public void setNav(Float nav) { this.nav = nav; }
+        @JsonProperty("FatcaStatus")
+        private String fatcaStatus;
 
-    public String getMaskedAccNumber() { return maskedAccNumber; }
-    public void setMaskedAccNumber(String maskedAccNumber) { this.maskedAccNumber = maskedAccNumber; }
+        @JsonProperty("amc")
+        private String amc;
 
-    public String getIsin() { return isin; }
-    public void setIsin(String isin) { this.isin = isin; }
+        @JsonProperty("amfiCode")
+        private String amfiCode;
 
-    public String getIsinDescription() { return isinDescription; }
-    public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+        @JsonProperty("closingUnits")
+        private Double closingUnits;
 
-    public String getSchemeCode() { return schemeCode; }
-    public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
+        @JsonProperty("folioNo")
+        private String folioNo;
 
-    public String getFolioNo() { return folioNo; }
-    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
+        @JsonProperty("isin")
+        private String isin;
 
-    public String getAccountType() { return accountType; }
-    public void setAccountType(String accountType) { this.accountType = accountType; }
+        @JsonProperty("isinDescription")
+        private String isinDescription;
 
-    public Float getCostValue() { return costValue; }
-    public void setCostValue(Float costValue) { this.costValue = costValue; }
+        @JsonProperty("lienUnits")
+        private Double lienUnits;
 
-    public String getClosingUnits() { return closingUnits; }
-    public void setClosingUnits(String closingUnits) { this.closingUnits = closingUnits; }
+        @JsonProperty("lockinUnits")
+        private Double lockinUnits;
 
-    public String getAmc() { return amc; }
-    public void setAmc(String amc) { this.amc = amc; }
+        @JsonProperty("nav")
+        private Double nav;
 
-    public String getRegistrar() { return registrar; }
-    public void setRegistrar(String registrar) { this.registrar = registrar; }
+        @JsonProperty("navDate")
+        private String navDate;
 
-    public String getSchemeOption() { return schemeOption; }
-    public void setSchemeOption(String schemeOption) { this.schemeOption = schemeOption; }
+        @JsonProperty("registrar")
+        private String registrar;
 
-    public String getSchemeCategory() { return schemeCategory; }
-    public void setSchemeCategory(String schemeCategory) { this.schemeCategory = schemeCategory; }
+        @JsonProperty("schemeCategory")
+        private String schemeCategory;
 
-    public String getFatcaStatus() { return fatcaStatus; }
-    public void setFatcaStatus(String fatcaStatus) { this.fatcaStatus = fatcaStatus; }
+        @JsonProperty("schemeCode")
+        private String schemeCode;
 
-    public String getLienUnits() { return lienUnits; }
-    public void setLienUnits(String lienUnits) { this.lienUnits = lienUnits; }
+        @JsonProperty("schemeOption")
+        private String schemeOption;
 
-    public String getLockinUnits() { return lockinUnits; }
-    public void setLockinUnits(String lockinUnits) { this.lockinUnits = lockinUnits; }
+        @JsonProperty("schemeTypes")
+        private String schemeTypes;
 
-    public String getNavDate() { return navDate; }
-    public void setNavDate(String navDate) { this.navDate = navDate; }
+        @JsonProperty("ucc")
+        private String ucc;
 
-    public String getLinkedAccRef() { return linkedAccRef; }
-    public void setLinkedAccRef(String linkedAccRef) { this.linkedAccRef = linkedAccRef; }
+        // Getters and Setters
+        public Double getCostValue() { return costValue; }
+        public void setCostValue(Double costValue) { this.costValue = costValue; }
 
-    public Float getCurrentValue() { return currentValue; }
-    public void setCurrentValue(Float currentValue) { this.currentValue = currentValue; }
+        public Double getCurrentValue() { return currentValue; }
+        public void setCurrentValue(Double currentValue) { this.currentValue = currentValue; }
 
-    public String getSchemeTypes() { return schemeTypes; }
-    public void setSchemeTypes(String schemeTypes) { this.schemeTypes = schemeTypes; }
+        public String getFatcaStatus() { return fatcaStatus; }
+        public void setFatcaStatus(String fatcaStatus) { this.fatcaStatus = fatcaStatus; }
 
-    public String getMaskedFolioNo() { return maskedFolioNo; }
-    public void setMaskedFolioNo(String maskedFolioNo) { this.maskedFolioNo = maskedFolioNo; }
+        public String getAmc() { return amc; }
+        public void setAmc(String amc) { this.amc = amc; }
 
-    public String getAmfiCode() { return amfiCode; }
-    public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
+        public String getAmfiCode() { return amfiCode; }
+        public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
+
+        public Double getClosingUnits() { return closingUnits; }
+        public void setClosingUnits(Double closingUnits) { this.closingUnits = closingUnits; }
+
+        public String getFolioNo() { return folioNo; }
+        public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
+
+        public String getIsin() { return isin; }
+        public void setIsin(String isin) { this.isin = isin; }
+
+        public String getIsinDescription() { return isinDescription; }
+        public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+
+        public Double getLienUnits() { return lienUnits; }
+        public void setLienUnits(Double lienUnits) { this.lienUnits = lienUnits; }
+
+        public Double getLockinUnits() { return lockinUnits; }
+        public void setLockinUnits(Double lockinUnits) { this.lockinUnits = lockinUnits; }
+
+        public Double getNav() { return nav; }
+        public void setNav(Double nav) { this.nav = nav; }
+
+        public String getNavDate() { return navDate; }
+        public void setNavDate(String navDate) { this.navDate = navDate; }
+
+        public String getRegistrar() { return registrar; }
+        public void setRegistrar(String registrar) { this.registrar = registrar; }
+
+        public String getSchemeCategory() { return schemeCategory; }
+        public void setSchemeCategory(String schemeCategory) { this.schemeCategory = schemeCategory; }
+
+        public String getSchemeCode() { return schemeCode; }
+        public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
+
+        public String getSchemeOption() { return schemeOption; }
+        public void setSchemeOption(String schemeOption) { this.schemeOption = schemeOption; }
+
+        public String getSchemeTypes() { return schemeTypes; }
+        public void setSchemeTypes(String schemeTypes) { this.schemeTypes = schemeTypes; }
+
+        public String getUcc() { return ucc; }
+        public void setUcc(String ucc) { this.ucc = ucc; }
+    }
+
+    // ================== Transactions ==================
+    public static class Transactions {
+        @JsonProperty("startDate")
+        private String startDate;
+
+        @JsonProperty("endDate")
+        private String endDate;
+
+        @JsonProperty("transaction")
+        private List<Transaction> transactionList;
+
+        // Meta Getters & Setters
+        public String getStartDate() { return startDate; }
+        public void setStartDate(String startDate) { this.startDate = startDate; }
+
+        public String getEndDate() { return endDate; }
+        public void setEndDate(String endDate) { this.endDate = endDate; }
+
+        public List<Transaction> getTransactionList() { return transactionList; }
+        public void setTransactionList(List<Transaction> transactionList) { this.transactionList = transactionList; }
+
+        // Individual Transaction
+        public static class Transaction {
+            @JsonProperty("amc")
+            private String amc;
+
+            @JsonProperty("amfiCode")
+            private String amfiCode;
+
+            @JsonProperty("amount")
+            private Double amount;
+
+            @JsonProperty("isin")
+            private String isin;
+
+            @JsonProperty("isinDescription")
+            private String isinDescription;
+
+            @JsonProperty("lock-inDays")
+            private Integer lockInDays;
+
+            @JsonProperty("lock-inFlag")
+            private String lockInFlag;
+
+            @JsonProperty("mode")
+            private String mode;
+
+            @JsonProperty("narration")
+            private String narration;
+
+            @JsonProperty("nav")
+            private Double nav;
+
+            @JsonProperty("navDate")
+            private String navDate;
+
+            @JsonProperty("registrar")
+            private String registrar;
+
+            @JsonProperty("schemeCode")
+            private String schemeCode;
+
+            @JsonProperty("schemePlan")
+            private String schemePlan;
+
+            @JsonProperty("transactionDate")
+            private String transactionDate;
+
+            @JsonProperty("txnId")
+            private String txnId;
+
+            @JsonProperty("type")
+            private String type;
+
+            @JsonProperty("ucc")
+            private String ucc;
+
+            @JsonProperty("units")
+            private Double units;
+
+            // Getters and Setters
+            public String getAmc() { return amc; }
+            public void setAmc(String amc) { this.amc = amc; }
+
+            public String getAmfiCode() { return amfiCode; }
+            public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
+
+            public Double getAmount() { return amount; }
+            public void setAmount(Double amount) { this.amount = amount; }
+
+            public String getIsin() { return isin; }
+            public void setIsin(String isin) { this.isin = isin; }
+
+            public String getIsinDescription() { return isinDescription; }
+            public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+
+            public Integer getLockInDays() { return lockInDays; }
+            public void setLockInDays(Integer lockInDays) { this.lockInDays = lockInDays; }
+
+            public String getLockInFlag() { return lockInFlag; }
+            public void setLockInFlag(String lockInFlag) { this.lockInFlag = lockInFlag; }
+
+            public String getMode() { return mode; }
+            public void setMode(String mode) { this.mode = mode; }
+
+            public String getNarration() { return narration; }
+            public void setNarration(String narration) { this.narration = narration; }
+
+            public Double getNav() { return nav; }
+            public void setNav(Double nav) { this.nav = nav; }
+
+            public String getNavDate() { return navDate; }
+            public void setNavDate(String navDate) { this.navDate = navDate; }
+
+            public String getRegistrar() { return registrar; }
+            public void setRegistrar(String registrar) { this.registrar = registrar; }
+
+            public String getSchemeCode() { return schemeCode; }
+            public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
+
+            public String getSchemePlan() { return schemePlan; }
+            public void setSchemePlan(String schemePlan) { this.schemePlan = schemePlan; }
+
+            public String getTransactionDate() { return transactionDate; }
+            public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
+
+            public String getTxnId() { return txnId; }
+            public void setTxnId(String txnId) { this.txnId = txnId; }
+
+            public String getType() { return type; }
+            public void setType(String type) { this.type = type; }
+
+            public String getUcc() { return ucc; }
+            public void setUcc(String ucc) { this.ucc = ucc; }
+
+            public Double getUnits() { return units; }
+            public void setUnits(Double units) { this.units = units; }
+        }
+    }
+
+    // ===== Main Getters & Setters =====
+    public Profile getProfile() { return profile; }
+    public void setProfile(Profile profile) { this.profile = profile; }
+
+    public List<Summary> getSummary() { return summary; }
+    public void setSummary(List<Summary> summary) { this.summary = summary; }
+
+    public Transactions getTransactions() { return transactions; }
+    public void setTransactions(Transactions transactions) { this.transactions = transactions; }
 }
