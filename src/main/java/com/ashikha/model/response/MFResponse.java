@@ -1,4 +1,4 @@
-public package com.ashikha.model.response;
+package com.ashikha.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -152,7 +152,4 @@ public class MFResponse {
 
     public String getAmfiCode() { return amfiCode; }
     public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
-}
- {
-    
 }
