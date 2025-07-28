@@ -5,18 +5,18 @@ import java.util.List;
 
 /**
  * Corrected Response structure for Deposit Account
- * Profile → Summary → Transactions (both as List)
+ * Profile, Summary, and Transactions are all Lists
  */
 public class DepositResponse {
 
     @JsonProperty("profile")
-    private Profile profile;
+    private List<Profile> profile;  // Changed to List
 
     @JsonProperty("summary")
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private List<Transaction> transactions;  // Changed to List<Transaction>
+    private List<Transaction> transactions;
 
     // ================== Inner Classes ==================
 
@@ -178,7 +178,7 @@ public class DepositResponse {
         public void setAmount(Double amount) { this.amount = amount; }
     }
 
-    /** Transaction Section (now direct list) */
+    /** Transaction Section */
     public static class Transaction {
         @JsonProperty("amount")
         private Double amount;
@@ -237,9 +237,8 @@ public class DepositResponse {
     }
 
     // ================== Getters & Setters for Main Class ==================
-
-    public Profile getProfile() { return profile; }
-    public void setProfile(Profile profile) { this.profile = profile; }
+    public List<Profile> getProfile() { return profile; }
+    public void setProfile(List<Profile> profile) { this.profile = profile; }
 
     public List<Summary> getSummary() { return summary; }
     public void setSummary(List<Summary> summary) { this.summary = summary; }
@@ -247,4 +246,5 @@ public class DepositResponse {
     public List<Transaction> getTransactions() { return transactions; }
     public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
+
 
