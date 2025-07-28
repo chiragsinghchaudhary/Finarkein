@@ -18,7 +18,7 @@ public class GetResultResponse {
     private Map<String, String> addOnParams;
 
     // ========== Separate Non-Static State Class ==========
-    public class State {   // Removed static keyword
+    public class State {  
         @JsonProperty("state")
         private String state;
 
