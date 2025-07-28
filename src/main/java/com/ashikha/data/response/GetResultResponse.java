@@ -9,16 +9,16 @@ public class GetResultResponse {
     private String requestId;
 
     @JsonProperty("state")
-    private State state;
+    private State state;  // Non-static inner object
 
     @JsonProperty("data")
-    private DataWrapper data;  // Replaced Object with structured DataWrapper
+    private DataWrapper data;
 
     @JsonProperty("addOnParams")
     private Map<String, String> addOnParams;
 
-    // ================= State =================
-    public static class State {
+    // ========== Separate Non-Static State Class ==========
+    public class State {   // Removed static keyword
         @JsonProperty("state")
         private String state;
 
@@ -39,7 +39,7 @@ public class GetResultResponse {
         public void setDataFetchStatus(String dataFetchStatus) { this.dataFetchStatus = dataFetchStatus; }
     }
 
-    // ================= Data Wrapper =================
+    // ========== Data Wrapper ==========
     public static class DataWrapper {
 
         @JsonProperty("deposit")
@@ -62,7 +62,7 @@ public class GetResultResponse {
         public void setEquity(EquityResponse equity) { this.equity = equity; }
     }
 
-    // ================= Main Getters & Setters =================
+    // ========== Main Getters & Setters ==========
     public String getRequestId() { return requestId; }
     public void setRequestId(String requestId) { this.requestId = requestId; }
 
@@ -75,3 +75,4 @@ public class GetResultResponse {
     public Map<String, String> getAddOnParams() { return addOnParams; }
     public void setAddOnParams(Map<String, String> addOnParams) { this.addOnParams = addOnParams; }
 }
+
