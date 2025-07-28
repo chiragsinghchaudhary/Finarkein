@@ -9,13 +9,13 @@ import java.util.List;
 public class MFResponse {
 
     @JsonProperty("profile")
-    private List<Profile> profile;   // Changed to List
+    private List<Profile> profile;
 
     @JsonProperty("summary")
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private List<Transaction> transactions;  // Changed to List (flattened structure)
+    private List<Transaction> transactions; 
 
     // ================== Profile ==================
     public static class Profile {
