@@ -2,7 +2,7 @@ package com.ashikha.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DataWrapper {
+public class DataDictionary {
 
     @JsonProperty("deposit")
     private DepositResponse deposit;

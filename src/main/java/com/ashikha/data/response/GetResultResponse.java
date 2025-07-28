@@ -12,7 +12,7 @@ public class GetResultResponse {
     private State state;
 
     @JsonProperty("data")
-    private DataWrapper data;
+    private DataDictionary data;
 
     @JsonProperty("addOnParams")
     private Map<String, String> addOnParams;
@@ -24,8 +24,8 @@ public class GetResultResponse {
     public State getState() { return state; }
     public void setState(State state) { this.state = state; }
 
-    public DataWrapper getData() { return data; }
-    public void setData(DataWrapper data) { this.data = data; }
+    public DataDictionary getData() { return data; }
+    public void setData(DataDictionary data) { this.data = data; }
 
     public Map<String, String> getAddOnParams() { return addOnParams; }
     public void setAddOnParams(Map<String, String> addOnParams) { this.addOnParams = addOnParams; }
