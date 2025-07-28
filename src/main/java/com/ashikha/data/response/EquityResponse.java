@@ -15,7 +15,7 @@ public class EquityResponse {
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private Transactions transactions;
+    private List<Transaction> transactions;
 
     // ================== Profile ==================
     public static class Profile {
@@ -127,102 +127,80 @@ public class EquityResponse {
         public void setUnits(Double units) { this.units = units; }
     }
 
-    // ================== Transactions ==================
-    public static class Transactions {
-        @JsonProperty("startDate")
-        private String startDate;
+    // ================== Transactions (as List) ==================
+    public static class Transaction {
+        @JsonProperty("companyName")
+        private String companyName;
 
-        @JsonProperty("endDate")
-        private String endDate;
+        @JsonProperty("equityCategory")
+        private String equityCategory;
 
-        @JsonProperty("transaction")
-        private List<Transaction> transactionList;
+        @JsonProperty("exchange")
+        private String exchange;
 
-        // Meta Getters & Setters
-        public String getStartDate() { return startDate; }
-        public void setStartDate(String startDate) { this.startDate = startDate; }
+        @JsonProperty("isin")
+        private String isin;
 
-        public String getEndDate() { return endDate; }
-        public void setEndDate(String endDate) { this.endDate = endDate; }
+        @JsonProperty("isinDescription")
+        private String isinDescription;
 
-        public List<Transaction> getTransactionList() { return transactionList; }
-        public void setTransactionList(List<Transaction> transactionList) { this.transactionList = transactionList; }
+        @JsonProperty("narration")
+        private String narration;
 
-        // Individual transaction
-        public static class Transaction {
-            @JsonProperty("companyName")
-            private String companyName;
+        @JsonProperty("orderId")
+        private String orderId;
 
-            @JsonProperty("equityCategory")
-            private String equityCategory;
+        @JsonProperty("rate")
+        private Double rate;
 
-            @JsonProperty("exchange")
-            private String exchange;
+        @JsonProperty("transactionDateTime")
+        private Long transactionDateTime;
 
-            @JsonProperty("isin")
-            private String isin;
+        @JsonProperty("txnId")
+        private String txnId;
 
-            @JsonProperty("isinDescription")
-            private String isinDescription;
+        @JsonProperty("type")
+        private String type;
 
-            @JsonProperty("narration")
-            private String narration;
+        @JsonProperty("units")
+        private Double units;
 
-            @JsonProperty("orderId")
-            private String orderId;
+        // Getters & Setters
+        public String getCompanyName() { return companyName; }
+        public void setCompanyName(String companyName) { this.companyName = companyName; }
 
-            @JsonProperty("rate")
-            private Double rate;
+        public String getEquityCategory() { return equityCategory; }
+        public void setEquityCategory(String equityCategory) { this.equityCategory = equityCategory; }
 
-            @JsonProperty("transactionDateTime")
-            private Long transactionDateTime;
+        public String getExchange() { return exchange; }
+        public void setExchange(String exchange) { this.exchange = exchange; }
 
-            @JsonProperty("txnId")
-            private String txnId;
+        public String getIsin() { return isin; }
+        public void setIsin(String isin) { this.isin = isin; }
 
-            @JsonProperty("type")
-            private String type;
+        public String getIsinDescription() { return isinDescription; }
+        public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
 
-            @JsonProperty("units")
-            private Double units;
+        public String getNarration() { return narration; }
+        public void setNarration(String narration) { this.narration = narration; }
 
-            // Getters & Setters
-            public String getCompanyName() { return companyName; }
-            public void setCompanyName(String companyName) { this.companyName = companyName; }
+        public String getOrderId() { return orderId; }
+        public void setOrderId(String orderId) { this.orderId = orderId; }
 
-            public String getEquityCategory() { return equityCategory; }
-            public void setEquityCategory(String equityCategory) { this.equityCategory = equityCategory; }
+        public Double getRate() { return rate; }
+        public void setRate(Double rate) { this.rate = rate; }
 
-            public String getExchange() { return exchange; }
-            public void setExchange(String exchange) { this.exchange = exchange; }
+        public Long getTransactionDateTime() { return transactionDateTime; }
+        public void setTransactionDateTime(Long transactionDateTime) { this.transactionDateTime = transactionDateTime; }
 
-            public String getIsin() { return isin; }
-            public void setIsin(String isin) { this.isin = isin; }
+        public String getTxnId() { return txnId; }
+        public void setTxnId(String txnId) { this.txnId = txnId; }
 
-            public String getIsinDescription() { return isinDescription; }
-            public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
 
-            public String getNarration() { return narration; }
-            public void setNarration(String narration) { this.narration = narration; }
-
-            public String getOrderId() { return orderId; }
-            public void setOrderId(String orderId) { this.orderId = orderId; }
-
-            public Double getRate() { return rate; }
-            public void setRate(Double rate) { this.rate = rate; }
-
-            public Long getTransactionDateTime() { return transactionDateTime; }
-            public void setTransactionDateTime(Long transactionDateTime) { this.transactionDateTime = transactionDateTime; }
-
-            public String getTxnId() { return txnId; }
-            public void setTxnId(String txnId) { this.txnId = txnId; }
-
-            public String getType() { return type; }
-            public void setType(String type) { this.type = type; }
-
-            public Double getUnits() { return units; }
-            public void setUnits(Double units) { this.units = units; }
-        }
+        public Double getUnits() { return units; }
+        public void setUnits(Double units) { this.units = units; }
     }
 
     // ===== Main Getters & Setters =====
@@ -232,6 +210,7 @@ public class EquityResponse {
     public List<Summary> getSummary() { return summary; }
     public void setSummary(List<Summary> summary) { this.summary = summary; }
 
-    public Transactions getTransactions() { return transactions; }
-    public void setTransactions(Transactions transactions) { this.transactions = transactions; }
+    public List<Transaction> getTransactions() { return transactions; }
+    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
+
