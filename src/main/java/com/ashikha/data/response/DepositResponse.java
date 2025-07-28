@@ -10,7 +10,7 @@ import java.util.List;
 public class DepositResponse {
 
     @JsonProperty("profile")
-    private List<Profile> profile;  // Changed to List
+    private List<Profile> profile;
 
     @JsonProperty("summary")
     private List<Summary> summary;
