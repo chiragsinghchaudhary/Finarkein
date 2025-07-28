@@ -9,13 +9,13 @@ import java.util.List;
 public class EquityResponse {
 
     @JsonProperty("profile")
-    private Profile profile;
+    private List<Profile> profile;   // Changed to List
 
     @JsonProperty("summary")
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private List<Transaction> transactions;
+    private List<Transaction> transactions;  // Already List
 
     // ================== Profile ==================
     public static class Profile {
@@ -127,7 +127,7 @@ public class EquityResponse {
         public void setUnits(Double units) { this.units = units; }
     }
 
-    // ================== Transactions (as List) ==================
+    // ================== Transactions (List) ==================
     public static class Transaction {
         @JsonProperty("companyName")
         private String companyName;
@@ -204,8 +204,8 @@ public class EquityResponse {
     }
 
     // ===== Main Getters & Setters =====
-    public Profile getProfile() { return profile; }
-    public void setProfile(Profile profile) { this.profile = profile; }
+    public List<Profile> getProfile() { return profile; }
+    public void setProfile(List<Profile> profile) { this.profile = profile; }
 
     public List<Summary> getSummary() { return summary; }
     public void setSummary(List<Summary> summary) { this.summary = summary; }
@@ -213,4 +213,3 @@ public class EquityResponse {
     public List<Transaction> getTransactions() { return transactions; }
     public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
-
