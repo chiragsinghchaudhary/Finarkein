@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Corrected Response structure for Deposit Account
- * Profile → Summary → Transactions
+ * Profile → Summary → Transactions (both as List)
  */
 public class DepositResponse {
 
@@ -16,7 +16,7 @@ public class DepositResponse {
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private Transactions transactions;
+    private List<Transaction> transactions;  // Changed to List<Transaction>
 
     // ================== Inner Classes ==================
 
@@ -178,84 +178,62 @@ public class DepositResponse {
         public void setAmount(Double amount) { this.amount = amount; }
     }
 
-    /** Transactions Section */
-    public static class Transactions {
-        @JsonProperty("startDate")
-        private String startDate;
+    /** Transaction Section (now direct list) */
+    public static class Transaction {
+        @JsonProperty("amount")
+        private Double amount;
 
-        @JsonProperty("endDate")
-        private String endDate;
+        @JsonProperty("currentBalance")
+        private Double currentBalance;
 
-        @JsonProperty("transaction")
-        private List<Transaction> transaction;
+        @JsonProperty("mode")
+        private String mode;
 
-        /** Transaction Details */
-        public static class Transaction {
-            @JsonProperty("amount")
-            private Double amount;
+        @JsonProperty("narration")
+        private String narration;
 
-            @JsonProperty("currentBalance")
-            private Double currentBalance;
+        @JsonProperty("reference")
+        private String reference;
 
-            @JsonProperty("mode")
-            private String mode;
+        @JsonProperty("transactionId")
+        private String transactionId;
 
-            @JsonProperty("narration")
-            private String narration;
+        @JsonProperty("transactionTimestamp")
+        private Long transactionTimestamp;
 
-            @JsonProperty("reference")
-            private String reference;
+        @JsonProperty("type")
+        private String type;
 
-            @JsonProperty("transactionId")
-            private String transactionId;
-
-            @JsonProperty("transactionTimestamp")
-            private Long transactionTimestamp;
-
-            @JsonProperty("type")
-            private String type;
-
-            @JsonProperty("valueDate")
-            private Long valueDate;
-
-            // Getters & Setters
-            public Double getAmount() { return amount; }
-            public void setAmount(Double amount) { this.amount = amount; }
-
-            public Double getCurrentBalance() { return currentBalance; }
-            public void setCurrentBalance(Double currentBalance) { this.currentBalance = currentBalance; }
-
-            public String getMode() { return mode; }
-            public void setMode(String mode) { this.mode = mode; }
-
-            public String getNarration() { return narration; }
-            public void setNarration(String narration) { this.narration = narration; }
-
-            public String getReference() { return reference; }
-            public void setReference(String reference) { this.reference = reference; }
-
-            public String getTransactionId() { return transactionId; }
-            public void setTransactionId(String transactionId) { this.transactionId = transactionId; }
-
-            public Long getTransactionTimestamp() { return transactionTimestamp; }
-            public void setTransactionTimestamp(Long transactionTimestamp) { this.transactionTimestamp = transactionTimestamp; }
-
-            public String getType() { return type; }
-            public void setType(String type) { this.type = type; }
-
-            public Long getValueDate() { return valueDate; }
-            public void setValueDate(Long valueDate) { this.valueDate = valueDate; }
-        }
+        @JsonProperty("valueDate")
+        private Long valueDate;
 
         // Getters & Setters
-        public String getStartDate() { return startDate; }
-        public void setStartDate(String startDate) { this.startDate = startDate; }
+        public Double getAmount() { return amount; }
+        public void setAmount(Double amount) { this.amount = amount; }
 
-        public String getEndDate() { return endDate; }
-        public void setEndDate(String endDate) { this.endDate = endDate; }
+        public Double getCurrentBalance() { return currentBalance; }
+        public void setCurrentBalance(Double currentBalance) { this.currentBalance = currentBalance; }
 
-        public List<Transaction> getTransaction() { return transaction; }
-        public void setTransaction(List<Transaction> transaction) { this.transaction = transaction; }
+        public String getMode() { return mode; }
+        public void setMode(String mode) { this.mode = mode; }
+
+        public String getNarration() { return narration; }
+        public void setNarration(String narration) { this.narration = narration; }
+
+        public String getReference() { return reference; }
+        public void setReference(String reference) { this.reference = reference; }
+
+        public String getTransactionId() { return transactionId; }
+        public void setTransactionId(String transactionId) { this.transactionId = transactionId; }
+
+        public Long getTransactionTimestamp() { return transactionTimestamp; }
+        public void setTransactionTimestamp(Long transactionTimestamp) { this.transactionTimestamp = transactionTimestamp; }
+
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+
+        public Long getValueDate() { return valueDate; }
+        public void setValueDate(Long valueDate) { this.valueDate = valueDate; }
     }
 
     // ================== Getters & Setters for Main Class ==================
@@ -266,6 +244,7 @@ public class DepositResponse {
     public List<Summary> getSummary() { return summary; }
     public void setSummary(List<Summary> summary) { this.summary = summary; }
 
-    public Transactions getTransactions() { return transactions; }
-    public void setTransactions(Transactions transactions) { this.transactions = transactions; }
+    public List<Transaction> getTransactions() { return transactions; }
+    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
+
