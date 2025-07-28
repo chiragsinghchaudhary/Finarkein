@@ -9,13 +9,13 @@ import java.util.List;
 public class MFResponse {
 
     @JsonProperty("profile")
-    private Profile profile;
+    private List<Profile> profile;   // Changed to List
 
     @JsonProperty("summary")
     private List<Summary> summary;
 
     @JsonProperty("transactions")
-    private Transactions transactions;
+    private List<Transaction> transactions;  // Changed to List (flattened structure)
 
     // ================== Profile ==================
     public static class Profile {
@@ -205,153 +205,131 @@ public class MFResponse {
         public void setUcc(String ucc) { this.ucc = ucc; }
     }
 
-    // ================== Transactions ==================
-    public static class Transactions {
-        @JsonProperty("startDate")
-        private String startDate;
+    // ================== Transactions (Flattened) ==================
+    public static class Transaction {
+        @JsonProperty("amc")
+        private String amc;
 
-        @JsonProperty("endDate")
-        private String endDate;
+        @JsonProperty("amfiCode")
+        private String amfiCode;
 
-        @JsonProperty("transaction")
-        private List<Transaction> transactionList;
+        @JsonProperty("amount")
+        private Double amount;
 
-        // Meta Getters & Setters
-        public String getStartDate() { return startDate; }
-        public void setStartDate(String startDate) { this.startDate = startDate; }
+        @JsonProperty("isin")
+        private String isin;
 
-        public String getEndDate() { return endDate; }
-        public void setEndDate(String endDate) { this.endDate = endDate; }
+        @JsonProperty("isinDescription")
+        private String isinDescription;
 
-        public List<Transaction> getTransactionList() { return transactionList; }
-        public void setTransactionList(List<Transaction> transactionList) { this.transactionList = transactionList; }
+        @JsonProperty("lock-inDays")
+        private Integer lockInDays;
 
-        // Individual Transaction
-        public static class Transaction {
-            @JsonProperty("amc")
-            private String amc;
+        @JsonProperty("lock-inFlag")
+        private String lockInFlag;
 
-            @JsonProperty("amfiCode")
-            private String amfiCode;
+        @JsonProperty("mode")
+        private String mode;
 
-            @JsonProperty("amount")
-            private Double amount;
+        @JsonProperty("narration")
+        private String narration;
 
-            @JsonProperty("isin")
-            private String isin;
+        @JsonProperty("nav")
+        private Double nav;
 
-            @JsonProperty("isinDescription")
-            private String isinDescription;
+        @JsonProperty("navDate")
+        private String navDate;
 
-            @JsonProperty("lock-inDays")
-            private Integer lockInDays;
+        @JsonProperty("registrar")
+        private String registrar;
 
-            @JsonProperty("lock-inFlag")
-            private String lockInFlag;
+        @JsonProperty("schemeCode")
+        private String schemeCode;
 
-            @JsonProperty("mode")
-            private String mode;
+        @JsonProperty("schemePlan")
+        private String schemePlan;
 
-            @JsonProperty("narration")
-            private String narration;
+        @JsonProperty("transactionDate")
+        private String transactionDate;
 
-            @JsonProperty("nav")
-            private Double nav;
+        @JsonProperty("txnId")
+        private String txnId;
 
-            @JsonProperty("navDate")
-            private String navDate;
+        @JsonProperty("type")
+        private String type;
 
-            @JsonProperty("registrar")
-            private String registrar;
+        @JsonProperty("ucc")
+        private String ucc;
 
-            @JsonProperty("schemeCode")
-            private String schemeCode;
+        @JsonProperty("units")
+        private Double units;
 
-            @JsonProperty("schemePlan")
-            private String schemePlan;
+        // Getters and Setters
+        public String getAmc() { return amc; }
+        public void setAmc(String amc) { this.amc = amc; }
 
-            @JsonProperty("transactionDate")
-            private String transactionDate;
+        public String getAmfiCode() { return amfiCode; }
+        public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
 
-            @JsonProperty("txnId")
-            private String txnId;
+        public Double getAmount() { return amount; }
+        public void setAmount(Double amount) { this.amount = amount; }
 
-            @JsonProperty("type")
-            private String type;
+        public String getIsin() { return isin; }
+        public void setIsin(String isin) { this.isin = isin; }
 
-            @JsonProperty("ucc")
-            private String ucc;
+        public String getIsinDescription() { return isinDescription; }
+        public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
 
-            @JsonProperty("units")
-            private Double units;
+        public Integer getLockInDays() { return lockInDays; }
+        public void setLockInDays(Integer lockInDays) { this.lockInDays = lockInDays; }
 
-            // Getters and Setters
-            public String getAmc() { return amc; }
-            public void setAmc(String amc) { this.amc = amc; }
+        public String getLockInFlag() { return lockInFlag; }
+        public void setLockInFlag(String lockInFlag) { this.lockInFlag = lockInFlag; }
 
-            public String getAmfiCode() { return amfiCode; }
-            public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
+        public String getMode() { return mode; }
+        public void setMode(String mode) { this.mode = mode; }
 
-            public Double getAmount() { return amount; }
-            public void setAmount(Double amount) { this.amount = amount; }
+        public String getNarration() { return narration; }
+        public void setNarration(String narration) { this.narration = narration; }
 
-            public String getIsin() { return isin; }
-            public void setIsin(String isin) { this.isin = isin; }
+        public Double getNav() { return nav; }
+        public void setNav(Double nav) { this.nav = nav; }
 
-            public String getIsinDescription() { return isinDescription; }
-            public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+        public String getNavDate() { return navDate; }
+        public void setNavDate(String navDate) { this.navDate = navDate; }
 
-            public Integer getLockInDays() { return lockInDays; }
-            public void setLockInDays(Integer lockInDays) { this.lockInDays = lockInDays; }
+        public String getRegistrar() { return registrar; }
+        public void setRegistrar(String registrar) { this.registrar = registrar; }
 
-            public String getLockInFlag() { return lockInFlag; }
-            public void setLockInFlag(String lockInFlag) { this.lockInFlag = lockInFlag; }
+        public String getSchemeCode() { return schemeCode; }
+        public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
 
-            public String getMode() { return mode; }
-            public void setMode(String mode) { this.mode = mode; }
+        public String getSchemePlan() { return schemePlan; }
+        public void setSchemePlan(String schemePlan) { this.schemePlan = schemePlan; }
 
-            public String getNarration() { return narration; }
-            public void setNarration(String narration) { this.narration = narration; }
+        public String getTransactionDate() { return transactionDate; }
+        public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
 
-            public Double getNav() { return nav; }
-            public void setNav(Double nav) { this.nav = nav; }
+        public String getTxnId() { return txnId; }
+        public void setTxnId(String txnId) { this.txnId = txnId; }
 
-            public String getNavDate() { return navDate; }
-            public void setNavDate(String navDate) { this.navDate = navDate; }
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
 
-            public String getRegistrar() { return registrar; }
-            public void setRegistrar(String registrar) { this.registrar = registrar; }
+        public String getUcc() { return ucc; }
+        public void setUcc(String ucc) { this.ucc = ucc; }
 
-            public String getSchemeCode() { return schemeCode; }
-            public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
-
-            public String getSchemePlan() { return schemePlan; }
-            public void setSchemePlan(String schemePlan) { this.schemePlan = schemePlan; }
-
-            public String getTransactionDate() { return transactionDate; }
-            public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
-
-            public String getTxnId() { return txnId; }
-            public void setTxnId(String txnId) { this.txnId = txnId; }
-
-            public String getType() { return type; }
-            public void setType(String type) { this.type = type; }
-
-            public String getUcc() { return ucc; }
-            public void setUcc(String ucc) { this.ucc = ucc; }
-
-            public Double getUnits() { return units; }
-            public void setUnits(Double units) { this.units = units; }
-        }
+        public Double getUnits() { return units; }
+        public void setUnits(Double units) { this.units = units; }
     }
 
     // ===== Main Getters & Setters =====
-    public Profile getProfile() { return profile; }
-    public void setProfile(Profile profile) { this.profile = profile; }
+    public List<Profile> getProfile() { return profile; }
+    public void setProfile(List<Profile> profile) { this.profile = profile; }
 
     public List<Summary> getSummary() { return summary; }
     public void setSummary(List<Summary> summary) { this.summary = summary; }
 
-    public Transactions getTransactions() { return transactions; }
-    public void setTransactions(Transactions transactions) { this.transactions = transactions; }
+    public List<Transaction> getTransactions() { return transactions; }
+    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
