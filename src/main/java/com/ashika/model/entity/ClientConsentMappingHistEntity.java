@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
+@IdClass(ClientConsentMappingHistId.class)
 @Table(name = "Client_Consent_Mapping_Hist")
 public class ClientConsentMappingHistEntity {
 

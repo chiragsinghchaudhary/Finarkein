@@ -10,10 +10,9 @@ import jakarta.persistence.Table;
 @Table(name = "equity_summary")
 public class EquitySummaryEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+	@Id
+    private String pan;
+   
     private Double currentValue;
     private String holdingMode;
     private String isin;
@@ -23,12 +22,12 @@ public class EquitySummaryEntity {
     private Double units;
 
     // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
+    public String getPan() {
+        return pan;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPan(String pan) {
+        this.pan = pan;
     }
 
     public Double getCurrentValue() {

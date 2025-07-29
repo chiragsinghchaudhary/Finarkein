@@ -10,9 +10,8 @@ import jakarta.persistence.Table;
 @Table(name = "mf_summary")
 public class MFSummaryEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+    private String pan;
 
     private Double costValue;
     private Double currentValue;
@@ -35,12 +34,12 @@ public class MFSummaryEntity {
     private String ucc;
 
     // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
+    public String getPan() {
+        return pan;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPan(String pan) {
+        this.pan = pan;
     }
 
     public Double getCostValue() {

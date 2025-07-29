@@ -10,9 +10,8 @@ import jakarta.persistence.Table;
 @Table(name = "mf_transaction")
 public class MFTransactionEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+    private String pan;
 
     private String startDate;
     private String endDate;
@@ -37,12 +36,12 @@ public class MFTransactionEntity {
     private Double units;
 
     // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
+    public String getPan() {
+        return pan;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPan(String pan) {
+        this.pan = pan;
     }
 
     public String getStartDate() {

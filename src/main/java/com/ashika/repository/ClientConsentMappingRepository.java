@@ -12,42 +12,43 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashika.model.entity.DepositSummaryEntity;
+import com.ashika.model.entity.ClientConsentMappingEntity;
+import com.ashika.model.entity.ClientConsentMappingId;
 
-public class DepositSummaryRepository implements JpaRepository<DepositSummaryEntity, String> {
+public class ClientConsentMappingRepository implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
 
 	@Override
-	public <S extends DepositSummaryEntity> List<S> saveAll(Iterable<S> entities) {
+	public <S extends ClientConsentMappingEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<DepositSummaryEntity> findAll() {
+	public List<ClientConsentMappingEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<DepositSummaryEntity> findAllById(Iterable<String> ids) {
+	public List<ClientConsentMappingEntity> findAllById(Iterable<ClientConsentMappingId> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> S save(S entity) {
+	public <S extends ClientConsentMappingEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<DepositSummaryEntity> findById(String id) {
+	public Optional<ClientConsentMappingEntity> findById(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public boolean existsById(String id) {
+	public boolean existsById(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -59,25 +60,25 @@ public class DepositSummaryRepository implements JpaRepository<DepositSummaryEnt
 	}
 
 	@Override
-	public void deleteById(String id) {
+	public void deleteById(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(DepositSummaryEntity entity) {
+	public void delete(ClientConsentMappingEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteAllById(Iterable<? extends String> ids) {
+	public void deleteAllById(Iterable<? extends ClientConsentMappingId> ids) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends DepositSummaryEntity> entities) {
+	public void deleteAll(Iterable<? extends ClientConsentMappingEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -89,43 +90,43 @@ public class DepositSummaryRepository implements JpaRepository<DepositSummaryEnt
 	}
 
 	@Override
-	public List<DepositSummaryEntity> findAll(Sort sort) {
+	public List<ClientConsentMappingEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<DepositSummaryEntity> findAll(Pageable pageable) {
+	public Page<ClientConsentMappingEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> Optional<S> findOne(Example<S> example) {
+	public <S extends ClientConsentMappingEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends ClientConsentMappingEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> long count(Example<S> example) {
+	public <S extends ClientConsentMappingEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> boolean exists(Example<S> example) {
+	public <S extends ClientConsentMappingEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity, R> R findBy(Example<S> example,
+	public <S extends ClientConsentMappingEntity, R> R findBy(Example<S> example,
 			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
@@ -138,25 +139,25 @@ public class DepositSummaryRepository implements JpaRepository<DepositSummaryEnt
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> S saveAndFlush(S entity) {
+	public <S extends ClientConsentMappingEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends ClientConsentMappingEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<DepositSummaryEntity> entities) {
+	public void deleteAllInBatch(Iterable<ClientConsentMappingEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteAllByIdInBatch(Iterable<String> ids) {
+	public void deleteAllByIdInBatch(Iterable<ClientConsentMappingId> ids) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -168,31 +169,31 @@ public class DepositSummaryRepository implements JpaRepository<DepositSummaryEnt
 	}
 
 	@Override
-	public DepositSummaryEntity getOne(String id) {
+	public ClientConsentMappingEntity getOne(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DepositSummaryEntity getById(String id) {
+	public ClientConsentMappingEntity getById(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DepositSummaryEntity getReferenceById(String id) {
+	public ClientConsentMappingEntity getReferenceById(ClientConsentMappingId id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> List<S> findAll(Example<S> example) {
+	public <S extends ClientConsentMappingEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositSummaryEntity> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends ClientConsentMappingEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}

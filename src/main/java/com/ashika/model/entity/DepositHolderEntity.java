@@ -10,10 +10,6 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_profile")
 public class DepositHolderEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String type;
     private String address;
     private Boolean ckycCompliance;
@@ -23,11 +19,9 @@ public class DepositHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
+    
+    @Id
     private String pan;
-
-    // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }

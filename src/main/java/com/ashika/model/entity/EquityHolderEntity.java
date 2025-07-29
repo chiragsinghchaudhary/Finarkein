@@ -10,10 +10,6 @@ import jakarta.persistence.Table;
 @Table(name = "equity_profile")
 public class EquityHolderEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String address;
     private String dematId;
     private Long dob;
@@ -23,16 +19,10 @@ public class EquityHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
+    @Id
     private String pan;
 
     // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;

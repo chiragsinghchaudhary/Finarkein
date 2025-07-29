@@ -11,9 +11,7 @@ import jakarta.persistence.Table;
 public class DepositTransactionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String pan;
     private String endDate;
     private String startDate;
     private Double amount;
@@ -26,16 +24,15 @@ public class DepositTransactionEntity {
     private String type;
     private String valueDate;
 
-    // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
-    }
+    public String getPan() {
+		return pan;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 
-    public String getEndDate() {
+	public String getEndDate() {
         return endDate;
     }
 

@@ -10,10 +10,8 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_summary")
 public class DepositSummaryEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+	@Id
+    private String pan;
     private Long balanceDatetime;
     private String branch;
     private String currency;
@@ -29,15 +27,14 @@ public class DepositSummaryEntity {
     private String type;
     private String transactionType;
     private Double amount;
+    
+    public String getPan() {
+		return pan;
+	}
 
-    // ===== Getters & Setters =====
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 
     public Long getBalanceDatetime() {
         return balanceDatetime;

@@ -12,36 +12,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.DepositTransaction;
+import com.ashika.model.entity.DepositTransactionEntity;
 
-public class DepositTransactionRepository implements JpaRepository<DepositTransaction, String> {
+public class DepositTransactionRepository implements JpaRepository<DepositTransactionEntity, String> {
 
 	@Override
-	public <S extends DepositTransaction> List<S> saveAll(Iterable<S> entities) {
+	public <S extends DepositTransactionEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<DepositTransaction> findAll() {
+	public List<DepositTransactionEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<DepositTransaction> findAllById(Iterable<String> ids) {
+	public List<DepositTransactionEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> S save(S entity) {
+	public <S extends DepositTransactionEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<DepositTransaction> findById(String id) {
+	public Optional<DepositTransactionEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -65,7 +65,7 @@ public class DepositTransactionRepository implements JpaRepository<DepositTransa
 	}
 
 	@Override
-	public void delete(DepositTransaction entity) {
+	public void delete(DepositTransactionEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -77,7 +77,7 @@ public class DepositTransactionRepository implements JpaRepository<DepositTransa
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends DepositTransaction> entities) {
+	public void deleteAll(Iterable<? extends DepositTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -89,43 +89,43 @@ public class DepositTransactionRepository implements JpaRepository<DepositTransa
 	}
 
 	@Override
-	public List<DepositTransaction> findAll(Sort sort) {
+	public List<DepositTransactionEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<DepositTransaction> findAll(Pageable pageable) {
+	public Page<DepositTransactionEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> Optional<S> findOne(Example<S> example) {
+	public <S extends DepositTransactionEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends DepositTransaction> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends DepositTransactionEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> long count(Example<S> example) {
+	public <S extends DepositTransactionEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends DepositTransaction> boolean exists(Example<S> example) {
+	public <S extends DepositTransactionEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends DepositTransaction, R> R findBy(Example<S> example,
+	public <S extends DepositTransactionEntity, R> R findBy(Example<S> example,
 			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
@@ -138,19 +138,19 @@ public class DepositTransactionRepository implements JpaRepository<DepositTransa
 	}
 
 	@Override
-	public <S extends DepositTransaction> S saveAndFlush(S entity) {
+	public <S extends DepositTransactionEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends DepositTransactionEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<DepositTransaction> entities) {
+	public void deleteAllInBatch(Iterable<DepositTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -168,34 +168,32 @@ public class DepositTransactionRepository implements JpaRepository<DepositTransa
 	}
 
 	@Override
-	public DepositTransaction getOne(String id) {
+	public DepositTransactionEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DepositTransaction getById(String id) {
+	public DepositTransactionEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DepositTransaction getReferenceById(String id) {
+	public DepositTransactionEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> List<S> findAll(Example<S> example) {
+	public <S extends DepositTransactionEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends DepositTransaction> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends DepositTransactionEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 }
