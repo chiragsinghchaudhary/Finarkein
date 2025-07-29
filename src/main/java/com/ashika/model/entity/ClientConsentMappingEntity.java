@@ -1,6 +1,7 @@
 package com.ashika.model.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -34,6 +35,8 @@ public class ClientConsentMappingEntity {
     private String requestId;
     
     private String consentHandle;
+    
+    private LocalDateTime lastUpdatedTime;
 
     // Getters & Setters
     public String getClientCode() { return clientCode; }
@@ -62,5 +65,14 @@ public class ClientConsentMappingEntity {
 
     public String getConsentHandle() { return consentHandle; }
     public void setConsentHandle(String consentHandle) { this.consentHandle = consentHandle; }
+	
+    public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+    
+    
 }
 
