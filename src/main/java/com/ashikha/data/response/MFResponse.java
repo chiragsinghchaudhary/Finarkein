@@ -6,7 +6,7 @@ import java.util.List;
 public class MFResponse {
 
     @JsonProperty("profile")
-    private List<MFProfile> profile;
+    private List<MFHolder> profile;
 
     @JsonProperty("summary")
     private List<MFSummary> summary;
@@ -15,8 +15,8 @@ public class MFResponse {
     private List<MFTransaction> transactions;
 
     // ===== Main Getters & Setters =====
-    public List<MFProfile> getProfile() { return profile; }
-    public void setProfile(List<MFProfile> profile) { this.profile = profile; }
+    public List<MFHolder> getProfile() { return profile; }
+    public void setProfile(List<MFHolder> profile) { this.profile = profile; }
 
     public List<MFSummary> getSummary() { return summary; }
     public void setSummary(List<MFSummary> summary) { this.summary = summary; }

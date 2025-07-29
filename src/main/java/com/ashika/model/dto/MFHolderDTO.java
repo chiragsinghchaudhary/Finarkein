@@ -1,11 +1,12 @@
 package com.ashika.model.dto;
 
-public record EquityProfileDTO(
+public record MFHolderDTO(
         Long id,
         String address,
         String dematId,
         Long dob,
         String email,
+        String folioNo,
         Boolean kycCompliance,
         String landline,
         String mobile,

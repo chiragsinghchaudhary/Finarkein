@@ -6,7 +6,7 @@ import java.util.List;
 public class EquityResponse {
 
     @JsonProperty("profile")
-    private List<EquityProfile> profile;
+    private List<EquityHolder> profile;
 
     @JsonProperty("summary")
     private List<EquitySummary> summary;
@@ -15,8 +15,8 @@ public class EquityResponse {
     private List<EquityTransaction> transactions;
 
     // ===== Main Getters & Setters =====
-    public List<EquityProfile> getProfile() { return profile; }
-    public void setProfile(List<EquityProfile> profile) { this.profile = profile; }
+    public List<EquityHolder> getProfile() { return profile; }
+    public void setProfile(List<EquityHolder> profile) { this.profile = profile; }
 
     public List<EquitySummary> getSummary() { return summary; }
     public void setSummary(List<EquitySummary> summary) { this.summary = summary; }

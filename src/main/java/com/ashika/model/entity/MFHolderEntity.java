@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mf_profile")
-public class MFProfileEntity {
+public class MFHolderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

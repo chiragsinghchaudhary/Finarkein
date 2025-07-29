@@ -1,6 +1,6 @@
 package com.ashika.model.dto;
 
-public record DepositProfileDTO(
+public record DepositHolderDTO(
     Long id,
     String type,
     String address,

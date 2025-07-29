@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "equity_profile")
-public class EquityProfileEntity {
+public class EquityHolderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

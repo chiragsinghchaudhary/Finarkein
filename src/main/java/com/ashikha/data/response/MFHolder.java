@@ -1,48 +1,60 @@
-package com.ashika.model.entity;
+package com.ashikha.data.response;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(name = "deposit_profile")
-public class DepositProfileEntity {
+public class MFHolder {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String type;
+    @JsonProperty("address")
     private String address;
-    private Boolean ckycCompliance;
+
+    @JsonProperty("dematId")
+    private String dematId;
+
+    @JsonProperty("dob")
     private Long dob;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("folioNo")
+    private String folioNo;
+
+    @JsonProperty("kycCompliance")
+    private Boolean kycCompliance;
+
+    @JsonProperty("landline")
     private String landline;
+
+    @JsonProperty("mobile")
     private String mobile;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("nominee")
     private String nominee;
+
+    @JsonProperty("pan")
     private String pan;
 
     // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
-
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public Boolean getCkycCompliance() { return ckycCompliance; }
-    public void setCkycCompliance(Boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
+    public String getDematId() { return dematId; }
+    public void setDematId(String dematId) { this.dematId = dematId; }
 
     public Long getDob() { return dob; }
     public void setDob(Long dob) { this.dob = dob; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getFolioNo() { return folioNo; }
+    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
+
+    public Boolean getKycCompliance() { return kycCompliance; }
+    public void setKycCompliance(Boolean kycCompliance) { this.kycCompliance = kycCompliance; }
 
     public String getLandline() { return landline; }
     public void setLandline(String landline) { this.landline = landline; }

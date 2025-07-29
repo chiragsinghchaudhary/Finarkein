@@ -2,25 +2,22 @@ package com.ashikha.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MFProfile {
+public class DepositHolder {
+
+    @JsonProperty("type")
+    private String type;
 
     @JsonProperty("address")
     private String address;
 
-    @JsonProperty("dematId")
-    private String dematId;
+    @JsonProperty("ckycCompliance")
+    private Boolean ckycCompliance;
 
     @JsonProperty("dob")
     private Long dob;
 
     @JsonProperty("email")
     private String email;
-
-    @JsonProperty("folioNo")
-    private String folioNo;
-
-    @JsonProperty("kycCompliance")
-    private Boolean kycCompliance;
 
     @JsonProperty("landline")
     private String landline;
@@ -38,23 +35,20 @@ public class MFProfile {
     private String pan;
 
     // Getters & Setters
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public String getDematId() { return dematId; }
-    public void setDematId(String dematId) { this.dematId = dematId; }
+    public Boolean getCkycCompliance() { return ckycCompliance; }
+    public void setCkycCompliance(Boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
 
     public Long getDob() { return dob; }
     public void setDob(Long dob) { this.dob = dob; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-
-    public String getFolioNo() { return folioNo; }
-    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
-
-    public Boolean getKycCompliance() { return kycCompliance; }
-    public void setKycCompliance(Boolean kycCompliance) { this.kycCompliance = kycCompliance; }
 
     public String getLandline() { return landline; }
     public void setLandline(String landline) { this.landline = landline; }
@@ -71,4 +65,3 @@ public class MFProfile {
     public String getPan() { return pan; }
     public void setPan(String pan) { this.pan = pan; }
 }
-
