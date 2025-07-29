@@ -35,7 +35,7 @@ public class MyController {
         return myService.getStatus(getStatusRequest);
     }
     
-    @GetMapping("/:workspace/dp/nerv/:flowId/:requestId/status")
+    @GetMapping("/:workspace/dp/nerv/:flowId/:requestId/result")
     public GetResultResponse getResult(@RequestBody GetResultRequest getResultRequest) {
         return myService.getResult(getResultRequest);
     }
