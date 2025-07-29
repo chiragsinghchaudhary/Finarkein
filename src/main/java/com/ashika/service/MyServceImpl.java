@@ -20,15 +20,15 @@ import com.ashikha.data.response.NewRunResponse;
 public class MyServceImpl implements MyService {
 
 	// ===== Repositories =====
-	private final DepositProfileRepository depositProfileRepo;
+	private final DepositHolderRepository depositHolderRepository;
 	private final DepositSummaryRepository depositSummaryRepo;
 	private final DepositTransactionRepository depositTransactionRepo;
 
-	private final EquityProfileRepository equityProfileRepo;
+	private final EquityHolderRepository equityHolderRepository;
 	private final EquitySummaryRepository equitySummaryRepo;
 	private final EquityTransactionRepository equityTransactionRepo;
 
-	private final MFProfileRepository mfProfileRepo;
+	private final MFHolderRepository mfProfileRepo;
 	private final MFSummaryRepository mfSummaryRepo;
 	private final MFTransactionRepository mfTransactionRepo;
 
@@ -59,7 +59,7 @@ public class MyServceImpl implements MyService {
 		return null;
 	}
 
-	public MyServiceImpl(DepositProfileRepository depositProfileRepo,
+	public MyServiceImpl(DepositHolderRepository depoHolderRepository,
                          DepositSummaryRepository depositSummaryRepo,
                          DepositTransactionRepository depositTransactionRepo,
                          EquityProfileRepository equityProfileRepo,
