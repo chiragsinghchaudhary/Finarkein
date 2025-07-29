@@ -1,16 +1,14 @@
 package com.ashika.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "Client_Consent_Mapping_Hist")
-@IdClass(ClientConsentMappingHistEntity.ClientConsentMappingHistId.class)
 public class ClientConsentMappingHistEntity {
 
     @Id
@@ -35,35 +33,6 @@ public class ClientConsentMappingHistEntity {
     private String email;
     private String requestId;
     private String consentHandle;
-
-    // Composite key class
-    public static class ClientConsentMappingHistId implements Serializable {
-        private String clientCode;
-        private String pan;
-        private String state;
-        private String consentStatus;
-        private String dataFetchStatus;
-        private LocalDateTime lastUpdatedTime;
-
-        // Getters & Setters
-        public String getClientCode() { return clientCode; }
-        public void setClientCode(String clientCode) { this.clientCode = clientCode; }
-
-        public String getPan() { return pan; }
-        public void setPan(String pan) { this.pan = pan; }
-
-        public String getState() { return state; }
-        public void setState(String state) { this.state = state; }
-
-        public String getConsentStatus() { return consentStatus; }
-        public void setConsentStatus(String consentStatus) { this.consentStatus = consentStatus; }
-
-        public String getDataFetchStatus() { return dataFetchStatus; }
-        public void setDataFetchStatus(String dataFetchStatus) { this.dataFetchStatus = dataFetchStatus; }
-
-        public LocalDateTime getLastUpdatedTime() { return lastUpdatedTime; }
-        public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
-    }
 
     // Getters & Setters
     public String getClientCode() { return clientCode; }

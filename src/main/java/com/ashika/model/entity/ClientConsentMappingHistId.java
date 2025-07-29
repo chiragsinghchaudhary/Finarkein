@@ -1,34 +1,15 @@
 package com.ashika.model.entity;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "Client_Consent_Mapping")
-public class ClientConsentMappingEntity {
-
-    @Id
+public class ClientConsentMappingHistId implements Serializable {
     private String clientCode;
-
-    @Id
     private String pan;
-
-    @Id
     private String state;
-
-    @Id
     private String consentStatus;
-
-    @Id
     private String dataFetchStatus;
-
-    private LocalDate dob;
-    private String email;
-    private String requestId;
-    private String consentHandle;
+    private LocalDateTime lastUpdatedTime;
 
     // Getters & Setters
     public String getClientCode() { return clientCode; }
@@ -46,16 +27,6 @@ public class ClientConsentMappingEntity {
     public String getDataFetchStatus() { return dataFetchStatus; }
     public void setDataFetchStatus(String dataFetchStatus) { this.dataFetchStatus = dataFetchStatus; }
 
-    public LocalDate getDob() { return dob; }
-    public void setDob(LocalDate dob) { this.dob = dob; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public String getRequestId() { return requestId; }
-    public void setRequestId(String requestId) { this.requestId = requestId; }
-
-    public String getConsentHandle() { return consentHandle; }
-    public void setConsentHandle(String consentHandle) { this.consentHandle = consentHandle; }
+    public LocalDateTime getLastUpdatedTime() { return lastUpdatedTime; }
+    public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
 }
-
