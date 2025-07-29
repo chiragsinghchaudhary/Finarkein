@@ -2,13 +2,13 @@ package com.ashikha.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.ashika.service.MyService;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
 import com.ashikha.data.request.NewRunRequest;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
 import com.ashikha.data.response.NewRunResponse;
-import com.ashikha.service.MyService;
 
 @RestController
 @RequestMapping("/api/finarkein")
