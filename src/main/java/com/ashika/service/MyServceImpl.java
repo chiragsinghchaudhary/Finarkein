@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
@@ -20,6 +21,7 @@ import com.ashikha.data.response.NewRunResponse;
 public class MyServceImpl implements MyService {
 
 	// ===== Repositories =====
+	@Autowired
 	private final DepositHolderRepository depositHolderRepository;
 	private final DepositSummaryRepository depositSummaryRepo;
 	private final DepositTransactionRepository depositTransactionRepo;

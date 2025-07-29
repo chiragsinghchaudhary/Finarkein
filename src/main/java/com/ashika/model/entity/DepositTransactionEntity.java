@@ -12,6 +12,7 @@ public class DepositTransactionEntity {
 
     @Id
     private String pan;
+    
     private String endDate;
     private String startDate;
     private Double amount;
