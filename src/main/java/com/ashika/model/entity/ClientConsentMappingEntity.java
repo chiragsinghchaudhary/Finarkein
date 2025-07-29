@@ -12,24 +12,27 @@ import jakarta.persistence.Table;
 @Table(name = "Client_Consent_Mapping")
 public class ClientConsentMappingEntity {
 
-    @Id
+    
     private String clientCode;
 
     @Id
     private String pan;
 
-    @Id
+    
     private String state;
 
-    @Id
+    
     private String consentStatus;
 
-    @Id
+    
     private String dataFetchStatus;
 
     private LocalDate dob;
     private String email;
+    
+    @Id
     private String requestId;
+    
     private String consentHandle;
 
     // Getters & Setters

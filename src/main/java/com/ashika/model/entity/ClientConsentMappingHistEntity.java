@@ -13,19 +13,16 @@ import jakarta.persistence.Table;
 @Table(name = "Client_Consent_Mapping_Hist")
 public class ClientConsentMappingHistEntity {
 
-    @Id
+    
     private String clientCode;
 
     @Id
     private String pan;
 
-    @Id
     private String state;
 
-    @Id
     private String consentStatus;
 
-    @Id
     private String dataFetchStatus;
 
     @Id
@@ -33,6 +30,8 @@ public class ClientConsentMappingHistEntity {
 
     private LocalDate dob;
     private String email;
+    
+    @Id
     private String requestId;
     private String consentHandle;
 
