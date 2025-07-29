@@ -84,4 +84,3 @@ public interface MyService {
     ClientConsentMappingHistDTO updateClientConsentHistory(Long id, ClientConsentMappingHistDTO dto);
     void deleteClientConsentHistory(Long id);
 }
-
