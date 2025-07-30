@@ -66,11 +66,12 @@ public class MyServceImpl implements MyService {
 
 	@Override
 		public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
-			ClientConsentMappingHistDTO dto = mapRequestToDTO(newRunRequest);
-			ClientConsentMappingHistEntity entity = dto.toEntity();
-			ClientConsentMappingHistEntity savedEntity = repository.save(entity);
+    			ClientConsentMappingDTO dto = mapRequestToDTO(newRunRequest);
+			ClientConsentMappingEntity entity = dto.toEntity();
+			ClientConsentMappingEntity savedEntity = clientConsentMappingRepository.save(entity);
 			return mapEntityToResponse(savedEntity);
-			}
+		}
+
 
 
 	@Override
