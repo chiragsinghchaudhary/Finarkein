@@ -5,6 +5,7 @@ import com.ashika.model.dto.*;
 import java.util.List;
 import java.util.Optional;
 
+import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
 import com.ashikha.data.request.NewRunRequest;
@@ -21,5 +22,9 @@ public interface MyService {
 	GetStatusResponse getStatus(GetStatusRequest getStatusRequest);
 
 	GetResultResponse getResult(GetResultRequest getResultRequest);
+
+	String checkValidConsent(GetRequest checkValidConsent);
+
+	GetResultResponse getDBRecords(GetRequest getRequest);
 
 }

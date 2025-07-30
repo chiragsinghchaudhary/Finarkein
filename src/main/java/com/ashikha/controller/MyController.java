@@ -3,6 +3,7 @@ package com.ashikha.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.ashika.service.MyService;
+import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
 import com.ashikha.data.request.NewRunRequest;
@@ -38,6 +39,16 @@ public class MyController {
     @GetMapping("/:workspace/dp/nerv/:flowId/:requestId/result")
     public GetResultResponse getResult(@RequestBody GetResultRequest getResultRequest) {
         return myService.getResult(getResultRequest);
+    }
+    
+    @GetMapping("/consentStatus")
+    public String checkValidConsent(@RequestBody GetRequest getRequest) {
+        return myService.checkValidConsent(getRequest);
+    }
+    
+    @GetMapping("/getDBRecords")
+    public GetResultResponse getDBRecords(@RequestBody GetRequest getRequest) {
+        return myService.getDBRecords(getRequest);
     }
 
 }

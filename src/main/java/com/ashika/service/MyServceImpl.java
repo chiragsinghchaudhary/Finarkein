@@ -759,7 +759,7 @@ public class MyServceImpl implements MyService {
 
 	// Client Consent Mapping Hist
 	private ClientConsentMappingHistDTO toClientConsentHistDTO(ClientConsentMappingHistEntity e) {
-		return new ClientConsentMappingHistDTO(e.getClientCode(), e.getPan(), e.getDob(), e.getEmail(),
+		return new ClientConsentMappingHistDTO(e.getId(), e.getClientCode(), e.getPan(), e.getDob(), e.getEmail(),
 				e.getRequestId(), e.getConsentHandle(), e.getState(), e.getConsentStatus(), e.getDataFetchStatus(),
 				e.getLastUpdatedTime());
 	}
