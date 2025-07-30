@@ -74,7 +74,33 @@ public class MyServceImpl implements MyService {
 			return mapEntityToResponse(savedEntity);
 		}
 
+private ClientConsentMappingDTO mapRequestToDTO(NewRunRequest request) {
+    return new ClientConsentMappingDTO(
+            request.getUser().getClientCode(),     
+            request.getUser().getPan(),            
+            "PENDING",                             
+            "PENDING",                             
+            "PENDING",                             
+            request.getUser().getDob(),            
+            request.getUser().getEmail(),          
+            request.getConsentTemplateId(),        
+            request.getRedirectUrl()               
+    );
+}
 
+private NewRunResponse mapEntityToResponse(ClientConsentMappingEntity entity) {
+    NewRunResponse response = new NewRunResponse();
+    response.setClientCode(entity.getClientCode());
+    response.setPan(entity.getPan());
+    response.setState(entity.getState());
+    response.setConsentStatus(entity.getConsentStatus());
+    response.setDataFetchStatus(entity.getDataFetchStatus());
+    response.setDob(entity.getDob());
+    response.setEmail(entity.getEmail());
+    response.setRequestId(entity.getRequestId());
+    response.setConsentHandle(entity.getConsentHandle());
+    return response;
+}
 
 	@Override
 	public NewRunResponse createNewRunFetch(NewRunRequest newRunRequest) {
