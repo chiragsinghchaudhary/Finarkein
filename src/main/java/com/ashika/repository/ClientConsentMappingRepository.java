@@ -10,13 +10,29 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
 import com.ashika.model.entity.ClientConsentMappingEntity;
+import com.ashika.model.entity.ClientConsentMappingHistEntity;
 import com.ashika.model.entity.ClientConsentMappingId;
 
 public class ClientConsentMappingRepository implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
 
+	@Query("SELECT c FROM ClientConsentMappingHistEntity c " +
+		       "WHERE c.pan = :pan " +
+		       "AND c.runType = 'consent' " +
+		       "AND c.state = 'SUCCESS' " +
+		       "AND c.dataFetchStatus = 'SUCCESS' " +
+		       "AND c.consentStatus = 'SUCCESS'")
+		List<ClientConsentMappingHistEntity> checkConsentAndStatus(@Param("pan") String pan) {
+		return null;
+	}
+
+
+    
+	
 	@Override
 	public <S extends ClientConsentMappingEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
@@ -200,3 +216,4 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 
 	
 }
+
