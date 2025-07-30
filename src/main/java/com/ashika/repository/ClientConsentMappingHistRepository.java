@@ -9,45 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
-import org.springframework.data.repository.query.Param;
 
 import com.ashika.model.entity.ClientConsentMappingHistEntity;
 import com.ashika.model.entity.ClientConsentMappingHistId;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+public class ClientConsentMappingHistRepository implements JpaRepository<ClientConsentMappingHistEntity, ClientConsentMappingHistId> {
 
-public interface ClientConsentMappingHistRepository extends JpaRepository<ClientConsentMappingHistEntity, ClientConsentMappingHistId> {
-
-// 1. Check valid consent (runType=consent and state=SUCCESS)
-    @Query("SELECT c FROM ClientConsentMappingHistEntity c WHERE c.runType = 'consent' AND c.state = 'SUCCESS'")
-    List<ClientConsentMappingHistEntity> checkValidConsent();
-
-    // 2. Get all DB records
-    @Query("SELECT c FROM ClientConsentMappingHistEntity c")
-    List<ClientConsentMappingHistEntity> getDbRecords();
-
-    // 3. Get result request by parameter
-    @Query("SELECT c FROM ClientConsentMappingHistEntity c WHERE c.resultRequest = :resultRequest")
-    List<ClientConsentMappingHistEntity> getResultRequest(@Param("resultRequest") String resultRequest);
-
-    // 4. Get status by Finarchin Hit Response
-    @Query("SELECT c FROM ClientConsentMappingHistEntity c WHERE c.finarchinHitResponse = :response")
-    List<ClientConsentMappingHistEntity> getStatus(@Param("response") String response);
-
-    // 5. Combine valid consent + resultRequest
-    @Query("SELECT c FROM ClientConsentMappingHistEntity c WHERE c.runType = 'consent' AND c.state = 'SUCCESS' AND c.resultRequest = :resultRequest")
-    List<ClientConsentMappingHistEntity> getResult(@Param("resultRequest") String resultRequest);
-
-    
-    // Inject EntityManager for custom queries
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Override
+	@Override
     public <S extends ClientConsentMappingHistEntity> List<S> saveAll(Iterable<S> entities) {
         // TODO Auto-generated method stub
         return null;

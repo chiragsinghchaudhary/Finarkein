@@ -20,17 +20,39 @@ import com.ashika.model.entity.ClientConsentMappingId;
 
 public class ClientConsentMappingRepository implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
 
-	@Query("SELECT c FROM ClientConsentMappingHistEntity c " +
-		       "WHERE c.pan = :pan " +
-		       "AND c.runType = 'consent' " +
-		       "AND c.state = 'SUCCESS' " +
-		       "AND c.dataFetchStatus = 'SUCCESS' " +
-		       "AND c.consentStatus = 'SUCCESS'")
+	@Query("SELECT c FROM ClientConsentMappingHistEntity" +
+		       "WHERE pan = :pan " +
+		       "AND runType = 'consent' " +
+		       "AND state = 'SUCCESS' " +
+		       "AND dataFetchStatus = 'SUCCESS' " +
+		       "AND consentStatus = 'SUCCESS'")
 		List<ClientConsentMappingHistEntity> checkConsentAndStatus(@Param("pan") String pan) {
 		return null;
 	}
+	
+	@Query("UPDATE ClientConsentMappingHistEntity "
+			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
+			+ "consentStatus = : consentStatus"
+			+ "requestId = : requestId" +
+		       "WHERE pan = : pan ")
+		List<ClientConsentMappingHistEntity> updateNewRunFetch(@Param("state") String state,
+				@Param("dataFetchStatus") String dataFetchStatus,
+				@Param("consentStatus") String consentStatus,
+				@Param("requestId") String requestId,
+				@Param("pan") String pan) {
+		return null;
+	}
 
-
+	@Query("UPDATE ClientConsentMappingHistEntity "
+			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
+			+ "consentStatus = : consentStatus" +
+		       "WHERE c.requestId = : requestId ")
+		List<ClientConsentMappingHistEntity> updateStatus(@Param("state") String state,
+				@Param("dataFetchStatus") String dataFetchStatus,
+				@Param("consentStatus") String consentStatus,
+				@Param("requestId") String requestId) {
+		return null;
+	}
     
 	
 	@Override
