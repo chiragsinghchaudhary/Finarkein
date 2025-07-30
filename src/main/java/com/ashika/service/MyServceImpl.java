@@ -68,7 +68,6 @@ public class MyServceImpl implements MyService {
 	@Override
 	public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
 		
-		ClientConsentMappingDTO clientConsentMappingDTO = new ClientConsentMappingDTO(newRunRequest.getUser().)
 		
 		return null;
 	}
@@ -102,12 +101,6 @@ public class MyServceImpl implements MyService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@Override public ClientConsentMappingDTO saveClientConsent(ClientConsentMappingDTO dto) { 
-		ClientConsentMappingEntity
-	 entity = toClientConsentEntity(dto); 
-	return
-	 toClientConsentDTO(clientConsentRepo.save(entity)); }
 
 	// ===================== Deposit Profile =====================
 	/*
