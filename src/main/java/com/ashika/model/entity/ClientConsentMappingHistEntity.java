@@ -3,6 +3,8 @@ package com.ashika.model.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.ashika.model.entity.ClientConsentMappingEntity.RunType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -14,10 +16,17 @@ import jakarta.persistence.Table;
 public class ClientConsentMappingHistEntity {
 
     
+	public enum RunType{
+		CONSENT,
+		RECURRING
+	}
+	
     private String clientCode;
 
     @Id
     private String pan;
+    
+    private RunType runType;
 
     private String state;
 
@@ -41,6 +50,9 @@ public class ClientConsentMappingHistEntity {
 
     public String getPan() { return pan; }
     public void setPan(String pan) { this.pan = pan; }
+    
+    public RunType getRunType() { return runType; }
+    public void setRunType(RunType runType) { this.runType = runType; }
 
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }

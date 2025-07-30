@@ -13,11 +13,17 @@ import jakarta.persistence.Table;
 @Table(name = "Client_Consent_Mapping")
 public class ClientConsentMappingEntity {
 
-    
+	public enum RunType{
+		CONSENT,
+		RECURRING
+	}
+	
     private String clientCode;
 
     @Id
     private String pan;
+    
+    private RunType runType;
 
     
     private String state;
@@ -44,6 +50,9 @@ public class ClientConsentMappingEntity {
 
     public String getPan() { return pan; }
     public void setPan(String pan) { this.pan = pan; }
+    
+    public RunType getRunType() { return runType; }
+    public void setRunType(RunType runType) { this.runType = runType; }
 
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
