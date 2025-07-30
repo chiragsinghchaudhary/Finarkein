@@ -2,6 +2,7 @@ package com.ashika.service;
 
 import org.springframework.stereotype.Service;
 
+import com.ashika.model.dto.ClientConsentMappingDTO;
 import com.ashika.model.entity.ClientConsentMappingEntity;
 import com.ashika.repository.ClientConsentMappingHistRepository;
 import com.ashika.repository.ClientConsentMappingRepository;
