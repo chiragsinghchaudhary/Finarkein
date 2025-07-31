@@ -96,11 +96,8 @@ public abstract class MyServceImpl implements MyService {
     @Override
     public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
     	GetStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
-    	ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
-        entity.setState(statusResponse.getState().getState());
-        entity.setConsentStatus(statusResponse.getState().getConsentStatus());
-        entity.setDataFetchStatus(statusResponse.getState().getDataFetchStatus());
-        clientConsentRepo.save(entity);
+        clientConsentRepo.updateStatus(statusResponse.getState().getState(),statusResponse.getState().getConsentStatus(), 
+        		statusResponse.getState().getDataFetchStatus(), getStatusRequest.getRequestId());
 
         return statusResponse;
     }

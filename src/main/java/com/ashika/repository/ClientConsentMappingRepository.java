@@ -47,6 +47,7 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
 			+ "consentStatus = : consentStatus" +
 		       "WHERE c.requestId = : requestId ")
+	public
 		List<ClientConsentMappingHistEntity> updateStatus(@Param("state") String state,
 				@Param("dataFetchStatus") String dataFetchStatus,
 				@Param("consentStatus") String consentStatus,
