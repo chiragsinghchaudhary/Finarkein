@@ -15,110 +15,106 @@ import com.ashika.repository.EquityTransactionRepository;
 import com.ashika.repository.MFHolderRepository;
 import com.ashika.repository.MFSummaryRepository;
 import com.ashika.repository.MFTransactionRepository;
-import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
 import com.ashikha.data.request.NewRunRequest;
+import com.ashikha.data.response.FinarkinResponse;
+import com.ashikha.data.response.FinarkinResultResponse;
+import com.ashikha.data.response.FinarkinStatusResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
 import com.ashikha.data.response.NewRunResponse;
 
+
 @Service
-public class MyServceImpl implements MyService {
+public abstract class MyServceImpl implements MyService {
 
-	// ===== Repositories =====
-	private final DepositHolderRepository depositHolderRepository;
-	private final DepositSummaryRepository depositSummaryRepo;
-	private final DepositTransactionRepository depositTransactionRepo;
+    private final DepositHolderRepository depositHolderRepository;
+    private final DepositSummaryRepository depositSummaryRepo;
+    private final DepositTransactionRepository depositTransactionRepo;
 
-	private final EquityHolderRepository equityHolderRepository;
-	private final EquitySummaryRepository equitySummaryRepo;
-	private final EquityTransactionRepository equityTransactionRepo;
+    private final EquityHolderRepository equityHolderRepository;
+    private final EquitySummaryRepository equitySummaryRepo;
+    private final EquityTransactionRepository equityTransactionRepo;
 
-	private final MFHolderRepository mfHolderRepository;
-	private final MFSummaryRepository mfSummaryRepo;
-	private final MFTransactionRepository mfTransactionRepo;
+    private final MFHolderRepository mfHolderRepository;
+    private final MFSummaryRepository mfSummaryRepo;
+    private final MFTransactionRepository mfTransactionRepo;
 
-	private final ClientConsentMappingRepository clientConsentRepo;
-	private final ClientConsentMappingHistRepository clientConsentHistRepo;
-	
-	public MyServceImpl(DepositHolderRepository depositHolderRepository,
-            DepositSummaryRepository depositSummaryRepo,
-            DepositTransactionRepository depositTransactionRepo,
-            EquityHolderRepository equityHolderRepository,
-            EquitySummaryRepository equitySummaryRepo,
-            EquityTransactionRepository equityTransactionRepo,
-            MFHolderRepository mfHolderRepository,
-            MFSummaryRepository mfSummaryRepo,
-            MFTransactionRepository mfTransactionRepo,
-            ClientConsentMappingRepository clientConsentRepo,
-            ClientConsentMappingHistRepository clientConsentHistRepo) {
-				this.depositHolderRepository = depositHolderRepository;
-				this.depositSummaryRepo = depositSummaryRepo;
-				this.depositTransactionRepo = depositTransactionRepo;
-				this.equityHolderRepository = equityHolderRepository;
-				this.equitySummaryRepo = equitySummaryRepo;
-				this.equityTransactionRepo = equityTransactionRepo;
-				this.mfHolderRepository = mfHolderRepository;
-				this.mfSummaryRepo = mfSummaryRepo;
-				this.mfTransactionRepo = mfTransactionRepo;
-				this.clientConsentRepo = clientConsentRepo;
-				this.clientConsentHistRepo = clientConsentHistRepo;
-	}
+    private final ClientConsentMappingRepository clientConsentRepo;
+    private final ClientConsentMappingHistRepository clientConsentHistRepo;
+    private final FinarkinClient finarkinClient;
 
-	@Override
-		public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
-    		ClientConsentMappingDTO dto = mapRequestToDTO(newRunRequest);
-			ClientConsentMappingEntity entity = dto.toEntity();
-			ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
-			return mapEntityToResponse(savedEntity);
-		}
+    public MyServceImpl(
+	            DepositHolderRepository depositHolderRepository,
+	            DepositSummaryRepository depositSummaryRepo,
+	            DepositTransactionRepository depositTransactionRepo,
+	            EquityHolderRepository equityHolderRepository,
+	            EquitySummaryRepository equitySummaryRepo,
+	            EquityTransactionRepository equityTransactionRepo,
+	            MFHolderRepository mfHolderRepository,
+	            MFSummaryRepository mfSummaryRepo,
+	            MFTransactionRepository mfTransactionRepo,
+	            ClientConsentMappingRepository clientConsentRepo,
+	            ClientConsentMappingHistRepository clientConsentHistRepo) {
+        this.depositHolderRepository = depositHolderRepository;
+        this.depositSummaryRepo = depositSummaryRepo;
+        this.depositTransactionRepo = depositTransactionRepo;
+        this.equityHolderRepository = equityHolderRepository;
+        this.equitySummaryRepo = equitySummaryRepo;
+        this.equityTransactionRepo = equityTransactionRepo;
+        this.mfHolderRepository = mfHolderRepository;
+        this.mfSummaryRepo = mfSummaryRepo;
+        this.mfTransactionRepo = mfTransactionRepo;
+        this.clientConsentRepo = clientConsentRepo;
+        this.clientConsentHistRepo = clientConsentHistRepo;
+		this.finarkinClient = new FinarkinClient();
+    }
 
-private ClientConsentMappingDTO mapRequestToDTO(NewRunRequest request) {
-    return new ClientConsentMappingDTO(
-            request.getUser().getClientCode(),     
-            request.getUser().getPan(),            
-            "PENDING",                             
-            "PENDING",                             
-            "PENDING",                             
-            request.getUser().getDob(),            
-            request.getUser().getEmail(),          
-            request.getConsentTemplateId(),        
-            request.getRedirectUrl()               
-    );
+   
+    @Override
+    public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
+        FinarkinStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
+        ClientConsentMappingEntity entity = clientConsentRepo.findById(getStatusRequest.getRequestId());
+        entity.setState(statusResponse.getState());
+        entity.setConsentStatus(statusResponse.getConsentStatus());
+        clientConsentRepo.save(entity);
+        return new GetStatusResponse();
+    }
+
+    @Override
+    public GetResultResponse getResult(GetResultRequest getResultRequest) {
+        FinarkinResultResponse resultResponse = finarkinClient.getResult(getResultRequest.getRequestId());
+        ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getResultRequest.getRequestId());
+        clientConsentRepo.save(entity);
+        return mapEntityToGetResultResponse(entity);
+    }
+
+    private ClientConsentMappingDTO mergeRequestAndResponse(NewRunRequest request, FinarkinResponse response) {
+        return new ClientConsentMappingDTO(
+            request.getUser().getClientUserId(),
+            request.getUser().getPan(),
+            null,
+            null,
+            null,
+            request.getUser().getDob(),
+            request.getUser().getEmail(),
+            response.getRequestId(),
+            response.getConsentHandle()
+        );
+    }
+
+    // TODO: Implement these mappings
+    private NewRunResponse mapEntityToResponse(ClientConsentMappingEntity entity) {
+        // map fields
+        return new NewRunResponse();
+    }
+
+    private GetResultResponse mapEntityToGetResultResponse(ClientConsentMappingEntity entity) {
+        // map fields
+        return new GetResultResponse();
+    }
 }
-
-private NewRunResponse mapEntityToResponse(ClientConsentMappingEntity entity) {
-    NewRunResponse response = new NewRunResponse();
-    response.setClientCode(entity.getClientCode());
-    response.setPan(entity.getPan());
-    response.setState(entity.getState());
-    response.setConsentStatus(entity.getConsentStatus());
-    response.setDataFetchStatus(entity.getDataFetchStatus());
-    response.setDob(entity.getDob());
-    response.setEmail(entity.getEmail());
-    response.setRequestId(entity.getRequestId());
-    response.setConsentHandle(entity.getConsentHandle());
-    return response;
-}
-
-	@Override
-	public NewRunResponse createNewRunFetch(NewRunRequest newRunRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GetResultResponse getResult(GetResultRequest getResultRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String checkValidConsent(GetRequest checkValidConsent) {
