@@ -15,16 +15,22 @@ import com.ashika.repository.EquityTransactionRepository;
 import com.ashika.repository.MFHolderRepository;
 import com.ashika.repository.MFSummaryRepository;
 import com.ashika.repository.MFTransactionRepository;
+
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
-import com.ashikha.data.request.NewRunRequest;
+
+// Updated imports for new classes
+import com.ashikha.data.request.consent.ConsentNewRunRequest;
+import com.ashikha.data.response.consent.ConsentNewRunResponse;
+
+import com.ashikha.data.request.recurring.RecurringNewRunRequest;
+import com.ashikha.data.response.recurring.RecurringNewRunResponse;
+
 import com.ashikha.data.response.FinarkinResponse;
 import com.ashikha.data.response.FinarkinResultResponse;
 import com.ashikha.data.response.FinarkinStatusResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.NewRunResponse;
-
 
 @Service
 public abstract class MyServceImpl implements MyService {
@@ -71,66 +77,110 @@ public abstract class MyServceImpl implements MyService {
         this.clientConsentHistRepo = clientConsentHistRepo;
     }
 
-   
+    /**
+     * Handles Consent + Data Fetch New Run
+     */
     @Override
-    public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
-    	
-		NewRunResponse newRunResponse = finarkinClient.initiateConsent(newRunRequest);
-        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, newRunResponse);
+    public ConsentNewRunResponse createNewRun(ConsentNewRunRequest consentNewRunRequest) {
+
+        // Call Finarkin client to initiate consent
+        ConsentNewRunResponse consentResponse = finarkinClient.initiateConsent(consentNewRunRequest);
+
+        // Merge request and response for saving into DB
+        ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
+
         ClientConsentMappingEntity entity = dto.toEntity();
         ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
-        return mapEntityToResponse(savedEntity);
+
+        return mapConsentEntityToResponse(savedEntity);
     }
 
+    /**
+     * Handles Recurring Data Fetch New Run
+     */
     @Override
-    public NewRunResponse createNewRunFetch(NewRunRequest newRunRequest) {
-        Object finarkinClient;
-		FinarkinResponse finarkinResponse = finarkinClient.fetchData(newRunRequest);
-        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, finarkinResponse);
+    public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
+
+        // Call Finarkin client to fetch recurring data
+        RecurringNewRunResponse recurringResponse = finarkinClient.fetchData(recurringNewRunRequest);
+
+        // Map recurring request to DB entity (if needed)
+        // In recurring fetch, usually we map requestId and consentHandle for tracking
+        ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(recurringNewRunRequest, recurringResponse);
+
         ClientConsentMappingEntity entity = dto.toEntity();
-        ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
-        return mapEntityToResponse(savedEntity);
+        clientConsentRepo.save(entity);
+
+        return recurringResponse;
     }
 
     @Override
     public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
         FinarkinStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
+
         ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
         entity.setState(statusResponse.getState());
         entity.setConsentStatus(statusResponse.getConsentStatus());
         clientConsentRepo.save(entity);
+
         return new GetStatusResponse(entity.getRequestId(), entity.getState(), entity.getConsentStatus());
     }
 
     @Override
     public GetResultResponse getResult(GetResultRequest getResultRequest) {
         FinarkinResultResponse resultResponse = finarkinClient.getResult(getResultRequest.getRequestId());
+
         ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getResultRequest.getRequestId());
         clientConsentRepo.save(entity);
+
         return mapEntityToGetResultResponse(entity);
     }
-    private ClientConsentMappingDTO mergeRequestAndResponse(NewRunRequest request, NewRunResponse response) {
+
+    // Merge methods
+
+    private ClientConsentMappingDTO mergeConsentRequestAndResponse(ConsentNewRunRequest request, ConsentNewRunResponse response) {
         return new ClientConsentMappingDTO(
             request.getUser().getClientUserId(),
             request.getUser().getPan(),
             request.getUser().getDob(),
-            response.getRequestId(),      
-            response.getConsentHandle()   
+            response.getRequestId(),
+            response.getConsentHandle()
         );
     }
 
+    private ClientConsentMappingDTO mergeRecurringRequestAndResponse(RecurringNewRunRequest request, RecurringNewRunResponse response) {
+        // Recurring fetch does not include user/pan/dob; only consentHandle and requestId
+        return new ClientConsentMappingDTO(
+            null,  // ClientUserId not part of recurring fetch
+            null,  // PAN not part of recurring fetch
+            null,  // DOB not part of recurring fetch
+            response.getRequestId(),
+            request.getConsentHandle()
+        );
+    }
 
-	@Override
-	public String checkValidConsent(GetRequest checkValidConsent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // Map Entity to ConsentNewRunResponse
+    private ConsentNewRunResponse mapConsentEntityToResponse(ClientConsentMappingEntity entity) {
+        return new ConsentNewRunResponse(
+            entity.getRequestId(),
+            entity.getConsentHandle(),
+            null // redirectUrl is not stored in entity; pass null or fetch if required
+        );
+    }
 
-	@Override
-	public GetResultResponse getDBRecords(GetRequest getRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String checkValidConsent(GetRequest checkValidConsent) {
+        // TODO Implement validation logic if needed
+        return null;
+    }
+
+    @Override
+    public GetResultResponse getDBRecords(GetRequest getRequest) {
+        // TODO Implement DB fetch logic if needed
+        return null;
+    }
+}
+
 
 	// ===================== Deposit Profile =====================
 	/*
