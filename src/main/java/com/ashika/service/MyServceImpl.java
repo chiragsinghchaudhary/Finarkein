@@ -43,6 +43,8 @@ public abstract class MyServceImpl implements MyService {
 
     private final ClientConsentMappingRepository clientConsentRepo;
     private final ClientConsentMappingHistRepository clientConsentHistRepo;
+    
+    private FinarkinClient finarkinClient = new FinarkinClient();
 
     public MyServceImpl(
             DepositHolderRepository depositHolderRepository,
@@ -72,9 +74,9 @@ public abstract class MyServceImpl implements MyService {
    
     @Override
     public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
-      
-		FinarkinResponse finarkinResponse = finarkinClient.initiateConsent(newRunRequest);
-        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, finarkinResponse);
+    	
+		NewRunResponse newRunResponse = finarkinClient.initiateConsent(newRunRequest);
+        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, newRunResponse);
         ClientConsentMappingEntity entity = dto.toEntity();
         ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
         return mapEntityToResponse(savedEntity);
@@ -107,15 +109,11 @@ public abstract class MyServceImpl implements MyService {
         clientConsentRepo.save(entity);
         return mapEntityToGetResultResponse(entity);
     }
-    private ClientConsentMappingDTO mergeRequestAndResponse(NewRunRequest request, FinarkinResponse response) {
+    private ClientConsentMappingDTO mergeRequestAndResponse(NewRunRequest request, NewRunResponse response) {
         return new ClientConsentMappingDTO(
-            request.getUser().getClientCode(),
+            request.getUser().getClientUserId(),
             request.getUser().getPan(),
-            null,
-            null,
-            null,
             request.getUser().getDob(),
-            request.getUser().getEmail(),
             response.getRequestId(),      
             response.getConsentHandle()   
         );

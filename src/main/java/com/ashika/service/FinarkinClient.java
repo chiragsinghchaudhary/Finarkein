@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.ashikha.data.request.NewRunRequest;
-import com.ashikha.data.response.FinarkinResponse;
-import com.ashikha.data.response.FinarkinResultResponse;
-import com.ashikha.data.response.FinarkinStatusResponse;
+import com.ashikha.data.response.GetResultResponse;
+import com.ashikha.data.response.GetStatusResponse;
+import com.ashikha.data.response.NewRunResponse;
 
 @Service
 public class FinarkinClient {
@@ -27,7 +27,7 @@ public class FinarkinClient {
     }
 
   
-    public FinarkinResponse initiateConsent(NewRunRequest request) {
+    public NewRunResponse initiateConsent(NewRunRequest request) {
         String url = finarkinBaseUrl + "/initiateConsent"; // Adjust endpoint name
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,18 +36,18 @@ public class FinarkinClient {
 
         HttpEntity<NewRunRequest> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<FinarkinResponse> response = restTemplate.exchange(
+        ResponseEntity<NewRunResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.POST,
                 entity,
-                FinarkinResponse.class
+                NewRunResponse.class
         );
 
         return response.getBody();
     }
 
  
-    public FinarkinResponse fetchData(NewRunRequest request) {
+    public GetResultResponse fetchData(NewRunRequest request) {
         String url = finarkinBaseUrl + "/fetchData"; // Adjust endpoint name
 
         HttpHeaders headers = new HttpHeaders();
@@ -56,18 +56,18 @@ public class FinarkinClient {
 
         HttpEntity<NewRunRequest> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<FinarkinResponse> response = restTemplate.exchange(
+        ResponseEntity<GetResultResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.POST,
                 entity,
-                FinarkinResponse.class
+                GetResultResponse.class
         );
 
         return response.getBody();
     }
 
   
-    public FinarkinStatusResponse getStatus(String requestId) {
+    public GetStatusResponse getStatus(String requestId) {
         String url = finarkinBaseUrl + "/getStatus/" + requestId;
 
         HttpHeaders headers = new HttpHeaders();
@@ -75,18 +75,18 @@ public class FinarkinClient {
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<FinarkinStatusResponse> response = restTemplate.exchange(
+        ResponseEntity<GetStatusResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 entity,
-                FinarkinStatusResponse.class
+                GetStatusResponse.class
         );
 
         return response.getBody();
     }
 
  
-    public FinarkinResultResponse getResult(String requestId) {
+    public GetResultResponse getResult(String requestId) {
         String url = finarkinBaseUrl + "/getResult/" + requestId;
 
         HttpHeaders headers = new HttpHeaders();
@@ -94,11 +94,11 @@ public class FinarkinClient {
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<FinarkinResultResponse> response = restTemplate.exchange(
+        ResponseEntity<GetResultResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 entity,
-                FinarkinResultResponse.class
+                GetResultResponse.class
         );
 
         return response.getBody();
