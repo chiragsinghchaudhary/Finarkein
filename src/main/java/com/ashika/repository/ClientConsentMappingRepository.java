@@ -236,6 +236,11 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 		return null;
 	}
 
+	public ClientConsentMappingEntity findByRequestId(String requestId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
 

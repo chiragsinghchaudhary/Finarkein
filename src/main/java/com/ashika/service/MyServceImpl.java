@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.ashika.model.dto.ClientConsentMappingDTO;
 import com.ashika.model.entity.ClientConsentMappingEntity;
+import com.ashika.model.entity.ClientConsentMappingId;
 import com.ashika.repository.ClientConsentMappingHistRepository;
 import com.ashika.repository.ClientConsentMappingRepository;
 import com.ashika.repository.DepositHolderRepository;
@@ -95,12 +96,13 @@ public abstract class MyServceImpl implements MyService {
     @Override
     public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
     	GetStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
-        ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
-        entity.setState(statusResponse.getState());
-        entity.setConsentStatus(statusResponse.getConsentStatus());
+    	ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
+        entity.setState(statusResponse.getState().getState());
+        entity.setConsentStatus(statusResponse.getState().getConsentStatus());
+        entity.setDataFetchStatus(statusResponse.getState().getDataFetchStatus());
         clientConsentRepo.save(entity);
 
-        return new GetStatusResponse(entity.getRequestId(), entity.getState(), entity.getConsentStatus());
+        return statusResponse;
     }
 
     @Override
