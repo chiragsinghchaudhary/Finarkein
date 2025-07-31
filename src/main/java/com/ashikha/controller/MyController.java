@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ashika.service.MyService;
 import com.ashikha.data.request.ConsentNewRunRequest;
 import com.ashikha.data.request.GetRequest;
-import com.ashikha.data.request.GetResultRequest;
-import com.ashikha.data.request.GetStatusRequest;
 import com.ashikha.data.request.RecurringNewRunRequest;
 import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.GetResultResponse;
