@@ -19,8 +19,10 @@ import com.ashikha.data.response.RecurringNewRunResponse;
 public class FinarkinClient {
 
     private final RestTemplate restTemplate;
+
     @Value("${finarkin.api.base-url}")
     private String finarkinBaseUrl;
+
     @Value("${finarkin.api.auth-token}")
     private String authToken;
 
@@ -28,9 +30,8 @@ public class FinarkinClient {
         this.restTemplate = new RestTemplate();
     }
 
-  
     public ConsentNewRunResponse createNewConsentRun(String workspace, String flowId, ConsentNewRunRequest request) {
-        String url = finarkinBaseUrl + "/initiateConsent"; // Adjust endpoint name
+        String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/flow/" + flowId + "/consent/initiate";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
@@ -48,9 +49,8 @@ public class FinarkinClient {
         return response.getBody();
     }
 
- 
-    public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
-        String url = finarkinBaseUrl + "/fetchData"; // Adjust endpoint name
+    public RecurringNewRunResponse createNewRecurringRun(String workspace, String flowId, RecurringNewRunRequest request) {
+        String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/flow/" + flowId + "/recurring/initiate";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
@@ -68,9 +68,8 @@ public class FinarkinClient {
         return response.getBody();
     }
 
-  
-    public GetStatusResponse getStatus(String requestId) {
-        String url = finarkinBaseUrl + "/getStatus/" + requestId;
+    public GetStatusResponse getStatus(String workspace, String requestId) {
+        String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/runs/" + requestId + "/status";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
@@ -87,9 +86,8 @@ public class FinarkinClient {
         return response.getBody();
     }
 
- 
-    public GetResultResponse getResult(String requestId) {
-        String url = finarkinBaseUrl + "/getResult/" + requestId;
+    public GetResultResponse getResult(String workspace, String requestId) {
+        String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/runs/" + requestId + "/result";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
@@ -106,4 +104,3 @@ public class FinarkinClient {
         return response.getBody();
     }
 }
-
