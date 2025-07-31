@@ -29,7 +29,7 @@ public class FinarkinClient {
     }
 
   
-    public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
+    public ConsentNewRunResponse createNewConsentRun(String workspace, String flowId, ConsentNewRunRequest request) {
         String url = finarkinBaseUrl + "/initiateConsent"; // Adjust endpoint name
 
         HttpHeaders headers = new HttpHeaders();

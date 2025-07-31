@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ashika.service.MyService;
-import com.ashikha.data.request.consent.ConsentNewRunRequest;
+import com.ashikha.data.request.ConsentNewRunRequest;
 import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
-import com.ashikha.data.request.recurring.RecurringNewRunRequest;
-import com.ashikha.data.response.consent.ConsentNewRunResponse;
+import com.ashikha.data.request.RecurringNewRunRequest;
+import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.recurring.RecurringNewRunResponse;
+import com.ashikha.data.response.RecurringNewRunResponse;
 
 @RestController
 @RequestMapping("/api/finarkein")
@@ -31,15 +31,15 @@ public class MyController {
     @PostMapping("/{workspace}/dp/nerv/{flowId}")
     public ConsentNewRunResponse createNewRun(@PathVariable("workspace") String workspace,
                                               @PathVariable("flowId") String flowId,
-                                              @RequestBody ConsentNewRunRequest newRunRequest) {
-        return myService.createNewRun(workspace, flowId, newRunRequest);
+                                              @RequestBody ConsentNewRunRequest consentNewRunRequest) {
+        return myService.createNewRun(workspace, flowId, consentNewRunRequest);
     }
 
     @PostMapping("/{workspace}/dp/nerv/fetch/{flowId}")
     public RecurringNewRunResponse createNewRunFetch(@PathVariable("workspace") String workspace,
                                                      @PathVariable("flowId") String flowId,
-                                                     @RequestBody RecurringNewRunRequest newRunRequest) {
-        return myService.createNewRunFetch(workspace, flowId, newRunRequest);
+                                                     @RequestBody RecurringNewRunRequest recurringNewRunRequest) {
+        return myService.createNewRunFetch(workspace, flowId, recurringNewRunRequest);
     }
 
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/status")

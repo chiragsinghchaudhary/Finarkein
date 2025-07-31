@@ -12,13 +12,13 @@ import com.ashikha.data.response.RecurringNewRunResponse;
 
 public interface MyService {
 
-	ConsentNewRunResponse createNewRun(ConsentNewRunRequest newRunRequest);
+	ConsentNewRunResponse createNewRun(String workspace, String flowId, ConsentNewRunRequest newRunRequest);
 
-	RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest newRunRequest);
+	RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, RecurringNewRunRequest newRunRequest);
 
-	GetStatusResponse getStatus(GetStatusRequest getStatusRequest);
+	GetStatusResponse getStatus(String workspace, String flowId, String requestId);
 
-	GetResultResponse getResult(GetResultRequest getResultRequest);
+	GetResultResponse getResult(String workspace, String flowId, String requestId);
 
 	String checkValidConsent(GetRequest checkValidConsent);
 

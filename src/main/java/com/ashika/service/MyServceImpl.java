@@ -73,10 +73,10 @@ public abstract class MyServceImpl implements MyService {
         this.clientConsentHistRepo = clientConsentHistRepo;
     }
     @Override
-    public ConsentNewRunResponse createNewRun(ConsentNewRunRequest consentNewRunRequest) {
+    public ConsentNewRunResponse createNewRun(String workspace, String flowId, ConsentNewRunRequest consentNewRunRequest) {
 
         // Call Finarkein client to initiate consent
-        ConsentNewRunResponse consentResponse = finarkinClient.createNewConsentRun(consentNewRunRequest);
+        ConsentNewRunResponse consentResponse = finarkinClient.createNewConsentRun(consentNewRunRequest, workspace, flowId);
         // Merge request and response for saving into DB
         ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
         ClientConsentMappingEntity entity = dto.toEntity();
@@ -84,7 +84,7 @@ public abstract class MyServceImpl implements MyService {
         return mapConsentEntityToResponse(savedEntity);
     }
     @Override
-    public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
+    public RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, RecurringNewRunRequest recurringNewRunRequest) {
 
         RecurringNewRunResponse recurringResponse = finarkinClient.createNewRecurringRun(recurringNewRunRequest);
         ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(recurringNewRunRequest, recurringResponse);
@@ -94,19 +94,19 @@ public abstract class MyServceImpl implements MyService {
     }
 
     @Override
-    public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
-    	GetStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
+    public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
+    	GetStatusResponse statusResponse = finarkinClient.getStatus(requestId);
         clientConsentRepo.updateStatus(statusResponse.getState().getState(),statusResponse.getState().getConsentStatus(), 
-        		statusResponse.getState().getDataFetchStatus(), getStatusRequest.getRequestId());
+        		statusResponse.getState().getDataFetchStatus(), requestId);
 
         return statusResponse;
     }
 
     @Override
-    public GetResultResponse getResult(GetResultRequest getResultRequest) {
-    	GetResultResponse resultResponse = finarkinClient.getResult(getResultRequest.getRequestId());
+    public GetResultResponse getResult(String workspace, String flowId, String requestId) {
+    	GetResultResponse resultResponse = finarkinClient.getResult(requestId);
 
-        ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getResultRequest.getRequestId());
+        ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(requestId);
         clientConsentRepo.save(entity);
 
         return mapEntityToGetResultResponse(entity);
