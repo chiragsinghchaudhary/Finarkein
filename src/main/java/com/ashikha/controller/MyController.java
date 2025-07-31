@@ -28,21 +28,18 @@ public class MyController {
         this.myService = myService;
     }
 
-    // POST: Consent + Data Fetch
     @PostMapping("/{workspace}/dp/nerv")
     public ConsentNewRunResponse createNewRun(@RequestBody ConsentNewRunRequest newRunRequest,
                                               @PathVariable("workspace") String workspace) {
         return myService.createNewRun(newRunRequest);
     }
 
-    // POST: Recurring Data Fetch
     @PostMapping("/{workspace}/dp/nerv/fetch")
     public RecurringNewRunResponse createNewRunFetch(@RequestBody RecurringNewRunRequest newRunRequest,
                                                      @PathVariable("workspace") String workspace) {
         return myService.createNewRunFetch(newRunRequest);
     }
 
-    // GET: Get Status
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/status")
     public GetStatusResponse getStatus(@PathVariable("workspace") String workspace,
                                        @PathVariable("flowId") String flowId,
@@ -52,7 +49,6 @@ public class MyController {
         return myService.getStatus(request);
     }
 
-    // GET: Get Result
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/result")
     public GetResultResponse getResult(@PathVariable("workspace") String workspace,
                                        @PathVariable("flowId") String flowId,
