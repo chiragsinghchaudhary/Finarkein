@@ -28,43 +28,43 @@ public class MyController {
         this.myService = myService;
     }
 
-    @PostMapping("/{workspace}/dp/nerv")
-    public ConsentNewRunResponse createNewRun(@RequestBody ConsentNewRunRequest newRunRequest,
-                                              @PathVariable("workspace") String workspace) {
-        return myService.createNewRun(newRunRequest);
+    @PostMapping("/{workspace}/dp/nerv/{flowId}")
+    public ConsentNewRunResponse createNewRun(@PathVariable("workspace") String workspace,
+                                              @PathVariable("flowId") String flowId,
+                                              @RequestBody ConsentNewRunRequest newRunRequest) {
+        return myService.createNewRun(workspace, flowId, newRunRequest);
     }
 
-    @PostMapping("/{workspace}/dp/nerv/fetch")
-    public RecurringNewRunResponse createNewRunFetch(@RequestBody RecurringNewRunRequest newRunRequest,
-                                                     @PathVariable("workspace") String workspace) {
-        return myService.createNewRunFetch(newRunRequest);
+    @PostMapping("/{workspace}/dp/nerv/fetch/{flowId}")
+    public RecurringNewRunResponse createNewRunFetch(@PathVariable("workspace") String workspace,
+                                                     @PathVariable("flowId") String flowId,
+                                                     @RequestBody RecurringNewRunRequest newRunRequest) {
+        return myService.createNewRunFetch(workspace, flowId, newRunRequest);
     }
 
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/status")
     public GetStatusResponse getStatus(@PathVariable("workspace") String workspace,
                                        @PathVariable("flowId") String flowId,
                                        @PathVariable("requestId") String requestId) {
-        GetStatusRequest request = new GetStatusRequest();
-        request.setRequestId(requestId);
-        return myService.getStatus(request);
+        return myService.getStatus(workspace, flowId, requestId);
     }
 
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/result")
     public GetResultResponse getResult(@PathVariable("workspace") String workspace,
                                        @PathVariable("flowId") String flowId,
                                        @PathVariable("requestId") String requestId) {
-=        GetResultRequest request = new GetResultRequest();
-        request.setRequestId(requestId);
-        return myService.getResult(request);
+        return myService.getResult(workspace, flowId, requestId);
     }
 
     @GetMapping("/consentStatus")
     public String checkValidConsent(@RequestBody GetRequest getRequest) {
         return myService.checkValidConsent(getRequest);
     }
+
     @GetMapping("/getDBRecords")
     public GetResultResponse getDBRecords(@RequestBody GetRequest getRequest) {
         return myService.getDBRecords(getRequest);
     }
 }
+
 
