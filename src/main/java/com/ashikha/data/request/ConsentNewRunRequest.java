@@ -58,3 +58,4 @@ public class ConsentNewRunRequest {
  public void setWebhook(Webhook webhook) {
         this.webhook = webhook;
     }
+}
