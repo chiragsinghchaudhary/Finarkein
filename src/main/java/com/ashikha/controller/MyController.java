@@ -1,15 +1,21 @@
 package com.ashikha.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ashika.service.MyService;
+import com.ashikha.data.request.ConsentNewRunRequest;
 import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
-import com.ashikha.data.request.NewRunRequest;
+import com.ashikha.data.request.RecurringNewRunRequest;
+import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.NewRunResponse;
+import com.ashikha.data.response.RecurringNewRunResponse;
 
 @RestController
 @RequestMapping("/api/finarkein")
@@ -22,12 +28,12 @@ public class MyController {
     }
     
     @PostMapping("/:workspace/dp/nerv")
-    public NewRunResponse createNewRun(@RequestBody NewRunRequest newRunRequest) {
+    public ConsentNewRunResponse createNewRun(@RequestBody ConsentNewRunRequest newRunRequest) {
         return myService.createNewRun(newRunRequest);
     }
     
     @PostMapping("/:workspace/dp/nerv/fetch")
-    public NewRunResponse createNewRunFetch(@RequestBody NewRunRequest newRunRequest) {
+    public RecurringNewRunResponse createNewRunFetch(@RequestBody RecurringNewRunRequest newRunRequest) {
         return myService.createNewRunFetch(newRunRequest);
     }
     

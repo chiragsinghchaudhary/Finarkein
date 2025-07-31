@@ -15,21 +15,17 @@ import com.ashika.repository.EquityTransactionRepository;
 import com.ashika.repository.MFHolderRepository;
 import com.ashika.repository.MFSummaryRepository;
 import com.ashika.repository.MFTransactionRepository;
-
+import com.ashikha.data.request.ConsentNewRunRequest;
+import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
-
-import com.ashikha.data.request.consent.ConsentNewRunRequest;
-import com.ashikha.data.response.consent.ConsentNewRunResponse;
-
-import com.ashikha.data.request.recurring.RecurringNewRunRequest;
-import com.ashikha.data.response.recurring.RecurringNewRunResponse;
-
-import com.ashikha.data.response.FinarkinResponse;
+import com.ashikha.data.request.RecurringNewRunRequest;
+import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.FinarkinResultResponse;
 import com.ashikha.data.response.FinarkinStatusResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
+import com.ashikha.data.response.RecurringNewRunResponse;
 
 @Service
 public abstract class MyServceImpl implements MyService {
@@ -78,8 +74,8 @@ public abstract class MyServceImpl implements MyService {
     @Override
     public ConsentNewRunResponse createNewRun(ConsentNewRunRequest consentNewRunRequest) {
 
-        // Call Finarkin client to initiate consent
-        ConsentNewRunResponse consentResponse = finarkinClient.initiateConsent(consentNewRunRequest);
+        // Call Finarkein client to initiate consent
+        ConsentNewRunResponse consentResponse = finarkinClient.createNewConsentRun(consentNewRunRequest);
         // Merge request and response for saving into DB
         ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
         ClientConsentMappingEntity entity = dto.toEntity();
@@ -89,7 +85,7 @@ public abstract class MyServceImpl implements MyService {
     @Override
     public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
 
-        RecurringNewRunResponse recurringResponse = finarkinClient.fetchData(recurringNewRunRequest);
+        RecurringNewRunResponse recurringResponse = finarkinClient.createNewRecurringRun(recurringNewRunRequest);
         ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(recurringNewRunRequest, recurringResponse);
         ClientConsentMappingEntity entity = dto.toEntity();
         clientConsentRepo.save(entity);
@@ -98,7 +94,7 @@ public abstract class MyServceImpl implements MyService {
 
     @Override
     public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
-        FinarkinStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
+    	GetStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
         ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
         entity.setState(statusResponse.getState());
         entity.setConsentStatus(statusResponse.getConsentStatus());
@@ -109,7 +105,7 @@ public abstract class MyServceImpl implements MyService {
 
     @Override
     public GetResultResponse getResult(GetResultRequest getResultRequest) {
-        FinarkinResultResponse resultResponse = finarkinClient.getResult(getResultRequest.getRequestId());
+    	GetResultResponse resultResponse = finarkinClient.getResult(getResultRequest.getRequestId());
 
         ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getResultRequest.getRequestId());
         clientConsentRepo.save(entity);

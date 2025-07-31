@@ -1,23 +1,20 @@
 package com.ashika.service;
 
-import com.ashika.model.dto.*;
-
-import java.util.List;
-import java.util.Optional;
-
+import com.ashikha.data.request.ConsentNewRunRequest;
 import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.GetResultRequest;
 import com.ashikha.data.request.GetStatusRequest;
-import com.ashikha.data.request.NewRunRequest;
+import com.ashikha.data.request.RecurringNewRunRequest;
+import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.NewRunResponse;
+import com.ashikha.data.response.RecurringNewRunResponse;
 
 public interface MyService {
 
-	NewRunResponse createNewRun(NewRunRequest newRunRequest);
+	ConsentNewRunResponse createNewRun(ConsentNewRunRequest newRunRequest);
 
-	NewRunResponse createNewRunFetch(NewRunRequest newRunRequest);
+	RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest newRunRequest);
 
 	GetStatusResponse getStatus(GetStatusRequest getStatusRequest);
 

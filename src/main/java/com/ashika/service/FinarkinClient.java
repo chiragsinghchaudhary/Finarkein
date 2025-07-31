@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.ashikha.data.request.NewRunRequest;
+import com.ashikha.data.request.ConsentNewRunRequest;
+import com.ashikha.data.request.RecurringNewRunRequest;
+import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.NewRunResponse;
+import com.ashikha.data.response.RecurringNewRunResponse;
 
 @Service
 public class FinarkinClient {
@@ -27,40 +29,40 @@ public class FinarkinClient {
     }
 
   
-    public NewRunResponse initiateConsent(NewRunRequest request) {
+    public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
         String url = finarkinBaseUrl + "/initiateConsent"; // Adjust endpoint name
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
         headers.set("Content-Type", "application/json");
 
-        HttpEntity<NewRunRequest> entity = new HttpEntity<>(request, headers);
+        HttpEntity<ConsentNewRunRequest> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<NewRunResponse> response = restTemplate.exchange(
+        ResponseEntity<ConsentNewRunResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.POST,
                 entity,
-                NewRunResponse.class
+                ConsentNewRunResponse.class
         );
 
         return response.getBody();
     }
 
  
-    public GetResultResponse fetchData(NewRunRequest request) {
+    public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
         String url = finarkinBaseUrl + "/fetchData"; // Adjust endpoint name
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + authToken);
         headers.set("Content-Type", "application/json");
 
-        HttpEntity<NewRunRequest> entity = new HttpEntity<>(request, headers);
+        HttpEntity<RecurringNewRunRequest> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<GetResultResponse> response = restTemplate.exchange(
+        ResponseEntity<RecurringNewRunResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.POST,
                 entity,
-                GetResultResponse.class
+                RecurringNewRunResponse.class
         );
 
         return response.getBody();
