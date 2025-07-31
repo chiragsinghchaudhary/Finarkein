@@ -43,20 +43,19 @@ public abstract class MyServceImpl implements MyService {
 
     private final ClientConsentMappingRepository clientConsentRepo;
     private final ClientConsentMappingHistRepository clientConsentHistRepo;
-    private final FinarkinClient finarkinClient;
 
     public MyServceImpl(
-	            DepositHolderRepository depositHolderRepository,
-	            DepositSummaryRepository depositSummaryRepo,
-	            DepositTransactionRepository depositTransactionRepo,
-	            EquityHolderRepository equityHolderRepository,
-	            EquitySummaryRepository equitySummaryRepo,
-	            EquityTransactionRepository equityTransactionRepo,
-	            MFHolderRepository mfHolderRepository,
-	            MFSummaryRepository mfSummaryRepo,
-	            MFTransactionRepository mfTransactionRepo,
-	            ClientConsentMappingRepository clientConsentRepo,
-	            ClientConsentMappingHistRepository clientConsentHistRepo) {
+            DepositHolderRepository depositHolderRepository,
+            DepositSummaryRepository depositSummaryRepo,
+            DepositTransactionRepository depositTransactionRepo,
+            EquityHolderRepository equityHolderRepository,
+            EquitySummaryRepository equitySummaryRepo,
+            EquityTransactionRepository equityTransactionRepo,
+            MFHolderRepository mfHolderRepository,
+            MFSummaryRepository mfSummaryRepo,
+            MFTransactionRepository mfTransactionRepo,
+            ClientConsentMappingRepository clientConsentRepo,
+            ClientConsentMappingHistRepository clientConsentHistRepo) {
         this.depositHolderRepository = depositHolderRepository;
         this.depositSummaryRepo = depositSummaryRepo;
         this.depositTransactionRepo = depositTransactionRepo;
@@ -68,18 +67,37 @@ public abstract class MyServceImpl implements MyService {
         this.mfTransactionRepo = mfTransactionRepo;
         this.clientConsentRepo = clientConsentRepo;
         this.clientConsentHistRepo = clientConsentHistRepo;
-		this.finarkinClient = new FinarkinClient();
     }
 
    
     @Override
+    public NewRunResponse createNewRun(NewRunRequest newRunRequest) {
+      
+		FinarkinResponse finarkinResponse = finarkinClient.initiateConsent(newRunRequest);
+        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, finarkinResponse);
+        ClientConsentMappingEntity entity = dto.toEntity();
+        ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
+        return mapEntityToResponse(savedEntity);
+    }
+
+    @Override
+    public NewRunResponse createNewRunFetch(NewRunRequest newRunRequest) {
+        Object finarkinClient;
+		FinarkinResponse finarkinResponse = finarkinClient.fetchData(newRunRequest);
+        ClientConsentMappingDTO dto = mergeRequestAndResponse(newRunRequest, finarkinResponse);
+        ClientConsentMappingEntity entity = dto.toEntity();
+        ClientConsentMappingEntity savedEntity = clientConsentRepo.save(entity);
+        return mapEntityToResponse(savedEntity);
+    }
+
+    @Override
     public GetStatusResponse getStatus(GetStatusRequest getStatusRequest) {
         FinarkinStatusResponse statusResponse = finarkinClient.getStatus(getStatusRequest.getRequestId());
-        ClientConsentMappingEntity entity = clientConsentRepo.findById(getStatusRequest.getRequestId());
+        ClientConsentMappingEntity entity = clientConsentRepo.findByRequestId(getStatusRequest.getRequestId());
         entity.setState(statusResponse.getState());
         entity.setConsentStatus(statusResponse.getConsentStatus());
         clientConsentRepo.save(entity);
-        return new GetStatusResponse();
+        return new GetStatusResponse(entity.getRequestId(), entity.getState(), entity.getConsentStatus());
     }
 
     @Override
@@ -89,32 +107,20 @@ public abstract class MyServceImpl implements MyService {
         clientConsentRepo.save(entity);
         return mapEntityToGetResultResponse(entity);
     }
-
     private ClientConsentMappingDTO mergeRequestAndResponse(NewRunRequest request, FinarkinResponse response) {
         return new ClientConsentMappingDTO(
-            request.getUser().getClientUserId(),
+            request.getUser().getClientCode(),
             request.getUser().getPan(),
             null,
             null,
             null,
             request.getUser().getDob(),
             request.getUser().getEmail(),
-            response.getRequestId(),
-            response.getConsentHandle()
+            response.getRequestId(),      
+            response.getConsentHandle()   
         );
     }
 
-    // TODO: Implement these mappings
-    private NewRunResponse mapEntityToResponse(ClientConsentMappingEntity entity) {
-        // map fields
-        return new NewRunResponse();
-    }
-
-    private GetResultResponse mapEntityToGetResultResponse(ClientConsentMappingEntity entity) {
-        // map fields
-        return new GetResultResponse();
-    }
-}
 
 	@Override
 	public String checkValidConsent(GetRequest checkValidConsent) {
