@@ -57,19 +57,15 @@ public class MyController {
     public GetResultResponse getResult(@PathVariable("workspace") String workspace,
                                        @PathVariable("flowId") String flowId,
                                        @PathVariable("requestId") String requestId) {
-        // Build GetResultRequest manually
-        GetResultRequest request = new GetResultRequest();
+=        GetResultRequest request = new GetResultRequest();
         request.setRequestId(requestId);
         return myService.getResult(request);
     }
 
-    // GET: Consent Status Check
     @GetMapping("/consentStatus")
     public String checkValidConsent(@RequestBody GetRequest getRequest) {
         return myService.checkValidConsent(getRequest);
     }
-
-    // GET: Get DB Records
     @GetMapping("/getDBRecords")
     public GetResultResponse getDBRecords(@RequestBody GetRequest getRequest) {
         return myService.getDBRecords(getRequest);
