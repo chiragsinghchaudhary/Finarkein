@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-com.ashikha.data.response.DepositHolder;
-
 import com.ashika.model.dto.ClientConsentMappingDTO;
 import com.ashika.model.entity.ClientConsentMappingEntity;
 import com.ashika.model.entity.DepositHolderEntity;
@@ -42,6 +40,7 @@ import com.ashikha.data.response.DepositSummary;
 import com.ashikha.data.response.DepositTransaction;
 import com.ashikha.data.response.EquityHolder;
 import com.ashikha.data.response.EquityResponse;
+import com.ashikha.data.response.EquitySummary;
 import com.ashikha.data.response.EquityTransaction;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
@@ -254,7 +253,7 @@ public abstract class MyServceImpl implements MyService {
     	getResultResponse.setData(dataDictionary);
     	
     	return getResultResponse;
-
+    }
 
         private List<DepositHolder> mapDepositHolderEntities(List<DepositHolderEntity> entities) {
         List<DepositHolder> responseList = new ArrayList<>();
@@ -422,33 +421,30 @@ private List<MFSummary> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
 
 private List<MFTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
     List<MFTransaction> responseList = new ArrayList<>();
-    for (MFTransactionEntity entity : entities) {
-        MFTransaction response = new MFTransaction();
-        response.setAmc(entity.getAmc());
-        response.setAmfiCode(entity.getAmfiCode());
-        response.setAmount(entity.getAmount());
-        response.setIsin(entity.getIsin());
-        response.setIsinDescription(entity.getIsinDescription());
-        response.setLockInDays(entity.getLockInDays());
-        response.setLockInFlag(entity.getLockInFlag());
-        response.setMode(entity.getMode());
-        response.setNarration(entity.getNarration());
-        response.setNav(entity.getNav());
-        response.setNavDate(entity.getNavDate());
-        response.setRegistrar(entity.getRegistrar());
-        response.setSchemeCode(entity.getSchemeCode());
-        response.setSchemePlan(entity.getSchemePlan());
-        response.setTransactionDate(entity.getTransactionDate());
-        response.setTxnId(entity.getTxnId());
-        response.setType(entity.getType());
-        response.setUcc(entity.getUcc());
-        response.setUnits(entity.getUnits());
-        responseList.add(response);
-    }
+	    for (MFTransactionEntity entity : entities) {
+	        MFTransaction response = new MFTransaction();
+	        response.setAmc(entity.getAmc());
+	        response.setAmfiCode(entity.getAmfiCode());
+	        response.setAmount(entity.getAmount());
+	        response.setIsin(entity.getIsin());
+	        response.setIsinDescription(entity.getIsinDescription());
+	        response.setLockInDays(entity.getLockInDays());
+	        response.setLockInFlag(entity.getLockInFlag());
+	        response.setMode(entity.getMode());
+	        response.setNarration(entity.getNarration());
+	        response.setNav(entity.getNav());
+	        response.setNavDate(entity.getNavDate());
+	        response.setRegistrar(entity.getRegistrar());
+	        response.setSchemeCode(entity.getSchemeCode());
+	        response.setSchemePlan(entity.getSchemePlan());
+	        response.setTransactionDate(entity.getTransactionDate());
+	        response.setTxnId(entity.getTxnId());
+	        response.setType(entity.getType());
+	        response.setUcc(entity.getUcc());
+	        response.setUnits(entity.getUnits());
+	        responseList.add(response);
+	    }
     return responseList;
-}
-
-    	
     }
 }
 
