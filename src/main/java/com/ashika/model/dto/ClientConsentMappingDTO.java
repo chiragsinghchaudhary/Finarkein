@@ -7,6 +7,7 @@ import com.ashika.model.entity.ClientConsentMappingEntity;
 	public record ClientConsentMappingDTO(
 	        String clientCode,
 	        String pan,
+	        String runType,
 	        String state,
 	        String consentStatus,
 	        String dataFetchStatus,
@@ -20,6 +21,7 @@ import com.ashika.model.entity.ClientConsentMappingEntity;
         ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
         entity.setClientCode(this.clientCode());
         entity.setPan(this.pan());
+        entity.setPan(this.runType);
         entity.setState(this.state());
         entity.setConsentStatus(this.consentStatus());
         entity.setDataFetchStatus(this.dataFetchStatus());

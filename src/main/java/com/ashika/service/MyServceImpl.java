@@ -115,7 +115,10 @@ public abstract class MyServceImpl implements MyService {
     	
         RecurringNewRunResponse recurringResponse = finarkinClient.createNewRecurringRun(workspace, flowId, recurringNewRunRequest);
         ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(clientConsentMappingEntity, recurringNewRunRequest, recurringResponse);
+        
+        
         ClientConsentMappingEntity entity = dto.toEntity();
+        entity.setRunType(Constants.RECURRING);
         clientConsentRepo.save(entity);
         return recurringResponse;
     }
@@ -149,6 +152,7 @@ public abstract class MyServceImpl implements MyService {
         return new ClientConsentMappingDTO(
                 request.getUser().getClientUserId(),
                 request.getUser().getPan(),
+                Constants.CONSENT,
                 null,
                 null,
                 null,
@@ -163,6 +167,7 @@ public abstract class MyServceImpl implements MyService {
         return new ClientConsentMappingDTO(
         		clientConsentMappingEntity.getClientCode(),
         		clientConsentMappingEntity.getPan(),
+        		Constants.RECURRING,
         		null,
         		null,
         		null,
