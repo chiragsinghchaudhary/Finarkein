@@ -190,9 +190,9 @@ public abstract class MyServceImpl implements MyService {
     	clientConsentMappingEntity.getConsentStatus().equals(Constants.ACTIVE) &&
     	clientConsentMappingEntity.getConsentStatus().equals(Constants.SUCCESS)){
     		return true;
+    	}else {
+    		return false;
     	}
-    	
-        return false;
     }
 
     @Override
