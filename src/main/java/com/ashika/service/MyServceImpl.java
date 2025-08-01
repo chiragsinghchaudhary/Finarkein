@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+com.ashikha.data.response.DepositHolder;
+
 import com.ashika.model.dto.ClientConsentMappingDTO;
 import com.ashika.model.entity.ClientConsentMappingEntity;
 import com.ashika.model.entity.DepositHolderEntity;
@@ -34,11 +36,19 @@ import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.RecurringNewRunRequest;
 import com.ashikha.data.response.ConsentNewRunResponse;
 import com.ashikha.data.response.DataDictionary;
+import com.ashikha.data.response.DepositHolder;
 import com.ashikha.data.response.DepositResponse;
+import com.ashikha.data.response.DepositSummary;
+import com.ashikha.data.response.DepositTransaction;
+import com.ashikha.data.response.EquityHolder;
 import com.ashikha.data.response.EquityResponse;
+import com.ashikha.data.response.EquityTransaction;
 import com.ashikha.data.response.GetResultResponse;
 import com.ashikha.data.response.GetStatusResponse;
+import com.ashikha.data.response.MFHolder;
 import com.ashikha.data.response.MFResponse;
+import com.ashikha.data.response.MFSummary;
+import com.ashikha.data.response.MFTransaction;
 import com.ashikha.data.response.RecurringNewRunResponse;
 import com.ashikha.data.response.State;
 
@@ -244,6 +254,200 @@ public abstract class MyServceImpl implements MyService {
     	getResultResponse.setData(dataDictionary);
     	
     	return getResultResponse;
+
+
+        private List<DepositHolder> mapDepositHolderEntities(List<DepositHolderEntity> entities) {
+        List<DepositHolder> responseList = new ArrayList<>();
+    for (DepositHolderEntity entity : entities) {
+        DepositHolder response = new DepositHolder();
+        response.setType(entity.getType());
+        response.setAddress(entity.getAddress());
+        response.setCkycCompliance(entity.getCkycCompliance());
+        response.setDob(entity.getDob());
+        response.setEmail(entity.getEmail());
+        response.setLandline(entity.getLandline());
+        response.setMobile(entity.getMobile());
+        response.setName(entity.getName());
+        response.setNominee(entity.getNominee());
+        response.setPan(entity.getPan());
+        responseList.add(response);
+    }
+    return responseList;
+}
+
+        private List<DepositSummary> mapDepositSummaryEntities(List<DepositSummaryEntity> entities) {
+    List<DepositSummary> responseList = new ArrayList<>();
+    for (DepositSummaryEntity entity : entities) {
+        DepositSummary response = new DepositSummary();
+        response.setBalanceDatetime(entity.getBalanceDatetime());
+        response.setBranch(entity.getBranch());
+        response.setCurrency(entity.getCurrency());
+        response.setCurrentBalance(entity.getCurrentBalance());
+        response.setCurrentODLimit(entity.getCurrentODLimit());
+        response.setDrawingLimit(entity.getDrawingLimit());
+        response.setExchangeRate(entity.getExchangeRate());
+        response.setFacility(entity.getFacility());
+        response.setIfscCode(entity.getIfscCode());
+        response.setMicrCode(entity.getMicrCode());
+        response.setOpeningDate(entity.getOpeningDate());
+        response.setStatus(entity.getStatus());
+        response.setType(entity.getType());
+        response.setTransactionType(entity.getTransactionType());
+        response.setAmount(entity.getAmount());
+        responseList.add(response);
+    }
+    return responseList;
+}
+
+
+        private List<DepositTransaction> mapDepositTransactionEntities(List<DepositTransactionEntity> entities) {
+    List<DepositTransaction> responseList = new ArrayList<>();
+    for (DepositTransactionEntity entity : entities) {
+        DepositTransaction response = new DepositTransaction();
+        response.setStartDate(entity.getStartDate());
+        response.setEndDate(entity.getEndDate());
+        response.setAmount(entity.getAmount());
+        response.setCurrentBalance(entity.getCurrentBalance());
+        response.setMode(entity.getMode());
+        response.setNarration(entity.getNarration());
+        response.setReference(entity.getReference());
+        response.setTransactionId(entity.getTransactionId());
+        response.setTransactionTimestamp(entity.getTransactionTimestamp());
+        response.setType(entity.getType());
+        response.setValueDate(entity.getValueDate());
+        responseList.add(response);
+    }
+    return responseList;
+}
+private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
+    List<EquityHolder> responseList = new ArrayList<>();
+    for (EquityHolderEntity entity : entities) {
+        EquityHolder response = new EquityHolder();
+        response.setAddress(entity.getAddress());
+        response.setDematId(entity.getDematId());
+        response.setDob(entity.getDob());
+        response.setEmail(entity.getEmail());
+        response.setKycCompliance(entity.getKycCompliance());
+        response.setLandline(entity.getLandline());
+        response.setMobile(entity.getMobile());
+        response.setName(entity.getName());
+        response.setNominee(entity.getNominee());
+        response.setPan(entity.getPan());
+        responseList.add(response);
+    }
+    return responseList;
+}
+private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
+    List<EquitySummary> responseList = new ArrayList<>();
+    for (EquitySummaryEntity entity : entities) {
+        EquitySummary response = new EquitySummary();
+        response.setCurrentValue(entity.getCurrentValue());
+        response.setHoldingMode(entity.getHoldingMode());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setIssuerName(entity.getIssuerName());
+        response.setLastTradedPrice(entity.getLastTradedPrice());
+        response.setUnits(entity.getUnits());
+        responseList.add(response);
+    }
+    return responseList;
+}
+private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
+    List<EquityTransaction> responseList = new ArrayList<>();
+    for (EquityTransactionEntity entity : entities) {
+        EquityTransaction response = new EquityTransaction();
+        response.setCompanyName(entity.getCompanyName());
+        response.setEquityCategory(entity.getEquityCategory());
+        response.setExchange(entity.getExchange());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setNarration(entity.getNarration());
+        response.setOrderId(entity.getOrderId());
+        response.setRate(entity.getRate());
+        response.setTransactionDateTime(entity.getTransactionDateTime());
+        response.setTxnId(entity.getTxnId());
+        response.setType(entity.getType());
+        response.setUnits(entity.getUnits());
+        responseList.add(response);
+    }
+    return responseList;
+}
+
+        private List<MFHolder> mapMFHolderEntities(List<MFHolderEntity> entities) {
+    List<MFHolder> responseList = new ArrayList<>();
+    for (MFHolderEntity entity : entities) {
+        MFHolder response = new MFHolder();
+        response.setAddress(entity.getAddress());
+        response.setDematId(entity.getDematId());
+        response.setDob(entity.getDob());
+        response.setEmail(entity.getEmail());
+        response.setFolioNo(entity.getFolioNo());
+        response.setKycCompliance(entity.getKycCompliance());
+        response.setLandline(entity.getLandline());
+        response.setMobile(entity.getMobile());
+        response.setName(entity.getName());
+        response.setNominee(entity.getNominee());
+        response.setPan(entity.getPan());
+        responseList.add(response);
+    }
+    return responseList;
+}
+private List<MFSummary> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
+    List<MFSummary> responseList = new ArrayList<>();
+    for (MFSummaryEntity entity : entities) {
+        MFSummary response = new MFSummary();
+        response.setCostValue(entity.getCostValue());
+        response.setCurrentValue(entity.getCurrentValue());
+        response.setFatcaStatus(entity.getFatcaStatus());
+        response.setAmc(entity.getAmc());
+        response.setAmfiCode(entity.getAmfiCode());
+        response.setClosingUnits(entity.getClosingUnits());
+        response.setFolioNo(entity.getFolioNo());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setLienUnits(entity.getLienUnits());
+        response.setLockinUnits(entity.getLockinUnits());
+        response.setNav(entity.getNav());
+        response.setNavDate(entity.getNavDate());
+        response.setRegistrar(entity.getRegistrar());
+        response.setSchemeCategory(entity.getSchemeCategory());
+        response.setSchemeCode(entity.getSchemeCode());
+        response.setSchemeOption(entity.getSchemeOption());
+        response.setSchemeTypes(entity.getSchemeTypes());
+        response.setUcc(entity.getUcc());
+        responseList.add(response);
+    }
+    return responseList;
+}
+
+private List<MFTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
+    List<MFTransaction> responseList = new ArrayList<>();
+    for (MFTransactionEntity entity : entities) {
+        MFTransaction response = new MFTransaction();
+        response.setAmc(entity.getAmc());
+        response.setAmfiCode(entity.getAmfiCode());
+        response.setAmount(entity.getAmount());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setLockInDays(entity.getLockInDays());
+        response.setLockInFlag(entity.getLockInFlag());
+        response.setMode(entity.getMode());
+        response.setNarration(entity.getNarration());
+        response.setNav(entity.getNav());
+        response.setNavDate(entity.getNavDate());
+        response.setRegistrar(entity.getRegistrar());
+        response.setSchemeCode(entity.getSchemeCode());
+        response.setSchemePlan(entity.getSchemePlan());
+        response.setTransactionDate(entity.getTransactionDate());
+        response.setTxnId(entity.getTxnId());
+        response.setType(entity.getType());
+        response.setUcc(entity.getUcc());
+        response.setUnits(entity.getUnits());
+        responseList.add(response);
+    }
+    return responseList;
+}
+
     	
     }
 }
