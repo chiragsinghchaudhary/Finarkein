@@ -1,8 +1,6 @@
 package com.ashika.model.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -23,7 +21,7 @@ public class DepositTransactionEntity {
     private String transactionId;
     private Long transactionTimestamp;
     private String type;
-    private String valueDate;
+    private Long valueDate;
 
     public String getPan() {
 		return pan;
@@ -113,11 +111,11 @@ public class DepositTransactionEntity {
         this.type = type;
     }
 
-    public String getValueDate() {
+    public Long getValueDate() {
         return valueDate;
     }
 
-    public void setValueDate(String valueDate) {
+    public void setValueDate(Long valueDate) {
         this.valueDate = valueDate;
     }
 }

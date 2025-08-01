@@ -29,7 +29,7 @@ public class MFTransactionEntity {
     private String registrar;
     private String schemeCode;
     private String schemePlan;
-    private String transactionDate;
+    private Long transactionDate;
     private String txnId;
     private String type;
     private String ucc;
@@ -172,11 +172,11 @@ public class MFTransactionEntity {
         this.schemePlan = schemePlan;
     }
 
-    public String getTransactionDate() {
+    public Long getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(Long transactionDate) {
         this.transactionDate = transactionDate;
     }
 

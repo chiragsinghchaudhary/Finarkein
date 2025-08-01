@@ -12,6 +12,6 @@ public record DepositTransactionDTO(
         String transactionId,
         Long transactionTimestamp,
         String type,
-        String valueDate
+        Long valueDate
 ) {}
 

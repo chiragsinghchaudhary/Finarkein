@@ -18,7 +18,7 @@ public record MFTransactionDTO(
         String registrar,
         String schemeCode,
         String schemePlan,
-        String transactionDate,
+        Long transactionDate,
         String txnId,
         String type,
         String ucc,

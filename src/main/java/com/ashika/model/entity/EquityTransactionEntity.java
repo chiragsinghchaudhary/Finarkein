@@ -23,7 +23,7 @@ public class EquityTransactionEntity {
     private String narration;
     private String orderId;
     private Double rate;
-    private String transactionDateTime;
+    private Long transactionDateTime;
     private String txnId;
     private String type;
     private Double units;
@@ -117,11 +117,11 @@ public class EquityTransactionEntity {
         this.rate = rate;
     }
 
-    public String getTransactionDateTime() {
+    public Long getTransactionDateTime() {
         return transactionDateTime;
     }
 
-    public void setTransactionDateTime(String transactionDateTime) {
+    public void setTransactionDateTime(Long transactionDateTime) {
         this.transactionDateTime = transactionDateTime;
     }
 

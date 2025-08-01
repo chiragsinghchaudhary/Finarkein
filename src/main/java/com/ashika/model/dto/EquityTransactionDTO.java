@@ -12,7 +12,7 @@ public record EquityTransactionDTO(
         String narration,
         String orderId,
         Double rate,
-        String transactionDateTime,
+        Long transactionDateTime,
         String txnId,
         String type,
         Double units
