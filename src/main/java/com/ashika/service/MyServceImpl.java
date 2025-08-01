@@ -50,7 +50,7 @@ import com.ashikha.data.response.MFTransaction;
 import com.ashikha.data.response.RecurringNewRunResponse;
 
 @Service
-public abstract class MyServceImpl implements MyService {
+public class MyServceImpl implements MyService {
 
 	private final DepositHolderRepository depositHolderRepository;
 	private final DepositSummaryRepository depositSummaryRepository;
