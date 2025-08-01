@@ -98,8 +98,6 @@ CREATE TABLE MF_Holdings (
 CREATE TABLE MF_Transactions (
     txnId VARCHAR(50) PRIMARY KEY,
     folioNo VARCHAR(30),
-    startDate DATE,
-    endDate DATE,
     amc VARCHAR(100),
     amfiCode VARCHAR(20),
     amount DECIMAL(15,2),
@@ -157,8 +155,6 @@ CREATE TABLE Equity_Holdings (
 CREATE TABLE Equity_Transactions (
     txnId VARCHAR(50) PRIMARY KEY,           -- unique transaction id
     pan VARCHAR(20),
-    startDate DATE,
-    endDate DATE,
     companyName VARCHAR(100),
     equityCategory VARCHAR(20),
     exchange VARCHAR(20),
