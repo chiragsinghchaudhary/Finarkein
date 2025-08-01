@@ -204,9 +204,11 @@ public class MyServceImpl implements MyService {
 			depositHolderRepository.deleteAllById(idList);
 			depositSummaryRepository.deleteAllById(idList);
 			depositTransactionRepository.deleteAllById(idList);
+			
 			equityHolderRepository.deleteAllById(idList);
 			equitySummaryRepository.deleteAllById(idList);
 			equityTransactionRepository.deleteAllById(idList);
+			
 			mfHolderRepository.deleteAllById(idList);
 			mfSummaryRepository.deleteAllById(idList);
 			mfTransactionRepository.deleteAllById(idList);
