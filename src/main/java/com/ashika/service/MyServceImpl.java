@@ -214,15 +214,18 @@ public abstract class MyServceImpl implements MyService {
 			mfTransactionRepository.deleteAllById(idList);
 			
 			
-			depositHolderRepository.saveAll(resultResponse.getData().getDeposit().getHolder());
-			depositSummaryRepository.saveAll(resultResponse.getData().getDeposit().getSummary());
-			depositTransactionRepository.saveAll(resultResponse.getData().getDeposit().getTransactions());
-			equityHolderRepository.saveAll(resultResponse.getData().getEquity().getHolder());
-			equitySummaryRepository.saveAll(resultResponse.getData().getEquity().getSummary());
-			equityTransactionRepository.saveAll(resultResponse.getData().getEquity().getTransactions());
-			mfHolderRepository.saveAll(resultResponse.getData().getMf().getHolder());
-			mfSummaryRepository.saveAll(resultResponse.getData().getMf().getSummary());
-			mfTransactionRepository.saveAll(resultResponse.getData().getMf().getTransactions());
+			depositHolderRepository.saveAll(mapDepositHolderResponses(resultResponse.getData().getDeposit().getHolder()));
+			depositSummaryRepository.saveAll(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary()));
+			depositTransactionRepository.saveAll(mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions()));
+			
+			equityHolderRepository.saveAll(mapEquityHolderResponses(resultResponse.getData().getEquity().getHolder()));
+			equitySummaryRepository.saveAll(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary()));
+			equityTransactionRepository.saveAll(mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions()));
+			
+			mfHolderRepository.saveAll(mapMFHolderResponses(resultResponse.getData().getMf().getHolder()));
+			mfSummaryRepository.saveAll(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary()));
+			mfTransactionRepository.saveAll(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions()));
+
 		}
 
 		return resultResponse;
@@ -452,4 +455,192 @@ public abstract class MyServceImpl implements MyService {
 		}
 		return responseList;
 	}
+
+	private List<DepositHolderEntity> mapDepositHolderResponses(List<DepositHolder> responses) {
+    List<DepositHolderEntity> entityList = new ArrayList<>();
+    for (DepositHolder response : responses) {
+        DepositHolderEntity entity = new DepositHolderEntity();
+        entity.setType(response.getType());
+        entity.setAddress(response.getAddress());
+        entity.setCkycCompliance(response.getCkycCompliance());
+        entity.setDob(response.getDob());
+        entity.setEmail(response.getEmail());
+        entity.setLandline(response.getLandline());
+        entity.setMobile(response.getMobile());
+        entity.setName(response.getName());
+        entity.setNominee(response.getNominee());
+        entity.setPan(response.getPan());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<DepositSummaryEntity> mapDepositSummaryResponses(List<DepositSummary> responses) {
+    List<DepositSummaryEntity> entityList = new ArrayList<>();
+    for (DepositSummary response : responses) {
+        DepositSummaryEntity entity = new DepositSummaryEntity();
+        entity.setBalanceDatetime(response.getBalanceDatetime());
+        entity.setBranch(response.getBranch());
+        entity.setCurrency(response.getCurrency());
+        entity.setCurrentBalance(response.getCurrentBalance());
+        entity.setCurrentODLimit(response.getCurrentODLimit());
+        entity.setDrawingLimit(response.getDrawingLimit());
+        entity.setExchangeRate(response.getExchangeRate());
+        entity.setFacility(response.getFacility());
+        entity.setIfscCode(response.getIfscCode());
+        entity.setMicrCode(response.getMicrCode());
+        entity.setOpeningDate(response.getOpeningDate());
+        entity.setStatus(response.getStatus());
+        entity.setType(response.getType());
+        entity.setTransactionType(response.getTransactionType());
+        entity.setAmount(response.getAmount());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses) {
+    List<DepositTransactionEntity> entityList = new ArrayList<>();
+    for (DepositTransaction response : responses) {
+        DepositTransactionEntity entity = new DepositTransactionEntity();
+        entity.setStartDate(response.getStartDate());
+        entity.setEndDate(response.getEndDate());
+        entity.setAmount(response.getAmount());
+        entity.setCurrentBalance(response.getCurrentBalance());
+        entity.setMode(response.getMode());
+        entity.setNarration(response.getNarration());
+        entity.setReference(response.getReference());
+        entity.setTransactionId(response.getTransactionId());
+        entity.setTransactionTimestamp(response.getTransactionTimestamp());
+        entity.setType(response.getType());
+        entity.setValueDate(response.getValueDate());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<EquityHolderEntity> mapEquityHolderResponses(List<EquityHolder> responses) {
+    List<EquityHolderEntity> entityList = new ArrayList<>();
+    for (EquityHolder response : responses) {
+        EquityHolderEntity entity = new EquityHolderEntity();
+        entity.setAddress(response.getAddress());
+        entity.setDematId(response.getDematId());
+        entity.setDob(response.getDob());
+        entity.setEmail(response.getEmail());
+        entity.setKycCompliance(response.getKycCompliance());
+        entity.setLandline(response.getLandline());
+        entity.setMobile(response.getMobile());
+        entity.setName(response.getName());
+        entity.setNominee(response.getNominee());
+        entity.setPan(response.getPan());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummary> responses) {
+    List<EquitySummaryEntity> entityList = new ArrayList<>();
+    for (EquitySummary response : responses) {
+        EquitySummaryEntity entity = new EquitySummaryEntity();
+        entity.setCurrentValue(response.getCurrentValue());
+        entity.setHoldingMode(response.getHoldingMode());
+        entity.setIsin(response.getIsin());
+        entity.setIsinDescription(response.getIsinDescription());
+        entity.setIssuerName(response.getIssuerName());
+        entity.setLastTradedPrice(response.getLastTradedPrice());
+        entity.setUnits(response.getUnits());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransaction> responses) {
+    List<EquityTransactionEntity> entityList = new ArrayList<>();
+    for (EquityTransaction response : responses) {
+        EquityTransactionEntity entity = new EquityTransactionEntity();
+        entity.setCompanyName(response.getCompanyName());
+        entity.setEquityCategory(response.getEquityCategory());
+        entity.setExchange(response.getExchange());
+        entity.setIsin(response.getIsin());
+        entity.setIsinDescription(response.getIsinDescription());
+        entity.setNarration(response.getNarration());
+        entity.setOrderId(response.getOrderId());
+        entity.setRate(response.getRate());
+        entity.setTransactionDateTime(response.getTransactionDateTime());
+        entity.setTxnId(response.getTxnId());
+        entity.setType(response.getType());
+        entity.setUnits(response.getUnits());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<MFHolderEntity> mapMFHolderResponses(List<MFHolder> responses) {
+    List<MFHolderEntity> entityList = new ArrayList<>();
+    for (MFHolder response : responses) {
+        MFHolderEntity entity = new MFHolderEntity();
+        entity.setAddress(response.getAddress());
+        entity.setDematId(response.getDematId());
+        entity.setDob(response.getDob());
+        entity.setEmail(response.getEmail());
+        entity.setFolioNo(response.getFolioNo());
+        entity.setKycCompliance(response.getKycCompliance());
+        entity.setLandline(response.getLandline());
+        entity.setMobile(response.getMobile());
+        entity.setName(response.getName());
+        entity.setNominee(response.getNominee());
+        entity.setPan(response.getPan());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummary> responses) {
+    List<MFSummaryEntity> entityList = new ArrayList<>();
+    for (MFSummary response : responses) {
+        MFSummaryEntity entity = new MFSummaryEntity();
+        entity.setCostValue(response.getCostValue());
+        entity.setCurrentValue(response.getCurrentValue());
+        entity.setFatcaStatus(response.getFatcaStatus());
+        entity.setAmc(response.getAmc());
+        entity.setAmfiCode(response.getAmfiCode());
+        entity.setClosingUnits(response.getClosingUnits());
+        entity.setFolioNo(response.getFolioNo());
+        entity.setIsin(response.getIsin());
+        entity.setIsinDescription(response.getIsinDescription());
+        entity.setLienUnits(response.getLienUnits());
+        entity.setLockinUnits(response.getLockinUnits());
+        entity.setNav(response.getNav());
+        entity.setNavDate(response.getNavDate());
+        entity.setRegistrar(response.getRegistrar());
+        entity.setSchemeCategory(response.getSchemeCategory());
+        entity.setSchemeCode(response.getSchemeCode());
+        entity.setSchemeOption(response.getSchemeOption());
+        entity.setSchemeTypes(response.getSchemeTypes());
+        entity.setUcc(response.getUcc());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransaction> responses) {
+    List<MFTransactionEntity> entityList = new ArrayList<>();
+    for (MFTransaction response : responses) {
+        MFTransactionEntity entity = new MFTransactionEntity();
+        entity.setAmc(response.getAmc());
+        entity.setAmfiCode(response.getAmfiCode());
+        entity.setAmount(response.getAmount());
+        entity.setIsin(response.getIsin());
+        entity.setIsinDescription(response.getIsinDescription());
+        entity.setLockInDays(response.getLockInDays());
+        entity.setLockInFlag(response.getLockInFlag());
+        entity.setMode(response.getMode());
+        entity.setNarration(response.getNarration());
+        entity.setNav(response.getNav());
+        entity.setNavDate(response.getNavDate());
+        entity.setRegistrar(response.getRegistrar());
+        entity.setSchemeCode(response.getSchemeCode());
+        entity.setSchemePlan(response.getSchemePlan());
+        entity.setTransactionDate(response.getTransactionDate());
+        entity.setTxnId(response.getTxnId());
+        entity.setType(response.getType());
+        entity.setUcc(response.getUcc());
+        entity.setUnits(response.getUnits());
+        entityList.add(entity);
+    }
+    return entityList;
+}
+
 }
