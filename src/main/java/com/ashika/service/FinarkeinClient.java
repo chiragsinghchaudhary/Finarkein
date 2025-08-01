@@ -16,7 +16,7 @@ import com.ashikha.data.response.GetStatusResponse;
 import com.ashikha.data.response.RecurringNewRunResponse;
 
 @Service
-public class FinarkinClient {
+public class FinarkeinClient {
 
     private final RestTemplate restTemplate;
 
@@ -38,7 +38,7 @@ public class FinarkinClient {
     @Value("${finarkein.api.auth-token}")
     private String authToken;
 
-    public FinarkinClient() {
+    public FinarkeinClient() {
         this.restTemplate = new RestTemplate();
     }
 

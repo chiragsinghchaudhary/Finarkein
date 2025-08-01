@@ -66,7 +66,7 @@ public class MyServceImpl implements MyService {
 
 	private final ClientConsentMappingRepository clientConsentRepository;
 
-	private FinarkinClient finarkinClient = new FinarkinClient();
+	private FinarkeinClient finarkeinClient = new FinarkeinClient();
 
 	public MyServceImpl(DepositHolderRepository depositHolderRepository,
 			DepositSummaryRepository depositSummaryRepository,
@@ -155,7 +155,7 @@ public class MyServceImpl implements MyService {
 	@Override
 	public ConsentNewRunResponse createNewRun(String workspace, String flowId,
 			ConsentNewRunRequest consentNewRunRequest) {
-		ConsentNewRunResponse consentResponse = finarkinClient.createNewConsentRun(flowId, workspace,
+		ConsentNewRunResponse consentResponse = finarkeinClient.createNewConsentRun(flowId, workspace,
 				consentNewRunRequest);
 		ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
 		ClientConsentMappingEntity entity = dto.toEntity();
@@ -172,7 +172,7 @@ public class MyServceImpl implements MyService {
 		RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
 		recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
 
-		RecurringNewRunResponse recurringResponse = finarkinClient.createNewRecurringRun(workspace, flowId,
+		RecurringNewRunResponse recurringResponse = finarkeinClient.createNewRecurringRun(workspace, flowId,
 				recurringNewRunRequest);
 		ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(clientConsentMappingEntity,
 				recurringNewRunRequest, recurringResponse);
@@ -185,7 +185,7 @@ public class MyServceImpl implements MyService {
 
 	@Override
 	public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
-		GetStatusResponse statusResponse = finarkinClient.getStatus(workspace, flowId, requestId);
+		GetStatusResponse statusResponse = finarkeinClient.getStatus(workspace, flowId, requestId);
 		clientConsentRepository.updateStatus(statusResponse.getState().getState(),
 				statusResponse.getState().getConsentStatus(), statusResponse.getState().getDataFetchStatus(),
 				requestId);
@@ -195,7 +195,7 @@ public class MyServceImpl implements MyService {
 
 	@Override
 	public GetResultResponse getResult(String workspace, String flowId, String requestId) {
-		GetResultResponse resultResponse = finarkinClient.getResult(workspace, flowId, requestId);
+		GetResultResponse resultResponse = finarkeinClient.getResult(workspace, flowId, requestId);
 
 		List<String> idList = new ArrayList<>();
 		idList.add(requestId);
