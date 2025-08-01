@@ -47,7 +47,7 @@ public class MFTransaction {
     private String schemePlan;
 
     @JsonProperty("transactionDate")
-    private String transactionDate;
+    private Long transactionDate;
 
     @JsonProperty("txnId")
     private String txnId;
@@ -104,8 +104,8 @@ public class MFTransaction {
     public String getSchemePlan() { return schemePlan; }
     public void setSchemePlan(String schemePlan) { this.schemePlan = schemePlan; }
 
-    public String getTransactionDate() { return transactionDate; }
-    public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
+    public Long getTransactionDate() { return transactionDate; }
+    public void setTransactionDate(Long transactionDate) { this.transactionDate = transactionDate; }
 
     public String getTxnId() { return txnId; }
     public void setTxnId(String txnId) { this.txnId = txnId; }
