@@ -11,36 +11,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.EquityTransaction;
+import com.ashika.model.entity.EquityTransactionEntity;
 
-public class EquityTransactionRepository implements JpaRepository<EquityTransaction, String> {
+public class EquityTransactionRepository implements JpaRepository<EquityTransactionEntity, String> {
 
 	@Override
-	public <S extends EquityTransaction> List<S> saveAll(Iterable<S> entities) {
+	public <S extends EquityTransactionEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EquityTransaction> findAll() {
+	public List<EquityTransactionEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EquityTransaction> findAllById(Iterable<String> ids) {
+	public List<EquityTransactionEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> S save(S entity) {
+	public <S extends EquityTransactionEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<EquityTransaction> findById(String id) {
+	public Optional<EquityTransactionEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -64,7 +64,7 @@ public class EquityTransactionRepository implements JpaRepository<EquityTransact
 	}
 
 	@Override
-	public void delete(EquityTransaction entity) {
+	public void delete(EquityTransactionEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -76,7 +76,7 @@ public class EquityTransactionRepository implements JpaRepository<EquityTransact
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends EquityTransaction> entities) {
+	public void deleteAll(Iterable<? extends EquityTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -88,43 +88,43 @@ public class EquityTransactionRepository implements JpaRepository<EquityTransact
 	}
 
 	@Override
-	public List<EquityTransaction> findAll(Sort sort) {
+	public List<EquityTransactionEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<EquityTransaction> findAll(Pageable pageable) {
+	public Page<EquityTransactionEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> Optional<S> findOne(Example<S> example) {
+	public <S extends EquityTransactionEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends EquityTransaction> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends EquityTransactionEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> long count(Example<S> example) {
+	public <S extends EquityTransactionEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends EquityTransaction> boolean exists(Example<S> example) {
+	public <S extends EquityTransactionEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends EquityTransaction, R> R findBy(Example<S> example,
+	public <S extends EquityTransactionEntity, R> R findBy(Example<S> example,
 			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
@@ -137,19 +137,19 @@ public class EquityTransactionRepository implements JpaRepository<EquityTransact
 	}
 
 	@Override
-	public <S extends EquityTransaction> S saveAndFlush(S entity) {
+	public <S extends EquityTransactionEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends EquityTransactionEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<EquityTransaction> entities) {
+	public void deleteAllInBatch(Iterable<EquityTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -167,34 +167,34 @@ public class EquityTransactionRepository implements JpaRepository<EquityTransact
 	}
 
 	@Override
-	public EquityTransaction getOne(String id) {
+	public EquityTransactionEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EquityTransaction getById(String id) {
+	public EquityTransactionEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EquityTransaction getReferenceById(String id) {
+	public EquityTransactionEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> List<S> findAll(Example<S> example) {
+	public <S extends EquityTransactionEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquityTransaction> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends EquityTransactionEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-		
+			
 }

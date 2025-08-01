@@ -1,6 +1,3 @@
-this my existing code of that file
-
-
 package com.ashika.model.dto;
 
 import java.time.LocalDate;

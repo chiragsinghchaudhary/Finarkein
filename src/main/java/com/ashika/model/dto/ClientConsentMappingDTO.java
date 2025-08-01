@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 import com.ashika.model.entity.ClientConsentMappingEntity;
 
-public record ClientConsentMappingDTO(
-        String clientCode,
-        String pan,
-        String state,
-        String consentStatus,
-        String dataFetchStatus,
-        LocalDate dob,
-        String email,
-        String requestId,
-        String consentHandle
-) {
+	public record ClientConsentMappingDTO(
+	        String clientCode,
+	        String pan,
+	        String state,
+	        String consentStatus,
+	        String dataFetchStatus,
+	        LocalDate dob,
+	        String requestId,
+	        String consentHandle
+			) 
+	{
     // Convert DTO → Entity
     public ClientConsentMappingEntity toEntity() {
         ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
@@ -24,7 +24,6 @@ public record ClientConsentMappingDTO(
         entity.setConsentStatus(this.consentStatus());
         entity.setDataFetchStatus(this.dataFetchStatus());
         entity.setDob(this.dob());
-        entity.setEmail(this.email());
         entity.setRequestId(this.requestId());
         entity.setConsentHandle(this.consentHandle());
         return entity;

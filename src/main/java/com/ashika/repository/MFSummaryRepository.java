@@ -11,37 +11,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.MFHolder;
-import com.ashikha.data.response.MFSummary;
+import com.ashika.model.entity.MFSummaryEntity;
 
-public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
+public class MFSummaryRepository implements JpaRepository<MFSummaryEntity, String> {
 
 	@Override
-	public <S extends MFSummary> List<S> saveAll(Iterable<S> entities) {
+	public <S extends MFSummaryEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFSummary> findAll() {
+	public List<MFSummaryEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFSummary> findAllById(Iterable<String> ids) {
+	public List<MFSummaryEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> S save(S entity) {
+	public <S extends MFSummaryEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<MFSummary> findById(String id) {
+	public Optional<MFSummaryEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -65,7 +64,7 @@ public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
 	}
 
 	@Override
-	public void delete(MFSummary entity) {
+	public void delete(MFSummaryEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -77,7 +76,7 @@ public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends MFSummary> entities) {
+	public void deleteAll(Iterable<? extends MFSummaryEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -89,43 +88,44 @@ public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
 	}
 
 	@Override
-	public List<MFSummary> findAll(Sort sort) {
+	public List<MFSummaryEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<MFSummary> findAll(Pageable pageable) {
+	public Page<MFSummaryEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> Optional<S> findOne(Example<S> example) {
+	public <S extends MFSummaryEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends MFSummary> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends MFSummaryEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> long count(Example<S> example) {
+	public <S extends MFSummaryEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends MFSummary> boolean exists(Example<S> example) {
+	public <S extends MFSummaryEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends MFSummary, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+	public <S extends MFSummaryEntity, R> R findBy(Example<S> example,
+			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,19 +137,19 @@ public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
 	}
 
 	@Override
-	public <S extends MFSummary> S saveAndFlush(S entity) {
+	public <S extends MFSummaryEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends MFSummaryEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<MFSummary> entities) {
+	public void deleteAllInBatch(Iterable<MFSummaryEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -167,33 +167,34 @@ public class MFSummaryRepository implements JpaRepository<MFSummary, String> {
 	}
 
 	@Override
-	public MFSummary getOne(String id) {
+	public MFSummaryEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFSummary getById(String id) {
+	public MFSummaryEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFSummary getReferenceById(String id) {
+	public MFSummaryEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> List<S> findAll(Example<S> example) {
+	public <S extends MFSummaryEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFSummary> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends MFSummaryEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+		
 }

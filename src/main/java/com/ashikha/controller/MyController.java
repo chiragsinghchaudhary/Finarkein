@@ -36,8 +36,8 @@ public class MyController {
     @PostMapping("/{workspace}/dp/nerv/fetch/{flowId}")
     public RecurringNewRunResponse createNewRunFetch(@PathVariable("workspace") String workspace,
                                                      @PathVariable("flowId") String flowId,
-                                                     @RequestBody RecurringNewRunRequest recurringNewRunRequest) {
-        return myService.createNewRunFetch(workspace, flowId, recurringNewRunRequest);
+                                                     @RequestBody GetRequest getRequest) {
+        return myService.createNewRunFetch(workspace, flowId, getRequest);
     }
 
     @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/status")
@@ -55,7 +55,7 @@ public class MyController {
     }
 
     @GetMapping("/consentStatus")
-    public String checkValidConsent(@RequestBody GetRequest getRequest) {
+    public boolean checkValidConsent(@RequestBody GetRequest getRequest) {
         return myService.checkValidConsent(getRequest);
     }
 

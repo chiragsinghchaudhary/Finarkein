@@ -68,7 +68,7 @@ public class FinarkinClient {
         return response.getBody();
     }
 
-    public GetStatusResponse getStatus(String workspace, String requestId) {
+    public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
         String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/runs/" + requestId + "/status";
 
         HttpHeaders headers = new HttpHeaders();
@@ -86,7 +86,7 @@ public class FinarkinClient {
         return response.getBody();
     }
 
-    public GetResultResponse getResult(String workspace, String requestId) {
+    public GetResultResponse getResult(String workspace, String flowId, String requestId) {
         String url = finarkinBaseUrl + "/v2/workspace/" + workspace + "/runs/" + requestId + "/result";
 
         HttpHeaders headers = new HttpHeaders();

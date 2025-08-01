@@ -11,36 +11,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.MFHolder;
+import com.ashika.model.entity.MFHolderEntity;
 
-public class MFHolderRepository implements JpaRepository<MFHolder, String> {
+public class MFHolderRepository implements JpaRepository<MFHolderEntity, String> {
 
 	@Override
-	public <S extends MFHolder> List<S> saveAll(Iterable<S> entities) {
+	public <S extends MFHolderEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFHolder> findAll() {
+	public List<MFHolderEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFHolder> findAllById(Iterable<String> ids) {
+	public List<MFHolderEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> S save(S entity) {
+	public <S extends MFHolderEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<MFHolder> findById(String id) {
+	public Optional<MFHolderEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -64,7 +64,7 @@ public class MFHolderRepository implements JpaRepository<MFHolder, String> {
 	}
 
 	@Override
-	public void delete(MFHolder entity) {
+	public void delete(MFHolderEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -76,7 +76,7 @@ public class MFHolderRepository implements JpaRepository<MFHolder, String> {
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends MFHolder> entities) {
+	public void deleteAll(Iterable<? extends MFHolderEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -88,43 +88,44 @@ public class MFHolderRepository implements JpaRepository<MFHolder, String> {
 	}
 
 	@Override
-	public List<MFHolder> findAll(Sort sort) {
+	public List<MFHolderEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<MFHolder> findAll(Pageable pageable) {
+	public Page<MFHolderEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> Optional<S> findOne(Example<S> example) {
+	public <S extends MFHolderEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends MFHolder> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends MFHolderEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> long count(Example<S> example) {
+	public <S extends MFHolderEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends MFHolder> boolean exists(Example<S> example) {
+	public <S extends MFHolderEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends MFHolder, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+	public <S extends MFHolderEntity, R> R findBy(Example<S> example,
+			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -136,19 +137,19 @@ public class MFHolderRepository implements JpaRepository<MFHolder, String> {
 	}
 
 	@Override
-	public <S extends MFHolder> S saveAndFlush(S entity) {
+	public <S extends MFHolderEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends MFHolderEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<MFHolder> entities) {
+	public void deleteAllInBatch(Iterable<MFHolderEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -166,33 +167,34 @@ public class MFHolderRepository implements JpaRepository<MFHolder, String> {
 	}
 
 	@Override
-	public MFHolder getOne(String id) {
+	public MFHolderEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFHolder getById(String id) {
+	public MFHolderEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFHolder getReferenceById(String id) {
+	public MFHolderEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> List<S> findAll(Example<S> example) {
+	public <S extends MFHolderEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFHolder> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends MFHolderEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+		
 }

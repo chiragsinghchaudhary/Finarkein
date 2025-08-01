@@ -5,8 +5,8 @@ import java.util.List;
 
 public class DepositResponse {
 
-    @JsonProperty("profile")
-    private List<DepositHolder> profile;
+    @JsonProperty("holder")
+    private List<DepositHolder> holder;
 
     @JsonProperty("summary")
     private List<DepositSummary> summary;
@@ -15,8 +15,8 @@ public class DepositResponse {
     private List<DepositTransaction> transactions;
 
     // Getters & Setters
-    public List<DepositHolder> getProfile() { return profile; }
-    public void setProfile(List<DepositHolder> profile) { this.profile = profile; }
+    public List<DepositHolder> getHolder() { return holder; }
+    public void setHolder(List<DepositHolder> holder) { this.holder = holder; }
 
     public List<DepositSummary> getSummary() { return summary; }
     public void setSummary(List<DepositSummary> summary) { this.summary = summary; }

@@ -11,36 +11,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.EquitySummary;
+import com.ashika.model.entity.EquitySummaryEntity;
 
-public class EquitySummaryRepository implements JpaRepository<EquitySummary, String> {
+public class EquitySummaryRepository implements JpaRepository<EquitySummaryEntity, String> {
 
 	@Override
-	public <S extends EquitySummary> List<S> saveAll(Iterable<S> entities) {
+	public <S extends EquitySummaryEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EquitySummary> findAll() {
+	public List<EquitySummaryEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EquitySummary> findAllById(Iterable<String> ids) {
+	public List<EquitySummaryEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> S save(S entity) {
+	public <S extends EquitySummaryEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<EquitySummary> findById(String id) {
+	public Optional<EquitySummaryEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -64,7 +64,7 @@ public class EquitySummaryRepository implements JpaRepository<EquitySummary, Str
 	}
 
 	@Override
-	public void delete(EquitySummary entity) {
+	public void delete(EquitySummaryEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -76,7 +76,7 @@ public class EquitySummaryRepository implements JpaRepository<EquitySummary, Str
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends EquitySummary> entities) {
+	public void deleteAll(Iterable<? extends EquitySummaryEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -88,43 +88,43 @@ public class EquitySummaryRepository implements JpaRepository<EquitySummary, Str
 	}
 
 	@Override
-	public List<EquitySummary> findAll(Sort sort) {
+	public List<EquitySummaryEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<EquitySummary> findAll(Pageable pageable) {
+	public Page<EquitySummaryEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> Optional<S> findOne(Example<S> example) {
+	public <S extends EquitySummaryEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends EquitySummary> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends EquitySummaryEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> long count(Example<S> example) {
+	public <S extends EquitySummaryEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends EquitySummary> boolean exists(Example<S> example) {
+	public <S extends EquitySummaryEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends EquitySummary, R> R findBy(Example<S> example,
+	public <S extends EquitySummaryEntity, R> R findBy(Example<S> example,
 			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
@@ -137,19 +137,19 @@ public class EquitySummaryRepository implements JpaRepository<EquitySummary, Str
 	}
 
 	@Override
-	public <S extends EquitySummary> S saveAndFlush(S entity) {
+	public <S extends EquitySummaryEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends EquitySummaryEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<EquitySummary> entities) {
+	public void deleteAllInBatch(Iterable<EquitySummaryEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -167,34 +167,34 @@ public class EquitySummaryRepository implements JpaRepository<EquitySummary, Str
 	}
 
 	@Override
-	public EquitySummary getOne(String id) {
+	public EquitySummaryEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EquitySummary getById(String id) {
+	public EquitySummaryEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EquitySummary getReferenceById(String id) {
+	public EquitySummaryEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> List<S> findAll(Example<S> example) {
+	public <S extends EquitySummaryEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends EquitySummary> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends EquitySummaryEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
+		
 }

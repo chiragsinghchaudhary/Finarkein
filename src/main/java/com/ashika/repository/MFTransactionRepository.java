@@ -11,38 +11,36 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import com.ashikha.data.response.MFHolder;
-import com.ashikha.data.response.MFSummary;
-import com.ashikha.data.response.MFTransaction;
+import com.ashika.model.entity.MFTransactionEntity;
 
-public class MFTransactionRepository implements JpaRepository<MFTransaction, String> {
+public class MFTransactionRepository implements JpaRepository<MFTransactionEntity, String> {
 
 	@Override
-	public <S extends MFTransaction> List<S> saveAll(Iterable<S> entities) {
+	public <S extends MFTransactionEntity> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFTransaction> findAll() {
+	public List<MFTransactionEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MFTransaction> findAllById(Iterable<String> ids) {
+	public List<MFTransactionEntity> findAllById(Iterable<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> S save(S entity) {
+	public <S extends MFTransactionEntity> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<MFTransaction> findById(String id) {
+	public Optional<MFTransactionEntity> findById(String id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
@@ -66,7 +64,7 @@ public class MFTransactionRepository implements JpaRepository<MFTransaction, Str
 	}
 
 	@Override
-	public void delete(MFTransaction entity) {
+	public void delete(MFTransactionEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -78,7 +76,7 @@ public class MFTransactionRepository implements JpaRepository<MFTransaction, Str
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends MFTransaction> entities) {
+	public void deleteAll(Iterable<? extends MFTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -90,43 +88,43 @@ public class MFTransactionRepository implements JpaRepository<MFTransaction, Str
 	}
 
 	@Override
-	public List<MFTransaction> findAll(Sort sort) {
+	public List<MFTransactionEntity> findAll(Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<MFTransaction> findAll(Pageable pageable) {
+	public Page<MFTransactionEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> Optional<S> findOne(Example<S> example) {
+	public <S extends MFTransactionEntity> Optional<S> findOne(Example<S> example) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public <S extends MFTransaction> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends MFTransactionEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> long count(Example<S> example) {
+	public <S extends MFTransactionEntity> long count(Example<S> example) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public <S extends MFTransaction> boolean exists(Example<S> example) {
+	public <S extends MFTransactionEntity> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public <S extends MFTransaction, R> R findBy(Example<S> example,
+	public <S extends MFTransactionEntity, R> R findBy(Example<S> example,
 			Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
@@ -139,19 +137,19 @@ public class MFTransactionRepository implements JpaRepository<MFTransaction, Str
 	}
 
 	@Override
-	public <S extends MFTransaction> S saveAndFlush(S entity) {
+	public <S extends MFTransactionEntity> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends MFTransactionEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<MFTransaction> entities) {
+	public void deleteAllInBatch(Iterable<MFTransactionEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -169,32 +167,35 @@ public class MFTransactionRepository implements JpaRepository<MFTransaction, Str
 	}
 
 	@Override
-	public MFTransaction getOne(String id) {
+	public MFTransactionEntity getOne(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFTransaction getById(String id) {
+	public MFTransactionEntity getById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MFTransaction getReferenceById(String id) {
+	public MFTransactionEntity getReferenceById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> List<S> findAll(Example<S> example) {
+	public <S extends MFTransactionEntity> List<S> findAll(Example<S> example) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends MFTransaction> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends MFTransactionEntity> List<S> findAll(Example<S> example, Sort sort) {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+
+
+
 }

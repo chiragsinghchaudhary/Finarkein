@@ -11,31 +11,33 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.data.repository.query.Param;
 
 import com.ashika.model.entity.ClientConsentMappingEntity;
-import com.ashika.model.entity.ClientConsentMappingHistEntity;
 import com.ashika.model.entity.ClientConsentMappingId;
 
 public class ClientConsentMappingRepository implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
 
-	@Query("SELECT c FROM ClientConsentMappingHistEntity" +
+	@Query("SELECT c"
+			+ " FROM ClientConsentMappingEntity" +
 		       "WHERE pan = :pan " +
-		       "AND runType = 'consent' " +
-		       "AND state = 'SUCCESS' " +
-		       "AND dataFetchStatus = 'SUCCESS' " +
-		       "AND consentStatus = 'SUCCESS'")
-		List<ClientConsentMappingHistEntity> checkConsentAndStatus(@Param("pan") String pan) {
+		       "AND runType = : runType "  +
+		       "AND state = :success " +
+		       "AND dataFetchStatus = :active " +
+		       "AND consentStatus = :success " + 
+		       "ORDER BY lastUpdatedTime desc LIMIT 1 ")
+	public
+		ClientConsentMappingEntity getlatestClientConsentObject(@Param("pan") String pan, @Param("runType") String runType, @Param("success") String success, @Param("active") String active) {
 		return null;
 	}
 	
-	@Query("UPDATE ClientConsentMappingHistEntity "
+	@Query("UPDATE ClientConsentMappingEntity "
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
 			+ "consentStatus = : consentStatus"
 			+ "requestId = : requestId" +
 		       "WHERE pan = : pan ")
-		List<ClientConsentMappingHistEntity> updateNewRunFetch(@Param("state") String state,
+		List<ClientConsentMappingEntity> updateNewRunFetch(@Param("state") String state,
 				@Param("dataFetchStatus") String dataFetchStatus,
 				@Param("consentStatus") String consentStatus,
 				@Param("requestId") String requestId,
@@ -43,12 +45,12 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 		return null;
 	}
 
-	@Query("UPDATE ClientConsentMappingHistEntity "
+	@Query("UPDATE ClientConsentMappingEntity "
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
 			+ "consentStatus = : consentStatus" +
 		       "WHERE c.requestId = : requestId ")
 	public
-		List<ClientConsentMappingHistEntity> updateStatus(@Param("state") String state,
+		List<ClientConsentMappingEntity> updateStatus(@Param("state") String state,
 				@Param("dataFetchStatus") String dataFetchStatus,
 				@Param("consentStatus") String consentStatus,
 				@Param("requestId") String requestId) {

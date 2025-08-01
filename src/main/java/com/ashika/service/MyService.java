@@ -14,13 +14,13 @@ public interface MyService {
 
 	ConsentNewRunResponse createNewRun(String workspace, String flowId, ConsentNewRunRequest newRunRequest);
 
-	RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, RecurringNewRunRequest newRunRequest);
+	RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, GetRequest getRequest);
 
 	GetStatusResponse getStatus(String workspace, String flowId, String requestId);
 
 	GetResultResponse getResult(String workspace, String flowId, String requestId);
 
-	String checkValidConsent(GetRequest checkValidConsent);
+	boolean checkValidConsent(GetRequest checkValidConsent);
 
 	GetResultResponse getDBRecords(GetRequest getRequest);
 
