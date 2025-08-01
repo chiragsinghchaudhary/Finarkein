@@ -48,7 +48,6 @@ import com.ashikha.data.response.MFResponse;
 import com.ashikha.data.response.MFSummary;
 import com.ashikha.data.response.MFTransaction;
 import com.ashikha.data.response.RecurringNewRunResponse;
-import com.ashikha.data.response.State;
 
 @Service
 public abstract class MyServceImpl implements MyService {
@@ -247,17 +246,6 @@ public abstract class MyServceImpl implements MyService {
 
 	private ConsentNewRunResponse mapConsentEntityToResponse(ClientConsentMappingEntity entity) {
 		return new ConsentNewRunResponse(entity.getRequestId(), entity.getConsentHandle(), null);
-	}
-
-	private GetResultResponse mapEntityToGetResultResponse(ClientConsentMappingEntity entity) {
-		GetResultResponse response = new GetResultResponse();
-		response.setRequestId(entity.getRequestId());
-		State state = new State();
-		state.setState(entity.getState());
-		state.setConsentStatus(entity.getConsentStatus());
-		state.setDataFetchStatus(entity.getDataFetchStatus());
-		response.setState(state);
-		return response;
 	}
 
 	private List<DepositHolder> mapDepositHolderEntities(List<DepositHolderEntity> entities) {
