@@ -53,7 +53,7 @@ public class MyController {
         return myService.getResult(workspace, flowId, requestId);
     }
 
-    @GetMapping("/consentStatus")
+    @GetMapping("/checkValidConsent")
     public boolean checkValidConsent(@RequestBody GetRequest getRequest) {
         return myService.checkValidConsent(getRequest);
     }
