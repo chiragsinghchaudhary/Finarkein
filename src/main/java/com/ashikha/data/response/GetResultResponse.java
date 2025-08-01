@@ -3,7 +3,7 @@ package com.ashikha.data.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-public class GetResultResponse {
+public class GetResultResponse extends BaseResponse {
 
     @JsonProperty("requestId")
     private String requestId;

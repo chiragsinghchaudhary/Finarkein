@@ -129,6 +129,10 @@ public abstract class MyServceImpl implements MyService {
     public GetResultResponse getResult(String workspace, String flowId, String requestId) {
         GetResultResponse resultResponse = finarkinClient.getResult(workspace, flowId, requestId);
         
+        if(resultResponse.isSuccess()) {
+        	
+        }
+        
         return resultResponse;
     }
 

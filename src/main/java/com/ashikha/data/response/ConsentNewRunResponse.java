@@ -2,7 +2,7 @@ package com.ashikha.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ConsentNewRunResponse {
+public class ConsentNewRunResponse extends BaseResponse {
 
     @JsonProperty("requestId")
     private String requestId;

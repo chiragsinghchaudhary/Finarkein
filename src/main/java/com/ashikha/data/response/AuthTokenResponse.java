@@ -3,7 +3,7 @@ package com.ashikha.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AuthTokenResponse {
+public class AuthTokenResponse extends BaseResponse {
 
     @JsonProperty("access_token")
     private String accessToken;
