@@ -17,7 +17,6 @@ import com.ashika.model.entity.EquityTransactionEntity;
 import com.ashika.model.entity.MFHolderEntity;
 import com.ashika.model.entity.MFSummaryEntity;
 import com.ashika.model.entity.MFTransactionEntity;
-import com.ashika.repository.ClientConsentMappingHistRepository;
 import com.ashika.repository.ClientConsentMappingRepository;
 import com.ashika.repository.DepositHolderRepository;
 import com.ashika.repository.DepositSummaryRepository;

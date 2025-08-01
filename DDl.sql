@@ -1,4 +1,4 @@
--- 1. Holder (Profile) Table
+-- 1. Holder (Holder) Table
 CREATE TABLE Deposit_Holder (
     pan VARCHAR(20) PRIMARY KEY,
     type VARCHAR(20),
@@ -54,7 +54,7 @@ CREATE TABLE Deposit_Transaction (
 
 
 
-1. Mutual Fund Holder Profile
+-- 1. Mutual Fund Holder 
 CREATE TABLE MF_Holder (
     pan VARCHAR(20) PRIMARY KEY,
     address VARCHAR(255),
@@ -98,8 +98,6 @@ CREATE TABLE MF_Holdings (
 CREATE TABLE MF_Transactions (
     txnId VARCHAR(50) PRIMARY KEY,
     folioNo VARCHAR(30),
-    startDate DATE,
-    endDate DATE,
     amc VARCHAR(100),
     amfiCode VARCHAR(20),
     amount DECIMAL(15,2),
@@ -126,7 +124,7 @@ CREATE TABLE MF_Transactions (
 ----------------------------------------------------------------------------------------------------------------
 
 
--- 1. Equity Holder Profile
+-- 1. Equity Holder 
 CREATE TABLE Equity_Holder (
     pan VARCHAR(20) PRIMARY KEY,
     address VARCHAR(255),
@@ -157,8 +155,6 @@ CREATE TABLE Equity_Holdings (
 CREATE TABLE Equity_Transactions (
     txnId VARCHAR(50) PRIMARY KEY,           -- unique transaction id
     pan VARCHAR(20),
-    startDate DATE,
-    endDate DATE,
     companyName VARCHAR(100),
     equityCategory VARCHAR(20),
     exchange VARCHAR(20),
@@ -205,6 +201,7 @@ CREATE TABLE Client_Consent_Mapping_Hist  (
     State           VARCHAR(20) NOT NULL,     -- Current state (e.g., Success, Pending)
     ConsentStatus   VARCHAR(20) NOT NULL,     -- Consent active/inactive
     DataFetchStatus VARCHAR(20) NOT NULL,     -- Status of data fetch (Success, Pending, Failed)
+    RunType         VARCHAR(20),              -- Indicates type of run (Consent or Recurring)
     LastUpdatedTime TIMESTAMP NOT NULL,       -- Timestamp of the latest update for historical tracking
     
     PRIMARY KEY (ClientCode, PAN, State, ConsentStatus, DataFetchStatus, LastUpdatedTime)
