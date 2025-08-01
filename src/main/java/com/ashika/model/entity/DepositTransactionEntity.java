@@ -10,9 +10,6 @@ public class DepositTransactionEntity {
 
     @Id
     private String pan;
-    
-    private String endDate;
-    private String startDate;
     private Double amount;
     private Double currentBalance;
     private String mode;
@@ -30,22 +27,6 @@ public class DepositTransactionEntity {
 	public void setPan(String pan) {
 		this.pan = pan;
 	}
-
-	public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
 
     public Double getAmount() {
         return amount;

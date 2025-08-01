@@ -308,8 +308,6 @@ public abstract class MyServceImpl implements MyService {
 		List<DepositTransaction> responseList = new ArrayList<>();
 		for (DepositTransactionEntity entity : entities) {
 			DepositTransaction response = new DepositTransaction();
-			response.setStartDate(entity.getStartDate());
-			response.setEndDate(entity.getEndDate());
 			response.setAmount(entity.getAmount());
 			response.setCurrentBalance(entity.getCurrentBalance());
 			response.setMode(entity.getMode());
@@ -501,8 +499,6 @@ private List<DepositTransactionEntity> mapDepositTransactionResponses(List<Depos
     List<DepositTransactionEntity> entityList = new ArrayList<>();
     for (DepositTransaction response : responses) {
         DepositTransactionEntity entity = new DepositTransactionEntity();
-        entity.setStartDate(response.getStartDate());
-        entity.setEndDate(response.getEndDate());
         entity.setAmount(response.getAmount());
         entity.setCurrentBalance(response.getCurrentBalance());
         entity.setMode(response.getMode());

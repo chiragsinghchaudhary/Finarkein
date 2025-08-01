@@ -1,14 +1,10 @@
 package com.ashikha.data.response;
 
+import java.sql.Date;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DepositTransaction {
-
-     @JsonProperty("startDate")
-    private String startDate;
-
-    @JsonProperty("endDate")
-    private String endDate;
 
     @JsonProperty("amount")
     private Double amount;
@@ -39,12 +35,6 @@ public class DepositTransaction {
 
     // Getters & Setters
 
-
-    public String getStartDate() { return startDate; }
-    public void setStartDate(String startDate) { this.startDate = startDate; }
-
-    public String getEndDate() { return endDate; }
-    public void setEndDate(String endDate) { this.endDate = endDate; }
     
     public Double getAmount() { return amount; }
     public void setAmount(Double amount) { this.amount = amount; }
