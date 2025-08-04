@@ -11,9 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Repository;
 
 import com.ashika.model.entity.DepositTransactionEntity;
 
+@Repository
 public class DepositTransactionRepository implements JpaRepository<DepositTransactionEntity, String> {
 
 	@Override
