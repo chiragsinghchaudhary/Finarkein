@@ -32,6 +32,13 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 		return null;
 	}
 	
+	@Query("SELECT c FROM ClientConsentMappingEntity "
+			+ "WHERE requestId = : requestId ")
+	public
+	ClientConsentMappingEntity getByReferenceId(@Param("requestId") String requestId) {
+	return null;
+}
+	
 	@Query("UPDATE ClientConsentMappingEntity "
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
 			+ "consentStatus = : consentStatus"
@@ -48,7 +55,7 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 	@Query("UPDATE ClientConsentMappingEntity "
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"
 			+ "consentStatus = : consentStatus" +
-		       "WHERE c.requestId = : requestId ")
+		       "WHERE requestId = : requestId ")
 	public
 		List<ClientConsentMappingEntity> updateStatus(@Param("state") String state,
 				@Param("dataFetchStatus") String dataFetchStatus,

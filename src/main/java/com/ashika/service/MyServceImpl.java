@@ -229,8 +229,6 @@ public class MyServceImpl implements MyService {
 		logger.info("DB Consent entity save completed -> " + " ProcessingTime : " + timeTakenToProcessRequest);
 		
 		ConsentNewRunResponse response = mapConsentEntityToResponse(savedEntity);
-		
-		logger.info("Exit: createNewRun | Returning ConsentNewRunResponse for requestId: {}", response.getRequestId());
 
 		return response;
 	}
@@ -238,22 +236,35 @@ public class MyServceImpl implements MyService {
 	@Override
 	public RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, GetRequest getRequest) {
 		
+		long startTimeInMilliseconds = System.currentTimeMillis();
 		
-		
-		logger.info("Entry: createNewRunFetch | workspace: {} | flowId: {} | PAN: {}", workspace, flowId,
-				getRequest.getPan());
+		logger.info("DB getlatestClientConsentObject started -> pan : " + getRequest.getPan());
 
 		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getlatestClientConsentObject(
 				getRequest.getPan(), Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE);
+		
+		long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("DB getlatestClientConsentObject completed -> pan : " + getRequest.getPan()
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		logger.debug("Fetched latest consent mapping entity with consentHandle: {}",
 				clientConsentMappingEntity.getConsentHandle());
 
 		RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
 		recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
+		
+		startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("Finarkein createNewRunFetch started -> pan : " + getRequest.getPan());
 
 		RecurringNewRunResponse recurringResponse = finarkeinClient.createNewRecurringRun(workspace, flowId,
 				recurringNewRunRequest);
+		
+		timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("Finarkein createNewRunFetch completed -> pan : " + getRequest.getPan()
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		logger.debug("RecurringNewRun API Response | requestId: {}", recurringResponse.getRequestId());
 
@@ -263,31 +274,54 @@ public class MyServceImpl implements MyService {
 		ClientConsentMappingEntity entity = dto.toEntity();
 		entity.setRunType(Constants.RECURRING);
 
+		startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("DB Save recurring run started -> pan : " + entity.getPan());
+		
 		clientConsentRepository.save(entity);
+		
+		timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("DB Save recurring run completed -> pan : " + getRequest.getPan()
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
+		
+		
 		logger.info("Recurring run entity saved successfully for PAN: {} | requestId: {}", entity.getPan(),
 				entity.getRequestId());
-
-		logger.info("Exit: createNewRunFetch | Returning RecurringNewRunResponse for requestId: {}",
-				recurringResponse.getRequestId());
 
 		return recurringResponse;
 	}
 
 	@Override
 	public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
-		logger.info("Entry: getStatus | workspace: {} | flowId: {} | requestId: {}", workspace, flowId, requestId);
+		
+		long startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("Finarkein getStatus started -> requestId : " + requestId);
 
 		GetStatusResponse statusResponse = finarkeinClient.getStatus(workspace, flowId, requestId);
+		
+		long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("Finarkein getStatus completed -> requestId : " + requestId
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
+		
 		logger.debug("Fetched status from Finarkein API | state: {} | consentStatus: {} | dataFetchStatus: {}",
 				statusResponse.getState().getState(), statusResponse.getState().getConsentStatus(),
 				statusResponse.getState().getDataFetchStatus());
 
+		startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("DB updateStatus started -> requestId : " + requestId);
+		
 		clientConsentRepository.updateStatus(statusResponse.getState().getState(),
 				statusResponse.getState().getConsentStatus(), statusResponse.getState().getDataFetchStatus(),
 				requestId);
-
-		logger.info("Updated client consent status in DB for requestId: {}", requestId);
-		logger.info("Exit: getStatus | Returning GetStatusResponse for requestId: {}", requestId);
+		
+		timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("DB Save recurring run completed -> requestId : " + requestId
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		return statusResponse;
 	}
@@ -296,31 +330,58 @@ public class MyServceImpl implements MyService {
 	public GetResultResponse getResult(String workspace, String flowId, String requestId) {
 		logger.info("Entry: getResult | workspace: {} | flowId: {} | requestId: {}", workspace, flowId, requestId);
 
+		long startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("Finarkein getResult started -> requestId : " + requestId);
+		
 		GetResultResponse resultResponse = finarkeinClient.getResult(workspace, flowId, requestId);
+		
+		long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("Finarkein getResult completed -> requestId : " + requestId
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
+		
 		logger.debug("Fetched result from Finarkein API | dataFetchStatus: {}",
 				resultResponse.getState().getDataFetchStatus());
+		
+		startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("DB getByReferenceId started -> pan : " + requestId);
+		
+		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getByReferenceId(requestId);
+		
+		timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+		
+		logger.info("Finarkein getResult completed -> requestId : " + requestId
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		List<String> idList = new ArrayList<>();
-		idList.add(requestId);
+		
+		String pan = clientConsentMappingEntity.getPan();
+		idList.add(pan);
+		
+		startTimeInMilliseconds = System.currentTimeMillis();
+		
+		logger.info("DB deleting old and saving new records started -> pan : " + pan);
 
 		if (resultResponse.getState().getDataFetchStatus().equals(Constants.SUCCESS)) {
-			logger.info("Data fetch status SUCCESS | Clearing existing records for requestId: {}", requestId);
+			logger.info("Data fetch status SUCCESS | Clearing existing records for requestId: {}", pan);
 
 			// Deletes
 			depositHolderRepository.deleteAllById(idList);
 			depositSummaryRepository.deleteAllById(idList);
 			depositTransactionRepository.deleteAllById(idList);
-			logger.debug("Deleted deposit records for requestId: {}", requestId);
+			logger.debug("Deleted deposit records for pan: {}", pan);
 
 			equityHolderRepository.deleteAllById(idList);
 			equitySummaryRepository.deleteAllById(idList);
 			equityTransactionRepository.deleteAllById(idList);
-			logger.debug("Deleted equity records for requestId: {}", requestId);
+			logger.debug("Deleted equity records for pan: {}", pan);
 
 			mfHolderRepository.deleteAllById(idList);
 			mfSummaryRepository.deleteAllById(idList);
 			mfTransactionRepository.deleteAllById(idList);
-			logger.debug("Deleted MF records for requestId: {}", requestId);
+			logger.debug("Deleted MF records for pan: {}", pan);
 
 			// Saves
 			depositHolderRepository
@@ -343,6 +404,12 @@ public class MyServceImpl implements MyService {
 			mfTransactionRepository
 					.saveAll(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions()));
 			logger.debug("Saved MF data for requestId: {}", requestId);
+			
+			timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
+			
+			logger.info("DB deleting old and saving new records completed -> pan : " + pan
+					+ " ProcessingTime : " + timeTakenToProcessRequest);
+			
 		} else {
 			logger.warn("Data fetch status is NOT SUCCESS for requestId: {} | Status: {}", requestId,
 					resultResponse.getState().getDataFetchStatus());
