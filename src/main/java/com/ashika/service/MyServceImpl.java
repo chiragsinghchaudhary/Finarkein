@@ -94,12 +94,17 @@ public class MyServceImpl implements MyService {
 	public boolean checkValidConsent(GetRequest getRequest) {
 		logger.info("Checking valid consent for PAN: {}", getRequest.getPan());
 		
-		
+		long startTimeInMilliseconds = System.currentTimeMillis();
+    	
+    	logger.info("DB checkValidConsent started -> pan : " + getRequest.getPan());
 
 		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getlatestClientConsentObject(
 				getRequest.getPan(), Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE);
 		
+		long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
 		
+		logger.info("Finarkein createNew Run completed -> pan : " + getRequest.getPan()
+		+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		if (clientConsentMappingEntity != null) {
 			logger.debug("Consent record found: State={}, ConsentStatus={}", clientConsentMappingEntity.getState(),
@@ -195,25 +200,35 @@ public class MyServceImpl implements MyService {
 		
 		long startTime = System.currentTimeMillis();
 		
-		logger.info("Entry: createNewRun | workspace: {} | flowId: {} | PAN: {}", workspace, flowId,
-				consentNewRunRequest.getUser().getPan());
+		logger.info("Finarkein createNewConsentRun started -> pan : " + consentNewRunRequest.getUser().getPan());
 
 		ConsentNewRunResponse consentResponse = finarkeinClient.createNewConsentRun(flowId, workspace,
 				consentNewRunRequest);
+		
+		long timeTakenToProcessRequest = System.currentTimeMillis() - startTime;
+		
+		logger.info("Finarkein createNewConsentRun completed -> pan : " + consentNewRunRequest.getUser().getPan()
+				+ " ProcessingTime : " + timeTakenToProcessRequest);
 
 		logger.debug("ConsentNewRun API Response | requestId: {} | consentHandle: {}", consentResponse.getRequestId(),
 				consentResponse.getConsentHandle());
-
+		
 		ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
 		ClientConsentMappingEntity entity = dto.toEntity();
 
+		startTime = System.currentTimeMillis();
+		
+		logger.info("DB Consent entity save started -> ");
+		
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.save(entity);
 		logger.info("Consent entity saved successfully for PAN: {} | requestId: {}", savedEntity.getPan(),
 				savedEntity.getRequestId());
 
-		ConsentNewRunResponse response = mapConsentEntityToResponse(savedEntity);
+		timeTakenToProcessRequest = System.currentTimeMillis() - startTime;
 		
-		long timeTaken = System.currentTimeMillis() - startTime;
+		logger.info("DB Consent entity save completed -> " + " ProcessingTime : " + timeTakenToProcessRequest);
+		
+		ConsentNewRunResponse response = mapConsentEntityToResponse(savedEntity);
 		
 		logger.info("Exit: createNewRun | Returning ConsentNewRunResponse for requestId: {}", response.getRequestId());
 
