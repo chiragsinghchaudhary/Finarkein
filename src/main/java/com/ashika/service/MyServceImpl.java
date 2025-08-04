@@ -160,6 +160,9 @@ public class MyServceImpl implements MyService {
 
             RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
             recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
+            
+            logger.info("Entry: createNewRunFetch | workspace: {} | flowId: {} | PAN: {} | ConsentHandle: {}",
+                    workspace, flowId, maskPan(getRequest.getPan()), recurringNewRunRequest.getConsentHandle());
 
             RecurringNewRunResponse recurringResponse = finarkeinClient.createNewRecurringRun(workspace, flowId, recurringNewRunRequest);
             ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(clientConsentMappingEntity, recurringNewRunRequest, recurringResponse);

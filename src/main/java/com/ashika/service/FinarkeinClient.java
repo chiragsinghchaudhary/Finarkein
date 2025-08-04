@@ -79,12 +79,12 @@ public class FinarkeinClient {
         }
     }
 
-    public RecurringNewRunResponse createNewRecurringRun(String workspace, String flowId, RecurringNewRunRequest request) {
+	public RecurringNewRunResponse createNewRecurringRun(String workspace, String flowId, RecurringNewRunRequest request) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + finarkeinFetchUrl + flowId;
 
-        logger.info("Entry: createNewRecurringRun | URL: {} | workspace: {} | flowId: {} | pan: {}",
-                url, workspace, flowId, maskPan(request.getPan()));
+        logger.info("Entry: createNewRecurringRun | URL: {} | workspace: {} | flowId: {} | consentHandle: {}",
+                url, workspace, flowId, request.getConsentHandle());
 
         try {
             HttpHeaders headers = new HttpHeaders();
