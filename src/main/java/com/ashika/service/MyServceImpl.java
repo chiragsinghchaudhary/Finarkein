@@ -93,9 +93,13 @@ public class MyServceImpl implements MyService {
 	@Override
 	public boolean checkValidConsent(GetRequest getRequest) {
 		logger.info("Checking valid consent for PAN: {}", getRequest.getPan());
+		
+		
 
 		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getlatestClientConsentObject(
 				getRequest.getPan(), Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE);
+		
+		
 
 		if (clientConsentMappingEntity != null) {
 			logger.debug("Consent record found: State={}, ConsentStatus={}", clientConsentMappingEntity.getState(),
@@ -118,7 +122,9 @@ public class MyServceImpl implements MyService {
 
 	@Override
 	public GetResultResponse getDBRecords(GetRequest getRequest) {
+		
 		long startTime = System.currentTimeMillis();
+		
 		logger.info("Entry: getDBRecords for PAN: {}", getRequest.getPan());
 
 		List<String> idList = new ArrayList<>();
@@ -186,6 +192,9 @@ public class MyServceImpl implements MyService {
 	@Override
 	public ConsentNewRunResponse createNewRun(String workspace, String flowId,
 			ConsentNewRunRequest consentNewRunRequest) {
+		
+		long startTime = System.currentTimeMillis();
+		
 		logger.info("Entry: createNewRun | workspace: {} | flowId: {} | PAN: {}", workspace, flowId,
 				consentNewRunRequest.getUser().getPan());
 
@@ -203,6 +212,9 @@ public class MyServceImpl implements MyService {
 				savedEntity.getRequestId());
 
 		ConsentNewRunResponse response = mapConsentEntityToResponse(savedEntity);
+		
+		long timeTaken = System.currentTimeMillis() - startTime;
+		
 		logger.info("Exit: createNewRun | Returning ConsentNewRunResponse for requestId: {}", response.getRequestId());
 
 		return response;
@@ -210,6 +222,9 @@ public class MyServceImpl implements MyService {
 
 	@Override
 	public RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, GetRequest getRequest) {
+		
+		
+		
 		logger.info("Entry: createNewRunFetch | workspace: {} | flowId: {} | PAN: {}", workspace, flowId,
 				getRequest.getPan());
 
