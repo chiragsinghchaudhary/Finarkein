@@ -57,28 +57,25 @@ public class MyService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyService.class);
 
-	@Autowired
 	private DepositHolderRepository depositHolderRepository;
-	@Autowired
-	private DepositSummaryRepository depositSummaryRepository;
-	@Autowired
-	private DepositTransactionRepository depositTransactionRepository;
 
-	@Autowired
+	private DepositSummaryRepository depositSummaryRepository;
+	
+	private DepositTransactionRepository depositTransactionRepository;
+	
 	private EquityHolderRepository equityHolderRepository;
-	@Autowired
+	
 	private EquitySummaryRepository equitySummaryRepository;
-	@Autowired
+	
 	private EquityTransactionRepository equityTransactionRepository;
 
-	@Autowired
+	
 	private MFHolderRepository mfHolderRepository;
-	@Autowired
+	
 	private MFSummaryRepository mfSummaryRepository;
-	@Autowired
+	
 	private MFTransactionRepository mfTransactionRepository;
 
-	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
 
 	private FinarkeinClient finarkeinClient = new FinarkeinClient();

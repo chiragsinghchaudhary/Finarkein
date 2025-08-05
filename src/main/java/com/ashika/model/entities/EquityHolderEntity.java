@@ -7,7 +7,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "equity_holder")
 public class EquityHolderEntity {
-
+	
+	@Id
+    private String pan;
     private String address;
     private String dematId;
     private Long dob;
@@ -17,8 +19,6 @@ public class EquityHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
-    @Id
-    private String pan;
 
     // ===== Getters & Setters =====
 

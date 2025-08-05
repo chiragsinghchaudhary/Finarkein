@@ -10,7 +10,6 @@ public class EquityTransactionEntity {
 
 	@Id
 	private String pan;
-
 	private String startDate;
 	private String endDate;
 	private String companyName;

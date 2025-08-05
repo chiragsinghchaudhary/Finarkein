@@ -7,7 +7,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "deposit_holders")
 public class DepositHolderEntity {
-
+	
+	@Id
+    private String pan;
     private String type;
     private String address;
     private Boolean ckycCompliance;
@@ -17,9 +19,6 @@ public class DepositHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
-    
-    @Id
-    private String pan;
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }

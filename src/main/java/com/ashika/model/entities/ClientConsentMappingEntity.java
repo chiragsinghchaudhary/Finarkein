@@ -13,30 +13,18 @@ import jakarta.persistence.Table;
 @Table(name = "Client_Consent_Mapping")
 public class ClientConsentMappingEntity {
 	
-    private String clientCode;
-
-    @Id
+	@Id
     private String pan;
-    
-    private String runType;
-
-    
+	@Id
+    private String requestId;
+    private String clientCode;
+    private String runType;    
     private String state;
-
-    
     private String consentStatus;
-
-    
     private String dataFetchStatus;
-
     private LocalDate dob;
     private String email;
-    
-    @Id
-    private String requestId;
-    
     private String consentHandle;
-    
     private LocalDateTime lastUpdatedTime;
 
     // Getters & Setters
@@ -76,7 +64,5 @@ public class ClientConsentMappingEntity {
 	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
 		this.lastUpdatedTime = lastUpdatedTime;
 	}
-    
-    
 }
 
