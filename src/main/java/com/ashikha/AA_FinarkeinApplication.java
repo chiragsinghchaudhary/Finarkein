@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.ashika.service")
 @EnableJpaRepositories(basePackages = {"com.ashika.repositories"})
-@EntityScan("com.ashika.entities")
+@EntityScan("com.ashika.entities") 
 public class AA_FinarkeinApplication {
 
     public static void main(String[] args) {

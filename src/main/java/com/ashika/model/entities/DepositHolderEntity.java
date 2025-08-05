@@ -19,6 +19,7 @@ public class DepositHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
+    
 	public String getPan() {
 		return pan;
 	}
