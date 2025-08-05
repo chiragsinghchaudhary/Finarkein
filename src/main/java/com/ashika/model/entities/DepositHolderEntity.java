@@ -1,13 +1,11 @@
-package com.ashika.model.entity;
+package com.ashika.model.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deposit_profile")
+@Table(name = "deposit_holders")
 public class DepositHolderEntity {
 
     private String type;

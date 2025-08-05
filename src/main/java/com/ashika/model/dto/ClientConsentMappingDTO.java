@@ -2,7 +2,7 @@ package com.ashika.model.dto;
 
 import java.time.LocalDate;
 
-import com.ashika.model.entity.ClientConsentMappingEntity;
+import com.ashika.model.entities.ClientConsentMappingEntity;
 
 	public record ClientConsentMappingDTO(
 	        String clientCode,

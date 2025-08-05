@@ -1,11 +1,11 @@
-package com.ashika.model.entity;
+package com.ashika.model.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_profile")
+@Table(name = "equity_holder")
 public class EquityHolderEntity {
 
     private String address;

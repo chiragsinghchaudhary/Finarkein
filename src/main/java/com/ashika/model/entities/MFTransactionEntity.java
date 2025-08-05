@@ -1,4 +1,4 @@
-package com.ashika.model.entity;
+package com.ashika.model.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

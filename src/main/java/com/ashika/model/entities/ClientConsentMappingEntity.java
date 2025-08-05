@@ -1,4 +1,4 @@
-package com.ashika.model.entity;
+package com.ashika.model.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,11 +9,11 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@IdClass(ClientConsentMappingHistId.class)
-@Table(name = "Client_Consent_Mapping_Hist")
-public class ClientConsentMappingHistEntity {
+@IdClass(ClientConsentMappingId.class)
+@Table(name = "Client_Consent_Mapping")
+public class ClientConsentMappingEntity {
 	
-	private String clientCode;
+    private String clientCode;
 
     @Id
     private String pan;
@@ -37,7 +37,6 @@ public class ClientConsentMappingHistEntity {
     
     private String consentHandle;
     
-    @Id
     private LocalDateTime lastUpdatedTime;
 
     // Getters & Setters
@@ -59,9 +58,6 @@ public class ClientConsentMappingHistEntity {
     public String getDataFetchStatus() { return dataFetchStatus; }
     public void setDataFetchStatus(String dataFetchStatus) { this.dataFetchStatus = dataFetchStatus; }
 
-    public LocalDateTime getLastUpdatedTime() { return lastUpdatedTime; }
-    public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
-
     public LocalDate getDob() { return dob; }
     public void setDob(LocalDate dob) { this.dob = dob; }
 
@@ -73,4 +69,14 @@ public class ClientConsentMappingHistEntity {
 
     public String getConsentHandle() { return consentHandle; }
     public void setConsentHandle(String consentHandle) { this.consentHandle = consentHandle; }
+	
+    public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+    
+    
 }
+

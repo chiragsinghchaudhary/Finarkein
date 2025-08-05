@@ -1,4 +1,4 @@
-package com.ashika.model.entity;
+package com.ashika.model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
