@@ -5,7 +5,11 @@ import java.io.Serializable;
 //Composite key class
 public class ClientConsentMappingId implements Serializable {
 	
-    private String pan;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6358170034946600057L;
+	private String pan;
     private String requestId;
     
     // Getters & Setters

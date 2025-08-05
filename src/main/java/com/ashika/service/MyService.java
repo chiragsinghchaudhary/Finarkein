@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ashika.model.dto.ClientConsentMappingDTO;
@@ -56,38 +57,31 @@ public class MyService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyService.class);
 
-	private final DepositHolderRepository depositHolderRepository;
-	private final DepositSummaryRepository depositSummaryRepository;
-	private final DepositTransactionRepository depositTransactionRepository;
+	@Autowired
+	private DepositHolderRepository depositHolderRepository;
+	@Autowired
+	private DepositSummaryRepository depositSummaryRepository;
+	@Autowired
+	private DepositTransactionRepository depositTransactionRepository;
 
-	private final EquityHolderRepository equityHolderRepository;
-	private final EquitySummaryRepository equitySummaryRepository;
-	private final EquityTransactionRepository equityTransactionRepository;
+	@Autowired
+	private EquityHolderRepository equityHolderRepository;
+	@Autowired
+	private EquitySummaryRepository equitySummaryRepository;
+	@Autowired
+	private EquityTransactionRepository equityTransactionRepository;
 
-	private final MFHolderRepository mfHolderRepository;
-	private final MFSummaryRepository mfSummaryRepository;
-	private final MFTransactionRepository mfTransactionRepository;
+	@Autowired
+	private MFHolderRepository mfHolderRepository;
+	@Autowired
+	private MFSummaryRepository mfSummaryRepository;
+	@Autowired
+	private MFTransactionRepository mfTransactionRepository;
 
-	private final ClientConsentMappingRepository clientConsentRepository;
+	@Autowired
+	private ClientConsentMappingRepository clientConsentRepository;
 
 	private FinarkeinClient finarkeinClient = new FinarkeinClient();
-
-	public MyService(DepositHolderRepository depositHolderRepository, DepositSummaryRepository depositSummaryRepository,
-			DepositTransactionRepository depositTransactionRepository, EquityHolderRepository equityHolderRepository,
-			EquitySummaryRepository equitySummaryRepository, EquityTransactionRepository equityTransactionRepository,
-			MFHolderRepository mfHolderRepository, MFSummaryRepository mfSummaryRepository,
-			MFTransactionRepository mfTransactionRepository, ClientConsentMappingRepository clientConsentRepository) {
-		this.depositHolderRepository = depositHolderRepository;
-		this.depositSummaryRepository = depositSummaryRepository;
-		this.depositTransactionRepository = depositTransactionRepository;
-		this.equityHolderRepository = equityHolderRepository;
-		this.equitySummaryRepository = equitySummaryRepository;
-		this.equityTransactionRepository = equityTransactionRepository;
-		this.mfHolderRepository = mfHolderRepository;
-		this.mfSummaryRepository = mfSummaryRepository;
-		this.mfTransactionRepository = mfTransactionRepository;
-		this.clientConsentRepository = clientConsentRepository;
-	}
 
 	public boolean checkValidConsent(GetRequest getRequest) {
 		String pan = getRequest.getPan();
