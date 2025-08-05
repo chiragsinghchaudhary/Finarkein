@@ -10,7 +10,6 @@ public class MFSummaryEntity {
 
 	@Id
     private String pan;
-
     private Double costValue;
     private Double currentValue;
     private String fatcaStatus;

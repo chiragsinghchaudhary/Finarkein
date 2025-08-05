@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ashika.model.dto.ClientConsentMappingDTO;
@@ -56,25 +57,25 @@ public class MyService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyService.class);
 
+	@Autowired
 	private DepositHolderRepository depositHolderRepository;
-
+	@Autowired
 	private DepositSummaryRepository depositSummaryRepository;
-	
+	@Autowired
 	private DepositTransactionRepository depositTransactionRepository;
-	
+	@Autowired
 	private EquityHolderRepository equityHolderRepository;
-	
+	@Autowired
 	private EquitySummaryRepository equitySummaryRepository;
-	
+	@Autowired
 	private EquityTransactionRepository equityTransactionRepository;
-
-	
+	@Autowired
 	private MFHolderRepository mfHolderRepository;
-	
+	@Autowired
 	private MFSummaryRepository mfSummaryRepository;
-	
+	@Autowired
 	private MFTransactionRepository mfTransactionRepository;
-
+	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
 
 	private FinarkeinClient finarkeinClient = new FinarkeinClient();

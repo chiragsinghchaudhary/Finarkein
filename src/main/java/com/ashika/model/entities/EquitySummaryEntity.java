@@ -10,7 +10,6 @@ public class EquitySummaryEntity {
 
 	@Id
     private String pan;
-   
     private Double currentValue;
     private String holdingMode;
     private String isin;
