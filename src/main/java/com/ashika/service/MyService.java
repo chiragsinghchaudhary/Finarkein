@@ -30,7 +30,7 @@ import com.ashika.repositories.EquityTransactionRepository;
 import com.ashika.repositories.MFHolderRepository;
 import com.ashika.repositories.MFSummaryRepository;
 import com.ashika.repositories.MFTransactionRepository;
-import com.ashika.utils.Constants;
+import com.ashikha.Constants;
 import com.ashikha.data.request.ConsentNewRunRequest;
 import com.ashikha.data.request.GetRequest;
 import com.ashikha.data.request.RecurringNewRunRequest;

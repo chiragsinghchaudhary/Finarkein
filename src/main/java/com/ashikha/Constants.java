@@ -1,4 +1,4 @@
-package com.ashika.utils;
+package com.ashikha;
 
 public class Constants {
 	
