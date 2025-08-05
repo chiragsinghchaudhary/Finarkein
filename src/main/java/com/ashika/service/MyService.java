@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ashika.model.dto.ClientConsentMappingDTO;
@@ -119,7 +118,7 @@ public class MyService {
 		idList.add(pan);
 
 		// Fetch all data
-		List<DepositHolderEntity> depositHolders = depositHolderRepository.findAllById(idList);
+		List<DepositHolderEntity> depositHolderEntities = depositHolderRepository.findAllById(idList);
 		List<DepositSummaryEntity> depositSummaries = depositSummaryRepository.findAllById(idList);
 		List<DepositTransactionEntity> depositTransactions = depositTransactionRepository.findAllById(idList);
 
@@ -134,7 +133,7 @@ public class MyService {
 		// Combined debug log
 		logger.debug(
 				"Fetched DB records -> DepositHolder={} | DepositSummary={} | DepositTransaction={} | EquityHolder={} | EquitySummary={} | EquityTransaction={} | MFHolder={} | MFSummary={} | MFTransaction={}",
-				depositHolders.size(), depositSummaries.size(), depositTransactions.size(), equityHolders.size(),
+				depositHolderEntities.size(), depositSummaries.size(), depositTransactions.size(), equityHolders.size(),
 				equitySummaries.size(), equityTransactions.size(), mfHolders.size(), mfSummaries.size(),
 				mfTransactions.size());
 
@@ -142,7 +141,7 @@ public class MyService {
 		GetResultResponse getResultResponse = new GetResultResponse();
 
 		DepositResponse depositResponse = new DepositResponse();
-		depositResponse.setHolder(mapDepositHolderEntities(depositHolders));
+		depositResponse.setHolder(mapDepositHolderEntities(depositHolderEntities));
 		depositResponse.setSummary(mapDepositSummaryEntities(depositSummaries));
 		depositResponse.setTransactions(mapDepositTransactionEntities(depositTransactions));
 
@@ -460,7 +459,7 @@ public class MyService {
 		return new ConsentNewRunResponse(entity.getRequestId(), entity.getConsentHandle(), null);
 	}
 
-	private List<DepositHolderEntity> mapDepositHolderEntities(List<DepositHolderEntity> entities) {
+	private List<DepositHolder> mapDepositHolderEntities(List<DepositHolderEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No DepositHolderEntity records found to map.");
 			return new ArrayList<>();
@@ -468,9 +467,9 @@ public class MyService {
 
 		logger.debug("Mapping {} DepositHolderEntity records to DepositHolder response objects", entities.size());
 
-		List<DepositHolderEntity> responseList = new ArrayList<>(entities.size());
+		List<DepositHolder> responseList = new ArrayList<>(entities.size());
 		for (DepositHolderEntity entity : entities) {
-			DepositHolderEntity response = new DepositHolderEntity();
+			DepositHolder response = new DepositHolder();
 			response.setType(entity.getType());
 			response.setAddress(entity.getAddress());
 			response.setCkycCompliance(entity.getCkycCompliance());
@@ -488,7 +487,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<DepositSummaryEntity> mapDepositSummaryEntities(List<DepositSummaryEntity> entities) {
+	private List<DepositSummary> mapDepositSummaryEntities(List<DepositSummaryEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No DepositSummaryEntity records found to map.");
 			return new ArrayList<>();
@@ -496,9 +495,9 @@ public class MyService {
 
 		logger.debug("Mapping {} DepositSummaryEntity records to DepositSummary response objects", entities.size());
 
-		List<DepositSummaryEntity> responseList = new ArrayList<>(entities.size());
+		List<DepositSummary> responseList = new ArrayList<>(entities.size());
 		for (DepositSummaryEntity entity : entities) {
-			DepositSummaryEntity response = new DepositSummaryEntity();
+			DepositSummary response = new DepositSummary();
 			response.setBalanceDatetime(entity.getBalanceDatetime());
 			response.setBranch(entity.getBranch());
 			response.setCurrency(entity.getCurrency());
@@ -521,7 +520,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<DepositTransactionEntity> mapDepositTransactionEntities(List<DepositTransactionEntity> entities) {
+	private List<DepositTransaction> mapDepositTransactionEntities(List<DepositTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No DepositTransactionEntity records found to map.");
 			return new ArrayList<>();
@@ -530,9 +529,9 @@ public class MyService {
 		logger.debug("Mapping {} DepositTransactionEntity records to DepositTransaction response objects",
 				entities.size());
 
-		List<DepositTransactionEntity> responseList = new ArrayList<>(entities.size());
+		List<DepositTransaction> responseList = new ArrayList<>(entities.size());
 		for (DepositTransactionEntity entity : entities) {
-			DepositTransactionEntity response = new DepositTransactionEntity();
+			DepositTransaction response = new DepositTransaction();
 			response.setAmount(entity.getAmount());
 			response.setCurrentBalance(entity.getCurrentBalance());
 			response.setMode(entity.getMode());
@@ -550,7 +549,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<EquityHolderEntity> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
+	private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No EquityHolderEntity records found to map.");
 			return new ArrayList<>();
@@ -558,9 +557,9 @@ public class MyService {
 
 		logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
 
-		List<EquityHolderEntity> responseList = new ArrayList<>(entities.size());
+		List<EquityHolder> responseList = new ArrayList<>(entities.size());
 		for (EquityHolderEntity entity : entities) {
-			EquityHolderEntity response = new EquityHolderEntity();
+			EquityHolder response = new EquityHolder();
 			response.setAddress(entity.getAddress());
 			response.setDematId(entity.getDematId());
 			response.setDob(entity.getDob());
@@ -578,7 +577,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<EquitySummaryEntity> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
+	private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No EquitySummaryEntity records found to map.");
 			return new ArrayList<>();
@@ -586,9 +585,9 @@ public class MyService {
 
 		logger.debug("Mapping {} EquitySummaryEntity records to EquitySummary response objects", entities.size());
 
-		List<EquitySummaryEntity> responseList = new ArrayList<>(entities.size());
+		List<EquitySummary> responseList = new ArrayList<>(entities.size());
 		for (EquitySummaryEntity entity : entities) {
-			EquitySummaryEntity response = new EquitySummaryEntity();
+			EquitySummary response = new EquitySummary();
 			response.setCurrentValue(entity.getCurrentValue());
 			response.setHoldingMode(entity.getHoldingMode());
 			response.setIsin(entity.getIsin());
@@ -603,7 +602,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<EquityTransactionEntity> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
+	private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No EquityTransactionEntity records found to map.");
 			return new ArrayList<>();
@@ -612,9 +611,9 @@ public class MyService {
 		logger.debug("Mapping {} EquityTransactionEntity records to EquityTransaction response objects",
 				entities.size());
 
-		List<EquityTransactionEntity> responseList = new ArrayList<>(entities.size());
+		List<EquityTransaction> responseList = new ArrayList<>(entities.size());
 		for (EquityTransactionEntity entity : entities) {
-			EquityTransactionEntity response = new EquityTransactionEntity();
+			EquityTransaction response = new EquityTransaction();
 			response.setCompanyName(entity.getCompanyName());
 			response.setEquityCategory(entity.getEquityCategory());
 			response.setExchange(entity.getExchange());
@@ -634,7 +633,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<MFHolderEntity> mapMFHolderEntities(List<MFHolderEntity> entities) {
+	private List<MFHolder> mapMFHolderEntities(List<MFHolderEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No MFHolderEntity records found to map.");
 			return new ArrayList<>();
@@ -642,9 +641,9 @@ public class MyService {
 
 		logger.debug("Mapping {} MFHolderEntity records to MFHolder response objects", entities.size());
 
-		List<MFHolderEntity> responseList = new ArrayList<>(entities.size());
+		List<MFHolder> responseList = new ArrayList<>(entities.size());
 		for (MFHolderEntity entity : entities) {
-			MFHolderEntity response = new MFHolderEntity();
+			MFHolder response = new MFHolder();
 			response.setAddress(entity.getAddress());
 			response.setDematId(entity.getDematId());
 			response.setDob(entity.getDob());
@@ -663,7 +662,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<MFSummaryEntity> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
+	private List<MFSummary> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No MFSummaryEntity records found to map.");
 			return new ArrayList<>();
@@ -671,9 +670,9 @@ public class MyService {
 
 		logger.debug("Mapping {} MFSummaryEntity records to MFSummary response objects", entities.size());
 
-		List<MFSummaryEntity> responseList = new ArrayList<>(entities.size());
+		List<MFSummary> responseList = new ArrayList<>(entities.size());
 		for (MFSummaryEntity entity : entities) {
-			MFSummaryEntity response = new MFSummaryEntity();
+			MFSummary response = new MFSummary();
 			response.setCostValue(entity.getCostValue());
 			response.setCurrentValue(entity.getCurrentValue());
 			response.setFatcaStatus(entity.getFatcaStatus());
@@ -700,7 +699,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<MFTransactionEntity> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
+	private List<MFTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No MFTransactionEntity records found to map.");
 			return new ArrayList<>();
@@ -708,9 +707,9 @@ public class MyService {
 
 		logger.debug("Mapping {} MFTransactionEntity records to MFTransaction response objects", entities.size());
 
-		List<MFTransactionEntity> responseList = new ArrayList<>(entities.size());
+		List<MFTransaction> responseList = new ArrayList<>(entities.size());
 		for (MFTransactionEntity entity : entities) {
-			MFTransactionEntity response = new MFTransactionEntity();
+			MFTransaction response = new MFTransaction();
 			response.setAmc(entity.getAmc());
 			response.setAmfiCode(entity.getAmfiCode());
 			response.setAmount(entity.getAmount());
@@ -737,7 +736,7 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<DepositHolderEntity> mapDepositHolderResponses(List<DepositHolderEntity> responses) {
+	private List<DepositHolderEntity> mapDepositHolderResponses(List<DepositHolder> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositHolder responses found to map.");
 			return new ArrayList<>();
@@ -746,7 +745,7 @@ public class MyService {
 		logger.debug("Mapping {} DepositHolder responses to DepositHolderEntity objects", responses.size());
 
 		List<DepositHolderEntity> entityList = new ArrayList<>(responses.size());
-		for (DepositHolderEntity response : responses) {
+		for (DepositHolder response : responses) {
 			DepositHolderEntity entity = new DepositHolderEntity();
 			entity.setType(response.getType());
 			entity.setAddress(response.getAddress());
@@ -765,7 +764,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<DepositSummaryEntity> mapDepositSummaryResponses(List<DepositSummaryEntity> responses) {
+	private List<DepositSummaryEntity> mapDepositSummaryResponses(List<DepositSummary> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositSummary responses found to map.");
 			return new ArrayList<>();
@@ -774,7 +773,7 @@ public class MyService {
 		logger.debug("Mapping {} DepositSummary responses to DepositSummaryEntity objects", responses.size());
 
 		List<DepositSummaryEntity> entityList = new ArrayList<>(responses.size());
-		for (DepositSummaryEntity response : responses) {
+		for (DepositSummary response : responses) {
 			DepositSummaryEntity entity = new DepositSummaryEntity();
 			entity.setBalanceDatetime(response.getBalanceDatetime());
 			entity.setBranch(response.getBranch());
@@ -798,7 +797,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransactionEntity> responses) {
+	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositTransaction responses found to map.");
 			return new ArrayList<>();
@@ -807,7 +806,7 @@ public class MyService {
 		logger.debug("Mapping {} DepositTransaction responses to DepositTransactionEntity objects", responses.size());
 
 		List<DepositTransactionEntity> entityList = new ArrayList<>(responses.size());
-		for (DepositTransactionEntity response : responses) {
+		for (DepositTransaction response : responses) {
 			DepositTransactionEntity entity = new DepositTransactionEntity();
 			entity.setAmount(response.getAmount());
 			entity.setCurrentBalance(response.getCurrentBalance());
@@ -825,7 +824,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<EquityHolderEntity> mapEquityHolderResponses(List<EquityHolderEntity> responses) {
+	private List<EquityHolderEntity> mapEquityHolderResponses(List<EquityHolder> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquityHolder responses found to map.");
 			return new ArrayList<>();
@@ -834,7 +833,7 @@ public class MyService {
 		logger.debug("Mapping {} EquityHolder responses to EquityHolderEntity objects", responses.size());
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
-		for (EquityHolderEntity response : responses) {
+		for (EquityHolder response : responses) {
 			EquityHolderEntity entity = new EquityHolderEntity();
 			entity.setAddress(response.getAddress());
 			entity.setDematId(response.getDematId());
@@ -853,7 +852,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummaryEntity> responses) {
+	private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummary> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquitySummary responses found to map.");
 			return new ArrayList<>();
@@ -862,7 +861,7 @@ public class MyService {
 		logger.debug("Mapping {} EquitySummary responses to EquitySummaryEntity objects", responses.size());
 
 		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
-		for (EquitySummaryEntity response : responses) {
+		for (EquitySummary response : responses) {
 			EquitySummaryEntity entity = new EquitySummaryEntity();
 			entity.setCurrentValue(response.getCurrentValue());
 			entity.setHoldingMode(response.getHoldingMode());
@@ -878,7 +877,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransactionEntity> responses) {
+	private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransaction> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquityTransaction responses found to map.");
 			return new ArrayList<>();
@@ -887,7 +886,7 @@ public class MyService {
 		logger.debug("Mapping {} EquityTransaction responses to EquityTransactionEntity objects", responses.size());
 
 		List<EquityTransactionEntity> entityList = new ArrayList<>(responses.size());
-		for (EquityTransactionEntity response : responses) {
+		for (EquityTransaction response : responses) {
 			EquityTransactionEntity entity = new EquityTransactionEntity();
 			entity.setCompanyName(response.getCompanyName());
 			entity.setEquityCategory(response.getEquityCategory());
@@ -908,7 +907,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<MFHolderEntity> mapMFHolderResponses(List<MFHolderEntity> responses) {
+	private List<MFHolderEntity> mapMFHolderResponses(List<MFHolder> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFHolder responses found to map.");
 			return new ArrayList<>();
@@ -917,7 +916,7 @@ public class MyService {
 		logger.debug("Mapping {} MFHolder responses to MFHolderEntity objects", responses.size());
 
 		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
-		for (MFHolderEntity response : responses) {
+		for (MFHolder response : responses) {
 			MFHolderEntity entity = new MFHolderEntity();
 			entity.setAddress(response.getAddress());
 			entity.setDematId(response.getDematId());
@@ -937,7 +936,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummaryEntity> responses) {
+	private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummary> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFSummary responses found to map.");
 			return new ArrayList<>();
@@ -946,7 +945,7 @@ public class MyService {
 		logger.debug("Mapping {} MFSummary responses to MFSummaryEntity objects", responses.size());
 
 		List<MFSummaryEntity> entityList = new ArrayList<>(responses.size());
-		for (MFSummaryEntity response : responses) {
+		for (MFSummary response : responses) {
 			MFSummaryEntity entity = new MFSummaryEntity();
 			entity.setCostValue(response.getCostValue());
 			entity.setCurrentValue(response.getCurrentValue());
@@ -974,7 +973,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransactionEntity> responses) {
+	private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransaction> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFTransaction responses found to map.");
 			return new ArrayList<>();
@@ -983,7 +982,7 @@ public class MyService {
 		logger.debug("Mapping {} MFTransaction responses to MFTransactionEntity objects", responses.size());
 
 		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
-		for (MFTransactionEntity response : responses) {
+		for (MFTransaction response : responses) {
 			MFTransactionEntity entity = new MFTransactionEntity();
 			entity.setAmc(response.getAmc());
 			entity.setAmfiCode(response.getAmfiCode());
