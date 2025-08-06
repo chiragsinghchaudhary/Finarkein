@@ -10,12 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.ashikha.data.request.ConsentNewRunRequest;
-import com.ashikha.data.request.RecurringNewRunRequest;
-import com.ashikha.data.response.ConsentNewRunResponse;
-import com.ashikha.data.response.GetResultResponse;
-import com.ashikha.data.response.GetStatusResponse;
-import com.ashikha.data.response.RecurringNewRunResponse;
+import com.ashika.data.request.ConsentNewRunRequest;
+import com.ashika.data.request.RecurringNewRunRequest;
+import com.ashika.data.response.ConsentNewRunResponse;
+import com.ashika.data.response.GetResultResponse;
+import com.ashika.data.response.GetStatusResponse;
+import com.ashika.data.response.RecurringNewRunResponse;
 
 @Service
 public class FinarkeinClient {
