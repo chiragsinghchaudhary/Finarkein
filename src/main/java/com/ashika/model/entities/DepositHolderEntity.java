@@ -22,7 +22,6 @@ public class DepositHolderEntity {
 
 	public DepositHolderEntity(String pan, String type, String address, Boolean ckycCompliance, Long dob, String email,
 			String landline, String mobile, String name, String nominee) {
-		super();
 		this.pan = pan;
 		this.type = type;
 		this.address = address;
