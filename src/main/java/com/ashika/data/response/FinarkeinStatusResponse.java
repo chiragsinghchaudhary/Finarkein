@@ -1,6 +1,6 @@
 package com.ashika.data.response;
 
-public class FinarkinStatusResponse extends BaseResponse {
+public class FinarkeinStatusResponse extends BaseResponse {
     private String requestId;
     private String state;
     private String consentStatus;

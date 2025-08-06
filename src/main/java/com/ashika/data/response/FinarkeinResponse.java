@@ -1,6 +1,6 @@
 package com.ashika.data.response;
 
-public class FinarkinResponse {
+public class FinarkeinResponse {
     private String requestId;
     private String consentHandle;
 

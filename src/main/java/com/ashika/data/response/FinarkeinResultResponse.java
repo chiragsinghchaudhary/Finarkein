@@ -1,6 +1,6 @@
 package com.ashika.data.response;
 
-public class FinarkinResultResponse extends BaseResponse {
+public class FinarkeinResultResponse extends BaseResponse {
     private String requestId;
     private Object resultData; // Replace Object with actual result fields when known
 
