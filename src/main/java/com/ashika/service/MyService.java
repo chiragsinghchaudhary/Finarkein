@@ -369,18 +369,18 @@ public class MyService {
 			depositHolderRepository
 					.saveAll(mapDepositHolderResponses(resultResponse.getData().getDeposit().getHolder()));
 			depositSummaryRepository
-					.saveAll(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary()));
+					.saveAll(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary(), pan));
 			depositTransactionRepository
-					.saveAll(mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions()));
+					.saveAll(mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions(), pan));
 			equityHolderRepository.saveAll(mapEquityHolderResponses(resultResponse.getData().getEquity().getHolder()));
 			equitySummaryRepository
-					.saveAll(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary()));
+					.saveAll(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary(), pan));
 			equityTransactionRepository
-					.saveAll(mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions()));
+					.saveAll(mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions(), pan));
 			mfHolderRepository.saveAll(mapMFHolderResponses(resultResponse.getData().getMf().getHolder()));
-			mfSummaryRepository.saveAll(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary()));
+			mfSummaryRepository.saveAll(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary(), pan));
 			mfTransactionRepository
-					.saveAll(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions()));
+					.saveAll(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions(), pan));
 			logger.debug("Saved new records for pan={}", pan);
 
 			logger.info("DB replace operation completed -> pan={} | duration={} ms", pan,
@@ -747,17 +747,10 @@ public class MyService {
 
 		List<DepositHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositHolder response : responses) {
-			DepositHolderEntity entity = new DepositHolderEntity();
-			entity.setType(response.getType());
-			entity.setAddress(response.getAddress());
-			entity.setCkycCompliance(response.getCkycCompliance());
-			entity.setDob(response.getDob());
-			entity.setEmail(response.getEmail());
-			entity.setLandline(response.getLandline());
-			entity.setMobile(response.getMobile());
-			entity.setName(response.getName());
-			entity.setNominee(response.getNominee());
-			entity.setPan(response.getPan());
+			DepositHolderEntity entity = new DepositHolderEntity(response.getPan(), response.getType(),
+					response.getAddress(), response.getCkycCompliance(), response.getDob(), response.getEmail(),
+					response.getLandline(), response.getMobile(), response.getName(), response.getNominee());
+			
 			entityList.add(entity);
 		}
 
@@ -765,7 +758,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<DepositSummaryEntity> mapDepositSummaryResponses(List<DepositSummary> responses) {
+	private List<DepositSummaryEntity> mapDepositSummaryResponses(List<DepositSummary> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositSummary responses found to map.");
 			return new ArrayList<>();
@@ -775,22 +768,11 @@ public class MyService {
 
 		List<DepositSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositSummary response : responses) {
-			DepositSummaryEntity entity = new DepositSummaryEntity();
-			entity.setBalanceDatetime(response.getBalanceDatetime());
-			entity.setBranch(response.getBranch());
-			entity.setCurrency(response.getCurrency());
-			entity.setCurrentBalance(response.getCurrentBalance());
-			entity.setCurrentODLimit(response.getCurrentODLimit());
-			entity.setDrawingLimit(response.getDrawingLimit());
-			entity.setExchangeRate(response.getExchangeRate());
-			entity.setFacility(response.getFacility());
-			entity.setIfscCode(response.getIfscCode());
-			entity.setMicrCode(response.getMicrCode());
-			entity.setOpeningDate(response.getOpeningDate());
-			entity.setStatus(response.getStatus());
-			entity.setType(response.getType());
-			entity.setTransactionType(response.getTransactionType());
-			entity.setAmount(response.getAmount());
+			DepositSummaryEntity entity = new DepositSummaryEntity(pan, response.getBalanceDatetime(), response.getBranch(),
+					response.getCurrency(), response.getCurrentBalance(), response.getCurrentODLimit(), response.getDrawingLimit(),
+					response.getExchangeRate(), response.getFacility(), response.getIfscCode(), response.getMicrCode(),
+					response.getOpeningDate(), response.getStatus(), response.getType(), response.getTransactionType(), response.getAmount());
+			
 			entityList.add(entity);
 		}
 
@@ -798,7 +780,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses) {
+	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositTransaction responses found to map.");
 			return new ArrayList<>();
@@ -808,17 +790,10 @@ public class MyService {
 
 		List<DepositTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositTransaction response : responses) {
-			DepositTransactionEntity entity = new DepositTransactionEntity();
-			entity.setAmount(response.getAmount());
-			entity.setCurrentBalance(response.getCurrentBalance());
-			entity.setMode(response.getMode());
-			entity.setNarration(response.getNarration());
-			entity.setReference(response.getReference());
-			entity.setTransactionId(response.getTransactionId());
-			entity.setTransactionTimestamp(response.getTransactionTimestamp());
-			entity.setType(response.getType());
-			entity.setValueDate(response.getValueDate());
-			entityList.add(entity);
+			DepositTransactionEntity entity = new DepositTransactionEntity(pan, response.getAmount(), response.getCurrentBalance(), response.getMode(),
+					response.getNarration(), response.getReference(), response.getTransactionId(), response.getTransactionTimestamp(), response.getType(),
+					response.getValueDate());
+						entityList.add(entity);
 		}
 
 		logger.debug("Successfully mapped {} DepositTransactionEntity objects", entityList.size());
@@ -835,17 +810,9 @@ public class MyService {
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity();
-			entity.setAddress(response.getAddress());
-			entity.setDematId(response.getDematId());
-			entity.setDob(response.getDob());
-			entity.setEmail(response.getEmail());
-			entity.setKycCompliance(response.getKycCompliance());
-			entity.setLandline(response.getLandline());
-			entity.setMobile(response.getMobile());
-			entity.setName(response.getName());
-			entity.setNominee(response.getNominee());
-			entity.setPan(response.getPan());
+			EquityHolderEntity entity = new EquityHolderEntity(response.getPan(), response.getAddress(), response.getDematId(), response.getDob(),
+					response.getEmail(), response.getKycCompliance(), response.getLandline(), response.getMobile(), response.getName(),
+					response.getNominee());
 			entityList.add(entity);
 		}
 
@@ -853,7 +820,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummary> responses) {
+	private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummary> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquitySummary responses found to map.");
 			return new ArrayList<>();
@@ -863,14 +830,10 @@ public class MyService {
 
 		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (EquitySummary response : responses) {
-			EquitySummaryEntity entity = new EquitySummaryEntity();
-			entity.setCurrentValue(response.getCurrentValue());
-			entity.setHoldingMode(response.getHoldingMode());
-			entity.setIsin(response.getIsin());
-			entity.setIsinDescription(response.getIsinDescription());
-			entity.setIssuerName(response.getIssuerName());
-			entity.setLastTradedPrice(response.getLastTradedPrice());
-			entity.setUnits(response.getUnits());
+			EquitySummaryEntity entity = new EquitySummaryEntity(pan, response.getCurrentValue(), response.getHoldingMode(), 
+					response.getIsin(), response.getIsinDescription(), response.getIssuerName(), response.getLastTradedPrice(),
+					response.getUnits());
+			
 			entityList.add(entity);
 		}
 
@@ -878,7 +841,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransaction> responses) {
+	private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquityTransaction responses found to map.");
 			return new ArrayList<>();
@@ -888,19 +851,11 @@ public class MyService {
 
 		List<EquityTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityTransaction response : responses) {
-			EquityTransactionEntity entity = new EquityTransactionEntity();
-			entity.setCompanyName(response.getCompanyName());
-			entity.setEquityCategory(response.getEquityCategory());
-			entity.setExchange(response.getExchange());
-			entity.setIsin(response.getIsin());
-			entity.setIsinDescription(response.getIsinDescription());
-			entity.setNarration(response.getNarration());
-			entity.setOrderId(response.getOrderId());
-			entity.setRate(response.getRate());
-			entity.setTransactionDateTime(response.getTransactionDateTime());
-			entity.setTxnId(response.getTxnId());
-			entity.setType(response.getType());
-			entity.setUnits(response.getUnits());
+			EquityTransactionEntity entity = new EquityTransactionEntity(pan, response.getCompanyName(), response.getEquityCategory(),
+					response.getExchange(), response.getIsin(), response.getIsinDescription(), response.getNarration(), 
+					response.getOrderId(), response.getRate(), response.getTransactionDateTime(), response.getTxnId(),
+					response.getType(), response.getUnits());
+			
 			entityList.add(entity);
 		}
 
@@ -918,18 +873,10 @@ public class MyService {
 
 		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (MFHolder response : responses) {
-			MFHolderEntity entity = new MFHolderEntity();
-			entity.setAddress(response.getAddress());
-			entity.setDematId(response.getDematId());
-			entity.setDob(response.getDob());
-			entity.setEmail(response.getEmail());
-			entity.setFolioNo(response.getFolioNo());
-			entity.setKycCompliance(response.getKycCompliance());
-			entity.setLandline(response.getLandline());
-			entity.setMobile(response.getMobile());
-			entity.setName(response.getName());
-			entity.setNominee(response.getNominee());
-			entity.setPan(response.getPan());
+			MFHolderEntity entity = new MFHolderEntity(response.getPan(), response.getAddress(), response.getDematId(), response.getDob(),
+					response.getEmail(), response.getFolioNo(), response.getKycCompliance(), response.getLandline(), response.getMobile(),
+					response.getName(), response.getNominee());
+			
 			entityList.add(entity);
 		}
 
@@ -937,7 +884,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummary> responses) {
+	private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummary> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFSummary responses found to map.");
 			return new ArrayList<>();
@@ -947,26 +894,11 @@ public class MyService {
 
 		List<MFSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (MFSummary response : responses) {
-			MFSummaryEntity entity = new MFSummaryEntity();
-			entity.setCostValue(response.getCostValue());
-			entity.setCurrentValue(response.getCurrentValue());
-			entity.setFatcaStatus(response.getFatcaStatus());
-			entity.setAmc(response.getAmc());
-			entity.setAmfiCode(response.getAmfiCode());
-			entity.setClosingUnits(response.getClosingUnits());
-			entity.setFolioNo(response.getFolioNo());
-			entity.setIsin(response.getIsin());
-			entity.setIsinDescription(response.getIsinDescription());
-			entity.setLienUnits(response.getLienUnits());
-			entity.setLockinUnits(response.getLockinUnits());
-			entity.setNav(response.getNav());
-			entity.setNavDate(response.getNavDate());
-			entity.setRegistrar(response.getRegistrar());
-			entity.setSchemeCategory(response.getSchemeCategory());
-			entity.setSchemeCode(response.getSchemeCode());
-			entity.setSchemeOption(response.getSchemeOption());
-			entity.setSchemeTypes(response.getSchemeTypes());
-			entity.setUcc(response.getUcc());
+			MFSummaryEntity entity = new MFSummaryEntity(pan, response.getCostValue(), response.getCurrentValue(), response.getFatcaStatus(),
+					response.getAmc(), response.getAmfiCode(), response.getClosingUnits(), response.getFolioNo(), response.getIsin(),
+					response.getIsinDescription(), response.getLienUnits(), response.getLockinUnits(), response.getNav(), response.getNavDate(),
+					response.getRegistrar(), response.getSchemeCategory(), response.getSchemeCode(), response.getSchemeOption(), response.getSchemeTypes(), response.getUcc());
+			
 			entityList.add(entity);
 		}
 
@@ -974,7 +906,7 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransaction> responses) {
+	private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFTransaction responses found to map.");
 			return new ArrayList<>();
@@ -984,26 +916,12 @@ public class MyService {
 
 		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (MFTransaction response : responses) {
-			MFTransactionEntity entity = new MFTransactionEntity();
-			entity.setAmc(response.getAmc());
-			entity.setAmfiCode(response.getAmfiCode());
-			entity.setAmount(response.getAmount());
-			entity.setIsin(response.getIsin());
-			entity.setIsinDescription(response.getIsinDescription());
-			entity.setLockInDays(response.getLockInDays());
-			entity.setLockInFlag(response.getLockInFlag());
-			entity.setMode(response.getMode());
-			entity.setNarration(response.getNarration());
-			entity.setNav(response.getNav());
-			entity.setNavDate(response.getNavDate());
-			entity.setRegistrar(response.getRegistrar());
-			entity.setSchemeCode(response.getSchemeCode());
-			entity.setSchemePlan(response.getSchemePlan());
-			entity.setTransactionDate(response.getTransactionDate());
-			entity.setTxnId(response.getTxnId());
-			entity.setType(response.getType());
-			entity.setUcc(response.getUcc());
-			entity.setUnits(response.getUnits());
+			MFTransactionEntity entity = new MFTransactionEntity(pan, response.getAmc(), response.getAmfiCode(), response.getAmount(),
+					response.getIsin(), response.getIsinDescription(), response.getLockInDays(), response.getLockInFlag(), 
+					response.getMode(), response.getNarration(), response.getNav(), response.getNavDate(), response.getRegistrar(),
+					response.getSchemeCode(), response.getSchemePlan(), response.getTransactionDate(), response.getTxnId(),
+					response.getType(), response.getUcc(), response.getUnits());
+			
 			entityList.add(entity);
 		}
 

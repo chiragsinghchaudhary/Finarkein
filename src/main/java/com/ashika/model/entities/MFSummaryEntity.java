@@ -29,8 +29,41 @@ public class MFSummaryEntity {
     private String schemeOption;
     private String schemeTypes;
     private String ucc;
+    
+    
 
-    // ===== Getters & Setters =====
+    public MFSummaryEntity(String pan, Double costValue, Double currentValue, String fatcaStatus, String amc,
+			String amfiCode, Double closingUnits, String folioNo, String isin, String isinDescription, Double lienUnits,
+			Double lockinUnits, Double nav, String navDate, String registrar, String schemeCategory, String schemeCode,
+			String schemeOption, String schemeTypes, String ucc) {
+		super();
+		this.pan = pan;
+		this.costValue = costValue;
+		this.currentValue = currentValue;
+		this.fatcaStatus = fatcaStatus;
+		this.amc = amc;
+		this.amfiCode = amfiCode;
+		this.closingUnits = closingUnits;
+		this.folioNo = folioNo;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.lienUnits = lienUnits;
+		this.lockinUnits = lockinUnits;
+		this.nav = nav;
+		this.navDate = navDate;
+		this.registrar = registrar;
+		this.schemeCategory = schemeCategory;
+		this.schemeCode = schemeCode;
+		this.schemeOption = schemeOption;
+		this.schemeTypes = schemeTypes;
+		this.ucc = ucc;
+	}
+
+	protected MFSummaryEntity() {
+		// TODO Auto-generated constructor stub
+	}
+
+	// ===== Getters & Setters =====
     public String getPan() {
         return pan;
     }

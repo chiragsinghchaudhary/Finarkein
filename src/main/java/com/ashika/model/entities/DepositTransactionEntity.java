@@ -8,19 +8,37 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_transaction")
 public class DepositTransactionEntity {
 
-    @Id
-    private String pan;
-    private Double amount;
-    private Double currentBalance;
-    private String mode;
-    private String narration;
-    private String reference;
-    private String transactionId;
-    private Long transactionTimestamp;
-    private String type;
-    private Long valueDate;
+	@Id
+	private String pan;
+	private Double amount;
+	private Double currentBalance;
+	private String mode;
+	private String narration;
+	private String reference;
+	private String transactionId;
+	private Long transactionTimestamp;
+	private String type;
+	private Long valueDate;
 
-    public String getPan() {
+	public DepositTransactionEntity(String pan, Double amount, Double currentBalance, String mode, String narration,
+			String reference, String transactionId, Long transactionTimestamp, String type, Long valueDate) {
+		this.pan = pan;
+		this.amount = amount;
+		this.currentBalance = currentBalance;
+		this.mode = mode;
+		this.narration = narration;
+		this.reference = reference;
+		this.transactionId = transactionId;
+		this.transactionTimestamp = transactionTimestamp;
+		this.type = type;
+		this.valueDate = valueDate;
+	}
+
+	protected DepositTransactionEntity() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getPan() {
 		return pan;
 	}
 
@@ -28,76 +46,75 @@ public class DepositTransactionEntity {
 		this.pan = pan;
 	}
 
-    public Double getAmount() {
-        return amount;
-    }
+	public Double getAmount() {
+		return amount;
+	}
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 
-    public Double getCurrentBalance() {
-        return currentBalance;
-    }
+	public Double getCurrentBalance() {
+		return currentBalance;
+	}
 
-    public void setCurrentBalance(Double currentBalance) {
-        this.currentBalance = currentBalance;
-    }
+	public void setCurrentBalance(Double currentBalance) {
+		this.currentBalance = currentBalance;
+	}
 
-    public String getMode() {
-        return mode;
-    }
+	public String getMode() {
+		return mode;
+	}
 
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 
-    public String getNarration() {
-        return narration;
-    }
+	public String getNarration() {
+		return narration;
+	}
 
-    public void setNarration(String narration) {
-        this.narration = narration;
-    }
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
 
-    public String getReference() {
-        return reference;
-    }
+	public String getReference() {
+		return reference;
+	}
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+	public String getTransactionId() {
+		return transactionId;
+	}
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
 
-    public Long getTransactionTimestamp() {
-        return transactionTimestamp;
-    }
+	public Long getTransactionTimestamp() {
+		return transactionTimestamp;
+	}
 
-    public void setTransactionTimestamp(Long transactionTimestamp) {
-        this.transactionTimestamp = transactionTimestamp;
-    }
+	public void setTransactionTimestamp(Long transactionTimestamp) {
+		this.transactionTimestamp = transactionTimestamp;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public Long getValueDate() {
-        return valueDate;
-    }
+	public Long getValueDate() {
+		return valueDate;
+	}
 
-    public void setValueDate(Long valueDate) {
-        this.valueDate = valueDate;
-    }
+	public void setValueDate(Long valueDate) {
+		this.valueDate = valueDate;
+	}
 }
-

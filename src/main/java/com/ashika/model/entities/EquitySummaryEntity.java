@@ -9,78 +9,94 @@ import jakarta.persistence.Table;
 public class EquitySummaryEntity {
 
 	@Id
-    private String pan;
-    private Double currentValue;
-    private String holdingMode;
-    private String isin;
-    private String isinDescription;
-    private String issuerName;
-    private Double lastTradedPrice;
-    private Double units;
+	private String pan;
+	private Double currentValue;
+	private String holdingMode;
+	private String isin;
+	private String isinDescription;
+	private String issuerName;
+	private Double lastTradedPrice;
+	private Double units;
 
-    // ===== Getters & Setters =====
-    public String getPan() {
-        return pan;
-    }
+	public EquitySummaryEntity(String pan, Double currentValue, String holdingMode, String isin, String isinDescription,
+			String issuerName, Double lastTradedPrice, Double units) {
+		super();
+		this.pan = pan;
+		this.currentValue = currentValue;
+		this.holdingMode = holdingMode;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.issuerName = issuerName;
+		this.lastTradedPrice = lastTradedPrice;
+		this.units = units;
+	}
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+	protected EquitySummaryEntity() {
+		// TODO Auto-generated constructor stub
+	}
 
-    public Double getCurrentValue() {
-        return currentValue;
-    }
+	// ===== Getters & Setters =====
+	public String getPan() {
+		return pan;
+	}
 
-    public void setCurrentValue(Double currentValue) {
-        this.currentValue = currentValue;
-    }
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 
-    public String getHoldingMode() {
-        return holdingMode;
-    }
+	public Double getCurrentValue() {
+		return currentValue;
+	}
 
-    public void setHoldingMode(String holdingMode) {
-        this.holdingMode = holdingMode;
-    }
+	public void setCurrentValue(Double currentValue) {
+		this.currentValue = currentValue;
+	}
 
-    public String getIsin() {
-        return isin;
-    }
+	public String getHoldingMode() {
+		return holdingMode;
+	}
 
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
+	public void setHoldingMode(String holdingMode) {
+		this.holdingMode = holdingMode;
+	}
 
-    public String getIsinDescription() {
-        return isinDescription;
-    }
+	public String getIsin() {
+		return isin;
+	}
 
-    public void setIsinDescription(String isinDescription) {
-        this.isinDescription = isinDescription;
-    }
+	public void setIsin(String isin) {
+		this.isin = isin;
+	}
 
-    public String getIssuerName() {
-        return issuerName;
-    }
+	public String getIsinDescription() {
+		return isinDescription;
+	}
 
-    public void setIssuerName(String issuerName) {
-        this.issuerName = issuerName;
-    }
+	public void setIsinDescription(String isinDescription) {
+		this.isinDescription = isinDescription;
+	}
 
-    public Double getLastTradedPrice() {
-        return lastTradedPrice;
-    }
+	public String getIssuerName() {
+		return issuerName;
+	}
 
-    public void setLastTradedPrice(Double lastTradedPrice) {
-        this.lastTradedPrice = lastTradedPrice;
-    }
+	public void setIssuerName(String issuerName) {
+		this.issuerName = issuerName;
+	}
 
-    public Double getUnits() {
-        return units;
-    }
+	public Double getLastTradedPrice() {
+		return lastTradedPrice;
+	}
 
-    public void setUnits(Double units) {
-        this.units = units;
-    }
+	public void setLastTradedPrice(Double lastTradedPrice) {
+		this.lastTradedPrice = lastTradedPrice;
+	}
+
+	public Double getUnits() {
+		return units;
+	}
+
+	public void setUnits(Double units) {
+		this.units = units;
+	}
 }
-

@@ -10,8 +10,6 @@ public class MFTransactionEntity {
 
 	@Id
     private String pan;
-    private String startDate;
-    private String endDate;
     private String amc;
     private String amfiCode;
     private Double amount;
@@ -31,30 +29,47 @@ public class MFTransactionEntity {
     private String type;
     private String ucc;
     private Double units;
+    
+    
 
-    // ===== Getters & Setters =====
+    public MFTransactionEntity(String pan, String amc, String amfiCode, Double amount,
+			String isin, String isinDescription, Integer lockInDays, String lockInFlag, String mode, String narration,
+			Double nav, String navDate, String registrar, String schemeCode, String schemePlan, Long transactionDate,
+			String txnId, String type, String ucc, Double units) {
+		super();
+		this.pan = pan;
+		this.amc = amc;
+		this.amfiCode = amfiCode;
+		this.amount = amount;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.lockInDays = lockInDays;
+		this.lockInFlag = lockInFlag;
+		this.mode = mode;
+		this.narration = narration;
+		this.nav = nav;
+		this.navDate = navDate;
+		this.registrar = registrar;
+		this.schemeCode = schemeCode;
+		this.schemePlan = schemePlan;
+		this.transactionDate = transactionDate;
+		this.txnId = txnId;
+		this.type = type;
+		this.ucc = ucc;
+		this.units = units;
+	}
+
+	protected MFTransactionEntity() {
+		// TODO Auto-generated constructor stub
+	}
+
+	// ===== Getters & Setters =====
     public String getPan() {
         return pan;
     }
 
     public void setPan(String pan) {
         this.pan = pan;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     public String getAmc() {

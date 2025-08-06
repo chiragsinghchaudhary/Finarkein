@@ -10,8 +10,6 @@ public class EquityTransactionEntity {
 
 	@Id
 	private String pan;
-	private String startDate;
-	private String endDate;
 	private String companyName;
 	private String equityCategory;
 	private String exchange;
@@ -25,6 +23,28 @@ public class EquityTransactionEntity {
 	private String type;
 	private Double units;
 
+	public EquityTransactionEntity(String pan, String companyName, String equityCategory, String exchange, String isin,
+			String isinDescription, String narration, String orderId, Double rate, Long transactionDateTime,
+			String txnId, String type, Double units) {
+		this.pan = pan;
+		this.companyName = companyName;
+		this.equityCategory = equityCategory;
+		this.exchange = exchange;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.narration = narration;
+		this.orderId = orderId;
+		this.rate = rate;
+		this.transactionDateTime = transactionDateTime;
+		this.txnId = txnId;
+		this.type = type;
+		this.units = units;
+	}
+
+	protected EquityTransactionEntity() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// ===== Getters & Setters =====
 	public String getPan() {
 		return pan;
@@ -32,22 +52,6 @@ public class EquityTransactionEntity {
 
 	public void setPan(String pan) {
 		this.pan = pan;
-	}
-
-	public String getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
 	}
 
 	public String getCompanyName() {

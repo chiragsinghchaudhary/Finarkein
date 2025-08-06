@@ -23,11 +23,31 @@ public class ClientConsentMappingEntity {
     private String consentStatus;
     private String dataFetchStatus;
     private LocalDate dob;
-    private String email;
     private String consentHandle;
     private LocalDateTime lastUpdatedTime;
+    
+    public ClientConsentMappingEntity(String pan, String requestId, String clientCode, String runType, String state,
+			String consentStatus, String dataFetchStatus, LocalDate dob, String consentHandle,
+			LocalDateTime lastUpdatedTime) {
+		this.pan = pan;
+		this.requestId = requestId;
+		this.clientCode = clientCode;
+		this.runType = runType;
+		this.state = state;
+		this.consentStatus = consentStatus;
+		this.dataFetchStatus = dataFetchStatus;
+		this.dob = dob;
+		this.consentHandle = consentHandle;
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+    
+    
+	protected ClientConsentMappingEntity() {
+		// TODO Auto-generated constructor stub
+	}
 
-    // Getters & Setters
+
+	// Getters & Setters
     public String getClientCode() { return clientCode; }
     public void setClientCode(String clientCode) { this.clientCode = clientCode; }
 
@@ -48,9 +68,6 @@ public class ClientConsentMappingEntity {
 
     public LocalDate getDob() { return dob; }
     public void setDob(LocalDate dob) { this.dob = dob; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
 
     public String getRequestId() { return requestId; }
     public void setRequestId(String requestId) { this.requestId = requestId; }
