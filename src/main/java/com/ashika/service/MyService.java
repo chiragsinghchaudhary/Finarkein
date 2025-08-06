@@ -79,6 +79,11 @@ public class MyService {
 	private ClientConsentMappingRepository clientConsentRepository;
 
 	private FinarkeinClient finarkeinClient = new FinarkeinClient();
+	
+
+	public MyService() {
+		logger.debug("MyService initialized");
+	}
 
 	public boolean checkValidConsent(GetRequest getRequest) {
 		String pan = getRequest.getPan();

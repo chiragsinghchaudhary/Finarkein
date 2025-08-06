@@ -19,6 +19,8 @@ public class DepositHolderEntity {
 	private String mobile;
 	private String name;
 	private String nominee;
+	
+	
 
 	public DepositHolderEntity(String pan, String type, String address, Boolean ckycCompliance, Long dob, String email,
 			String landline, String mobile, String name, String nominee) {

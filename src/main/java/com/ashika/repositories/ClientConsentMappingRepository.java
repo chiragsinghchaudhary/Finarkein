@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,12 @@ import com.ashika.model.entities.ClientConsentMappingId;
 
 @Repository
 public class ClientConsentMappingRepository implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ClientConsentMappingRepository.class);
+
+	public ClientConsentMappingRepository() {
+		logger.debug("ClientConsentMappingRepository initialized");
+	}
 
 	@Query("SELECT c"
 			+ " FROM ClientConsentMappingEntity" +
