@@ -220,8 +220,6 @@ public class MyService {
 	}
 
 	public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
-
-		
 		
 		String pan = "";
 		long overallStart = System.currentTimeMillis();

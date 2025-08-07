@@ -44,8 +44,8 @@ public class FinarkeinClient {
     @Value("${finarkein.api.result-url}")
     private String finarkeinResultUrl;
 
-    @Value("${finarkein.api.auth-token}")
-    private String authToken;
+    @Value("${finarkein.api.auth-token-url}")
+    private String authTokenUrl;
 
     public FinarkeinClient() {
         this.restTemplate = new RestTemplate();
@@ -60,7 +60,7 @@ public class FinarkeinClient {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authToken);
+            headers.set("Authorization", "Bearer " + authTokenUrl);
             headers.set("Content-Type", "application/json");
 
             HttpEntity<ConsentNewRunRequest> entity = new HttpEntity<>(request, headers);
@@ -94,7 +94,7 @@ public class FinarkeinClient {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authToken);
+            headers.set("Authorization", "Bearer " + authTokenUrl);
             headers.set("Content-Type", "application/json");
 
             HttpEntity<RecurringNewRunRequest> entity = new HttpEntity<>(request, headers);
@@ -128,7 +128,7 @@ public class FinarkeinClient {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authToken);
+            headers.set("Authorization", "Bearer " + authTokenUrl);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -161,7 +161,7 @@ public class FinarkeinClient {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authToken);
+            headers.set("Authorization", "Bearer " + authTokenUrl);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
