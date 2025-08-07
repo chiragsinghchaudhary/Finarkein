@@ -3,6 +3,12 @@ package com.ashika.data.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConsentNewRunRequest {
+	
+	@JsonProperty("customerMobileNumber")
+    private String customerMobileNumber;
+	
+	@JsonProperty("applicationNo")
+    private String applicationNo;
 
     @JsonProperty("consentTemplateId")
     private String consentTemplateId;
@@ -10,52 +16,58 @@ public class ConsentNewRunRequest {
     @JsonProperty("redirectUrl")
     private String redirectUrl;
 
-    @JsonProperty("user")
-    private User user;
+    @JsonProperty("identifiers")
+    private Identifiers identifiers;
 
     @JsonProperty("webhook")
     private Webhook webhook;
 
-    // No-arg constructor
-    public ConsentNewRunRequest() {}
+	public String getCustomerMobileNumber() {
+		return customerMobileNumber;
+	}
 
-    // Parameterized constructor
-    public ConsentNewRunRequest(String consentTemplateId, String redirectUrl, User user, Webhook webhook) {
-        this.consentTemplateId = consentTemplateId;
-        this.redirectUrl = redirectUrl;
-        this.user = user;
-        this.webhook = webhook;
-    }
+	public void setCustomerMobileNumber(String customerMobileNumber) {
+		this.customerMobileNumber = customerMobileNumber;
+	}
 
-    // Getters and Setters
-    public String getConsentTemplateId() {
-        return consentTemplateId;
-    }
+	public String getApplicationNo() {
+		return applicationNo;
+	}
 
-    public void setConsentTemplateId(String consentTemplateId) {
-        this.consentTemplateId = consentTemplateId;
-    }
+	public void setApplicationNo(String applicationNo) {
+		this.applicationNo = applicationNo;
+	}
 
-    public String getRedirectUrl() {
-        return redirectUrl;
-    }
+	public String getConsentTemplateId() {
+		return consentTemplateId;
+	}
 
-    public void setRedirectUrl(String redirectUrl) {
-        this.redirectUrl = redirectUrl;
-    }
+	public void setConsentTemplateId(String consentTemplateId) {
+		this.consentTemplateId = consentTemplateId;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
+	}
 
-    public Webhook getWebhook() {
-        return webhook;
-    }
- public void setWebhook(Webhook webhook) {
-        this.webhook = webhook;
-    }
+	public Identifiers getIdentifiers() {
+		return identifiers;
+	}
+
+	public void setIdentifiers(Identifiers identifiers) {
+		this.identifiers = identifiers;
+	}
+
+	public Webhook getWebhook() {
+		return webhook;
+	}
+
+	public void setWebhook(Webhook webhook) {
+		this.webhook = webhook;
+	}
+   
 }

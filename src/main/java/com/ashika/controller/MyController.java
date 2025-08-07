@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.GetRequest;
+import com.ashika.data.request.RecurringNewRunRequest;
 import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.GetResultResponse;
@@ -38,86 +39,98 @@ public class MyController {
         return "Hello World!";
     }
 
-	@PostMapping("/{workspace}/dp/nerv/{flowId}")
-    public ConsentNewRunResponse createNewRun(@PathVariable("workspace") String workspace,
-                                              @PathVariable("flowId") String flowId,
-                                              @RequestBody ConsentNewRunRequest consentNewRunRequest) {
+	/*
+	 * @PostMapping("/{workspace}/dp/nerv/{flowId}") public ConsentNewRunResponse
+	 * createNewRun(@PathVariable("workspace") String workspace,
+	 * 
+	 * @PathVariable("flowId") String flowId,
+	 * 
+	 * @RequestBody ConsentNewRunRequest consentNewRunRequest) {
+	 * 
+	 * long startTimeInMilliseconds = System.currentTimeMillis();
+	 * 
+	 * logger.info("Entry: /createNewRun " + " workspace : " + workspace +
+	 * " flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan());
+	 * 
+	 * ConsentNewRunResponse consentNewRunResponse =
+	 * myService.createNewRun(workspace, flowId, consentNewRunRequest);
+	 * 
+	 * long timeTakenToProcessRequest = System.currentTimeMillis() -
+	 * startTimeInMilliseconds;
+	 * 
+	 * logger.info("Exit: /createNewRun " + " workspace : " + workspace +
+	 * " flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan() +
+	 * " ProcessingTime : " + timeTakenToProcessRequest);
+	 * 
+	 * return consentNewRunResponse; }
+	 */
+    
+    @PostMapping("/createNewConsentRun")
+    public ConsentNewRunResponse createNewRun(@RequestBody ConsentNewRunRequest consentNewRunRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /createNewRun " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan());
+    	logger.info("Entry: /createNewRun " + " pan : " + consentNewRunRequest.getIdentifiers().getPan());
     	
-    	ConsentNewRunResponse consentNewRunResponse = myService.createNewRun(workspace, flowId, consentNewRunRequest);
+    	ConsentNewRunResponse consentNewRunResponse = myService.createNewRun(consentNewRunRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /createNewRun " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan()
+    	logger.info("Exit: /createNewRun " + " pan : " + consentNewRunRequest.getIdentifiers().getPan()
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
     	return consentNewRunResponse;
     }
 
-    @PostMapping("/{workspace}/dp/nerv/fetch/{flowId}")
-    public RecurringNewRunResponse createNewRunFetch(@PathVariable("workspace") String workspace,
-                                                     @PathVariable("flowId") String flowId,
-                                                     @RequestBody GetRequest getRequest) {
+    @PostMapping("/createNewFetchRun")
+    public RecurringNewRunResponse createNewRunFetch(@RequestBody RecurringNewRunRequest recurringNewRunRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /createNewRunFetch " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " pan : " + getRequest.getPan());
+    	logger.info("Entry: /createNewRunFetch " + " consentHandle : " + recurringNewRunRequest.getConsentHandle());
     	
-    	RecurringNewRunResponse recurringNewRunResponse = myService.createNewRunFetch(workspace, flowId, getRequest);
+    	RecurringNewRunResponse recurringNewRunResponse = myService.createNewRunFetch(recurringNewRunRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /createNewRunFetch " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " pan : " + getRequest.getPan()
-    			+ " ProcessingTime : " + timeTakenToProcessRequest);
+		
+		  logger.info("Exit: /createNewRunFetch " + " consentHandle : " + recurringNewRunRequest.getConsentHandle() +
+		  " ProcessingTime : " + timeTakenToProcessRequest);
+		 
     	
         return recurringNewRunResponse;
     }
 
-    @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/status")
-    public GetStatusResponse getStatus(@PathVariable("workspace") String workspace,
-                                       @PathVariable("flowId") String flowId,
-                                       @PathVariable("requestId") String requestId) {
+    @GetMapping("/getStatus")
+    public GetStatusResponse getStatus(@PathVariable("requestId") String requestId) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /getStatus " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " requestId : " + requestId );
+    	logger.info("Entry: /getStatus " + " requestId : " + requestId );
     	
-    	GetStatusResponse getStatusResponse = myService.getStatus(workspace, flowId, requestId);
+    	GetStatusResponse getStatusResponse = myService.getStatus(requestId);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /getStatus " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " requestId : " + requestId
+    	logger.info("Exit: /getStatus " + " requestId : " + requestId
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
         return getStatusResponse;
     }
 
-    @GetMapping("/{workspace}/dp/nerv/{flowId}/{requestId}/result")
-    public GetResultResponse getResult(@PathVariable("workspace") String workspace,
-                                       @PathVariable("flowId") String flowId,
-                                       @PathVariable("requestId") String requestId) {
+    @GetMapping("/getResult")
+    public GetResultResponse getResult(@PathVariable("requestId") String requestId) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /getResult " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " requestId : " + requestId );
+    	logger.info("Entry: /getResult " + " requestId : " + requestId );
     	
     	
-    	GetResultResponse getResultResponse = myService.getResult(workspace, flowId, requestId);
+    	GetResultResponse getResultResponse = myService.getResult(requestId);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /getResult " + " workspace : " + workspace + 
-    			" flowId : " + flowId + " requestId : " + requestId
+    	logger.info("Exit: /getResult " + " requestId : " + requestId
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
         return getResultResponse;

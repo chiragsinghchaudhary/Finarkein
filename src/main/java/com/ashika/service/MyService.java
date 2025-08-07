@@ -181,20 +181,18 @@ public class MyService {
 		return getResultResponse;
 	}
 
-	public ConsentNewRunResponse createNewRun(String workspace, String flowId,
-			ConsentNewRunRequest consentNewRunRequest) {
+	public ConsentNewRunResponse createNewRun(ConsentNewRunRequest consentNewRunRequest) {
 
-		String pan = consentNewRunRequest.getUser().getPan();
+		String pan = consentNewRunRequest.getIdentifiers().getPan();
 		long overallStart = System.currentTimeMillis();
 
-		logger.info("createNewRun started -> pan={} | workspace={} | flowId={}", pan, workspace, flowId);
+		logger.info("createNewRun started -> pan={} ", pan);
 
 		// --- API Call ---
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: createNewConsentRun -> pan={}", pan);
 
-		ConsentNewRunResponse consentResponse = finarkeinClient.createNewConsentRun(flowId, workspace,
-				consentNewRunRequest);
+		ConsentNewRunResponse consentResponse = finarkeinClient.createNewConsentRun(consentNewRunRequest);
 
 		logger.info("API call completed: createNewConsentRun -> pan={} | duration={} ms", pan,
 				System.currentTimeMillis() - apiStart);
@@ -221,12 +219,14 @@ public class MyService {
 		return mapConsentEntityToResponse(savedEntity);
 	}
 
-	public RecurringNewRunResponse createNewRunFetch(String workspace, String flowId, GetRequest getRequest) {
+	public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
 
-		String pan = getRequest.getPan();
+		
+		
+		String pan = "";
 		long overallStart = System.currentTimeMillis();
 
-		logger.info("createNewRunFetch started -> pan={} | workspace={} | flowId={}", pan, workspace, flowId);
+		logger.info("createNewRunFetch started -> pan={} ", pan);
 
 		// --- DB Fetch ---
 		long dbFetchStart = System.currentTimeMillis();
@@ -245,14 +245,12 @@ public class MyService {
 		logger.debug("Fetched consentHandle={} for pan={}", clientConsentMappingEntity.getConsentHandle(), pan);
 
 		// --- API Call ---
-		RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
 		recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
 
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: createNewRecurringRun -> pan={}", pan);
 
-		RecurringNewRunResponse recurringResponse = finarkeinClient.createNewRecurringRun(workspace, flowId,
-				recurringNewRunRequest);
+		RecurringNewRunResponse recurringResponse = finarkeinClient.createNewRecurringRun(recurringNewRunRequest);
 
 		logger.info("API call completed: createNewRecurringRun -> pan={} | duration={} ms", pan,
 				System.currentTimeMillis() - apiStart);
@@ -280,16 +278,16 @@ public class MyService {
 		return recurringResponse;
 	}
 
-	public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
+	public GetStatusResponse getStatus(String requestId) {
 
 		long overallStart = System.currentTimeMillis();
-		logger.info("getStatus started -> workspace={} | flowId={} | requestId={}", workspace, flowId, requestId);
+		logger.info("getStatus started -> requestId={}", requestId);
 
 		// --- API Call ---
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: getStatus -> requestId={}", requestId);
 
-		GetStatusResponse statusResponse = finarkeinClient.getStatus(workspace, flowId, requestId);
+		GetStatusResponse statusResponse = finarkeinClient.getStatus(requestId);
 
 		if (statusResponse == null || statusResponse.getState() == null) {
 			logger.error("API getStatus returned null or invalid state -> requestId={}", requestId);
@@ -321,16 +319,16 @@ public class MyService {
 		return statusResponse;
 	}
 
-	public GetResultResponse getResult(String workspace, String flowId, String requestId) {
+	public GetResultResponse getResult(String requestId) {
 
 		long overallStart = System.currentTimeMillis();
-		logger.info("getResult started -> workspace={} | flowId={} | requestId={}", workspace, flowId, requestId);
+		logger.info("getResult started -> requestId={}", requestId);
 
 		// --- API Call ---
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: getResult -> requestId={}", requestId);
 
-		GetResultResponse resultResponse = finarkeinClient.getResult(workspace, flowId, requestId);
+		GetResultResponse resultResponse = finarkeinClient.getResult(requestId);
 
 		if (resultResponse == null || resultResponse.getState() == null) {
 			logger.error("API getResult returned null or invalid state -> requestId={}", requestId);
@@ -411,26 +409,21 @@ public class MyService {
 
 	private ClientConsentMappingDTO mergeConsentRequestAndResponse(ConsentNewRunRequest request,
 			ConsentNewRunResponse response) {
-		if (request == null || request.getUser() == null || response == null) {
-			logger.error("mergeConsentRequestAndResponse: Null parameter(s) detected. Request={}, Response={}", request,
-					response);
-			return null; // or throw exception
-		}
 
-		String maskedPan = maskPan(request.getUser().getPan());
+		String maskedPan = maskPan(request.getIdentifiers().getPan());
 
 		logger.debug("Merging consent request & response | clientUserId={} | pan={} | requestId={} | consentHandle={}",
-				request.getUser().getClientUserId(), maskedPan, response.getRequestId(), response.getConsentHandle());
+				request.getApplicationNo(), maskedPan, response.getRequestId(), response.getConsentHandle());
 
 		LocalDate dob = null;
 		try {
-			dob = LocalDate.parse(request.getUser().getDob());
+			dob = LocalDate.parse(request.getIdentifiers().getDob());
 		} catch (Exception e) {
 			logger.warn("Invalid DOB format in request for clientUserId={} | value={}",
-					request.getUser().getClientUserId(), request.getUser().getDob());
+					request.getApplicationNo(), request.getIdentifiers().getDob());
 		}
 
-		return new ClientConsentMappingDTO(request.getUser().getClientUserId(), request.getUser().getPan(),
+		return new ClientConsentMappingDTO(request.getApplicationNo(), request.getIdentifiers().getPan(),
 				Constants.CONSENT, null, null, null, dob, response.getRequestId(), response.getConsentHandle());
 	}
 

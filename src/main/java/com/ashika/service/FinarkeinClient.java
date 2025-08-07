@@ -25,6 +25,12 @@ public class FinarkeinClient {
 
     @Value("${finarkein.api.base-url}")
     private String finarkeinBaseUrl;
+    
+    @Value("${finarkein.workspace}")
+    private String workspace;
+    
+    @Value("${finarkein.flowId}")
+    private String flowId;
 
     @Value("${finarkein.api.common-url}")
     private String finarkeinCommmonUrl;
@@ -45,12 +51,12 @@ public class FinarkeinClient {
         this.restTemplate = new RestTemplate();
     }
 
-    public ConsentNewRunResponse createNewConsentRun(String workspace, String flowId, ConsentNewRunRequest request) {
+    public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId;
 
         logger.info("Entry: createNewConsentRun | URL: {} | workspace: {} | flowId: {} | pan: {}",
-                url, workspace, flowId, maskPan(request.getUser().getPan()));
+                url, workspace, flowId, maskPan(request.getIdentifiers().getPan()));
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -79,7 +85,7 @@ public class FinarkeinClient {
         }
     }
 
-	public RecurringNewRunResponse createNewRecurringRun(String workspace, String flowId, RecurringNewRunRequest request) {
+	public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + finarkeinFetchUrl + flowId;
 
@@ -113,7 +119,7 @@ public class FinarkeinClient {
         }
     }
 
-    public GetStatusResponse getStatus(String workspace, String flowId, String requestId) {
+    public GetStatusResponse getStatus(String requestId) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId + "/:" + requestId + finarkeinStatusUrl;
 
@@ -146,7 +152,7 @@ public class FinarkeinClient {
         }
     }
 
-    public GetResultResponse getResult(String workspace, String flowId, String requestId) {
+    public GetResultResponse getResult(String requestId) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId + "/:" + requestId + finarkeinResultUrl;
 
