@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.GetRequest;
+import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
@@ -123,20 +124,20 @@ public class MyController {
     }
 
     @GetMapping("/checkValidConsent")
-    public boolean checkValidConsent(@RequestBody GetRequest getRequest) {
+    public BaseResponse checkValidConsent(@RequestBody GetRequest getRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
     	logger.info("Entry: /checkValidConsent " + " pan : " + getRequest.getPan());
     	
-    	boolean isConsentValid = myService.checkValidConsent(getRequest);
+    	BaseResponse baseResponse = myService.checkValidConsent(getRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
     	logger.info("Exit: /getResult " + " pan : " + getRequest.getPan()
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
-        return isConsentValid;
+        return baseResponse;
     }
 
     @GetMapping("/getDBRecords")

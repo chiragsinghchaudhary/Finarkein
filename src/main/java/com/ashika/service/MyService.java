@@ -13,6 +13,7 @@ import com.ashika.Constants;
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.GetRequest;
 import com.ashika.data.request.RecurringNewRunRequest;
+import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.DataDictionary;
 import com.ashika.data.response.DepositHolder;
@@ -85,7 +86,7 @@ public class MyService {
 		logger.debug("MyService initialized");
 	}
 
-	public boolean checkValidConsent(GetRequest getRequest) {
+	public BaseResponse checkValidConsent(GetRequest getRequest) {
 		String pan = getRequest.getPan();
 		long start = System.currentTimeMillis();
 
@@ -96,6 +97,9 @@ public class MyService {
 
 		long duration = System.currentTimeMillis() - start;
 		logger.info("checkValidConsent completed -> pan={} | duration={} ms", pan, duration);
+		
+		// Build response
+		BaseResponse baseResponse = new BaseResponse();
 
 		if (entity != null) {
 			logger.debug("Consent record found -> state={} | consentStatus={}", entity.getState(),
@@ -103,15 +107,18 @@ public class MyService {
 
 			if (entity.getState().equals(Constants.SUCCESS) && entity.getConsentStatus().equals(Constants.ACTIVE)) {
 				logger.info("Consent is VALID -> pan={}", pan);
-				return true;
+				baseResponse.setSuccess(true);
 			} else {
 				logger.warn("Consent is NOT valid -> pan={}", pan);
-				return false;
+				baseResponse.setSuccess(false);
+				baseResponse.setErrorMessage("Consent is NOT valid");
 			}
 		} else {
 			logger.warn("No consent record found -> pan={}", pan);
-			return false;
+			baseResponse.setSuccess(false);
+			baseResponse.setErrorMessage("No consent record found");
 		}
+		return baseResponse;
 	}
 
 	public GetResultResponse getDBRecords(GetRequest getRequest) {
