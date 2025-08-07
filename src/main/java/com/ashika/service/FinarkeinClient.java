@@ -3,11 +3,10 @@ package com.ashika.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.ashika.data.request.ConsentNewRunRequest;
@@ -17,6 +16,8 @@ import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
 import com.ashika.data.response.RecurringNewRunResponse;
 
+import java.util.Map;
+
 @Service
 public class FinarkeinClient {
 
@@ -25,10 +26,10 @@ public class FinarkeinClient {
 
     @Value("${finarkein.api.base-url}")
     private String finarkeinBaseUrl;
-    
+
     @Value("${finarkein.workspace}")
     private String workspace;
-    
+
     @Value("${finarkein.flowId}")
     private String flowId;
 
@@ -47,6 +48,12 @@ public class FinarkeinClient {
     @Value("${finarkein.api.auth-token-url}")
     private String authTokenUrl;
 
+    @Value("${finarkein.client-id}")
+    private String clientId;
+
+    @Value("${finarkein.client-secret}")
+    private String clientSecret;
+
     public FinarkeinClient() {
         this.restTemplate = new RestTemplate();
     }
@@ -59,8 +66,10 @@ public class FinarkeinClient {
                 url, workspace, flowId, maskPan(request.getIdentifiers().getPan()));
 
         try {
+            String accessToken = getAuthToken();
+
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authTokenUrl);
+            headers.set("Authorization", "Bearer " + accessToken);
             headers.set("Content-Type", "application/json");
 
             HttpEntity<ConsentNewRunRequest> entity = new HttpEntity<>(request, headers);
@@ -85,7 +94,7 @@ public class FinarkeinClient {
         }
     }
 
-	public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
+    public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + finarkeinFetchUrl + flowId;
 
@@ -93,8 +102,10 @@ public class FinarkeinClient {
                 url, workspace, flowId, request.getConsentHandle());
 
         try {
+            String accessToken = getAuthToken();
+
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authTokenUrl);
+            headers.set("Authorization", "Bearer " + accessToken);
             headers.set("Content-Type", "application/json");
 
             HttpEntity<RecurringNewRunRequest> entity = new HttpEntity<>(request, headers);
@@ -127,8 +138,10 @@ public class FinarkeinClient {
                 url, workspace, flowId, requestId);
 
         try {
+            String accessToken = getAuthToken();
+
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authTokenUrl);
+            headers.set("Authorization", "Bearer " + accessToken);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -160,8 +173,10 @@ public class FinarkeinClient {
                 url, workspace, flowId, requestId);
 
         try {
+            String accessToken = getAuthToken();
+
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + authTokenUrl);
+            headers.set("Authorization", "Bearer " + accessToken);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -185,7 +200,43 @@ public class FinarkeinClient {
         }
     }
 
-    /** Mask PAN for security (show last 4 digits only) */
+    private String getAuthToken() {
+        long startTime = System.currentTimeMillis();
+
+        logger.info("Entry: getAuthToken | URL: {}", authTokenUrl);
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+            body.add("grant_type", "client_credentials");
+            body.add("client_id", clientId);
+            body.add("client_secret", clientSecret);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
+
+            ResponseEntity<Map> response = restTemplate.postForEntity(authTokenUrl, request, Map.class);
+
+            long timeTaken = System.currentTimeMillis() - startTime;
+            logger.info("Exit: getAuthToken | Time taken: {} ms", timeTaken);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                Map<String, Object> responseBody = response.getBody();
+                if (responseBody != null && responseBody.containsKey("access_token")) {
+                    return (String) responseBody.get("access_token");
+                } else {
+                    throw new RuntimeException("Access token not found in response.");
+                }
+            } else {
+                throw new RuntimeException("Failed to fetch token. Status: " + response.getStatusCode());
+            }
+        } catch (Exception ex) {
+            logger.error("Error in getAuthToken | Error: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Exception while fetching auth token", ex);
+        }
+    }
+
     private String maskPan(String pan) {
         if (pan == null || pan.length() < 4) return "****";
         return "****" + pan.substring(pan.length() - 4);
