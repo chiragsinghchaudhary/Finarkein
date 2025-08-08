@@ -101,7 +101,7 @@ public class MyController {
         return recurringNewRunResponse;
     }
 
-    @GetMapping("/getStatus")
+    @GetMapping("/getStatus/{requestId}")
     public GetStatusResponse getStatus(@PathVariable("requestId") String requestId) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
@@ -118,7 +118,7 @@ public class MyController {
         return getStatusResponse;
     }
 
-    @GetMapping("/getResult")
+    @GetMapping("/getResult/{requestId}")
     public GetResultResponse getResult(@PathVariable("requestId") String requestId) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();

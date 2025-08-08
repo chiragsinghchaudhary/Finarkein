@@ -223,7 +223,8 @@ public class MyService {
 		logger.info("createNewRun completed -> pan={} | totalDuration={} ms", pan,
 				System.currentTimeMillis() - overallStart);
 
-		return mapConsentEntityToResponse(entity);
+		//return mapConsentEntityToResponse(entity);
+		return consentResponse;
 	}
 
 	@Transactional

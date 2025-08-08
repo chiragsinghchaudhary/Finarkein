@@ -144,7 +144,7 @@ public class FinarkeinClient {
 
     public GetStatusResponse getStatus(String requestId) {
         long startTime = System.currentTimeMillis();
-        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId + "/:" + requestId + finarkeinStatusUrl;
+        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId + "/" + requestId + finarkeinStatusUrl;
 
         logger.info("Entry: getStatus | URL: {} | workspace: {} | flowId: {} | requestId: {}",
                 url, workspace, flowId, requestId);
@@ -181,7 +181,7 @@ public class FinarkeinClient {
 
     public GetResultResponse getResult(String requestId) {
         long startTime = System.currentTimeMillis();
-        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId + "/:" + requestId + finarkeinResultUrl;
+        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId + "/" + requestId + finarkeinResultUrl;
 
         logger.info("Entry: getResult | URL: {} | workspace: {} | flowId: {} | requestId: {}",
                 url, workspace, flowId, requestId);
