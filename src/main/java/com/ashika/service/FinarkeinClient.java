@@ -66,7 +66,7 @@ public class FinarkeinClient {
 
     public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
         long startTime = System.currentTimeMillis();
-        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + ":" + flowId;
+        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId;
 
         logger.info("Entry: createNewConsentRun | URL: {} | workspace: {} | flowId: {} | pan: {}",
                 url, workspace, flowId, maskPan(request.getIdentifiers().getPan()));

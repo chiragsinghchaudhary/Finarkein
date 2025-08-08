@@ -47,6 +47,11 @@
 	        <artifactId>postgresql</artifactId>
 	        <scope>runtime</scope>
 	    </dependency>
+	    <dependency>
+	        <groupId>com.github.gavlyukovskiy</groupId>
+	        <artifactId>datasource-proxy-spring-boot-starter</artifactId>
+        	<version>1.9.1</version> <!-- Use the latest version -->
+    	</dependency>
 	</dependencies>
 
 	<build>

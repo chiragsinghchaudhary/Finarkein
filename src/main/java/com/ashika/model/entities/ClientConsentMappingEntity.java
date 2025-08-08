@@ -3,6 +3,8 @@ package com.ashika.model.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -24,6 +26,7 @@ public class ClientConsentMappingEntity {
     private String dataFetchStatus;
     private LocalDate dob;
     private String consentHandle;
+    @UpdateTimestamp
     private LocalDateTime lastUpdatedTime;
     
     public ClientConsentMappingEntity(String pan, String requestId, String clientCode, String runType, String state,
