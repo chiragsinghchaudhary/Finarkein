@@ -78,8 +78,8 @@ public class MyService {
 	private MFTransactionRepository mfTransactionRepository;
 	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
-
-	private FinarkeinClient finarkeinClient = new FinarkeinClient();
+	@Autowired
+	private FinarkeinClient finarkeinClient;
 	
 
 	public MyService() {

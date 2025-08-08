@@ -1,14 +1,23 @@
 package com.ashika.service;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.ashika.Constants;
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.RecurringNewRunRequest;
 import com.ashika.data.response.ConsentNewRunResponse;
@@ -16,21 +25,18 @@ import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
 import com.ashika.data.response.RecurringNewRunResponse;
 
-import java.util.Map;
-
 @Service
 public class FinarkeinClient {
 
-    private final RestTemplate restTemplate;
     private static final Logger logger = LoggerFactory.getLogger(FinarkeinClient.class);
 
     @Value("${finarkein.api.base-url}")
     private String finarkeinBaseUrl;
 
-    @Value("${finarkein.workspace}")
+    @Value("${finarkein.api.workspace}")
     private String workspace;
 
-    @Value("${finarkein.flowId}")
+    @Value("${finarkein.api.flowId}")
     private String flowId;
 
     @Value("${finarkein.api.common-url}")
@@ -48,15 +54,15 @@ public class FinarkeinClient {
     @Value("${finarkein.api.auth-token-url}")
     private String authTokenUrl;
 
-    @Value("${finarkein.client-id}")
+    @Value("${finarkein.api.client-id}")
     private String clientId;
 
-    @Value("${finarkein.client-secret}")
+    @Value("${finarkein.api.client-secret}")
     private String clientSecret;
-
+    
     public FinarkeinClient() {
-        this.restTemplate = new RestTemplate();
-    }
+		logger.debug("FinarkeinClient initialized");
+	}
 
     public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
         long startTime = System.currentTimeMillis();
@@ -73,6 +79,8 @@ public class FinarkeinClient {
             headers.set("Content-Type", "application/json");
 
             HttpEntity<ConsentNewRunRequest> entity = new HttpEntity<>(request, headers);
+            
+            RestTemplate restTemplate = new RestTemplate();
 
             ResponseEntity<ConsentNewRunResponse> response = restTemplate.exchange(
                     url,
@@ -109,8 +117,12 @@ public class FinarkeinClient {
             headers.set("Content-Type", "application/json");
 
             HttpEntity<RecurringNewRunRequest> entity = new HttpEntity<>(request, headers);
+            
+            
 
-            ResponseEntity<RecurringNewRunResponse> response = restTemplate.exchange(
+            RestTemplate restTemplate = new RestTemplate();
+            
+			ResponseEntity<RecurringNewRunResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.POST,
                     entity,
@@ -145,6 +157,8 @@ public class FinarkeinClient {
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
+            RestTemplate restTemplate = new RestTemplate();
+            
             ResponseEntity<GetStatusResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
@@ -179,6 +193,8 @@ public class FinarkeinClient {
             headers.set("Authorization", "Bearer " + accessToken);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
+            
+            RestTemplate restTemplate = new RestTemplate();
 
             ResponseEntity<GetResultResponse> response = restTemplate.exchange(
                     url,
@@ -208,13 +224,21 @@ public class FinarkeinClient {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            
+         // Encode username and password
+            String authString = clientId + ":" + clientSecret;
+            byte[] encodedAuth = Base64.getEncoder().encode(authString.getBytes(StandardCharsets.UTF_8));
+            String authHeader = new String(encodedAuth);
+
+            // Set the Authorization header
+            headers.setBasicAuth(authHeader);
 
             MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-            body.add("grant_type", "client_credentials");
-            body.add("client_id", clientId);
-            body.add("client_secret", clientSecret);
+            body.add(Constants.GRANT_TYPE, Constants.CLIENT_CREDENTIALS);
 
             HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
+            
+            RestTemplate restTemplate = new RestTemplate();
 
             ResponseEntity<Map> response = restTemplate.postForEntity(authTokenUrl, request, Map.class);
 
