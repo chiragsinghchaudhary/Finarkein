@@ -216,50 +216,41 @@ public class FinarkeinClient {
         }
     }
 
-    private String getAuthToken() {
-        long startTime = System.currentTimeMillis();
+private String getAuthToken() {
+    long startTime = System.currentTimeMillis();
+    logger.info("Entry: getAuthToken | URL: {}", authTokenUrl);
 
-        logger.info("Entry: getAuthToken | URL: {}", authTokenUrl);
+    try {
+=        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setBasicAuth(clientId, clientSecret, StandardCharsets.UTF_8); 
 
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            
-         // Encode username and password
-            String authString = clientId + ":" + clientSecret;
-            byte[] encodedAuth = Base64.getEncoder().encode(authString.getBytes(StandardCharsets.UTF_8));
-            String authHeader = new String(encodedAuth);
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add(Constants.GRANT_TYPE, Constants.CLIENT_CREDENTIALS);
 
-            // Set the Authorization header
-            headers.setBasicAuth(authHeader);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
 
-            MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-            body.add(Constants.GRANT_TYPE, Constants.CLIENT_CREDENTIALS);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Map> response = restTemplate.postForEntity(authTokenUrl, request, Map.class);
 
-            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-            
-            RestTemplate restTemplate = new RestTemplate();
+        long timeTaken = System.currentTimeMillis() - startTime;
+        logger.info("Exit: getAuthToken | Time taken: {} ms", timeTaken);
 
-            ResponseEntity<Map> response = restTemplate.postForEntity(authTokenUrl, request, Map.class);
-
-            long timeTaken = System.currentTimeMillis() - startTime;
-            logger.info("Exit: getAuthToken | Time taken: {} ms", timeTaken);
-
-            if (response.getStatusCode().is2xxSuccessful()) {
-                Map<String, Object> responseBody = response.getBody();
-                if (responseBody != null && responseBody.containsKey("access_token")) {
-                    return (String) responseBody.get("access_token");
-                } else {
-                    throw new RuntimeException("Access token not found in response.");
-                }
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Map<String, Object> responseBody = response.getBody();
+            if (responseBody != null && responseBody.containsKey("access_token")) {
+                return (String) responseBody.get("access_token");
             } else {
-                throw new RuntimeException("Failed to fetch token. Status: " + response.getStatusCode());
+                throw new RuntimeException("Access token not found in response.");
             }
-        } catch (Exception ex) {
-            logger.error("Error in getAuthToken | Error: {}", ex.getMessage(), ex);
-            throw new RuntimeException("Exception while fetching auth token", ex);
+        } else {
+            throw new RuntimeException("Failed to fetch token. Status: " + response.getStatusCode());
         }
+    } catch (Exception ex) {
+        logger.error("Error in getAuthToken | Error: {}", ex.getMessage(), ex);
+        throw new RuntimeException("Exception while fetching auth token", ex);
     }
+}
 
     private String maskPan(String pan) {
         if (pan == null || pan.length() < 4) return "****";
