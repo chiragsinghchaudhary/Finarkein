@@ -219,9 +219,9 @@ public class MyService {
 		return mapConsentEntityToResponse(savedEntity);
 	}
 
-	public RecurringNewRunResponse createNewRunFetch(RecurringNewRunRequest recurringNewRunRequest) {
+	public RecurringNewRunResponse createNewRunFetch(GetRequest getRequest) {
 		
-		String pan = "";
+		String pan = getRequest.getPan();
 		long overallStart = System.currentTimeMillis();
 
 		logger.info("createNewRunFetch started -> pan={} ", pan);
@@ -243,6 +243,8 @@ public class MyService {
 		logger.debug("Fetched consentHandle={} for pan={}", clientConsentMappingEntity.getConsentHandle(), pan);
 
 		// --- API Call ---
+		RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
+		
 		recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
 
 		long apiStart = System.currentTimeMillis();
@@ -342,7 +344,7 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch by referenceId -> requestId={}", requestId);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getByReferenceId(requestId);
+		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.getByRequestId(requestId);
 
 		if (clientConsentMappingEntity == null) {
 			logger.warn("No consent mapping found in DB -> requestId={}", requestId);

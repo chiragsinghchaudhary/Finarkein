@@ -46,9 +46,17 @@ public class ClientConsentMappingRepository implements JpaRepository<ClientConse
 	@Query("SELECT c FROM ClientConsentMappingEntity "
 			+ "WHERE requestId = : requestId ")
 	public
-	ClientConsentMappingEntity getByReferenceId(@Param("requestId") String requestId) {
+	ClientConsentMappingEntity getByRequestId(@Param("requestId") String requestId) {
+		return null;
+	}
+	
+	@Query("SELECT c FROM ClientConsentMappingEntity "
+			+ "WHERE runType = : runType "  +
+			" AND consentHandle = : consentHandle ")
+	public
+	ClientConsentMappingEntity getByConsentHandle(@Param("runType") String runType, @Param("consentHandle") String requestId) {
 	return null;
-}
+	}
 	
 	@Query("UPDATE ClientConsentMappingEntity "
 			+ "SET state = :state, dataFetchStatus = :dataFetchStatus ,"

@@ -83,18 +83,18 @@ public class MyController {
     }
 
     @PostMapping("/createNewFetchRun")
-    public RecurringNewRunResponse createNewRunFetch(@RequestBody RecurringNewRunRequest recurringNewRunRequest) {
+    public RecurringNewRunResponse createNewRunFetch(@RequestBody GetRequest getRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /createNewRunFetch " + " consentHandle : " + recurringNewRunRequest.getConsentHandle());
+    	logger.info("Entry: /createNewRunFetch " + " pan : " + getRequest.getPan());
     	
-    	RecurringNewRunResponse recurringNewRunResponse = myService.createNewRunFetch(recurringNewRunRequest);
+    	RecurringNewRunResponse recurringNewRunResponse = myService.createNewRunFetch(getRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
 		
-		  logger.info("Exit: /createNewRunFetch " + " consentHandle : " + recurringNewRunRequest.getConsentHandle() +
+		  logger.info("Exit: /createNewRunFetch " + " pan : " + getRequest.getPan() +
 		  " ProcessingTime : " + timeTakenToProcessRequest);
 		 
     	
