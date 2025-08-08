@@ -221,12 +221,12 @@ private String getAuthToken() {
     logger.info("Entry: getAuthToken | URL: {}", authTokenUrl);
 
     try {
-=        HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setBasicAuth(clientId, clientSecret, StandardCharsets.UTF_8); 
+        headers.setBasicAuth(clientId, clientSecret, StandardCharsets.UTF_8);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-        body.add(Constants.GRANT_TYPE, Constants.CLIENT_CREDENTIALS);
+        body.add("grant_type", "client_credentials"); // can also be moved to properties if needed
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
 
@@ -240,9 +240,8 @@ private String getAuthToken() {
             Map<String, Object> responseBody = response.getBody();
             if (responseBody != null && responseBody.containsKey("access_token")) {
                 return (String) responseBody.get("access_token");
-            } else {
-                throw new RuntimeException("Access token not found in response.");
             }
+            throw new RuntimeException("Access token not found in response.");
         } else {
             throw new RuntimeException("Failed to fetch token. Status: " + response.getStatusCode());
         }
