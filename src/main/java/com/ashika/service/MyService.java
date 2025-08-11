@@ -3,10 +3,12 @@ package com.ashika.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,27 +83,27 @@ public class MyService {
 	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
 	@Autowired
-	private ClientConsentMappingRepositoryImpl clientConsentMappingRepositoryImpl;
+	private ClientConsentMappingRepositoryImpl clientConsentRepositoryImpl;
 	@Autowired
 	private FinarkeinClient finarkeinClient;
-	
 
 	public MyService() {
 		logger.debug("MyService initialized");
 	}
 
+	@Transactional
 	public BaseResponse checkValidConsent(GetRequest getRequest) {
 		String pan = getRequest.getPan();
 		long start = System.currentTimeMillis();
 
 		logger.info("checkValidConsent started -> pan={}", pan);
 
-		ClientConsentMappingEntity entity = clientConsentMappingRepositoryImpl.getlatestClientConsentObject(pan, Constants.CONSENT,
-				Constants.SUCCESS, Constants.ACTIVE);
+		ClientConsentMappingEntity entity = clientConsentRepositoryImpl.getlatestClientConsentObject(pan,
+				Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE);
 
 		long duration = System.currentTimeMillis() - start;
 		logger.info("checkValidConsent completed -> pan={} | duration={} ms", pan, duration);
-		
+
 		// Build response
 		BaseResponse baseResponse = new BaseResponse();
 
@@ -125,6 +127,7 @@ public class MyService {
 		return baseResponse;
 	}
 
+	@Transactional
 	public GetResultResponse getDBRecords(GetRequest getRequest) {
 		String pan = getRequest.getPan();
 		long startTime = System.currentTimeMillis();
@@ -212,10 +215,8 @@ public class MyService {
 		long dbStart = System.currentTimeMillis();
 		logger.info("DB save started -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 
-		//ClientConsentMappingEntity savedEntity = clientConsentMappingRepositoryImpl.insert(pan, entity.getRequestId(), entity.getClientCode(), entity.getRunType(), entity.getDob(), entity.getConsentHandle(), entity.getLastUpdatedTime());
-
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
-		
+
 		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
 				entity.getRequestId(), System.currentTimeMillis() - dbStart);
 
@@ -223,13 +224,14 @@ public class MyService {
 		logger.info("createNewRun completed -> pan={} | totalDuration={} ms", pan,
 				System.currentTimeMillis() - overallStart);
 
-		//return mapConsentEntityToResponse(entity);
+		// return mapConsentEntityToResponse(entity);
 		return consentResponse;
 	}
 
+	@Modifying
 	@Transactional
 	public RecurringNewRunResponse createNewRunFetch(GetRequest getRequest) {
-		
+
 		String pan = getRequest.getPan();
 		long overallStart = System.currentTimeMillis();
 
@@ -239,7 +241,7 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch latest consent object -> pan={}", pan);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentMappingRepositoryImpl
+		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepositoryImpl
 				.getlatestClientConsentObject(pan, Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE);
 
 		if (clientConsentMappingEntity == null) {
@@ -253,7 +255,7 @@ public class MyService {
 
 		// --- API Call ---
 		RecurringNewRunRequest recurringNewRunRequest = new RecurringNewRunRequest();
-		
+
 		recurringNewRunRequest.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
 
 		long apiStart = System.currentTimeMillis();
@@ -275,7 +277,7 @@ public class MyService {
 		long dbSaveStart = System.currentTimeMillis();
 		logger.info("DB save recurring run -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 
-		clientConsentRepository.save(entity);
+		clientConsentRepository.saveAndFlush(entity);
 
 		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
 				entity.getRequestId(), System.currentTimeMillis() - dbSaveStart);
@@ -287,7 +289,6 @@ public class MyService {
 		return recurringResponse;
 	}
 
-	@Transactional
 	public GetStatusResponse getStatus(String requestId) {
 
 		long overallStart = System.currentTimeMillis();
@@ -307,7 +308,7 @@ public class MyService {
 		logger.info("API call completed: getStatus -> requestId={} | duration={} ms", requestId,
 				System.currentTimeMillis() - apiStart);
 
-		logger.debug("Status API Response -> state={} | consentStatus={} | dataFetchStatus={}",
+		logger.info("Status API Response -> state={} | consentStatus={} | dataFetchStatus={}",
 				statusResponse.getState().getState(), statusResponse.getState().getConsentStatus(),
 				statusResponse.getState().getDataFetchStatus());
 
@@ -315,9 +316,20 @@ public class MyService {
 		long dbStart = System.currentTimeMillis();
 		logger.info("DB updateStatus -> requestId={}", requestId);
 
-		clientConsentMappingRepositoryImpl.updateStatus(statusResponse.getState().getState(),
-				statusResponse.getState().getConsentStatus(), statusResponse.getState().getDataFetchStatus(),
-				requestId);
+		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
+				.findByRequestId(requestId);
+
+		ClientConsentMappingEntity clientConsentMappingEntity = null;
+
+		if (optionalClientConsentMapping.isPresent()) {
+			clientConsentMappingEntity = optionalClientConsentMapping.get();
+			clientConsentMappingEntity.setState(statusResponse.getState().getState());
+			clientConsentMappingEntity.setConsentStatus(statusResponse.getState().getConsentStatus());
+			clientConsentMappingEntity.setConsentStatus(statusResponse.getState().getConsentStatus());
+			clientConsentMappingEntity.setDataFetchStatus(statusResponse.getState().getDataFetchStatus());
+		}
+
+		clientConsentRepository.saveAndFlush(clientConsentMappingEntity);
 
 		logger.info("DB updateStatus completed -> requestId={} | duration={} ms", requestId,
 				System.currentTimeMillis() - dbStart);
@@ -355,9 +367,14 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch by referenceId -> requestId={}", requestId);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentMappingRepositoryImpl.getByRequestId(requestId);
+		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
+				.findByRequestId(requestId);
 
-		if (clientConsentMappingEntity == null) {
+		ClientConsentMappingEntity clientConsentMappingEntity = null;
+
+		if (optionalClientConsentMapping.isPresent()) {
+			clientConsentMappingEntity = optionalClientConsentMapping.get();
+		} else {
 			logger.warn("No consent mapping found in DB -> requestId={}", requestId);
 			return resultResponse; // API gave result, but DB mapping missing
 		}
@@ -388,20 +405,20 @@ public class MyService {
 
 			// Save new records
 			depositHolderRepository
-					.saveAll(mapDepositHolderResponses(resultResponse.getData().getDeposit().getHolder()));
+					.saveAllAndFlush(mapDepositHolderResponses(resultResponse.getData().getDeposit().getHolder()));
 			depositSummaryRepository
-					.saveAll(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary(), pan));
-			depositTransactionRepository
-					.saveAll(mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions(), pan));
-			equityHolderRepository.saveAll(mapEquityHolderResponses(resultResponse.getData().getEquity().getHolder()));
+					.saveAllAndFlush(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary(), pan));
+			depositTransactionRepository.saveAllAndFlush(
+					mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions(), pan));
+			equityHolderRepository.saveAllAndFlush(mapEquityHolderResponses(resultResponse.getData().getEquity().getHolder()));
 			equitySummaryRepository
-					.saveAll(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary(), pan));
-			equityTransactionRepository
-					.saveAll(mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions(), pan));
-			mfHolderRepository.saveAll(mapMFHolderResponses(resultResponse.getData().getMf().getHolder()));
-			mfSummaryRepository.saveAll(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary(), pan));
+					.saveAllAndFlush(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary(), pan));
+			equityTransactionRepository.saveAllAndFlush(
+					mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions(), pan));
+			mfHolderRepository.saveAllAndFlush(mapMFHolderResponses(resultResponse.getData().getMf().getHolder()));
+			mfSummaryRepository.saveAllAndFlush(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary(), pan));
 			mfTransactionRepository
-					.saveAll(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions(), pan));
+					.saveAllAndFlush(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions(), pan));
 			logger.debug("Saved new records for pan={}", pan);
 
 			logger.info("DB replace operation completed -> pan={} | duration={} ms", pan,
@@ -430,8 +447,8 @@ public class MyService {
 		try {
 			dob = LocalDate.parse(request.getIdentifiers().getDob());
 		} catch (Exception e) {
-			logger.warn("Invalid DOB format in request for clientUserId={} | value={}",
-					request.getApplicationNo(), request.getIdentifiers().getDob());
+			logger.warn("Invalid DOB format in request for clientUserId={} | value={}", request.getApplicationNo(),
+					request.getIdentifiers().getDob());
 		}
 
 		return new ClientConsentMappingDTO(request.getApplicationNo(), request.getIdentifiers().getPan(),
@@ -766,7 +783,7 @@ public class MyService {
 			DepositHolderEntity entity = new DepositHolderEntity(response.getPan(), response.getType(),
 					response.getAddress(), response.getCkycCompliance(), response.getDob(), response.getEmail(),
 					response.getLandline(), response.getMobile(), response.getName(), response.getNominee());
-			
+
 			entityList.add(entity);
 		}
 
@@ -784,11 +801,12 @@ public class MyService {
 
 		List<DepositSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositSummary response : responses) {
-			DepositSummaryEntity entity = new DepositSummaryEntity(pan, response.getBalanceDatetime(), response.getBranch(),
-					response.getCurrency(), response.getCurrentBalance(), response.getCurrentODLimit(), response.getDrawingLimit(),
-					response.getExchangeRate(), response.getFacility(), response.getIfscCode(), response.getMicrCode(),
-					response.getOpeningDate(), response.getStatus(), response.getType(), response.getTransactionType(), response.getAmount());
-			
+			DepositSummaryEntity entity = new DepositSummaryEntity(pan, response.getBalanceDatetime(),
+					response.getBranch(), response.getCurrency(), response.getCurrentBalance(),
+					response.getCurrentODLimit(), response.getDrawingLimit(), response.getExchangeRate(),
+					response.getFacility(), response.getIfscCode(), response.getMicrCode(), response.getOpeningDate(),
+					response.getStatus(), response.getType(), response.getTransactionType(), response.getAmount());
+
 			entityList.add(entity);
 		}
 
@@ -796,7 +814,8 @@ public class MyService {
 		return entityList;
 	}
 
-	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses, String pan) {
+	private List<DepositTransactionEntity> mapDepositTransactionResponses(List<DepositTransaction> responses,
+			String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No DepositTransaction responses found to map.");
 			return new ArrayList<>();
@@ -806,10 +825,11 @@ public class MyService {
 
 		List<DepositTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositTransaction response : responses) {
-			DepositTransactionEntity entity = new DepositTransactionEntity(pan, response.getAmount(), response.getCurrentBalance(), response.getMode(),
-					response.getNarration(), response.getReference(), response.getTransactionId(), response.getTransactionTimestamp(), response.getType(),
+			DepositTransactionEntity entity = new DepositTransactionEntity(pan, response.getAmount(),
+					response.getCurrentBalance(), response.getMode(), response.getNarration(), response.getReference(),
+					response.getTransactionId(), response.getTransactionTimestamp(), response.getType(),
 					response.getValueDate());
-						entityList.add(entity);
+			entityList.add(entity);
 		}
 
 		logger.debug("Successfully mapped {} DepositTransactionEntity objects", entityList.size());
@@ -826,9 +846,9 @@ public class MyService {
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity(response.getPan(), response.getAddress(), response.getDematId(), response.getDob(),
-					response.getEmail(), response.getKycCompliance(), response.getLandline(), response.getMobile(), response.getName(),
-					response.getNominee());
+			EquityHolderEntity entity = new EquityHolderEntity(response.getPan(), response.getAddress(),
+					response.getDematId(), response.getDob(), response.getEmail(), response.getKycCompliance(),
+					response.getLandline(), response.getMobile(), response.getName(), response.getNominee());
 			entityList.add(entity);
 		}
 
@@ -846,10 +866,10 @@ public class MyService {
 
 		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (EquitySummary response : responses) {
-			EquitySummaryEntity entity = new EquitySummaryEntity(pan, response.getCurrentValue(), response.getHoldingMode(), 
-					response.getIsin(), response.getIsinDescription(), response.getIssuerName(), response.getLastTradedPrice(),
-					response.getUnits());
-			
+			EquitySummaryEntity entity = new EquitySummaryEntity(pan, response.getCurrentValue(),
+					response.getHoldingMode(), response.getIsin(), response.getIsinDescription(),
+					response.getIssuerName(), response.getLastTradedPrice(), response.getUnits());
+
 			entityList.add(entity);
 		}
 
@@ -867,11 +887,11 @@ public class MyService {
 
 		List<EquityTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityTransaction response : responses) {
-			EquityTransactionEntity entity = new EquityTransactionEntity(pan, response.getCompanyName(), response.getEquityCategory(),
-					response.getExchange(), response.getIsin(), response.getIsinDescription(), response.getNarration(), 
-					response.getOrderId(), response.getRate(), response.getTransactionDateTime(), response.getTxnId(),
-					response.getType(), response.getUnits());
-			
+			EquityTransactionEntity entity = new EquityTransactionEntity(pan, response.getCompanyName(),
+					response.getEquityCategory(), response.getExchange(), response.getIsin(),
+					response.getIsinDescription(), response.getNarration(), response.getOrderId(), response.getRate(),
+					response.getTransactionDateTime(), response.getTxnId(), response.getType(), response.getUnits());
+
 			entityList.add(entity);
 		}
 
@@ -889,10 +909,10 @@ public class MyService {
 
 		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (MFHolder response : responses) {
-			MFHolderEntity entity = new MFHolderEntity(response.getPan(), response.getAddress(), response.getDematId(), response.getDob(),
-					response.getEmail(), response.getFolioNo(), response.getKycCompliance(), response.getLandline(), response.getMobile(),
-					response.getName(), response.getNominee());
-			
+			MFHolderEntity entity = new MFHolderEntity(response.getPan(), response.getAddress(), response.getDematId(),
+					response.getDob(), response.getEmail(), response.getFolioNo(), response.getKycCompliance(),
+					response.getLandline(), response.getMobile(), response.getName(), response.getNominee());
+
 			entityList.add(entity);
 		}
 
@@ -910,11 +930,13 @@ public class MyService {
 
 		List<MFSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (MFSummary response : responses) {
-			MFSummaryEntity entity = new MFSummaryEntity(pan, response.getCostValue(), response.getCurrentValue(), response.getFatcaStatus(),
-					response.getAmc(), response.getAmfiCode(), response.getClosingUnits(), response.getFolioNo(), response.getIsin(),
-					response.getIsinDescription(), response.getLienUnits(), response.getLockinUnits(), response.getNav(), response.getNavDate(),
-					response.getRegistrar(), response.getSchemeCategory(), response.getSchemeCode(), response.getSchemeOption(), response.getSchemeTypes(), response.getUcc());
-			
+			MFSummaryEntity entity = new MFSummaryEntity(pan, response.getCostValue(), response.getCurrentValue(),
+					response.getFatcaStatus(), response.getAmc(), response.getAmfiCode(), response.getClosingUnits(),
+					response.getFolioNo(), response.getIsin(), response.getIsinDescription(), response.getLienUnits(),
+					response.getLockinUnits(), response.getNav(), response.getNavDate(), response.getRegistrar(),
+					response.getSchemeCategory(), response.getSchemeCode(), response.getSchemeOption(),
+					response.getSchemeTypes(), response.getUcc());
+
 			entityList.add(entity);
 		}
 
@@ -932,12 +954,13 @@ public class MyService {
 
 		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (MFTransaction response : responses) {
-			MFTransactionEntity entity = new MFTransactionEntity(pan, response.getAmc(), response.getAmfiCode(), response.getAmount(),
-					response.getIsin(), response.getIsinDescription(), response.getLockInDays(), response.getLockInFlag(), 
-					response.getMode(), response.getNarration(), response.getNav(), response.getNavDate(), response.getRegistrar(),
-					response.getSchemeCode(), response.getSchemePlan(), response.getTransactionDate(), response.getTxnId(),
-					response.getType(), response.getUcc(), response.getUnits());
-			
+			MFTransactionEntity entity = new MFTransactionEntity(pan, response.getAmc(), response.getAmfiCode(),
+					response.getAmount(), response.getIsin(), response.getIsinDescription(), response.getLockInDays(),
+					response.getLockInFlag(), response.getMode(), response.getNarration(), response.getNav(),
+					response.getNavDate(), response.getRegistrar(), response.getSchemeCode(), response.getSchemePlan(),
+					response.getTransactionDate(), response.getTxnId(), response.getType(), response.getUcc(),
+					response.getUnits());
+
 			entityList.add(entity);
 		}
 
