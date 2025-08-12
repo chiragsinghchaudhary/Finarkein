@@ -475,13 +475,16 @@ public class MyService {
 			response.setDob(entity.getDob());
 			response.setMaskedAccNumber(entity.getMaskedAccNumber());
 			response.setAccountType(entity.getAccountType());
-			
-			response.setType(entity.getType());
+			response.setLandLine(entity.getLandLine());
 			response.setAddress(entity.getAddress());
 			response.setCkycCompliance(entity.getCkycCompliance());
+			response.setLinkedAccRef(null);
+			
+			response.setType(entity.getType());
 			
 			
-			response.setLandLine(entity.getLandLine());
+			
+			
 			response.setMobile(entity.getMobile());
 			
 			response.setNominee(entity.getNominee());
