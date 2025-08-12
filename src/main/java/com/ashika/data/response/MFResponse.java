@@ -1,18 +1,20 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MFResponse {
 
     @JsonProperty("holder")
-    private List<MFHolder> holder;
+    private List<MFHolder> holder = new ArrayList<>();
 
     @JsonProperty("summary")
-    private List<MFSummary> summary;
+    private List<MFSummary> summary = new ArrayList<>();
 
     @JsonProperty("transactions")
-    private List<MFTransaction> transactions;
+    private List<MFTransaction> transactions = new ArrayList<>();
 
     // ===== Main Getters & Setters =====
     public List<MFHolder> getHolder() { return holder; }

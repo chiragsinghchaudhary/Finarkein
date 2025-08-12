@@ -3,7 +3,9 @@ package com.ashika.model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-//Composite key class
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class ClientConsentMappingId implements Serializable {
 
 	/**
@@ -13,10 +15,12 @@ public class ClientConsentMappingId implements Serializable {
 	private String pan;
 	private String requestId;
 
+	// No-argument constructor
 	public ClientConsentMappingId() {
 
 	}
 	
+	// Constructor with fields
 	public ClientConsentMappingId(String pan, String requestId) {
 		this.pan = pan;
 		this.requestId = requestId;

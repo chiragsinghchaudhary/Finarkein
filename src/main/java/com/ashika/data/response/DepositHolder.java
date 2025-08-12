@@ -4,64 +4,146 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DepositHolder {
 
-    @JsonProperty("type")
-    private String type;
+	@JsonProperty("name")
+	private String name;
 
-    @JsonProperty("address")
-    private String address;
+	@JsonProperty("email")
+	private String email;
 
-    @JsonProperty("ckycCompliance")
-    private Boolean ckycCompliance;
+	@JsonProperty("dob")
+	private Long dob;
 
-    @JsonProperty("dob")
-    private Long dob;
+	@JsonProperty("maskedAccNumber")
+	private String maskedAccNumber;
 
-    @JsonProperty("email")
-    private String email;
+	@JsonProperty("account_type")
+	private String accountType;
 
-    @JsonProperty("landline")
-    private String landline;
+	@JsonProperty("landLine")
+	private String landLine;
 
-    @JsonProperty("mobile")
-    private String mobile;
+	@JsonProperty("address")
+	private String address;
 
-    @JsonProperty("name")
-    private String name;
+	@JsonProperty("ckycCompliance")
+	private Boolean ckycCompliance;
 
-    @JsonProperty("nominee")
-    private String nominee;
+	@JsonProperty("linkedAccRef")
+	private Boolean linkedAccRef;
 
-    @JsonProperty("pan")
-    private String pan;
+	@JsonProperty("type")
+	private Boolean type;
 
-    // Getters & Setters
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+	@JsonProperty("mobile")
+	private String mobile;
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+	@JsonProperty("pan")
+	private String pan;
 
-    public Boolean getCkycCompliance() { return ckycCompliance; }
-    public void setCkycCompliance(Boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
+	@JsonProperty("nominee")
+	private String nominee;
 
-    public Long getDob() { return dob; }
-    public void setDob(Long dob) { this.dob = dob; }
+	public String getName() {
+		return name;
+	}
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getLandline() { return landline; }
-    public void setLandline(String landline) { this.landline = landline; }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getMobile() { return mobile; }
-    public void setMobile(String mobile) { this.mobile = mobile; }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+	public Long getDob() {
+		return dob;
+	}
 
-    public String getNominee() { return nominee; }
-    public void setNominee(String nominee) { this.nominee = nominee; }
+	public void setDob(Long dob) {
+		this.dob = dob;
+	}
 
-    public String getPan() { return pan; }
-    public void setPan(String pan) { this.pan = pan; }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
+
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getLandLine() {
+		return landLine;
+	}
+
+	public void setLandLine(String landLine) {
+		this.landLine = landLine;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Boolean getCkycCompliance() {
+		return ckycCompliance;
+	}
+
+	public void setCkycCompliance(Boolean ckycCompliance) {
+		this.ckycCompliance = ckycCompliance;
+	}
+
+	public Boolean getLinkedAccRef() {
+		return linkedAccRef;
+	}
+
+	public void setLinkedAccRef(Boolean linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public Boolean getType() {
+		return type;
+	}
+
+	public void setType(Boolean type) {
+		this.type = type;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+
+	public String getNominee() {
+		return nominee;
+	}
+
+	public void setNominee(String nominee) {
+		this.nominee = nominee;
+	}
 }

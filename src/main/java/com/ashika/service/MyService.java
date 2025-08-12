@@ -36,6 +36,7 @@ import com.ashika.data.response.MFSummary;
 import com.ashika.data.response.MFTransaction;
 import com.ashika.data.response.RecurringNewRunResponse;
 import com.ashika.model.entities.ClientConsentMappingEntity;
+import com.ashika.model.entities.ClientConsentMappingId;
 import com.ashika.model.entities.DepositHolderEntity;
 import com.ashika.model.entities.DepositSummaryEntity;
 import com.ashika.model.entities.DepositTransactionEntity;
@@ -221,10 +222,10 @@ public class MyService {
 		
 		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
 		
-		entity.setPan(consentNewRunRequest.getIdentifiers().getPan());
-		entity.setRequestId(consentResponse.getRequestId());
+		ClientConsentMappingId clientConsentMappingId = new ClientConsentMappingId(consentNewRunRequest.getIdentifiers().getPan(), consentResponse.getRequestId());
+		entity.setClientMappingId(clientConsentMappingId);
 		entity.setClientCode(consentNewRunRequest.getApplicationNo());
-		entity.setConsentHandle(Constants.CONSENT);
+		entity.setRunType(Constants.CONSENT);
 		entity.setState(null);
 		entity.setConsentStatus(null);
 		entity.setDataFetchStatus(null);
@@ -233,12 +234,12 @@ public class MyService {
 		entity.setLastUpdatedTime(LocalDateTime.now());
 
 		long dbStart = System.currentTimeMillis();
-		logger.info("DB save started -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
+		logger.info("DB save started -> pan={} | requestId={}", entity.getClientMappingId().getPan(), entity.getClientMappingId().getRequestId());
 
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
 		
-		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
-				entity.getRequestId(), System.currentTimeMillis() - dbStart);
+		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getClientMappingId().getPan(),
+				entity.getClientMappingId().getRequestId(), System.currentTimeMillis() - dbStart);
 
 		// --- Completion ---
 		logger.info("createNewRun completed -> pan={} | totalDuration={} ms", pan,
@@ -289,18 +290,18 @@ public class MyService {
 
 		// --- DB Save ---
 		
-		ClientConsentMappingEntity entity = new ClientConsentMappingEntity(clientConsentMappingEntity.getPan(), clientConsentMappingEntity.getRequestId(), clientConsentMappingEntity.getClientCode(),
+		ClientConsentMappingEntity entity = new ClientConsentMappingEntity(new ClientConsentMappingId(clientConsentMappingEntity.getClientMappingId().getPan(), clientConsentMappingEntity.getClientMappingId().getRequestId()), clientConsentMappingEntity.getClientCode(),
 				Constants.RECURRING, null, null, null, clientConsentMappingEntity.getDob(), clientConsentMappingEntity.getConsentHandle(), LocalDateTime.now());
 		
 		entity.setRunType(Constants.RECURRING);
 
 		long dbSaveStart = System.currentTimeMillis();
-		logger.info("DB save recurring run -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
+		logger.info("DB save recurring run -> pan={} | requestId={}", entity.getClientMappingId().getPan(), entity.getClientMappingId().getRequestId());
 
 		clientConsentRepository.saveAndFlush(entity);
 
-		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
-				entity.getRequestId(), System.currentTimeMillis() - dbSaveStart);
+		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getClientMappingId().getPan(),
+				entity.getClientMappingId().getRequestId(), System.currentTimeMillis() - dbSaveStart);
 
 		// --- Completion ---
 		logger.info("createNewRunFetch completed -> pan={} | totalDuration={} ms", pan,
@@ -337,7 +338,7 @@ public class MyService {
 		logger.info("DB updateStatus -> requestId={}", requestId);
 
 		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
-				.findByRequestId(requestId);
+				.findByClientMappingId_RequestId(requestId);
 
 		ClientConsentMappingEntity clientConsentMappingEntity = null;
 
@@ -388,7 +389,7 @@ public class MyService {
 		logger.info("DB fetch by referenceId -> requestId={}", requestId);
 
 		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
-				.findByRequestId(requestId);
+				.findByClientMappingId_RequestId(requestId);
 
 		ClientConsentMappingEntity clientConsentMappingEntity = null;
 
@@ -403,7 +404,7 @@ public class MyService {
 				System.currentTimeMillis() - dbFetchStart);
 
 		// --- Data Save Logic ---
-		String pan = clientConsentMappingEntity.getPan();
+		String pan = clientConsentMappingEntity.getClientMappingId().getPan();
 		List<String> idList = new ArrayList<>();
 		idList.add(pan);
 

@@ -1,18 +1,20 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EquityResponse {
 
     @JsonProperty("holder")
-    private List<EquityHolder> holder;
+    private List<EquityHolder> holder = new ArrayList<>();
 
     @JsonProperty("summary")
-    private List<EquitySummary> summary;
+    private List<EquitySummary> summary = new ArrayList<>();
 
     @JsonProperty("transactions")
-    private List<EquityTransaction> transactions;
+    private List<EquityTransaction> transactions = new ArrayList<>();
 
     // ===== Main Getters & Setters =====
     public List<EquityHolder> getHolder() { return holder; }
