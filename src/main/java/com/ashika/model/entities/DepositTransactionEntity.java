@@ -8,113 +8,146 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_transaction")
 public class DepositTransactionEntity {
 
-	@Id
-	private String pan;
-	private Double amount;
-	private Double currentBalance;
-	private String mode;
-	private String narration;
-	private String reference;
-	private String transactionId;
-	private Long transactionTimestamp;
-	private String type;
-	private Long valueDate;
+    @Id
+    private String pan;
 
-	public DepositTransactionEntity(String pan, Double amount, Double currentBalance, String mode, String narration,
-			String reference, String transactionId, Long transactionTimestamp, String type, Long valueDate) {
-		this.pan = pan;
-		this.amount = amount;
-		this.currentBalance = currentBalance;
-		this.mode = mode;
-		this.narration = narration;
-		this.reference = reference;
-		this.transactionId = transactionId;
-		this.transactionTimestamp = transactionTimestamp;
-		this.type = type;
-		this.valueDate = valueDate;
-	}
+    private String reference;
+    private String transactionId;
+    private String maskedAccNumber;
+    private Long transactionTimestamp;
+    private String accountType;
+    private Double currentBalance;
+    private Double amount;
+    private Long valueDate;
+    private String narration;
+    private String mode;
+    private Boolean linkedAccRef;
+    private String type;
 
-	protected DepositTransactionEntity() {
-		// TODO Auto-generated constructor stub
-	}
+    public DepositTransactionEntity(String pan, String reference, String transactionId, String maskedAccNumber,
+                                     Long transactionTimestamp, String accountType, Double currentBalance,
+                                     Double amount, Long valueDate, String narration, String mode,
+                                     Boolean linkedAccRef, String type) {
+        this.pan = pan;
+        this.reference = reference;
+        this.transactionId = transactionId;
+        this.maskedAccNumber = maskedAccNumber;
+        this.transactionTimestamp = transactionTimestamp;
+        this.accountType = accountType;
+        this.currentBalance = currentBalance;
+        this.amount = amount;
+        this.valueDate = valueDate;
+        this.narration = narration;
+        this.mode = mode;
+        this.linkedAccRef = linkedAccRef;
+        this.type = type;
+    }
 
-	public String getPan() {
-		return pan;
-	}
+    protected DepositTransactionEntity() {
+        // Default constructor for JPA
+    }
 
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
+    public String getPan() {
+        return pan;
+    }
 
-	public Double getAmount() {
-		return amount;
-	}
+    public void setPan(String pan) {
+        this.pan = pan;
+    }
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
+    public String getReference() {
+        return reference;
+    }
 
-	public Double getCurrentBalance() {
-		return currentBalance;
-	}
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
-	public void setCurrentBalance(Double currentBalance) {
-		this.currentBalance = currentBalance;
-	}
+    public String getTransactionId() {
+        return transactionId;
+    }
 
-	public String getMode() {
-		return mode;
-	}
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
 
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
+    public String getMaskedAccNumber() {
+        return maskedAccNumber;
+    }
 
-	public String getNarration() {
-		return narration;
-	}
+    public void setMaskedAccNumber(String maskedAccNumber) {
+        this.maskedAccNumber = maskedAccNumber;
+    }
 
-	public void setNarration(String narration) {
-		this.narration = narration;
-	}
+    public Long getTransactionTimestamp() {
+        return transactionTimestamp;
+    }
 
-	public String getReference() {
-		return reference;
-	}
+    public void setTransactionTimestamp(Long transactionTimestamp) {
+        this.transactionTimestamp = transactionTimestamp;
+    }
 
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
+    public String getAccountType() {
+        return accountType;
+    }
 
-	public String getTransactionId() {
-		return transactionId;
-	}
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
-	}
+    public Double getCurrentBalance() {
+        return currentBalance;
+    }
 
-	public Long getTransactionTimestamp() {
-		return transactionTimestamp;
-	}
+    public void setCurrentBalance(Double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
 
-	public void setTransactionTimestamp(Long transactionTimestamp) {
-		this.transactionTimestamp = transactionTimestamp;
-	}
+    public Double getAmount() {
+        return amount;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public Long getValueDate() {
+        return valueDate;
+    }
 
-	public Long getValueDate() {
-		return valueDate;
-	}
+    public void setValueDate(Long valueDate) {
+        this.valueDate = valueDate;
+    }
 
-	public void setValueDate(Long valueDate) {
-		this.valueDate = valueDate;
-	}
+    public String getNarration() {
+        return narration;
+    }
+
+    public void setNarration(String narration) {
+        this.narration = narration;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public Boolean getLinkedAccRef() {
+        return linkedAccRef;
+    }
+
+    public void setLinkedAccRef(Boolean linkedAccRef) {
+        this.linkedAccRef = linkedAccRef;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
