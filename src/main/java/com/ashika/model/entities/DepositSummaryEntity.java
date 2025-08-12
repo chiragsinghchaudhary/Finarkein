@@ -25,18 +25,19 @@ public class DepositSummaryEntity {
     private String micrCode;
     private Long balanceDatetime;
     private String currency;
-    private Double pending_amount;
+    private Double pendingAmount;
     private Boolean linkedAccRef;
     private String ifscCode;
     private String type;
     private String facility;
     private String exchangeRate;
+    private String pan;
 
     public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
                                  String branch, String accountType, Double currentBalance, Double drawingLimit,
                                  Long accountAgeInDays, String pendingTransactionType, String status, String micrCode,
-                                 Long balanceDatetime, String currency, Double pending_amount, Boolean linkedAccRef,
-                                 String ifscCode, String type, String facility, String exchangeRate) {
+                                 Long balanceDatetime, String currency, Double pendingAmount, Boolean linkedAccRef,
+                                 String ifscCode, String type, String facility, String exchangeRate, String pan) {
         this.currentODLimit = currentODLimit;
         this.openingDate = openingDate;
         this.fipName = fipName;
@@ -51,12 +52,13 @@ public class DepositSummaryEntity {
         this.micrCode = micrCode;
         this.balanceDatetime = balanceDatetime;
         this.currency = currency;
-        this.pending_amount = pending_amount;
+        this.pendingAmount = pendingAmount;
         this.linkedAccRef = linkedAccRef;
         this.ifscCode = ifscCode;
         this.type = type;
         this.facility = facility;
         this.exchangeRate = exchangeRate;
+        this.pan = pan;
     }
 
     protected DepositSummaryEntity() {
@@ -175,12 +177,12 @@ public class DepositSummaryEntity {
         this.currency = currency;
     }
 
-    public Double getPending_amount() {
-        return pending_amount;
+    public Double getPendingAmount() {
+        return pendingAmount;
     }
 
-    public void setPending_amount(Double pending_amount) {
-        this.pending_amount = pending_amount;
+    public void setPendingAmount(Double pendingAmount) {
+        this.pendingAmount = pendingAmount;
     }
 
     public Boolean getLinkedAccRef() {
@@ -222,4 +224,14 @@ public class DepositSummaryEntity {
     public void setExchangeRate(String exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+    
+    
 }

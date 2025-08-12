@@ -8,11 +8,11 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_transaction")
 public class DepositTransactionEntity {
 
-    @Id
     private String pan;
-
     private String reference;
     private String transactionId;
+    
+    @Id
     private String maskedAccNumber;
     private Long transactionTimestamp;
     private String accountType;

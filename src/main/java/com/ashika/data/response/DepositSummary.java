@@ -47,7 +47,7 @@ public class DepositSummary {
     private String currency;
     
     @JsonProperty("pending_amount")
-    private Double pending_amount;
+    private Double pendingAmount;
     
     @JsonProperty("linkedAccRef")
 	private Boolean linkedAccRef;
@@ -176,12 +176,12 @@ public class DepositSummary {
 		this.currency = currency;
 	}
 
-	public Double getPending_amount() {
-		return pending_amount;
+	public Double getPendingAmount() {
+		return pendingAmount;
 	}
 
-	public void setPending_amount(Double pending_amount) {
-		this.pending_amount = pending_amount;
+	public void setPendingAmount(Double pendingAmount) {
+		this.pendingAmount = pendingAmount;
 	}
 
 	public Boolean getLinkedAccRef() {

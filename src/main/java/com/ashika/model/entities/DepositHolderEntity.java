@@ -11,6 +11,8 @@ public class DepositHolderEntity {
     private String name;
     private String email;
     private Long dob;
+    
+    @Id
     private String maskedAccNumber;
     private String accountType;
     private String landLine;
@@ -19,15 +21,12 @@ public class DepositHolderEntity {
     private String linkedAccRef;
     private String type;
     private String mobile;
-
-    @Id
     private String pan;
-
     private String nominee;
 
     public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
-                                String landLine, String address, Boolean ckycCompliance, Boolean linkedAccRef,
-                                Boolean type, String mobile, String pan, String nominee) {
+                                String landLine, String address, Boolean ckycCompliance, String linkedAccRef,
+                                String type, String mobile, String pan, String nominee) {
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -111,19 +110,19 @@ public class DepositHolderEntity {
         this.ckycCompliance = ckycCompliance;
     }
 
-    public Boolean getLinkedAccRef() {
+    public String getLinkedAccRef() {
         return linkedAccRef;
     }
 
-    public void setLinkedAccRef(Boolean linkedAccRef) {
+    public void setLinkedAccRef(String linkedAccRef) {
         this.linkedAccRef = linkedAccRef;
     }
 
-    public Boolean getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Boolean type) {
+    public void setType(String type) {
         this.type = type;
     }
 
