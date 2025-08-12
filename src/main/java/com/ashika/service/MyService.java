@@ -221,9 +221,8 @@ public class MyService {
 		}
 		
 		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
-		
-		ClientConsentMappingId clientConsentMappingId = new ClientConsentMappingId(consentNewRunRequest.getIdentifiers().getPan(), consentResponse.getRequestId());
-		entity.setClientMappingId(clientConsentMappingId);
+		entity.setPan(consentNewRunRequest.getIdentifiers().getPan());
+		entity.setRequestId(consentResponse.getRequestId());
 		entity.setClientCode(consentNewRunRequest.getApplicationNo());
 		entity.setRunType(Constants.CONSENT);
 		entity.setState(null);
@@ -238,8 +237,8 @@ public class MyService {
 
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
 		
-		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getClientMappingId().getPan(),
-				entity.getClientMappingId().getRequestId(), System.currentTimeMillis() - dbStart);
+		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
+				entity.getRequestId(), System.currentTimeMillis() - dbStart);
 
 		// --- Completion ---
 		logger.info("createNewRun completed -> pan={} | totalDuration={} ms", pan,
@@ -290,18 +289,22 @@ public class MyService {
 
 		// --- DB Save ---
 		
-		ClientConsentMappingEntity entity = new ClientConsentMappingEntity(new ClientConsentMappingId(clientConsentMappingEntity.getClientMappingId().getPan(), clientConsentMappingEntity.getClientMappingId().getRequestId()), clientConsentMappingEntity.getClientCode(),
-				Constants.RECURRING, null, null, null, clientConsentMappingEntity.getDob(), clientConsentMappingEntity.getConsentHandle(), LocalDateTime.now());
-		
+		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
+		entity.setPan(clientConsentMappingEntity.getPan());
+		entity.setRequestId(recurringResponse.getRequestId());
+		entity.setClientCode(clientConsentMappingEntity.getClientCode());
 		entity.setRunType(Constants.RECURRING);
+		entity.setDob(clientConsentMappingEntity.getDob());
+		entity.setConsentHandle(clientConsentMappingEntity.getConsentHandle());
+		entity.setLastUpdatedTime(LocalDateTime.now());
 
 		long dbSaveStart = System.currentTimeMillis();
-		logger.info("DB save recurring run -> pan={} | requestId={}", entity.getClientMappingId().getPan(), entity.getClientMappingId().getRequestId());
+		logger.info("DB save recurring run -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 
 		clientConsentRepository.saveAndFlush(entity);
 
-		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getClientMappingId().getPan(),
-				entity.getClientMappingId().getRequestId(), System.currentTimeMillis() - dbSaveStart);
+		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
+				entity.getRequestId(), System.currentTimeMillis() - dbSaveStart);
 
 		// --- Completion ---
 		logger.info("createNewRunFetch completed -> pan={} | totalDuration={} ms", pan,
@@ -404,7 +407,7 @@ public class MyService {
 				System.currentTimeMillis() - dbFetchStart);
 
 		// --- Data Save Logic ---
-		String pan = clientConsentMappingEntity.getClientMappingId().getPan();
+		String pan = clientConsentMappingEntity.getPan();
 		List<String> idList = new ArrayList<>();
 		idList.add(pan);
 

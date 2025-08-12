@@ -5,21 +5,27 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Client_Consent_Mapping")
+@Table(name = "Client_Consent_Mapping",indexes = {
+	    @Index(name = "idx_requestId", columnList = "requestId"),
+	    @Index(name = "idx_pan_requestId", columnList = "pan, requestId")
+	})
 public class ClientConsentMappingEntity{
 	
-	/*
-	 * @Id private String pan;
-	 * 
-	 * @Id private String requestId;
-	 */
-	@EmbeddedId
-	private ClientConsentMappingId clientMappingId;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	private String pan;	  
+	@Column(unique = true)
+	private String requestId; 
     private String clientCode;
     private String runType;    
     private String state;
@@ -33,28 +39,29 @@ public class ClientConsentMappingEntity{
 	public ClientConsentMappingEntity() {
 		// TODO Auto-generated constructor stub
 	}
-     
-    public ClientConsentMappingEntity(ClientConsentMappingId clientConsentMappingId, String clientCode, String runType, String state,
-			String consentStatus, String dataFetchStatus, LocalDate dob, String consentHandle,
-			LocalDateTime lastUpdatedTime) {
-    	this.clientMappingId = clientConsentMappingId;
-		this.clientCode = clientCode;
-		this.runType = runType;
-		this.state = state;
-		this.consentStatus = consentStatus;
-		this.dataFetchStatus = dataFetchStatus;
-		this.dob = dob;
-		this.consentHandle = consentHandle;
-		this.lastUpdatedTime = lastUpdatedTime;
-	}
-    
-    // Getters & Setters
-	public ClientConsentMappingId getClientMappingId() {
-		return clientMappingId;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setClientMappingId(ClientConsentMappingId clientMappingId) {
-		this.clientMappingId = clientMappingId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
 	}
 
 	public String getClientCode() {
