@@ -470,14 +470,20 @@ public class MyService {
 		List<DepositHolder> responseList = new ArrayList<>(entities.size());
 		for (DepositHolderEntity entity : entities) {
 			DepositHolder response = new DepositHolder();
+			response.setName(entity.getName());
+			response.setEmail(entity.getEmail());
+			response.setDob(entity.getDob());
+			response.setMaskedAccNumber(entity.getMaskedAccNumber());
+			response.setAccountType(entity.getAccountType());
+			
 			response.setType(entity.getType());
 			response.setAddress(entity.getAddress());
 			response.setCkycCompliance(entity.getCkycCompliance());
-			response.setDob(entity.getDob());
-			response.setEmail(entity.getEmail());
-			response.setLandline(entity.getLandline());
+			
+			
+			response.setLandLine(entity.getLandLine());
 			response.setMobile(entity.getMobile());
-			response.setName(entity.getName());
+			
 			response.setNominee(entity.getNominee());
 			response.setPan(entity.getPan());
 			responseList.add(response);
@@ -812,9 +818,9 @@ public class MyService {
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity(response.getPan(), response.getAddress(),
+			EquityHolderEntity entity = new EquityHolderEntity(response.getAddress(),
 					response.getDematId(), response.getDob(), response.getEmail(), response.getKycCompliance(),
-					response.getLandline(), response.getMobile(), response.getName(), response.getNominee());
+					response.getLandline(), response.getMobile(), response.getName(), response.getNominee(), response.getPan());
 			entityList.add(entity);
 		}
 

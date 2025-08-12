@@ -29,10 +29,10 @@ public class DepositHolder {
 	private Boolean ckycCompliance;
 
 	@JsonProperty("linkedAccRef")
-	private Boolean linkedAccRef;
+	private String linkedAccRef;
 
 	@JsonProperty("type")
-	private Boolean type;
+	private String type;
 
 	@JsonProperty("mobile")
 	private String mobile;
@@ -107,19 +107,19 @@ public class DepositHolder {
 		this.ckycCompliance = ckycCompliance;
 	}
 
-	public Boolean getLinkedAccRef() {
+	public String getLinkedAccRef() {
 		return linkedAccRef;
 	}
 
-	public void setLinkedAccRef(Boolean linkedAccRef) {
+	public void setLinkedAccRef(String linkedAccRef) {
 		this.linkedAccRef = linkedAccRef;
 	}
 
-	public Boolean getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Boolean type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

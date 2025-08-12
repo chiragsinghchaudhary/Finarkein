@@ -16,8 +16,8 @@ public class DepositHolderEntity {
     private String landLine;
     private String address;
     private Boolean ckycCompliance;
-    private Boolean linkedAccRef;
-    private Boolean type;
+    private String linkedAccRef;
+    private String type;
     private String mobile;
 
     @Id
