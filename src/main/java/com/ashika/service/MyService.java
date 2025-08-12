@@ -341,7 +341,7 @@ public class MyService {
 		logger.info("DB updateStatus -> requestId={}", requestId);
 
 		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
-				.findByClientMappingId_RequestId(requestId);
+				.findByRequestId(requestId);
 
 		ClientConsentMappingEntity clientConsentMappingEntity = null;
 
@@ -392,7 +392,7 @@ public class MyService {
 		logger.info("DB fetch by referenceId -> requestId={}", requestId);
 
 		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository
-				.findByClientMappingId_RequestId(requestId);
+				.findByRequestId(requestId);
 
 		ClientConsentMappingEntity clientConsentMappingEntity = null;
 
