@@ -35,7 +35,7 @@ public class DepositTransaction {
 	private String mode;
 
 	@JsonProperty("linkedAccRef")
-	private Boolean linkedAccRef;
+	private String linkedAccRef;
 
 	@JsonProperty("type")
 	private String type;
@@ -120,11 +120,11 @@ public class DepositTransaction {
 		this.mode = mode;
 	}
 
-	public Boolean getLinkedAccRef() {
+	public String getLinkedAccRef() {
 		return linkedAccRef;
 	}
 
-	public void setLinkedAccRef(Boolean linkedAccRef) {
+	public void setLinkedAccRef(String linkedAccRef) {
 		this.linkedAccRef = linkedAccRef;
 	}
 

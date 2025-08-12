@@ -26,7 +26,7 @@ public class DepositHolder {
 	private String address;
 
 	@JsonProperty("ckycCompliance")
-	private Boolean ckycCompliance;
+	private boolean ckycCompliance;
 
 	@JsonProperty("linkedAccRef")
 	private String linkedAccRef;
@@ -99,11 +99,11 @@ public class DepositHolder {
 		this.address = address;
 	}
 
-	public Boolean getCkycCompliance() {
+	public boolean getCkycCompliance() {
 		return ckycCompliance;
 	}
 
-	public void setCkycCompliance(Boolean ckycCompliance) {
+	public void setCkycCompliance(boolean ckycCompliance) {
 		this.ckycCompliance = ckycCompliance;
 	}
 

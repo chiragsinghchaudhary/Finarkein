@@ -21,13 +21,13 @@ public class DepositTransactionEntity {
     private Long valueDate;
     private String narration;
     private String mode;
-    private Boolean linkedAccRef;
+    private String linkedAccRef;
     private String type;
 
     public DepositTransactionEntity(String pan, String reference, String transactionId, String maskedAccNumber,
                                      Long transactionTimestamp, String accountType, Double currentBalance,
                                      Double amount, Long valueDate, String narration, String mode,
-                                     Boolean linkedAccRef, String type) {
+                                     String linkedAccRef, String type) {
         this.pan = pan;
         this.reference = reference;
         this.transactionId = transactionId;
@@ -135,11 +135,11 @@ public class DepositTransactionEntity {
         this.mode = mode;
     }
 
-    public Boolean getLinkedAccRef() {
+    public String getLinkedAccRef() {
         return linkedAccRef;
     }
 
-    public void setLinkedAccRef(Boolean linkedAccRef) {
+    public void setLinkedAccRef(String linkedAccRef) {
         this.linkedAccRef = linkedAccRef;
     }
 

@@ -26,7 +26,7 @@ public class DepositSummaryEntity {
     private Long balanceDatetime;
     private String currency;
     private Double pendingAmount;
-    private Boolean linkedAccRef;
+    private String linkedAccRef;
     private String ifscCode;
     private String type;
     private String facility;
@@ -36,7 +36,7 @@ public class DepositSummaryEntity {
     public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
                                  String branch, String accountType, Double currentBalance, Double drawingLimit,
                                  Long accountAgeInDays, String pendingTransactionType, String status, String micrCode,
-                                 Long balanceDatetime, String currency, Double pendingAmount, Boolean linkedAccRef,
+                                 Long balanceDatetime, String currency, Double pendingAmount, String linkedAccRef,
                                  String ifscCode, String type, String facility, String exchangeRate, String pan) {
         this.currentODLimit = currentODLimit;
         this.openingDate = openingDate;
@@ -185,11 +185,11 @@ public class DepositSummaryEntity {
         this.pendingAmount = pendingAmount;
     }
 
-    public Boolean getLinkedAccRef() {
+    public String getLinkedAccRef() {
         return linkedAccRef;
     }
 
-    public void setLinkedAccRef(Boolean linkedAccRef) {
+    public void setLinkedAccRef(String linkedAccRef) {
         this.linkedAccRef = linkedAccRef;
     }
 

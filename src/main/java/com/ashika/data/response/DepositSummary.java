@@ -50,7 +50,7 @@ public class DepositSummary {
     private Double pendingAmount;
     
     @JsonProperty("linkedAccRef")
-	private Boolean linkedAccRef;
+	private String linkedAccRef;
     
     @JsonProperty("ifscCode")
     private String ifscCode;
@@ -184,11 +184,11 @@ public class DepositSummary {
 		this.pendingAmount = pendingAmount;
 	}
 
-	public Boolean getLinkedAccRef() {
+	public String getLinkedAccRef() {
 		return linkedAccRef;
 	}
 
-	public void setLinkedAccRef(Boolean linkedAccRef) {
+	public void setLinkedAccRef(String linkedAccRef) {
 		this.linkedAccRef = linkedAccRef;
 	}
 

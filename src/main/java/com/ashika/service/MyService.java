@@ -21,22 +21,18 @@ import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.DataDictionary;
 import com.ashika.data.response.DepositHolder;
-import com.ashika.data.response.DepositResponse;
 import com.ashika.data.response.DepositSummary;
 import com.ashika.data.response.DepositTransaction;
 import com.ashika.data.response.EquityHolder;
-import com.ashika.data.response.EquityResponse;
 import com.ashika.data.response.EquitySummary;
 import com.ashika.data.response.EquityTransaction;
 import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
 import com.ashika.data.response.MFHolder;
-import com.ashika.data.response.MFResponse;
 import com.ashika.data.response.MFSummary;
 import com.ashika.data.response.MFTransaction;
 import com.ashika.data.response.RecurringNewRunResponse;
 import com.ashika.model.entities.ClientConsentMappingEntity;
-import com.ashika.model.entities.ClientConsentMappingId;
 import com.ashika.model.entities.DepositHolderEntity;
 import com.ashika.model.entities.DepositSummaryEntity;
 import com.ashika.model.entities.DepositTransactionEntity;
@@ -161,25 +157,19 @@ public class MyService {
 		// Build response
 		GetResultResponse getResultResponse = new GetResultResponse();
 
-		DepositResponse depositResponse = new DepositResponse();
-		depositResponse.setHolder(mapDepositHolderEntities(depositHolderEntities));
-		depositResponse.setSummary(mapDepositSummaryEntities(depositSummaries));
-		depositResponse.setTransactions(mapDepositTransactionEntities(depositTransactions));
-
-		EquityResponse equityResponse = new EquityResponse();
-		equityResponse.setHolder(mapEquityHolderEntities(equityHolders));
-		equityResponse.setSummary(mapEquitySummaryEntities(equitySummaries));
-		equityResponse.setTransactions(mapEquityTransactionEntities(equityTransactions));
-
-		MFResponse mfResponse = new MFResponse();
-		mfResponse.setHolder(mapMFHolderEntities(mfHolders));
-		mfResponse.setSummary(mapMFSummaryEntities(mfSummaries));
-		mfResponse.setTransactions(mapMFTransactionEntities(mfTransactions));
-
 		DataDictionary dataDictionary = new DataDictionary();
-		dataDictionary.setDeposit(depositResponse);
-		dataDictionary.setEquity(equityResponse);
-		dataDictionary.setMf(mfResponse);
+
+		dataDictionary.setDepositHolders(mapDepositHolderEntities(depositHolderEntities));
+		dataDictionary.setDepositSummary(mapDepositSummaryEntities(depositSummaries));
+		dataDictionary.setDepositTransactions(mapDepositTransactionEntities(depositTransactions));
+
+		dataDictionary.setEquityHolders(mapEquityHolderEntities(equityHolders));
+		dataDictionary.setEquitySummary(mapEquitySummaryEntities(equitySummaries));
+		dataDictionary.setEquityTransactions(mapEquityTransactionEntities(equityTransactions));
+
+		dataDictionary.setMFHolders(mapMFHolderEntities(mfHolders));
+		dataDictionary.setMFSummary(mapMFSummaryEntities(mfSummaries));
+		dataDictionary.setMFTransactions(mapMFTransactionEntities(mfTransactions));
 
 		getResultResponse.setData(dataDictionary);
 
@@ -210,24 +200,22 @@ public class MyService {
 				consentResponse.getConsentHandle());
 
 		// --- DB Save ---
-		//ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
-		
+		// ClientConsentMappingDTO dto =
+		// mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
+
 		LocalDate dob = null;
 		try {
 			dob = LocalDate.parse(consentNewRunRequest.getIdentifiers().getDob());
 		} catch (Exception e) {
-			logger.warn("Invalid DOB format in request for clientUserId={} | value={}", consentNewRunRequest.getApplicationNo(),
-					consentNewRunRequest.getIdentifiers().getDob());
+			logger.warn("Invalid DOB format in request for clientUserId={} | value={}",
+					consentNewRunRequest.getApplicationNo(), consentNewRunRequest.getIdentifiers().getDob());
 		}
-		
+
 		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
 		entity.setPan(consentNewRunRequest.getIdentifiers().getPan());
 		entity.setRequestId(consentResponse.getRequestId());
 		entity.setClientCode(consentNewRunRequest.getApplicationNo());
 		entity.setRunType(Constants.CONSENT);
-		entity.setState(null);
-		entity.setConsentStatus(null);
-		entity.setDataFetchStatus(null);
 		entity.setDob(dob);
 		entity.setConsentHandle(consentResponse.getConsentHandle());
 		entity.setLastUpdatedTime(LocalDateTime.now());
@@ -236,7 +224,7 @@ public class MyService {
 		logger.info("DB save started -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
-		
+
 		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
 				entity.getRequestId(), System.currentTimeMillis() - dbStart);
 
@@ -288,7 +276,7 @@ public class MyService {
 		logger.debug("RecurringNewRun API Response -> requestId={}", recurringResponse.getRequestId());
 
 		// --- DB Save ---
-		
+
 		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
 		entity.setPan(clientConsentMappingEntity.getPan());
 		entity.setRequestId(recurringResponse.getRequestId());
@@ -429,20 +417,23 @@ public class MyService {
 
 			// Save new records
 			depositHolderRepository
-					.saveAllAndFlush(mapDepositHolderResponses(resultResponse.getData().getDeposit().getHolder()));
+					.saveAllAndFlush(mapDepositHolderResponses(resultResponse.getData().getDepositHolders()));
 			depositSummaryRepository
-					.saveAllAndFlush(mapDepositSummaryResponses(resultResponse.getData().getDeposit().getSummary(), pan));
+					.saveAllAndFlush(mapDepositSummaryResponses(resultResponse.getData().getDepositSummary(), pan));
 			depositTransactionRepository.saveAllAndFlush(
-					mapDepositTransactionResponses(resultResponse.getData().getDeposit().getTransactions(), pan));
-			equityHolderRepository.saveAllAndFlush(mapEquityHolderResponses(resultResponse.getData().getEquity().getHolder()));
+					mapDepositTransactionResponses(resultResponse.getData().getDepositTransactions(), pan));
+
+			equityHolderRepository
+					.saveAllAndFlush(mapEquityHolderResponses(resultResponse.getData().getEquityHolders()));
 			equitySummaryRepository
-					.saveAllAndFlush(mapEquitySummaryResponses(resultResponse.getData().getEquity().getSummary(), pan));
+					.saveAllAndFlush(mapEquitySummaryResponses(resultResponse.getData().getEquitySummary(), pan));
 			equityTransactionRepository.saveAllAndFlush(
-					mapEquityTransactionResponses(resultResponse.getData().getEquity().getTransactions(), pan));
-			mfHolderRepository.saveAllAndFlush(mapMFHolderResponses(resultResponse.getData().getMf().getHolder()));
-			mfSummaryRepository.saveAllAndFlush(mapMFSummaryResponses(resultResponse.getData().getMf().getSummary(), pan));
+					mapEquityTransactionResponses(resultResponse.getData().getEquityTransactions(), pan));
+			mfHolderRepository.saveAllAndFlush(mapMFHolderResponses(resultResponse.getData().getMFHolders()));
+			mfSummaryRepository.saveAllAndFlush(mapMFSummaryResponses(resultResponse.getData().getMFSummary(), pan));
 			mfTransactionRepository
-					.saveAllAndFlush(mapMFTransactionResponses(resultResponse.getData().getMf().getTransactions(), pan));
+					.saveAllAndFlush(mapMFTransactionResponses(resultResponse.getData().getMFTransactions(), pan));
+
 			logger.debug("Saved new records for pan={}", pan);
 
 			logger.info("DB replace operation completed -> pan={} | duration={} ms", pan,
@@ -484,7 +475,7 @@ public class MyService {
 			response.setPan(entity.getPan());
 			response.setNominee(entity.getNominee());
 
-			//Add to list
+			// Add to list
 			responseList.add(response);
 		}
 
@@ -515,7 +506,7 @@ public class MyService {
 			response.setPendingTransactionType(entity.getPendingTransactionType());
 			response.setStatus(entity.getStatus());
 			response.setMicrCode(entity.getMicrCode());
-			response.setBalanceDatetime(entity.getBalanceDatetime());	
+			response.setBalanceDatetime(entity.getBalanceDatetime());
 			response.setCurrency(entity.getCurrency());
 			response.setPendingAmount(entity.getPendingAmount());
 			response.setLinkedAccRef(entity.getLinkedAccRef());
@@ -523,8 +514,8 @@ public class MyService {
 			response.setType(entity.getType());
 			response.setFacility(entity.getFacility());
 			response.setExchangeRate(entity.getExchangeRate());
-			
-			//Add to list
+
+			// Add to list
 			responseList.add(response);
 		}
 
@@ -549,15 +540,15 @@ public class MyService {
 			response.setMaskedAccNumber(entity.getMaskedAccNumber());
 			response.setTransactionTimestamp(entity.getTransactionTimestamp());
 			response.setAccountType(entity.getAccountType());
-			response.setCurrentBalance(entity.getCurrentBalance());		
+			response.setCurrentBalance(entity.getCurrentBalance());
 			response.setAmount(entity.getAmount());
 			response.setValueDate(entity.getValueDate());
 			response.setNarration(entity.getNarration());
 			response.setMode(entity.getMode());
 			response.setLinkedAccRef(entity.getLinkedAccRef());
-			response.setType(entity.getType());			
-			
-			//Add to list
+			response.setType(entity.getType());
+
+			// Add to list
 			responseList.add(response);
 		}
 
@@ -763,20 +754,10 @@ public class MyService {
 
 		List<DepositHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositHolder response : responses) {
-			DepositHolderEntity entity = new DepositHolderEntity(
-					response.getName(),
-					response.getEmail(),
-					response.getDob(),
-					response.getMaskedAccNumber(),
-					response.getAccountType(),
-					response.getLandLine(),
-					response.getAddress(),
-					response.getCkycCompliance(),
-					response.getLinkedAccRef(),
-					response.getType(),
-					response.getMobile(),
-					response.getPan(),
-					response.getNominee());
+			DepositHolderEntity entity = new DepositHolderEntity(response.getName(), response.getEmail(),
+					response.getDob(), response.getMaskedAccNumber(), response.getAccountType(), response.getLandLine(),
+					response.getAddress(), response.getCkycCompliance(), response.getLinkedAccRef(), response.getType(),
+					response.getMobile(), response.getPan(), response.getNominee());
 
 			entityList.add(entity);
 		}
@@ -795,28 +776,13 @@ public class MyService {
 
 		List<DepositSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositSummary response : responses) {
-			DepositSummaryEntity entity = new DepositSummaryEntity(
-					response.getCurrentODLimit(),
-					response.getOpeningDate(),
-					response.getFipName(),
-					response.getMaskedAccNumber(),
-					response.getBranch(),
-					response.getAccountType(),
-					response.getCurrentBalance(),
-					response.getDrawingLimit(),
-					response.getAccountAgeInDays(),
-					response.getPendingTransactionType(),
-					response.getStatus(),
-					response.getMicrCode(),
-					response.getBalanceDatetime(),
-					response.getCurrency(),
-					response.getPendingAmount(),
-					response.getLinkedAccRef(),
-					response.getIfscCode(),
-					response.getType(),
-					response.getFacility(),
-					response.getExchangeRate(),
-					pan);
+			DepositSummaryEntity entity = new DepositSummaryEntity(response.getCurrentODLimit(),
+					response.getOpeningDate(), response.getFipName(), response.getMaskedAccNumber(),
+					response.getBranch(), response.getAccountType(), response.getCurrentBalance(),
+					response.getDrawingLimit(), response.getAccountAgeInDays(), response.getPendingTransactionType(),
+					response.getStatus(), response.getMicrCode(), response.getBalanceDatetime(), response.getCurrency(),
+					response.getPendingAmount(), response.getLinkedAccRef(), response.getIfscCode(), response.getType(),
+					response.getFacility(), response.getExchangeRate(), pan);
 
 			entityList.add(entity);
 		}
@@ -836,22 +802,13 @@ public class MyService {
 
 		List<DepositTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (DepositTransaction response : responses) {
-			DepositTransactionEntity entity = new DepositTransactionEntity(
-					pan,
-					response.getReference(),
-					response.getTxnId(),
-					response.getMaskedAccNumber(),
-					response.getTransactionTimestamp(),
-					response.getAccountType(),
-					response.getCurrentBalance(),
-					response.getAmount(),
-					response.getValueDate(),
-					response.getNarration(), 
-					response.getMode(),
-					response.getLinkedAccRef(),
+			DepositTransactionEntity entity = new DepositTransactionEntity(pan, response.getReference(),
+					response.getTxnId(), response.getMaskedAccNumber(), response.getTransactionTimestamp(),
+					response.getAccountType(), response.getCurrentBalance(), response.getAmount(),
+					response.getValueDate(), response.getNarration(), response.getMode(), response.getLinkedAccRef(),
 					response.getType());
-			
-			//Add to list
+
+			// Add to list
 			entityList.add(entity);
 		}
 
@@ -869,9 +826,9 @@ public class MyService {
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity(response.getAddress(),
-					response.getDematId(), response.getDob(), response.getEmail(), response.getKycCompliance(),
-					response.getLandline(), response.getMobile(), response.getName(), response.getNominee(), response.getPan());
+			EquityHolderEntity entity = new EquityHolderEntity(response.getAddress(), response.getDematId(),
+					response.getDob(), response.getEmail(), response.getKycCompliance(), response.getLandline(),
+					response.getMobile(), response.getName(), response.getNominee(), response.getPan());
 			entityList.add(entity);
 		}
 
@@ -889,9 +846,9 @@ public class MyService {
 
 		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (EquitySummary response : responses) {
-			EquitySummaryEntity entity = new EquitySummaryEntity(response.getCurrentValue(),
-					response.getHoldingMode(), response.getIsin(), response.getIsinDescription(),
-					response.getIssuerName(), response.getLastTradedPrice(), response.getUnits(), pan);
+			EquitySummaryEntity entity = new EquitySummaryEntity(response.getCurrentValue(), response.getHoldingMode(),
+					response.getIsin(), response.getIsinDescription(), response.getIssuerName(),
+					response.getLastTradedPrice(), response.getUnits(), pan);
 
 			entityList.add(entity);
 		}
@@ -913,7 +870,8 @@ public class MyService {
 			EquityTransactionEntity entity = new EquityTransactionEntity(response.getCompanyName(),
 					response.getEquityCategory(), response.getExchange(), response.getIsin(),
 					response.getIsinDescription(), response.getNarration(), response.getOrderId(), response.getRate(),
-					response.getTransactionDateTime(), response.getTxnId(), response.getType(), response.getUnits(), pan);
+					response.getTransactionDateTime(), response.getTxnId(), response.getType(), response.getUnits(),
+					pan);
 
 			entityList.add(entity);
 		}
@@ -932,9 +890,9 @@ public class MyService {
 
 		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (MFHolder response : responses) {
-			MFHolderEntity entity = new MFHolderEntity(response.getAddress(), response.getDematId(),
-					response.getDob(), response.getEmail(), response.getFolioNo(), response.getKycCompliance(),
-					response.getLandline(), response.getMobile(), response.getName(), response.getNominee(), response.getPan());
+			MFHolderEntity entity = new MFHolderEntity(response.getAddress(), response.getDematId(), response.getDob(),
+					response.getEmail(), response.getFolioNo(), response.getKycCompliance(), response.getLandline(),
+					response.getMobile(), response.getName(), response.getNominee(), response.getPan());
 
 			entityList.add(entity);
 		}
