@@ -8,116 +8,146 @@ import jakarta.persistence.Table;
 @Table(name = "deposit_holder")
 public class DepositHolderEntity {
 
-	@Id
-	private String pan;
-	private String type;
-	private String address;
-	private Boolean ckycCompliance;
-	private Long dob;
-	private String email;
-	private String landline;
-	private String mobile;
-	private String name;
-	private String nominee;
-	
-	
+    private String name;
+    private String email;
+    private Long dob;
+    private String maskedAccNumber;
+    private String accountType;
+    private String landLine;
+    private String address;
+    private Boolean ckycCompliance;
+    private Boolean linkedAccRef;
+    private Boolean type;
+    private String mobile;
 
-	public DepositHolderEntity(String pan, String type, String address, Boolean ckycCompliance, Long dob, String email,
-			String landline, String mobile, String name, String nominee) {
-		this.pan = pan;
-		this.type = type;
-		this.address = address;
-		this.ckycCompliance = ckycCompliance;
-		this.dob = dob;
-		this.email = email;
-		this.landline = landline;
-		this.mobile = mobile;
-		this.name = name;
-		this.nominee = nominee;
-	}
+    @Id
+    private String pan;
 
-	protected DepositHolderEntity() {
-		// TODO Auto-generated constructor stub
-	}
+    private String nominee;
 
-	public String getPan() {
-		return pan;
-	}
+    public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
+                                String landLine, String address, Boolean ckycCompliance, Boolean linkedAccRef,
+                                Boolean type, String mobile, String pan, String nominee) {
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.maskedAccNumber = maskedAccNumber;
+        this.accountType = accountType;
+        this.landLine = landLine;
+        this.address = address;
+        this.ckycCompliance = ckycCompliance;
+        this.linkedAccRef = linkedAccRef;
+        this.type = type;
+        this.mobile = mobile;
+        this.pan = pan;
+        this.nominee = nominee;
+    }
 
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
+    protected DepositHolderEntity() {
+        // Default constructor for JPA
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Boolean getCkycCompliance() {
-		return ckycCompliance;
-	}
+    public Long getDob() {
+        return dob;
+    }
 
-	public void setCkycCompliance(Boolean ckycCompliance) {
-		this.ckycCompliance = ckycCompliance;
-	}
+    public void setDob(Long dob) {
+        this.dob = dob;
+    }
 
-	public Long getDob() {
-		return dob;
-	}
+    public String getMaskedAccNumber() {
+        return maskedAccNumber;
+    }
 
-	public void setDob(Long dob) {
-		this.dob = dob;
-	}
+    public void setMaskedAccNumber(String maskedAccNumber) {
+        this.maskedAccNumber = maskedAccNumber;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getAccountType() {
+        return accountType;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
-	public String getLandline() {
-		return landline;
-	}
+    public String getLandLine() {
+        return landLine;
+    }
 
-	public void setLandline(String landline) {
-		this.landline = landline;
-	}
+    public void setLandLine(String landLine) {
+        this.landLine = landLine;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Boolean getCkycCompliance() {
+        return ckycCompliance;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setCkycCompliance(Boolean ckycCompliance) {
+        this.ckycCompliance = ckycCompliance;
+    }
 
-	public String getNominee() {
-		return nominee;
-	}
+    public Boolean getLinkedAccRef() {
+        return linkedAccRef;
+    }
 
-	public void setNominee(String nominee) {
-		this.nominee = nominee;
-	}
+    public void setLinkedAccRef(Boolean linkedAccRef) {
+        this.linkedAccRef = linkedAccRef;
+    }
 
+    public Boolean getType() {
+        return type;
+    }
+
+    public void setType(Boolean type) {
+        this.type = type;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPan() {
+        return pan;
+    }
+
+    public void setPan(String pan) {
+        this.pan = pan;
+    }
+
+    public String getNominee() {
+        return nominee;
+    }
+
+    public void setNominee(String nominee) {
+        this.nominee = nominee;
+    }
 }
