@@ -8,8 +8,6 @@ import jakarta.persistence.Table;
 @Table(name = "mf_summary")
 public class MFSummaryEntity {
 
-	@Id
-    private String pan;
     private Double costValue;
     private Double currentValue;
     private String fatcaStatus;
@@ -29,47 +27,39 @@ public class MFSummaryEntity {
     private String schemeOption;
     private String schemeTypes;
     private String ucc;
-    
-    
 
-    public MFSummaryEntity(String pan, Double costValue, Double currentValue, String fatcaStatus, String amc,
-			String amfiCode, Double closingUnits, String folioNo, String isin, String isinDescription, Double lienUnits,
-			Double lockinUnits, Double nav, String navDate, String registrar, String schemeCategory, String schemeCode,
-			String schemeOption, String schemeTypes, String ucc) {
-		super();
-		this.pan = pan;
-		this.costValue = costValue;
-		this.currentValue = currentValue;
-		this.fatcaStatus = fatcaStatus;
-		this.amc = amc;
-		this.amfiCode = amfiCode;
-		this.closingUnits = closingUnits;
-		this.folioNo = folioNo;
-		this.isin = isin;
-		this.isinDescription = isinDescription;
-		this.lienUnits = lienUnits;
-		this.lockinUnits = lockinUnits;
-		this.nav = nav;
-		this.navDate = navDate;
-		this.registrar = registrar;
-		this.schemeCategory = schemeCategory;
-		this.schemeCode = schemeCode;
-		this.schemeOption = schemeOption;
-		this.schemeTypes = schemeTypes;
-		this.ucc = ucc;
-	}
+    @Id
+    private String pan;
 
-	protected MFSummaryEntity() {
-		// TODO Auto-generated constructor stub
-	}
-
-	// ===== Getters & Setters =====
-    public String getPan() {
-        return pan;
+    public MFSummaryEntity(Double costValue, Double currentValue, String fatcaStatus, String amc,
+                           String amfiCode, Double closingUnits, String folioNo, String isin,
+                           String isinDescription, Double lienUnits, Double lockinUnits, Double nav,
+                           String navDate, String registrar, String schemeCategory, String schemeCode,
+                           String schemeOption, String schemeTypes, String ucc, String pan) {
+        this.costValue = costValue;
+        this.currentValue = currentValue;
+        this.fatcaStatus = fatcaStatus;
+        this.amc = amc;
+        this.amfiCode = amfiCode;
+        this.closingUnits = closingUnits;
+        this.folioNo = folioNo;
+        this.isin = isin;
+        this.isinDescription = isinDescription;
+        this.lienUnits = lienUnits;
+        this.lockinUnits = lockinUnits;
+        this.nav = nav;
+        this.navDate = navDate;
+        this.registrar = registrar;
+        this.schemeCategory = schemeCategory;
+        this.schemeCode = schemeCode;
+        this.schemeOption = schemeOption;
+        this.schemeTypes = schemeTypes;
+        this.ucc = ucc;
+        this.pan = pan;
     }
 
-    public void setPan(String pan) {
-        this.pan = pan;
+    protected MFSummaryEntity() {
+        // Default constructor for JPA
     }
 
     public Double getCostValue() {
@@ -222,5 +212,13 @@ public class MFSummaryEntity {
 
     public void setUcc(String ucc) {
         this.ucc = ucc;
+    }
+
+    public String getPan() {
+        return pan;
+    }
+
+    public void setPan(String pan) {
+        this.pan = pan;
     }
 }
