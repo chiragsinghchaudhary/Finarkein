@@ -1,6 +1,7 @@
 package com.ashika.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,6 @@ import com.ashika.data.response.MFResponse;
 import com.ashika.data.response.MFSummary;
 import com.ashika.data.response.MFTransaction;
 import com.ashika.data.response.RecurringNewRunResponse;
-import com.ashika.model.dto.ClientConsentMappingDTO;
 import com.ashika.model.entities.ClientConsentMappingEntity;
 import com.ashika.model.entities.DepositHolderEntity;
 import com.ashika.model.entities.DepositSummaryEntity;
@@ -209,14 +209,34 @@ public class MyService {
 				consentResponse.getConsentHandle());
 
 		// --- DB Save ---
-		ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
-		ClientConsentMappingEntity entity = dto.toEntity();
+		//ClientConsentMappingDTO dto = mergeConsentRequestAndResponse(consentNewRunRequest, consentResponse);
+		
+		LocalDate dob = null;
+		try {
+			dob = LocalDate.parse(consentNewRunRequest.getIdentifiers().getDob());
+		} catch (Exception e) {
+			logger.warn("Invalid DOB format in request for clientUserId={} | value={}", consentNewRunRequest.getApplicationNo(),
+					consentNewRunRequest.getIdentifiers().getDob());
+		}
+		
+		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
+		
+		entity.setPan(consentNewRunRequest.getIdentifiers().getPan());
+		entity.setRequestId(consentResponse.getRequestId());
+		entity.setClientCode(consentNewRunRequest.getApplicationNo());
+		entity.setConsentHandle(Constants.CONSENT);
+		entity.setState(null);
+		entity.setConsentStatus(null);
+		entity.setDataFetchStatus(null);
+		entity.setDob(dob);
+		entity.setConsentHandle(consentResponse.getConsentHandle());
+		entity.setLastUpdatedTime(LocalDateTime.now());
 
 		long dbStart = System.currentTimeMillis();
 		logger.info("DB save started -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 
 		ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
-
+		
 		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
 				entity.getRequestId(), System.currentTimeMillis() - dbStart);
 
@@ -224,7 +244,6 @@ public class MyService {
 		logger.info("createNewRun completed -> pan={} | totalDuration={} ms", pan,
 				System.currentTimeMillis() - overallStart);
 
-		// return mapConsentEntityToResponse(entity);
 		return consentResponse;
 	}
 
@@ -269,9 +288,10 @@ public class MyService {
 		logger.debug("RecurringNewRun API Response -> requestId={}", recurringResponse.getRequestId());
 
 		// --- DB Save ---
-		ClientConsentMappingDTO dto = mergeRecurringRequestAndResponse(clientConsentMappingEntity,
-				recurringNewRunRequest, recurringResponse);
-		ClientConsentMappingEntity entity = dto.toEntity();
+		
+		ClientConsentMappingEntity entity = new ClientConsentMappingEntity(clientConsentMappingEntity.getPan(), clientConsentMappingEntity.getRequestId(), clientConsentMappingEntity.getClientCode(),
+				Constants.RECURRING, null, null, null, clientConsentMappingEntity.getDob(), clientConsentMappingEntity.getConsentHandle(), LocalDateTime.now());
+		
 		entity.setRunType(Constants.RECURRING);
 
 		long dbSaveStart = System.currentTimeMillis();
@@ -433,64 +453,6 @@ public class MyService {
 				System.currentTimeMillis() - overallStart);
 
 		return resultResponse;
-	}
-
-	private ClientConsentMappingDTO mergeConsentRequestAndResponse(ConsentNewRunRequest request,
-			ConsentNewRunResponse response) {
-
-		String maskedPan = maskPan(request.getIdentifiers().getPan());
-
-		logger.debug("Merging consent request & response | clientUserId={} | pan={} | requestId={} | consentHandle={}",
-				request.getApplicationNo(), maskedPan, response.getRequestId(), response.getConsentHandle());
-
-		LocalDate dob = null;
-		try {
-			dob = LocalDate.parse(request.getIdentifiers().getDob());
-		} catch (Exception e) {
-			logger.warn("Invalid DOB format in request for clientUserId={} | value={}", request.getApplicationNo(),
-					request.getIdentifiers().getDob());
-		}
-
-		return new ClientConsentMappingDTO(request.getApplicationNo(), request.getIdentifiers().getPan(),
-				Constants.CONSENT, null, null, null, dob, response.getRequestId(), response.getConsentHandle());
-	}
-
-	private String maskPan(String pan) {
-		if (pan == null || pan.length() < 4)
-			return "****";
-		return "****" + pan.substring(pan.length() - 4);
-	}
-
-	private ClientConsentMappingDTO mergeRecurringRequestAndResponse(
-			ClientConsentMappingEntity clientConsentMappingEntity, RecurringNewRunRequest request,
-			RecurringNewRunResponse response) {
-
-		if (clientConsentMappingEntity == null || request == null || response == null) {
-			logger.error("mergeRecurringRequestAndResponse: Null input(s) provided. Entity={}, Request={}, Response={}",
-					clientConsentMappingEntity, request, response);
-			return null; // Or throw an exception if null inputs are invalid
-		}
-
-		logger.debug(
-				"Merging RecurringNewRunRequest and RecurringNewRunResponse | clientCode: {} | pan: {} | consentHandle: {} | newRequestId: {}",
-				clientConsentMappingEntity.getClientCode(), clientConsentMappingEntity.getPan(),
-				request.getConsentHandle(), response.getRequestId());
-
-		return new ClientConsentMappingDTO(clientConsentMappingEntity.getClientCode(),
-				clientConsentMappingEntity.getPan(), Constants.RECURRING, null, null, null,
-				clientConsentMappingEntity.getDob(), response.getRequestId(), request.getConsentHandle());
-	}
-
-	private ConsentNewRunResponse mapConsentEntityToResponse(ClientConsentMappingEntity entity) {
-		if (entity == null) {
-			logger.error("mapConsentEntityToResponse: Provided entity is null");
-			return null; // Or throw an exception if null is unexpected
-		}
-
-		logger.debug("Mapping ClientConsentMappingEntity to ConsentNewRunResponse | requestId={} | consentHandle={}",
-				entity.getRequestId(), entity.getConsentHandle());
-
-		return new ConsentNewRunResponse(entity.getRequestId(), entity.getConsentHandle(), null);
 	}
 
 	private List<DepositHolder> mapDepositHolderEntities(List<DepositHolderEntity> entities) {

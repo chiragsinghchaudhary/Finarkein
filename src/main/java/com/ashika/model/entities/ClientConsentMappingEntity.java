@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @IdClass(ClientConsentMappingId.class)
 @Table(name = "Client_Consent_Mapping")
-public class ClientConsentMappingEntity {
+public class ClientConsentMappingEntity{
 	
 	@Id
     private String pan;
@@ -29,6 +29,10 @@ public class ClientConsentMappingEntity {
     @UpdateTimestamp
     private LocalDateTime lastUpdatedTime;
     
+	public ClientConsentMappingEntity() {
+		// TODO Auto-generated constructor stub
+	}
+     
     public ClientConsentMappingEntity(String pan, String requestId, String clientCode, String runType, String state,
 			String consentStatus, String dataFetchStatus, LocalDate dob, String consentHandle,
 			LocalDateTime lastUpdatedTime) {
@@ -42,11 +46,6 @@ public class ClientConsentMappingEntity {
 		this.dob = dob;
 		this.consentHandle = consentHandle;
 		this.lastUpdatedTime = lastUpdatedTime;
-	}
-    
-    
-	protected ClientConsentMappingEntity() {
-		// TODO Auto-generated constructor stub
 	}
 
 

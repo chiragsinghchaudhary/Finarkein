@@ -13,6 +13,15 @@ public class ClientConsentMappingId implements Serializable {
 	private String pan;
 	private String requestId;
 
+	public ClientConsentMappingId() {
+
+	}
+	
+	public ClientConsentMappingId(String pan, String requestId) {
+		this.pan = pan;
+		this.requestId = requestId;
+	}
+
 	// Getters & Setters
 
 	public String getPan() {
