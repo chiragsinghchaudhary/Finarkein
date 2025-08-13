@@ -93,9 +93,17 @@ public class MyService {
 
 		logger.info("checkValidConsent started -> pan={}", pan);
 
-		ClientConsentMappingEntity entity = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
+		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
 		  Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
-		 
+
+		ClientConsentMappingEntity entity = null;
+
+		if (optionalClientConsentMapping.isPresent()) {
+			entity = optionalClientConsentMapping.get();
+		} else {
+			logger.warn("No consent mapping found in DB -> pan={}", pan);
+			// API gave result, but DB mapping missing
+		}
 
 		long duration = System.currentTimeMillis() - start;
 		logger.info("checkValidConsent completed -> pan={} | duration={} ms", pan, duration);
@@ -134,17 +142,17 @@ public class MyService {
 		idList.add(pan);
 
 		// Fetch all data
-		List<DepositHolderEntity> depositHolderEntities = depositHolderRepository.findAllById(idList);
-		List<DepositSummaryEntity> depositSummaries = depositSummaryRepository.findAllById(idList);
-		List<DepositTransactionEntity> depositTransactions = depositTransactionRepository.findAllById(idList);
+		List<DepositHolderEntity> depositHolderEntities = depositHolderRepository.findAllByPan(pan);
+		List<DepositSummaryEntity> depositSummaries = depositSummaryRepository.findAllByPan(pan);
+		List<DepositTransactionEntity> depositTransactions = depositTransactionRepository.findAllByPan(pan);
 
-		List<EquityHolderEntity> equityHolders = equityHolderRepository.findAllById(idList);
-		List<EquitySummaryEntity> equitySummaries = equitySummaryRepository.findAllById(idList);
-		List<EquityTransactionEntity> equityTransactions = equityTransactionRepository.findAllById(idList);
+		List<EquityHolderEntity> equityHolders = equityHolderRepository.findAllByPan(pan);
+		List<EquitySummaryEntity> equitySummaries = equitySummaryRepository.findAllByPan(pan);
+		List<EquityTransactionEntity> equityTransactions = equityTransactionRepository.findAllByPan(pan);
 
-		List<MFHolderEntity> mfHolders = mfHolderRepository.findAllById(idList);
-		List<MFSummaryEntity> mfSummaries = mfSummaryRepository.findAllById(idList);
-		List<MFTransactionEntity> mfTransactions = mfTransactionRepository.findAllById(idList);
+		List<MFHolderEntity> mfHolders = mfHolderRepository.findAllByPan(pan);
+		List<MFSummaryEntity> mfSummaries = mfSummaryRepository.findAllByPan(pan);
+		List<MFTransactionEntity> mfTransactions = mfTransactionRepository.findAllByPan(pan);
 
 		// Combined debug log
 		logger.debug(
@@ -246,9 +254,18 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch latest consent object -> pan={}", pan);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
+		Optional<ClientConsentMappingEntity> optionalClientConsentMapping = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
 				  Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
 
+		ClientConsentMappingEntity clientConsentMappingEntity = null;
+
+		if (optionalClientConsentMapping.isPresent()) {
+			clientConsentMappingEntity = optionalClientConsentMapping.get();
+		} else {
+			logger.warn("No consent mapping found in DB -> pan={}", pan);
+			// API gave result, but DB mapping missing
+		}
+		
 		if (clientConsentMappingEntity == null) {
 			logger.warn("No consent mapping found -> pan={} | Aborting createNewRunFetch", pan);
 			return null; // Or throw custom exception

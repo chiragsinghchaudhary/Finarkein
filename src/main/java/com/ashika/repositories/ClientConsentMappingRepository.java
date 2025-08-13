@@ -11,7 +11,7 @@ public interface ClientConsentMappingRepository extends JpaRepository<ClientCons
 	
 	public Optional<ClientConsentMappingEntity> findByRequestId(String requestId);
 	
-	public ClientConsentMappingEntity findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(String pan, String runType, String state, String consentStatus, String dataFetchStatus);
+	public Optional<ClientConsentMappingEntity> findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(String pan, String runType, String state, String consentStatus, String dataFetchStatus);
 	
 	public ClientConsentMappingEntity findByRunTypeAndConsentHandle(String runType, String consentHandle);
 	
