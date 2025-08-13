@@ -43,7 +43,6 @@ import com.ashika.entities.MFHolderEntity;
 import com.ashika.entities.MFSummaryEntity;
 import com.ashika.entities.MFTransactionEntity;
 import com.ashika.repositories.ClientConsentMappingRepository;
-import com.ashika.repositories.ClientConsentMappingRepositoryImpl;
 import com.ashika.repositories.DepositHolderRepository;
 import com.ashika.repositories.DepositSummaryRepository;
 import com.ashika.repositories.DepositTransactionRepository;
@@ -81,8 +80,6 @@ public class MyService {
 	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
 	@Autowired
-	private ClientConsentMappingRepositoryImpl clientConsentRepositoryImpl;
-	@Autowired
 	private FinarkeinClient finarkeinClient;
 
 	public MyService() {
@@ -96,8 +93,12 @@ public class MyService {
 
 		logger.info("checkValidConsent started -> pan={}", pan);
 
-		ClientConsentMappingEntity entity = clientConsentRepositoryImpl.getlatestClientConsentObject(pan,
-				Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
+		ClientConsentMappingEntity entity = null;
+		
+		/*
+		 * entity = clientConsentRepositoryImpl.getlatestClientConsentObject(pan,
+		 * Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
+		 */
 
 		long duration = System.currentTimeMillis() - start;
 		logger.info("checkValidConsent completed -> pan={} | duration={} ms", pan, duration);
@@ -211,6 +212,7 @@ public class MyService {
 		}
 
 		ClientConsentMappingEntity entity = new ClientConsentMappingEntity();
+		
 		entity.setPan(consentNewRunRequest.getIdentifiers().getPan());
 		entity.setRequestId(consentResponse.getRequestId());
 		entity.setClientCode(consentNewRunRequest.getApplicationNo());
@@ -222,9 +224,8 @@ public class MyService {
 		long dbStart = System.currentTimeMillis();
 		logger.info("DB save started -> pan={} | requestId={}", entity.getPan(), entity.getRequestId());
 		
-		final ClientConsentMappingEntity savedEntity = clientConsentRepository.saveAndFlush(entity);
+		ClientConsentMappingEntity savedEntity = clientConsentRepository.save(entity);
 		
-
 		logger.info("DB save completed -> pan={} | requestId={} | duration={} ms", entity.getPan(),
 				entity.getRequestId(), System.currentTimeMillis() - dbStart);
 
@@ -248,8 +249,13 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch latest consent object -> pan={}", pan);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepositoryImpl
-				.getlatestClientConsentObject(pan, Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
+		ClientConsentMappingEntity clientConsentMappingEntity = null;
+		
+		/*
+		 * clientConsentMappingEntity = clientConsentRepositoryImpl
+		 * .getlatestClientConsentObject(pan, Constants.CONSENT, Constants.SUCCESS,
+		 * Constants.ACTIVE, Constants.SUCCESS);
+		 */
 
 		if (clientConsentMappingEntity == null) {
 			logger.warn("No consent mapping found -> pan={} | Aborting createNewRunFetch", pan);

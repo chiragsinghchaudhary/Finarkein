@@ -3,8 +3,6 @@ package com.ashika.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ import jakarta.persistence.Table;
 public class ClientConsentMappingEntity{
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
 	@Column(nullable = false)
@@ -29,14 +27,13 @@ public class ClientConsentMappingEntity{
 	@Column(nullable = false)
 	private String requestId; 
     private String clientCode;
+    @Column(nullable = false)
     private String runType;
-    
     private String state;
     private String consentStatus;
     private String dataFetchStatus;
     private LocalDate dob;
     private String consentHandle;
-    @UpdateTimestamp
     private LocalDateTime lastUpdatedTime;
     
 	public ClientConsentMappingEntity() {
