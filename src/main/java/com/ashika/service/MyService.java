@@ -93,12 +93,9 @@ public class MyService {
 
 		logger.info("checkValidConsent started -> pan={}", pan);
 
-		ClientConsentMappingEntity entity = null;
-		
-		/*
-		 * entity = clientConsentRepositoryImpl.getlatestClientConsentObject(pan,
-		 * Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
-		 */
+		ClientConsentMappingEntity entity = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
+		  Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
+		 
 
 		long duration = System.currentTimeMillis() - start;
 		logger.info("checkValidConsent completed -> pan={} | duration={} ms", pan, duration);
@@ -249,13 +246,8 @@ public class MyService {
 		long dbFetchStart = System.currentTimeMillis();
 		logger.info("DB fetch latest consent object -> pan={}", pan);
 
-		ClientConsentMappingEntity clientConsentMappingEntity = null;
-		
-		/*
-		 * clientConsentMappingEntity = clientConsentRepositoryImpl
-		 * .getlatestClientConsentObject(pan, Constants.CONSENT, Constants.SUCCESS,
-		 * Constants.ACTIVE, Constants.SUCCESS);
-		 */
+		ClientConsentMappingEntity clientConsentMappingEntity = clientConsentRepository.findTopByPanAndRunTypeAndStateAndConsentStatusAndDataFetchStatusOrderByLastUpdatedTimeDesc(pan,
+				  Constants.CONSENT, Constants.SUCCESS, Constants.ACTIVE, Constants.SUCCESS);
 
 		if (clientConsentMappingEntity == null) {
 			logger.warn("No consent mapping found -> pan={} | Aborting createNewRunFetch", pan);
