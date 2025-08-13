@@ -38,32 +38,6 @@ public class MyController {
     	logger.info("Entry: /helloWorld");
         return "Hello World!";
     }
-
-	/*
-	 * @PostMapping("/{workspace}/dp/nerv/{flowId}") public ConsentNewRunResponse
-	 * createNewRun(@PathVariable("workspace") String workspace,
-	 * 
-	 * @PathVariable("flowId") String flowId,
-	 * 
-	 * @RequestBody ConsentNewRunRequest consentNewRunRequest) {
-	 * 
-	 * long startTimeInMilliseconds = System.currentTimeMillis();
-	 * 
-	 * logger.info("Entry: /createNewRun " + " workspace : " + workspace +
-	 * " flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan());
-	 * 
-	 * ConsentNewRunResponse consentNewRunResponse =
-	 * myService.createNewRun(workspace, flowId, consentNewRunRequest);
-	 * 
-	 * long timeTakenToProcessRequest = System.currentTimeMillis() -
-	 * startTimeInMilliseconds;
-	 * 
-	 * logger.info("Exit: /createNewRun " + " workspace : " + workspace +
-	 * " flowId : " + flowId + " pan : " + consentNewRunRequest.getUser().getPan() +
-	 * " ProcessingTime : " + timeTakenToProcessRequest);
-	 * 
-	 * return consentNewRunResponse; }
-	 */
     
     @PostMapping("/createNewConsentRun")
     public ConsentNewRunResponse createNewRun(@RequestBody ConsentNewRunRequest consentNewRunRequest) {

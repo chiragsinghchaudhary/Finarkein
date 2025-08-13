@@ -1,18 +1,17 @@
-package com.ashika.model.entities;
+package com.ashika.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mf_holder")
-public class MFHolderEntity {
+@Table(name = "equity_holder")
+public class EquityHolderEntity {
 
     private String address;
     private String dematId;
     private Long dob;
     private String email;
-    private String folioNo;
     private Boolean kycCompliance;
     private String landline;
     private String mobile;
@@ -22,14 +21,12 @@ public class MFHolderEntity {
     @Id
     private String pan;
 
-    public MFHolderEntity(String address, String dematId, Long dob, String email, String folioNo,
-                           Boolean kycCompliance, String landline, String mobile, String name,
-                           String nominee, String pan) {
+    public EquityHolderEntity(String address, String dematId, Long dob, String email, Boolean kycCompliance,
+                               String landline, String mobile, String name, String nominee, String pan) {
         this.address = address;
         this.dematId = dematId;
         this.dob = dob;
         this.email = email;
-        this.folioNo = folioNo;
         this.kycCompliance = kycCompliance;
         this.landline = landline;
         this.mobile = mobile;
@@ -38,7 +35,7 @@ public class MFHolderEntity {
         this.pan = pan;
     }
 
-    protected MFHolderEntity() {
+    protected EquityHolderEntity() {
         // Default constructor for JPA
     }
 
@@ -72,14 +69,6 @@ public class MFHolderEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFolioNo() {
-        return folioNo;
-    }
-
-    public void setFolioNo(String folioNo) {
-        this.folioNo = folioNo;
     }
 
     public Boolean getKycCompliance() {

@@ -1,4 +1,4 @@
-package com.ashika.model.entities;
+package com.ashika.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,13 +21,16 @@ import jakarta.persistence.Table;
 public class ClientConsentMappingEntity{
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-	private String pan;	  
-	@Column(unique = true)
+	
+	@Column(nullable = false)
+	private String pan;
+	@Column(nullable = false)
 	private String requestId; 
     private String clientCode;
-    private String runType;    
+    private String runType;
+    
     private String state;
     private String consentStatus;
     private String dataFetchStatus;

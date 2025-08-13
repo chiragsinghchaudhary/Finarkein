@@ -14,18 +14,19 @@ import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuer
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ashika.model.entities.ClientConsentMappingEntity;
-import com.ashika.model.entities.ClientConsentMappingId;
+import com.ashika.entities.ClientConsentMappingEntity;
 
 @Repository
 public class ClientConsentMappingRepositoryImpl
-		implements JpaRepository<ClientConsentMappingEntity, ClientConsentMappingId> {
+		implements JpaRepository<ClientConsentMappingEntity, Long> {
 
 	@Query(value = "SELECT c" + " FROM ClientConsentMappingEntity" + " WHERE pan = :pan " + "AND run_type = : runType "
-			+ "AND state = :success " + "AND data_fetch_status = :active " + "AND consent_status = :success "
+			+ "AND state = :state " + "AND data_fetch_status = :dataFetchStatus " + "AND consent_status = :consentStatus "
 			+ "ORDER BY lastUpdatedTime desc LIMIT 1 ", nativeQuery = true)
 	public ClientConsentMappingEntity getlatestClientConsentObject(@Param("pan") String pan,
-			@Param("runType") String runType, @Param("success") String success, @Param("active") String active) {
+			@Param("runType") String runType, 
+			@Param("state") String state, @Param("consentStatus") String consentStatus,
+			@Param("dataFetchStatus") String dataFetchStatus) {
 		return null;
 	}
 
@@ -42,7 +43,7 @@ public class ClientConsentMappingRepositoryImpl
 	}
 
 	@Override
-	public List<ClientConsentMappingEntity> findAllById(Iterable<ClientConsentMappingId> ids) {
+	public List<ClientConsentMappingEntity> findAllById(Iterable<Long> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -54,13 +55,13 @@ public class ClientConsentMappingRepositoryImpl
 	}
 
 	@Override
-	public Optional<ClientConsentMappingEntity> findById(ClientConsentMappingId id) {
+	public Optional<ClientConsentMappingEntity> findById(Long id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
-	public boolean existsById(ClientConsentMappingId id) {
+	public boolean existsById(Long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -72,33 +73,33 @@ public class ClientConsentMappingRepositoryImpl
 	}
 
 	@Override
-	public void deleteById(ClientConsentMappingId id) {
+	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void delete(ClientConsentMappingEntity entity) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void deleteAllById(Iterable<? extends ClientConsentMappingId> ids) {
+	public void deleteAllById(Iterable<? extends Long> ids) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void deleteAll(Iterable<? extends ClientConsentMappingEntity> entities) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void deleteAll() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -169,7 +170,7 @@ public class ClientConsentMappingRepositoryImpl
 	}
 
 	@Override
-	public void deleteAllByIdInBatch(Iterable<ClientConsentMappingId> ids) {
+	public void deleteAllByIdInBatch(Iterable<Long> ids) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -181,19 +182,19 @@ public class ClientConsentMappingRepositoryImpl
 	}
 
 	@Override
-	public ClientConsentMappingEntity getOne(ClientConsentMappingId id) {
+	public ClientConsentMappingEntity getOne(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ClientConsentMappingEntity getById(ClientConsentMappingId id) {
+	public ClientConsentMappingEntity getById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ClientConsentMappingEntity getReferenceById(ClientConsentMappingId id) {
+	public ClientConsentMappingEntity getReferenceById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -209,4 +210,6 @@ public class ClientConsentMappingRepositoryImpl
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }
