@@ -572,33 +572,40 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No EquityHolderEntity records found to map.");
-			return new ArrayList<>();
-		}
+private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No EquityHolderEntity records found to map.");
+        return new ArrayList<>();
+    }
 
-		logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
+    logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
 
-		List<EquityHolder> responseList = new ArrayList<>(entities.size());
-		for (EquityHolderEntity entity : entities) {
-			EquityHolder response = new EquityHolder();
-			response.setAddress(entity.getAddress());
-			response.setDematId(entity.getDematId());
-			response.setDob(entity.getDob());
-			response.setEmail(entity.getEmail());
-			response.setKycCompliance(entity.getKycCompliance());
-			response.setLandline(entity.getLandline());
-			response.setMobile(entity.getMobile());
-			response.setName(entity.getName());
-			response.setNominee(entity.getNominee());
-			response.setPan(entity.getPan());
-			responseList.add(response);
-		}
+    List<EquityHolder> responseList = new ArrayList<>(entities.size());
+    for (EquityHolderEntity entity : entities) {
+        EquityHolder response = new EquityHolder();
 
-		logger.debug("Successfully mapped {} EquityHolder response objects", responseList.size());
-		return responseList;
-	}
+        // Following the specified JSON order
+        response.setName(entity.getName());
+        response.setEmail(entity.getEmail());
+        response.setDob(entity.getDob());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setFolioNo(entity.getFolioNo());
+        response.setAccountType(entity.getAccountType());
+        response.setLandline(entity.getLandline());
+        response.setDematId(entity.getDematId());
+        response.setAddress(entity.getAddress());
+        response.setKycCompliance(entity.getKycCompliance());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setMobile(entity.getMobile());
+        response.setPan(entity.getPan());
+        response.setNominee(entity.getNominee());
+
+        responseList.add(response);
+    }
+
+    logger.debug("Successfully mapped {} EquityHolder response objects", responseList.size());
+    return responseList;
+}
 
 	private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
