@@ -8,44 +8,47 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_transaction",indexes = {
-	    @Index(name = "idx_equity_transaction_pan", columnList = "pan")
-	})
+@Table(
+    name = "equity_transaction",
+    indexes = {
+        @Index(name = "idx_equity_transaction_pan", columnList = "pan")
+    }
+)
 public class EquityTransactionEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
-    private String companyName;
-    private String equityCategory;
-    private String exchange;
+
+    private Double rate;
+    private String txnId;
+    private Long transactionDateTime;
+    private String orderId;
     private String isin;
     private String isinDescription;
+    private String equityCategory;
+    private String exchange;
+    private String companyName;
     private String narration;
-    private String orderId;
-    private Double rate;
-    private Long transactionDateTime;
-    private String txnId;
-    private String type;
     private Double units;
+    private String type;
     private String pan;
 
-    public EquityTransactionEntity(String companyName, String equityCategory, String exchange, String isin,
-                                   String isinDescription, String narration, String orderId, Double rate,
-                                   Long transactionDateTime, String txnId, String type, Double units, String pan) {
-        this.companyName = companyName;
-        this.equityCategory = equityCategory;
-        this.exchange = exchange;
+    public EquityTransactionEntity(Double rate, String txnId, Long transactionDateTime, String orderId,
+                                   String isin, String isinDescription, String equityCategory, String exchange,
+                                   String companyName, String narration, Double units, String type, String pan) {
+        this.rate = rate;
+        this.txnId = txnId;
+        this.transactionDateTime = transactionDateTime;
+        this.orderId = orderId;
         this.isin = isin;
         this.isinDescription = isinDescription;
+        this.equityCategory = equityCategory;
+        this.exchange = exchange;
+        this.companyName = companyName;
         this.narration = narration;
-        this.orderId = orderId;
-        this.rate = rate;
-        this.transactionDateTime = transactionDateTime;
-        this.txnId = txnId;
-        this.type = type;
         this.units = units;
+        this.type = type;
         this.pan = pan;
     }
 
@@ -53,28 +56,36 @@ public class EquityTransactionEntity {
         // Default constructor for JPA
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public Double getRate() {
+        return rate;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setRate(Double rate) {
+        this.rate = rate;
     }
 
-    public String getEquityCategory() {
-        return equityCategory;
+    public String getTxnId() {
+        return txnId;
     }
 
-    public void setEquityCategory(String equityCategory) {
-        this.equityCategory = equityCategory;
+    public void setTxnId(String txnId) {
+        this.txnId = txnId;
     }
 
-    public String getExchange() {
-        return exchange;
+    public Long getTransactionDateTime() {
+        return transactionDateTime;
     }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
+    public void setTransactionDateTime(Long transactionDateTime) {
+        this.transactionDateTime = transactionDateTime;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getIsin() {
@@ -93,6 +104,30 @@ public class EquityTransactionEntity {
         this.isinDescription = isinDescription;
     }
 
+    public String getEquityCategory() {
+        return equityCategory;
+    }
+
+    public void setEquityCategory(String equityCategory) {
+        this.equityCategory = equityCategory;
+    }
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public String getNarration() {
         return narration;
     }
@@ -101,36 +136,12 @@ public class EquityTransactionEntity {
         this.narration = narration;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public Double getUnits() {
+        return units;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Double getRate() {
-        return rate;
-    }
-
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-
-    public Long getTransactionDateTime() {
-        return transactionDateTime;
-    }
-
-    public void setTransactionDateTime(Long transactionDateTime) {
-        this.transactionDateTime = transactionDateTime;
-    }
-
-    public String getTxnId() {
-        return txnId;
-    }
-
-    public void setTxnId(String txnId) {
-        this.txnId = txnId;
+    public void setUnits(Double units) {
+        this.units = units;
     }
 
     public String getType() {
@@ -139,14 +150,6 @@ public class EquityTransactionEntity {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Double getUnits() {
-        return units;
-    }
-
-    public void setUnits(Double units) {
-        this.units = units;
     }
 
     public String getPan() {
