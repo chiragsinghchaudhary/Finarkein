@@ -1,15 +1,7 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({
-        "ucc", "maskedDematID", "nav", "maskedAccNumber", "isin", "isinDescription",
-        "schemeCode", "folioNo", "account_type", "costValue", "closingUnits", "amc",
-        "registrar", "schemeOption", "schemeCategory", "fatcaStatus", "lienUnits",
-        "lockinUnits", "navDate", "linkedAccRef", "currentValue", "schemeTypes",
-        "maskedFolioNo", "amfiCode"
-})
 public class MFSummary {
 
     @JsonProperty("ucc")
@@ -43,7 +35,7 @@ public class MFSummary {
     private Double costValue;
 
     @JsonProperty("closingUnits")
-    private String closingUnits; // Example JSON shows "0.000" (String)
+    private String closingUnits;
 
     @JsonProperty("amc")
     private String amc;
@@ -64,7 +56,7 @@ public class MFSummary {
     private String lienUnits;
 
     @JsonProperty("lockinUnits")
-    private String lockinUnits; 
+    private String lockinUnits;
 
     @JsonProperty("navDate")
     private Long navDate;
