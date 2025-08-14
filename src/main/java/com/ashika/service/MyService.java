@@ -572,89 +572,108 @@ public class MyService {
 		return responseList;
 	}
 
-	private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No EquityHolderEntity records found to map.");
-			return new ArrayList<>();
-		}
+private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No EquityHolderEntity records found to map.");
+        return new ArrayList<>();
+    }
 
-		logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
+    logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
 
-		List<EquityHolder> responseList = new ArrayList<>(entities.size());
-		for (EquityHolderEntity entity : entities) {
-			EquityHolder response = new EquityHolder();
-			response.setAddress(entity.getAddress());
-			response.setDematId(entity.getDematId());
-			response.setDob(entity.getDob());
-			response.setEmail(entity.getEmail());
-			response.setKycCompliance(entity.getKycCompliance());
-			response.setLandline(entity.getLandline());
-			response.setMobile(entity.getMobile());
-			response.setName(entity.getName());
-			response.setNominee(entity.getNominee());
-			response.setPan(entity.getPan());
-			responseList.add(response);
-		}
+    List<EquityHolder> responseList = new ArrayList<>(entities.size());
+    for (EquityHolderEntity entity : entities) {
+        EquityHolder response = new EquityHolder();
 
-		logger.debug("Successfully mapped {} EquityHolder response objects", responseList.size());
-		return responseList;
-	}
+        // Following the specified JSON order
+        response.setName(entity.getName());
+        response.setEmail(entity.getEmail());
+        response.setDob(entity.getDob());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setFolioNo(entity.getFolioNo());
+        response.setAccountType(entity.getAccountType());
+        response.setLandline(entity.getLandline());
+        response.setDematId(entity.getDematId());
+        response.setAddress(entity.getAddress());
+        response.setKycCompliance(entity.getKycCompliance());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setMobile(entity.getMobile());
+        response.setPan(entity.getPan());
+        response.setNominee(entity.getNominee());
 
-	private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No EquitySummaryEntity records found to map.");
-			return new ArrayList<>();
-		}
+        responseList.add(response);
+    }
 
-		logger.debug("Mapping {} EquitySummaryEntity records to EquitySummary response objects", entities.size());
+    logger.debug("Successfully mapped {} EquityHolder response objects", responseList.size());
+    return responseList;
+}
 
-		List<EquitySummary> responseList = new ArrayList<>(entities.size());
-		for (EquitySummaryEntity entity : entities) {
-			EquitySummary response = new EquitySummary();
-			response.setCurrentValue(entity.getCurrentValue());
-			response.setHoldingMode(entity.getHoldingMode());
-			response.setIsin(entity.getIsin());
-			response.setIsinDescription(entity.getIsinDescription());
-			response.setIssuerName(entity.getIssuerName());
-			response.setLastTradedPrice(entity.getLastTradedPrice());
-			response.setUnits(entity.getUnits());
-			responseList.add(response);
-		}
+private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No EquitySummaryEntity records found to map.");
+        return new ArrayList<>();
+    }
 
-		logger.debug("Successfully mapped {} EquitySummary response objects", responseList.size());
-		return responseList;
-	}
+    logger.debug("Mapping {} EquitySummaryEntity records to EquitySummary response objects", entities.size());
 
-	private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No EquityTransactionEntity records found to map.");
-			return new ArrayList<>();
-		}
+    List<EquitySummary> responseList = new ArrayList<>(entities.size());
+    for (EquitySummaryEntity entity : entities) {
+        EquitySummary response = new EquitySummary();
 
-		logger.debug("Mapping {} EquityTransactionEntity records to EquityTransaction response objects",
-				entities.size());
+        // Matching the specified JSON order
+        response.setLastTradedPrice(entity.getLastTradedPrice());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setAccountType(entity.getAccountType());
+        response.setUnits(entity.getUnits());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setType(entity.getType());
+        response.setCurrentValue(entity.getCurrentValue());
+        response.setIssuerName(entity.getIssuerName());
 
-		List<EquityTransaction> responseList = new ArrayList<>(entities.size());
-		for (EquityTransactionEntity entity : entities) {
-			EquityTransaction response = new EquityTransaction();
-			response.setCompanyName(entity.getCompanyName());
-			response.setEquityCategory(entity.getEquityCategory());
-			response.setExchange(entity.getExchange());
-			response.setIsin(entity.getIsin());
-			response.setIsinDescription(entity.getIsinDescription());
-			response.setNarration(entity.getNarration());
-			response.setOrderId(entity.getOrderId());
-			response.setRate(entity.getRate());
-			response.setTransactionDateTime(entity.getTransactionDateTime());
-			response.setTxnId(entity.getTxnId());
-			response.setType(entity.getType());
-			response.setUnits(entity.getUnits());
-			responseList.add(response);
-		}
+        responseList.add(response);
+    }
 
-		logger.debug("Successfully mapped {} EquityTransaction response objects", responseList.size());
-		return responseList;
-	}
+    logger.debug("Successfully mapped {} EquitySummary response objects", responseList.size());
+    return responseList;
+}
+
+private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No EquityTransactionEntity records found to map.");
+        return new ArrayList<>();
+    }
+
+    logger.debug("Mapping {} EquityTransactionEntity records to EquityTransaction response objects",
+            entities.size());
+
+    List<EquityTransaction> responseList = new ArrayList<>(entities.size());
+    for (EquityTransactionEntity entity : entities) {
+        EquityTransaction response = new EquityTransaction();
+
+        // Matching JSON order
+        response.setRate(entity.getRate());
+        response.setTxnId(entity.getTxnId());
+        response.setTransactionDateTime(entity.getTransactionDateTime());
+        response.setOrderId(entity.getOrderId());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setAccountType(entity.getAccountType());
+        response.setEquityCategory(entity.getEquityCategory());
+        response.setExchange(entity.getExchange());
+        response.setCompanyName(entity.getCompanyName());
+        response.setNarration(entity.getNarration());
+        response.setUnits(entity.getUnits());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setType(entity.getType());
+
+        responseList.add(response);
+    }
+
+    logger.debug("Successfully mapped {} EquityTransaction response objects", responseList.size());
+    return responseList;
+}
 
 	private List<MFHolder> mapMFHolderEntities(List<MFHolderEntity> entities) {
 		if (entities == null || entities.isEmpty()) {

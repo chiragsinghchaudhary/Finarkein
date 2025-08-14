@@ -8,32 +8,53 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_summary",indexes = {
-	    @Index(name = "idx_equity_summary_pan", columnList = "pan")
-	})
+@Table(
+    name = "equity_summary",
+    indexes = {
+        @Index(name = "idx_equity_summary_pan", columnList = "pan")
+    }
+)
 public class EquitySummaryEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double currentValue;
-    private String holdingMode;
+    private Double lastTradedPrice;
+    private String maskedAccNumber;
     private String isin;
     private String isinDescription;
-    private String issuerName;
-    private Double lastTradedPrice;
+    private String accountType;
     private Double units;
-    private String pan;
+    private String linkedAccRef;
+    private String type;
+    private Double currentValue;
+    private String issuerName;
+    private String pan; // kept from your original entity
 
-    public EquitySummaryEntity(Double currentValue, String holdingMode, String isin, String isinDescription,
-                                String issuerName, Double lastTradedPrice, Double units, String pan) {
-        this.currentValue = currentValue;
-        this.holdingMode = holdingMode;
+    public EquitySummaryEntity(
+            Double lastTradedPrice,
+            String maskedAccNumber,
+            String isin,
+            String isinDescription,
+            String accountType,
+            Double units,
+            String linkedAccRef,
+            String type,
+            Double currentValue,
+            String issuerName,
+            String pan
+    ) {
+        this.lastTradedPrice = lastTradedPrice;
+        this.maskedAccNumber = maskedAccNumber;
         this.isin = isin;
         this.isinDescription = isinDescription;
-        this.issuerName = issuerName;
-        this.lastTradedPrice = lastTradedPrice;
+        this.accountType = accountType;
         this.units = units;
+        this.linkedAccRef = linkedAccRef;
+        this.type = type;
+        this.currentValue = currentValue;
+        this.issuerName = issuerName;
         this.pan = pan;
     }
 
@@ -41,20 +62,24 @@ public class EquitySummaryEntity {
         // Default constructor for JPA
     }
 
-    public Double getCurrentValue() {
-        return currentValue;
+    public Long getId() {
+        return id;
     }
 
-    public void setCurrentValue(Double currentValue) {
-        this.currentValue = currentValue;
+    public Double getLastTradedPrice() {
+        return lastTradedPrice;
     }
 
-    public String getHoldingMode() {
-        return holdingMode;
+    public void setLastTradedPrice(Double lastTradedPrice) {
+        this.lastTradedPrice = lastTradedPrice;
     }
 
-    public void setHoldingMode(String holdingMode) {
-        this.holdingMode = holdingMode;
+    public String getMaskedAccNumber() {
+        return maskedAccNumber;
+    }
+
+    public void setMaskedAccNumber(String maskedAccNumber) {
+        this.maskedAccNumber = maskedAccNumber;
     }
 
     public String getIsin() {
@@ -73,20 +98,12 @@ public class EquitySummaryEntity {
         this.isinDescription = isinDescription;
     }
 
-    public String getIssuerName() {
-        return issuerName;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setIssuerName(String issuerName) {
-        this.issuerName = issuerName;
-    }
-
-    public Double getLastTradedPrice() {
-        return lastTradedPrice;
-    }
-
-    public void setLastTradedPrice(Double lastTradedPrice) {
-        this.lastTradedPrice = lastTradedPrice;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public Double getUnits() {
@@ -95,6 +112,38 @@ public class EquitySummaryEntity {
 
     public void setUnits(Double units) {
         this.units = units;
+    }
+
+    public String getLinkedAccRef() {
+        return linkedAccRef;
+    }
+
+    public void setLinkedAccRef(String linkedAccRef) {
+        this.linkedAccRef = linkedAccRef;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Double getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(Double currentValue) {
+        this.currentValue = currentValue;
+    }
+
+    public String getIssuerName() {
+        return issuerName;
+    }
+
+    public void setIssuerName(String issuerName) {
+        this.issuerName = issuerName;
     }
 
     public String getPan() {

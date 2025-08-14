@@ -8,120 +8,111 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_holder",indexes = {
-	    @Index(name = "idx_equity_holder_pan", columnList = "pan")
-	})
+@Table(
+    name = "equity_holder",
+    indexes = {
+        @Index(name = "idx_equity_holder_pan", columnList = "pan")
+    }
+)
 public class EquityHolderEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-    private String address;
-    private String dematId;
-    private Long dob;
-    private String email;
-    private Boolean kycCompliance;
-    private String landline;
-    private String mobile;
-    private String name;
-    private String nominee;
-    private String pan;
 
-    public EquityHolderEntity(String address, String dematId, Long dob, String email, Boolean kycCompliance,
-                               String landline, String mobile, String name, String nominee, String pan) {
-        this.address = address;
-        this.dematId = dematId;
-        this.dob = dob;
-        this.email = email;
-        this.kycCompliance = kycCompliance;
-        this.landline = landline;
-        this.mobile = mobile;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String email;
+    private Long dob;
+    private String maskedAccNumber;
+    private String folioNo;
+    private String accountType;
+    private String landLine;
+    private String dematId;
+    private String address;
+    private Boolean ckycCompliance;
+    private String linkedAccRef;
+    private String mobile;
+    private String pan;
+    private String nominee;
+
+    public EquityHolderEntity(
+            String name,
+            String email,
+            Long dob,
+            String maskedAccNumber,
+            String folioNo,
+            String accountType,
+            String landLine,
+            String dematId,
+            String address,
+            Boolean ckycCompliance,
+            String linkedAccRef,
+            String mobile,
+            String pan,
+            String nominee
+    ) {
         this.name = name;
-        this.nominee = nominee;
+        this.email = email;
+        this.dob = dob;
+        this.maskedAccNumber = maskedAccNumber;
+        this.folioNo = folioNo;
+        this.accountType = accountType;
+        this.landLine = landLine;
+        this.dematId = dematId;
+        this.address = address;
+        this.ckycCompliance = ckycCompliance;
+        this.linkedAccRef = linkedAccRef;
+        this.mobile = mobile;
         this.pan = pan;
+        this.nominee = nominee;
     }
 
     protected EquityHolderEntity() {
         // Default constructor for JPA
     }
 
-    public String getAddress() {
-        return address;
-    }
+    // Getters & Setters
+    public Long getId() { return id; }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getDematId() {
-        return dematId;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setDematId(String dematId) {
-        this.dematId = dematId;
-    }
+    public Long getDob() { return dob; }
+    public void setDob(Long dob) { this.dob = dob; }
 
-    public Long getDob() {
-        return dob;
-    }
+    public String getMaskedAccNumber() { return maskedAccNumber; }
+    public void setMaskedAccNumber(String maskedAccNumber) { this.maskedAccNumber = maskedAccNumber; }
 
-    public void setDob(Long dob) {
-        this.dob = dob;
-    }
+    public String getFolioNo() { return folioNo; }
+    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getAccountType() { return accountType; }
+    public void setAccountType(String accountType) { this.accountType = accountType; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getLandLine() { return landLine; }
+    public void setLandLine(String landLine) { this.landLine = landLine; }
 
-    public Boolean getKycCompliance() {
-        return kycCompliance;
-    }
+    public String getDematId() { return dematId; }
+    public void setDematId(String dematId) { this.dematId = dematId; }
 
-    public void setKycCompliance(Boolean kycCompliance) {
-        this.kycCompliance = kycCompliance;
-    }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
-    public String getLandline() {
-        return landline;
-    }
+    public Boolean getCkycCompliance() { return ckycCompliance; }
+    public void setCkycCompliance(Boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
 
-    public void setLandline(String landline) {
-        this.landline = landline;
-    }
+    public String getLinkedAccRef() { return linkedAccRef; }
+    public void setLinkedAccRef(String linkedAccRef) { this.linkedAccRef = linkedAccRef; }
 
-    public String getMobile() {
-        return mobile;
-    }
+    public String getMobile() { return mobile; }
+    public void setMobile(String mobile) { this.mobile = mobile; }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+    public String getPan() { return pan; }
+    public void setPan(String pan) { this.pan = pan; }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNominee() {
-        return nominee;
-    }
-
-    public void setNominee(String nominee) {
-        this.nominee = nominee;
-    }
-
-    public String getPan() {
-        return pan;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+    public String getNominee() { return nominee; }
+    public void setNominee(String nominee) { this.nominee = nominee; }
 }
