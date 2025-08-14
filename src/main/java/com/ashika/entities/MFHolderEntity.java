@@ -18,11 +18,11 @@ public class MFHolderEntity {
     private Long dob;
     private String maskedAccNumber;
     private String folioNo;
-    private String accountType;       // MUTUAL_FUNDS in example
-    private String landLine;          // Changed from landline to match JSON key
+    private String accountType;       
+    private String landLine;         
     private String dematId;
     private String address;
-    private String ckycCompliance;    // Changed from Boolean to String ("Completed")
+    private String ckycCompliance;    
     private String linkedAccRef;
     private String mobile;
     private String pan;
