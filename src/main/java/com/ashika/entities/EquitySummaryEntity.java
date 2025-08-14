@@ -1,12 +1,20 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_summary")
+@Table(name = "equity_summary",indexes = {
+	    @Index(name = "idx_equity_summary_pan", columnList = "pan")
+	})
 public class EquitySummaryEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Double currentValue;
     private String holdingMode;
@@ -15,8 +23,6 @@ public class EquitySummaryEntity {
     private String issuerName;
     private Double lastTradedPrice;
     private Double units;
-
-    @Id
     private String pan;
 
     public EquitySummaryEntity(Double currentValue, String holdingMode, String isin, String isinDescription,

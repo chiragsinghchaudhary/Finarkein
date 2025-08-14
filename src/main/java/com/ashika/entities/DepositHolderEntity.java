@@ -1,152 +1,165 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deposit_holder")
+@Table(name = "deposit_holder", indexes = { @Index(name = "idx_deposit_holder_pan", columnList = "pan") })
 public class DepositHolderEntity {
 
-    private String name;
-    private String email;
-    private Long dob;
-    
-    @Id
-    private String maskedAccNumber;
-    private String accountType;
-    private String landLine;
-    private String address;
-    private Boolean ckycCompliance;
-    private String linkedAccRef;
-    private String type;
-    private String mobile;
-    private String pan;
-    private String nominee;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
-                                String landLine, String address, Boolean ckycCompliance, String linkedAccRef,
-                                String type, String mobile, String pan, String nominee) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-        this.maskedAccNumber = maskedAccNumber;
-        this.accountType = accountType;
-        this.landLine = landLine;
-        this.address = address;
-        this.ckycCompliance = ckycCompliance;
-        this.linkedAccRef = linkedAccRef;
-        this.type = type;
-        this.mobile = mobile;
-        this.pan = pan;
-        this.nominee = nominee;
-    }
+	private String name;
+	private String email;
+	private Long dob;
+	private String maskedAccNumber;
+	private String accountType;
+	private String landLine;
+	private String address;
+	private Boolean ckycCompliance;
+	private String linkedAccRef;
+	private String type;
+	private String mobile;
+	private String pan;
+	private String nominee;
 
-    protected DepositHolderEntity() {
-        // Default constructor for JPA
-    }
+	public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
+			String landLine, String address, Boolean ckycCompliance, String linkedAccRef, String type, String mobile,
+			String pan, String nominee) {
+		this.name = name;
+		this.email = email;
+		this.dob = dob;
+		this.maskedAccNumber = maskedAccNumber;
+		this.accountType = accountType;
+		this.landLine = landLine;
+		this.address = address;
+		this.ckycCompliance = ckycCompliance;
+		this.linkedAccRef = linkedAccRef;
+		this.type = type;
+		this.mobile = mobile;
+		this.pan = pan;
+		this.nominee = nominee;
+	}
 
-    public String getName() {
-        return name;
-    }
+	protected DepositHolderEntity() {
+		// Default constructor for JPA
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Long getDob() {
-        return dob;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDob(Long dob) {
-        this.dob = dob;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getMaskedAccNumber() {
-        return maskedAccNumber;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setMaskedAccNumber(String maskedAccNumber) {
-        this.maskedAccNumber = maskedAccNumber;
-    }
+	public Long getDob() {
+		return dob;
+	}
 
-    public String getAccountType() {
-        return accountType;
-    }
+	public void setDob(Long dob) {
+		this.dob = dob;
+	}
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public String getLandLine() {
-        return landLine;
-    }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public void setLandLine(String landLine) {
-        this.landLine = landLine;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getLandLine() {
+		return landLine;
+	}
 
-    public Boolean getCkycCompliance() {
-        return ckycCompliance;
-    }
+	public void setLandLine(String landLine) {
+		this.landLine = landLine;
+	}
 
-    public void setCkycCompliance(Boolean ckycCompliance) {
-        this.ckycCompliance = ckycCompliance;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getLinkedAccRef() {
-        return linkedAccRef;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setLinkedAccRef(String linkedAccRef) {
-        this.linkedAccRef = linkedAccRef;
-    }
+	public Boolean getCkycCompliance() {
+		return ckycCompliance;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setCkycCompliance(Boolean ckycCompliance) {
+		this.ckycCompliance = ckycCompliance;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getPan() {
-        return pan;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public String getNominee() {
-        return nominee;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public void setNominee(String nominee) {
-        this.nominee = nominee;
-    }
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+
+	public String getNominee() {
+		return nominee;
+	}
+
+	public void setNominee(String nominee) {
+		this.nominee = nominee;
+	}
 }

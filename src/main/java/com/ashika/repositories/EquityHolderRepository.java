@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.EquityHolderEntity;
 
 @Repository
-public interface EquityHolderRepository extends JpaRepository<EquityHolderEntity, String> {
+public interface EquityHolderRepository extends JpaRepository<EquityHolderEntity, Long> {
+	
 	public List<EquityHolderEntity> findAllByPan(String pan);
-		
+	
+	public void deleteAllByPan(String pan);
 }

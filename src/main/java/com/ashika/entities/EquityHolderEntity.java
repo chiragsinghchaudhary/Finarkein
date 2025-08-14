@@ -1,13 +1,21 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_holder")
+@Table(name = "equity_holder",indexes = {
+	    @Index(name = "idx_equity_holder_pan", columnList = "pan")
+	})
 public class EquityHolderEntity {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
     private String address;
     private String dematId;
     private Long dob;
@@ -17,8 +25,6 @@ public class EquityHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
-
-    @Id
     private String pan;
 
     public EquityHolderEntity(String address, String dematId, Long dob, String email, Boolean kycCompliance,

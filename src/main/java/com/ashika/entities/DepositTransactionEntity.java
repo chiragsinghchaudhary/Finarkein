@@ -1,18 +1,25 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deposit_transaction")
+@Table(name = "deposit_transaction",indexes = {
+	    @Index(name = "idx_deposit_transaction_pan", columnList = "pan")
+	})
 public class DepositTransactionEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String pan;
     private String reference;
     private String transactionId;
-    
-    @Id
     private String maskedAccNumber;
     private Long transactionTimestamp;
     private String accountType;
@@ -47,107 +54,115 @@ public class DepositTransactionEntity {
         // Default constructor for JPA
     }
 
-    public String getPan() {
-        return pan;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getReference() {
-        return reference;
-    }
+	public String getPan() {
+		return pan;
+	}
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+	public String getReference() {
+		return reference;
+	}
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
 
-    public String getMaskedAccNumber() {
-        return maskedAccNumber;
-    }
+	public String getTransactionId() {
+		return transactionId;
+	}
 
-    public void setMaskedAccNumber(String maskedAccNumber) {
-        this.maskedAccNumber = maskedAccNumber;
-    }
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
 
-    public Long getTransactionTimestamp() {
-        return transactionTimestamp;
-    }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public void setTransactionTimestamp(Long transactionTimestamp) {
-        this.transactionTimestamp = transactionTimestamp;
-    }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getAccountType() {
-        return accountType;
-    }
+	public Long getTransactionTimestamp() {
+		return transactionTimestamp;
+	}
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
+	public void setTransactionTimestamp(Long transactionTimestamp) {
+		this.transactionTimestamp = transactionTimestamp;
+	}
 
-    public Double getCurrentBalance() {
-        return currentBalance;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public void setCurrentBalance(Double currentBalance) {
-        this.currentBalance = currentBalance;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
-    public Double getAmount() {
-        return amount;
-    }
+	public Double getCurrentBalance() {
+		return currentBalance;
+	}
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
+	public void setCurrentBalance(Double currentBalance) {
+		this.currentBalance = currentBalance;
+	}
 
-    public Long getValueDate() {
-        return valueDate;
-    }
+	public Double getAmount() {
+		return amount;
+	}
 
-    public void setValueDate(Long valueDate) {
-        this.valueDate = valueDate;
-    }
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 
-    public String getNarration() {
-        return narration;
-    }
+	public Long getValueDate() {
+		return valueDate;
+	}
 
-    public void setNarration(String narration) {
-        this.narration = narration;
-    }
+	public void setValueDate(Long valueDate) {
+		this.valueDate = valueDate;
+	}
 
-    public String getMode() {
-        return mode;
-    }
+	public String getNarration() {
+		return narration;
+	}
 
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
 
-    public String getLinkedAccRef() {
-        return linkedAccRef;
-    }
+	public String getMode() {
+		return mode;
+	}
 
-    public void setLinkedAccRef(String linkedAccRef) {
-        this.linkedAccRef = linkedAccRef;
-    }
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.MFSummaryEntity;
 
 @Repository
-public interface MFSummaryRepository extends JpaRepository<MFSummaryEntity, String> {
+public interface MFSummaryRepository extends JpaRepository<MFSummaryEntity, Long> {
+	
 	public List<MFSummaryEntity> findAllByPan(String pan);
+	
+	public void deleteAllByPan(String pan);
 }

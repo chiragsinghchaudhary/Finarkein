@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.DepositHolderEntity;
 
 @Repository
-public interface DepositHolderRepository extends JpaRepository<DepositHolderEntity, String> {
+public interface DepositHolderRepository extends JpaRepository<DepositHolderEntity, Long> {
 	
 	public List<DepositHolderEntity> findAllByPan(String pan);
+	
+	public void deleteAllByPan(String pan);
 	
 }

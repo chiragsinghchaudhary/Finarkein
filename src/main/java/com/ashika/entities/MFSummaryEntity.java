@@ -1,13 +1,22 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mf_summary")
+@Table(name = "mf_summary",indexes = {
+	    @Index(name = "idx_mf_summary_pan", columnList = "pan")
+	})
 public class MFSummaryEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
     private Double costValue;
     private Double currentValue;
     private String fatcaStatus;
@@ -27,8 +36,6 @@ public class MFSummaryEntity {
     private String schemeOption;
     private String schemeTypes;
     private String ucc;
-
-    @Id
     private String pan;
 
     public MFSummaryEntity(Double costValue, Double currentValue, String fatcaStatus, String amc,

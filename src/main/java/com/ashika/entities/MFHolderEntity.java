@@ -1,13 +1,22 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mf_holder")
+@Table(name = "mf_holder",indexes = {
+	    @Index(name = "idx_mf_holder_pan", columnList = "pan")
+	})
 public class MFHolderEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
     private String address;
     private String dematId;
     private Long dob;
@@ -18,8 +27,6 @@ public class MFHolderEntity {
     private String mobile;
     private String name;
     private String nominee;
-
-    @Id
     private String pan;
 
     public MFHolderEntity(String address, String dematId, Long dob, String email, String folioNo,

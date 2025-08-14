@@ -1,13 +1,22 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "equity_transaction")
+@Table(name = "equity_transaction",indexes = {
+	    @Index(name = "idx_equity_transaction_pan", columnList = "pan")
+	})
 public class EquityTransactionEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
     private String companyName;
     private String equityCategory;
     private String exchange;
@@ -20,8 +29,6 @@ public class EquityTransactionEntity {
     private String txnId;
     private String type;
     private Double units;
-
-    @Id
     private String pan;
 
     public EquityTransactionEntity(String companyName, String equityCategory, String exchange, String isin,

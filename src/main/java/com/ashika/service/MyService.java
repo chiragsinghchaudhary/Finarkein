@@ -411,23 +411,23 @@ public class MyService {
 
 		// --- Data Save Logic ---
 		String pan = clientConsentMappingEntity.getPan();
-		List<String> idList = new ArrayList<>();
-		idList.add(pan);
 
 		if (Constants.SUCCESS.equals(resultResponse.getState().getDataFetchStatus())) {
 			long dbSaveStart = System.currentTimeMillis();
 			logger.info("DB replace operation started -> pan={}", pan);
 
 			// Delete old records
-			depositHolderRepository.deleteAllById(idList);
-			depositSummaryRepository.deleteAllById(idList);
-			depositTransactionRepository.deleteAllById(idList);
-			equityHolderRepository.deleteAllById(idList);
-			equitySummaryRepository.deleteAllById(idList);
-			equityTransactionRepository.deleteAllById(idList);
-			mfHolderRepository.deleteAllById(idList);
-			mfSummaryRepository.deleteAllById(idList);
-			mfTransactionRepository.deleteAllById(idList);
+			depositHolderRepository.deleteAllByPan(pan);
+			depositSummaryRepository.deleteAllByPan(pan);
+			depositTransactionRepository.deleteAllByPan(pan);
+			equityHolderRepository.deleteAllByPan(pan);
+			equitySummaryRepository.deleteAllByPan(pan);
+			equityTransactionRepository.deleteAllByPan(pan);
+			mfHolderRepository.deleteAllByPan(pan);
+			mfSummaryRepository.deleteAllByPan(pan);
+			mfTransactionRepository.deleteAllByPan(pan);
+			
+			
 			logger.debug("Deleted existing records for pan={}", pan);
 
 			// Save new records

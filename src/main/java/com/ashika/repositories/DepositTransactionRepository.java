@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.DepositTransactionEntity;
 
 @Repository
-public interface DepositTransactionRepository extends JpaRepository<DepositTransactionEntity, String> {
+public interface DepositTransactionRepository extends JpaRepository<DepositTransactionEntity, Long> {
+	
 	public List<DepositTransactionEntity> findAllByPan(String pan);
+	
+	public void deleteAllByPan(String pan);
 
 }

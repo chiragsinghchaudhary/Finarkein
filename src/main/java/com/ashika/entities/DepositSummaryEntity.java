@@ -1,229 +1,242 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deposit_summary")
+@Table(name = "deposit_summary", indexes = { @Index(name = "idx_deposit_summary_pan", columnList = "pan") })
 public class DepositSummaryEntity {
 
-    private Long currentODLimit;
-    private String openingDate;
-    private String fipName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Id
-    private String maskedAccNumber;
+	private Long currentODLimit;
+	private String openingDate;
+	private String fipName;
+	private String maskedAccNumber;
 
-    private String branch;
-    private String accountType;
-    private Double currentBalance;
-    private Double drawingLimit;
-    private Long accountAgeInDays;
-    private String pendingTransactionType;
-    private String status;
-    private String micrCode;
-    private Long balanceDatetime;
-    private String currency;
-    private Double pendingAmount;
-    private String linkedAccRef;
-    private String ifscCode;
-    private String type;
-    private String facility;
-    private String exchangeRate;
-    private String pan;
+	private String branch;
+	private String accountType;
+	private Double currentBalance;
+	private Double drawingLimit;
+	private Long accountAgeInDays;
+	private String pendingTransactionType;
+	private String status;
+	private String micrCode;
+	private Long balanceDatetime;
+	private String currency;
+	private Double pendingAmount;
+	private String linkedAccRef;
+	private String ifscCode;
+	private String type;
+	private String facility;
+	private String exchangeRate;
+	private String pan;
 
-    public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
-                                 String branch, String accountType, Double currentBalance, Double drawingLimit,
-                                 Long accountAgeInDays, String pendingTransactionType, String status, String micrCode,
-                                 Long balanceDatetime, String currency, Double pendingAmount, String linkedAccRef,
-                                 String ifscCode, String type, String facility, String exchangeRate, String pan) {
-        this.currentODLimit = currentODLimit;
-        this.openingDate = openingDate;
-        this.fipName = fipName;
-        this.maskedAccNumber = maskedAccNumber;
-        this.branch = branch;
-        this.accountType = accountType;
-        this.currentBalance = currentBalance;
-        this.drawingLimit = drawingLimit;
-        this.accountAgeInDays = accountAgeInDays;
-        this.pendingTransactionType = pendingTransactionType;
-        this.status = status;
-        this.micrCode = micrCode;
-        this.balanceDatetime = balanceDatetime;
-        this.currency = currency;
-        this.pendingAmount = pendingAmount;
-        this.linkedAccRef = linkedAccRef;
-        this.ifscCode = ifscCode;
-        this.type = type;
-        this.facility = facility;
-        this.exchangeRate = exchangeRate;
-        this.pan = pan;
-    }
+	public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
+			String branch, String accountType, Double currentBalance, Double drawingLimit, Long accountAgeInDays,
+			String pendingTransactionType, String status, String micrCode, Long balanceDatetime, String currency,
+			Double pendingAmount, String linkedAccRef, String ifscCode, String type, String facility,
+			String exchangeRate, String pan) {
+		this.currentODLimit = currentODLimit;
+		this.openingDate = openingDate;
+		this.fipName = fipName;
+		this.maskedAccNumber = maskedAccNumber;
+		this.branch = branch;
+		this.accountType = accountType;
+		this.currentBalance = currentBalance;
+		this.drawingLimit = drawingLimit;
+		this.accountAgeInDays = accountAgeInDays;
+		this.pendingTransactionType = pendingTransactionType;
+		this.status = status;
+		this.micrCode = micrCode;
+		this.balanceDatetime = balanceDatetime;
+		this.currency = currency;
+		this.pendingAmount = pendingAmount;
+		this.linkedAccRef = linkedAccRef;
+		this.ifscCode = ifscCode;
+		this.type = type;
+		this.facility = facility;
+		this.exchangeRate = exchangeRate;
+		this.pan = pan;
+	}
 
-    protected DepositSummaryEntity() {
-        // Default constructor for JPA
-    }
+	protected DepositSummaryEntity() {
+		// Default constructor for JPA
+	}
 
-    public Long getCurrentODLimit() {
-        return currentODLimit;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCurrentODLimit(Long currentODLimit) {
-        this.currentODLimit = currentODLimit;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getOpeningDate() {
-        return openingDate;
-    }
+	public Long getCurrentODLimit() {
+		return currentODLimit;
+	}
 
-    public void setOpeningDate(String openingDate) {
-        this.openingDate = openingDate;
-    }
+	public void setCurrentODLimit(Long currentODLimit) {
+		this.currentODLimit = currentODLimit;
+	}
 
-    public String getFipName() {
-        return fipName;
-    }
+	public String getOpeningDate() {
+		return openingDate;
+	}
 
-    public void setFipName(String fipName) {
-        this.fipName = fipName;
-    }
+	public void setOpeningDate(String openingDate) {
+		this.openingDate = openingDate;
+	}
 
-    public String getMaskedAccNumber() {
-        return maskedAccNumber;
-    }
+	public String getFipName() {
+		return fipName;
+	}
 
-    public void setMaskedAccNumber(String maskedAccNumber) {
-        this.maskedAccNumber = maskedAccNumber;
-    }
+	public void setFipName(String fipName) {
+		this.fipName = fipName;
+	}
 
-    public String getBranch() {
-        return branch;
-    }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getAccountType() {
-        return accountType;
-    }
+	public String getBranch() {
+		return branch;
+	}
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
 
-    public Double getCurrentBalance() {
-        return currentBalance;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public void setCurrentBalance(Double currentBalance) {
-        this.currentBalance = currentBalance;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
-    public Double getDrawingLimit() {
-        return drawingLimit;
-    }
+	public Double getCurrentBalance() {
+		return currentBalance;
+	}
 
-    public void setDrawingLimit(Double drawingLimit) {
-        this.drawingLimit = drawingLimit;
-    }
+	public void setCurrentBalance(Double currentBalance) {
+		this.currentBalance = currentBalance;
+	}
 
-    public Long getAccountAgeInDays() {
-        return accountAgeInDays;
-    }
+	public Double getDrawingLimit() {
+		return drawingLimit;
+	}
 
-    public void setAccountAgeInDays(Long accountAgeInDays) {
-        this.accountAgeInDays = accountAgeInDays;
-    }
+	public void setDrawingLimit(Double drawingLimit) {
+		this.drawingLimit = drawingLimit;
+	}
 
-    public String getPendingTransactionType() {
-        return pendingTransactionType;
-    }
+	public Long getAccountAgeInDays() {
+		return accountAgeInDays;
+	}
 
-    public void setPendingTransactionType(String pendingTransactionType) {
-        this.pendingTransactionType = pendingTransactionType;
-    }
+	public void setAccountAgeInDays(Long accountAgeInDays) {
+		this.accountAgeInDays = accountAgeInDays;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getPendingTransactionType() {
+		return pendingTransactionType;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setPendingTransactionType(String pendingTransactionType) {
+		this.pendingTransactionType = pendingTransactionType;
+	}
 
-    public String getMicrCode() {
-        return micrCode;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setMicrCode(String micrCode) {
-        this.micrCode = micrCode;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public Long getBalanceDatetime() {
-        return balanceDatetime;
-    }
+	public String getMicrCode() {
+		return micrCode;
+	}
 
-    public void setBalanceDatetime(Long balanceDatetime) {
-        this.balanceDatetime = balanceDatetime;
-    }
+	public void setMicrCode(String micrCode) {
+		this.micrCode = micrCode;
+	}
 
-    public String getCurrency() {
-        return currency;
-    }
+	public Long getBalanceDatetime() {
+		return balanceDatetime;
+	}
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+	public void setBalanceDatetime(Long balanceDatetime) {
+		this.balanceDatetime = balanceDatetime;
+	}
 
-    public Double getPendingAmount() {
-        return pendingAmount;
-    }
+	public String getCurrency() {
+		return currency;
+	}
 
-    public void setPendingAmount(Double pendingAmount) {
-        this.pendingAmount = pendingAmount;
-    }
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 
-    public String getLinkedAccRef() {
-        return linkedAccRef;
-    }
+	public Double getPendingAmount() {
+		return pendingAmount;
+	}
 
-    public void setLinkedAccRef(String linkedAccRef) {
-        this.linkedAccRef = linkedAccRef;
-    }
+	public void setPendingAmount(Double pendingAmount) {
+		this.pendingAmount = pendingAmount;
+	}
 
-    public String getIfscCode() {
-        return ifscCode;
-    }
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
 
-    public void setIfscCode(String ifscCode) {
-        this.ifscCode = ifscCode;
-    }
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getIfscCode() {
+		return ifscCode;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
 
-    public String getFacility() {
-        return facility;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setFacility(String facility) {
-        this.facility = facility;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public String getExchangeRate() {
-        return exchangeRate;
-    }
+	public String getFacility() {
+		return facility;
+	}
 
-    public void setExchangeRate(String exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
+	public void setFacility(String facility) {
+		this.facility = facility;
+	}
+
+	public String getExchangeRate() {
+		return exchangeRate;
+	}
+
+	public void setExchangeRate(String exchangeRate) {
+		this.exchangeRate = exchangeRate;
+	}
 
 	public String getPan() {
 		return pan;
@@ -232,6 +245,5 @@ public class DepositSummaryEntity {
 	public void setPan(String pan) {
 		this.pan = pan;
 	}
-    
-    
+
 }

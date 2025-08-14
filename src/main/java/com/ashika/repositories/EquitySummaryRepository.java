@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.EquitySummaryEntity;
 
 @Repository
-public interface EquitySummaryRepository extends JpaRepository<EquitySummaryEntity, String> {
+public interface EquitySummaryRepository extends JpaRepository<EquitySummaryEntity, Long> {
+	
 	public List<EquitySummaryEntity> findAllByPan(String pan);
+	
+	public void deleteAllByPan(String pan);
 		
 }

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.MFHolderEntity;
 
 @Repository
-public interface MFHolderRepository extends JpaRepository<MFHolderEntity, String> {
+public interface MFHolderRepository extends JpaRepository<MFHolderEntity, Long> {
+	
 	public List<MFHolderEntity> findAllByPan(String pan);
+	
+	public void deleteAllByPan(String pan);
 }

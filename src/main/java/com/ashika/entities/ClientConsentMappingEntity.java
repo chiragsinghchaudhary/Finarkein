@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Client_Consent_Mapping",indexes = {
-	    @Index(name = "idx_requestId", columnList = "requestId"),
-	    @Index(name = "idx_pan_requestId", columnList = "pan, requestId")
+	    @Index(name = "idx_client_consent_requestId", columnList = "requestId"),
+	    @Index(name = "idx_client_consent_pan_requestId", columnList = "pan, requestId")
 	})
 public class ClientConsentMappingEntity{
 	

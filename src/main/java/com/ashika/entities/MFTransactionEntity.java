@@ -1,13 +1,22 @@
 package com.ashika.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mf_transaction")
+@Table(name = "mf_transaction",indexes = {
+	    @Index(name = "idx_mf_transaction_pan", columnList = "pan")
+	})
 public class MFTransactionEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
     private String amc;
     private String amfiCode;
     private Double amount;
@@ -27,8 +36,6 @@ public class MFTransactionEntity {
     private String type;
     private String ucc;
     private Double units;
-
-    @Id
     private String pan;
 
     public MFTransactionEntity(String amc, String amfiCode, Double amount, String isin, String isinDescription,
