@@ -17,214 +17,275 @@ public class MFTransactionEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-    private String amc;
-    private String amfiCode;
-    private Double amount;
-    private String isin;
+	private String ucc;
+	private String txnId;
+	private String maskedDematID;
+	private Double nav;
+	private String maskedAccNumber;
+	private String isin;
     private String isinDescription;
-    private Integer lockInDays;
-    private String lockInFlag;
-    private String mode;
-    private String narration;
-    private Double nav;
-    private String navDate;
-    private String registrar;
     private String schemeCode;
     private String schemePlan;
-    private Long transactionDate;
-    private String txnId;
-    private String type;
-    private String ucc;
+    private String accountType;
+    private Double amount;
+    private String amc;
+    private String registrar;
+    private String narration;
     private Double units;
+    private String mode;
+    private Integer lockInDays;
+    private String navDate;
+    private String linkedAccRef;
+    private String lockInFlag;
+    private Long transactionDate;
+    private String type;
+    private String maskedFolioNo;
+    private String amfiCode;
+    
     private String pan;
 
-    public MFTransactionEntity(String amc, String amfiCode, Double amount, String isin, String isinDescription,
-                                Integer lockInDays, String lockInFlag, String mode, String narration,
-                                Double nav, String navDate, String registrar, String schemeCode, String schemePlan,
-                                Long transactionDate, String txnId, String type, String ucc, Double units, String pan) {
-        this.amc = amc;
-        this.amfiCode = amfiCode;
-        this.amount = amount;
-        this.isin = isin;
-        this.isinDescription = isinDescription;
-        this.lockInDays = lockInDays;
-        this.lockInFlag = lockInFlag;
-        this.mode = mode;
-        this.narration = narration;
-        this.nav = nav;
-        this.navDate = navDate;
-        this.registrar = registrar;
-        this.schemeCode = schemeCode;
-        this.schemePlan = schemePlan;
-        this.transactionDate = transactionDate;
-        this.txnId = txnId;
-        this.type = type;
-        this.ucc = ucc;
-        this.units = units;
-        this.pan = pan;
-    }
+    public MFTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav, String maskedAccNumber,
+			String isin, String isinDescription, String schemeCode, String schemePlan, String accountType,
+			Double amount, String amc, String registrar, String narration, Double units, String mode,
+			Integer lockInDays, String navDate, String linkedAccRef, String lockInFlag, Long transactionDate,
+			String type, String maskedFolioNo, String amfiCode, String pan) {
+		super();
+		this.ucc = ucc;
+		this.txnId = txnId;
+		this.maskedDematID = maskedDematID;
+		this.nav = nav;
+		this.maskedAccNumber = maskedAccNumber;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.schemeCode = schemeCode;
+		this.schemePlan = schemePlan;
+		this.accountType = accountType;
+		this.amount = amount;
+		this.amc = amc;
+		this.registrar = registrar;
+		this.narration = narration;
+		this.units = units;
+		this.mode = mode;
+		this.lockInDays = lockInDays;
+		this.navDate = navDate;
+		this.linkedAccRef = linkedAccRef;
+		this.lockInFlag = lockInFlag;
+		this.transactionDate = transactionDate;
+		this.type = type;
+		this.maskedFolioNo = maskedFolioNo;
+		this.amfiCode = amfiCode;
+		this.pan = pan;
+	}
 
-    protected MFTransactionEntity() {
+	protected MFTransactionEntity() {
         // Default constructor for JPA
     }
 
-    public String getAmc() {
-        return amc;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setAmc(String amc) {
-        this.amc = amc;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getAmfiCode() {
-        return amfiCode;
-    }
+	public String getUcc() {
+		return ucc;
+	}
 
-    public void setAmfiCode(String amfiCode) {
-        this.amfiCode = amfiCode;
-    }
+	public void setUcc(String ucc) {
+		this.ucc = ucc;
+	}
 
-    public Double getAmount() {
-        return amount;
-    }
+	public String getTxnId() {
+		return txnId;
+	}
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
+	public void setTxnId(String txnId) {
+		this.txnId = txnId;
+	}
 
-    public String getIsin() {
-        return isin;
-    }
+	public String getMaskedDematID() {
+		return maskedDematID;
+	}
 
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
+	public void setMaskedDematID(String maskedDematID) {
+		this.maskedDematID = maskedDematID;
+	}
 
-    public String getIsinDescription() {
-        return isinDescription;
-    }
+	public Double getNav() {
+		return nav;
+	}
 
-    public void setIsinDescription(String isinDescription) {
-        this.isinDescription = isinDescription;
-    }
+	public void setNav(Double nav) {
+		this.nav = nav;
+	}
 
-    public Integer getLockInDays() {
-        return lockInDays;
-    }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public void setLockInDays(Integer lockInDays) {
-        this.lockInDays = lockInDays;
-    }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getLockInFlag() {
-        return lockInFlag;
-    }
+	public String getIsin() {
+		return isin;
+	}
 
-    public void setLockInFlag(String lockInFlag) {
-        this.lockInFlag = lockInFlag;
-    }
+	public void setIsin(String isin) {
+		this.isin = isin;
+	}
 
-    public String getMode() {
-        return mode;
-    }
+	public String getIsinDescription() {
+		return isinDescription;
+	}
 
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
+	public void setIsinDescription(String isinDescription) {
+		this.isinDescription = isinDescription;
+	}
 
-    public String getNarration() {
-        return narration;
-    }
+	public String getSchemeCode() {
+		return schemeCode;
+	}
 
-    public void setNarration(String narration) {
-        this.narration = narration;
-    }
+	public void setSchemeCode(String schemeCode) {
+		this.schemeCode = schemeCode;
+	}
 
-    public Double getNav() {
-        return nav;
-    }
+	public String getSchemePlan() {
+		return schemePlan;
+	}
 
-    public void setNav(Double nav) {
-        this.nav = nav;
-    }
+	public void setSchemePlan(String schemePlan) {
+		this.schemePlan = schemePlan;
+	}
 
-    public String getNavDate() {
-        return navDate;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public void setNavDate(String navDate) {
-        this.navDate = navDate;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
-    public String getRegistrar() {
-        return registrar;
-    }
+	public Double getAmount() {
+		return amount;
+	}
 
-    public void setRegistrar(String registrar) {
-        this.registrar = registrar;
-    }
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 
-    public String getSchemeCode() {
-        return schemeCode;
-    }
+	public String getAmc() {
+		return amc;
+	}
 
-    public void setSchemeCode(String schemeCode) {
-        this.schemeCode = schemeCode;
-    }
+	public void setAmc(String amc) {
+		this.amc = amc;
+	}
 
-    public String getSchemePlan() {
-        return schemePlan;
-    }
+	public String getRegistrar() {
+		return registrar;
+	}
 
-    public void setSchemePlan(String schemePlan) {
-        this.schemePlan = schemePlan;
-    }
+	public void setRegistrar(String registrar) {
+		this.registrar = registrar;
+	}
 
-    public Long getTransactionDate() {
-        return transactionDate;
-    }
+	public String getNarration() {
+		return narration;
+	}
 
-    public void setTransactionDate(Long transactionDate) {
-        this.transactionDate = transactionDate;
-    }
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
 
-    public String getTxnId() {
-        return txnId;
-    }
+	public Double getUnits() {
+		return units;
+	}
 
-    public void setTxnId(String txnId) {
-        this.txnId = txnId;
-    }
+	public void setUnits(Double units) {
+		this.units = units;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getMode() {
+		return mode;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 
-    public String getUcc() {
-        return ucc;
-    }
+	public Integer getLockInDays() {
+		return lockInDays;
+	}
 
-    public void setUcc(String ucc) {
-        this.ucc = ucc;
-    }
+	public void setLockInDays(Integer lockInDays) {
+		this.lockInDays = lockInDays;
+	}
 
-    public Double getUnits() {
-        return units;
-    }
+	public String getNavDate() {
+		return navDate;
+	}
 
-    public void setUnits(Double units) {
-        this.units = units;
-    }
+	public void setNavDate(String navDate) {
+		this.navDate = navDate;
+	}
 
-    public String getPan() {
-        return pan;
-    }
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public String getLockInFlag() {
+		return lockInFlag;
+	}
+
+	public void setLockInFlag(String lockInFlag) {
+		this.lockInFlag = lockInFlag;
+	}
+
+	public Long getTransactionDate() {
+		return transactionDate;
+	}
+
+	public void setTransactionDate(Long transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getMaskedFolioNo() {
+		return maskedFolioNo;
+	}
+
+	public void setMaskedFolioNo(String maskedFolioNo) {
+		this.maskedFolioNo = maskedFolioNo;
+	}
+
+	public String getAmfiCode() {
+		return amfiCode;
+	}
+
+	public void setAmfiCode(String amfiCode) {
+		this.amfiCode = amfiCode;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 }
