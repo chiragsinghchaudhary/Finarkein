@@ -1,29 +1,28 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({
+        "ucc", "maskedDematID", "nav", "maskedAccNumber", "isin", "isinDescription",
+        "schemeCode", "folioNo", "account_type", "costValue", "closingUnits", "amc",
+        "registrar", "schemeOption", "schemeCategory", "fatcaStatus", "lienUnits",
+        "lockinUnits", "navDate", "linkedAccRef", "currentValue", "schemeTypes",
+        "maskedFolioNo", "amfiCode"
+})
 public class MFSummary {
 
-    @JsonProperty("costValue")
-    private Double costValue;
+    @JsonProperty("ucc")
+    private String ucc;
 
-    @JsonProperty("currentValue")
-    private Double currentValue;
+    @JsonProperty("maskedDematID")
+    private String maskedDematID;
 
-    @JsonProperty("FatcaStatus")
-    private String fatcaStatus;
+    @JsonProperty("nav")
+    private Double nav;
 
-    @JsonProperty("amc")
-    private String amc;
-
-    @JsonProperty("amfiCode")
-    private String amfiCode;
-
-    @JsonProperty("closingUnits")
-    private Double closingUnits;
-
-    @JsonProperty("folioNo")
-    private String folioNo;
+    @JsonProperty("maskedAccNumber")
+    private String maskedAccNumber;
 
     @JsonProperty("isin")
     private String isin;
@@ -31,57 +30,72 @@ public class MFSummary {
     @JsonProperty("isinDescription")
     private String isinDescription;
 
-    @JsonProperty("lienUnits")
-    private Double lienUnits;
+    @JsonProperty("schemeCode")
+    private String schemeCode;
 
-    @JsonProperty("lockinUnits")
-    private Double lockinUnits;
+    @JsonProperty("folioNo")
+    private String folioNo;
 
-    @JsonProperty("nav")
-    private Double nav;
+    @JsonProperty("account_type")
+    private String accountType;
 
-    @JsonProperty("navDate")
-    private String navDate;
+    @JsonProperty("costValue")
+    private Double costValue;
+
+    @JsonProperty("closingUnits")
+    private String closingUnits; // Example JSON shows "0.000" (String)
+
+    @JsonProperty("amc")
+    private String amc;
 
     @JsonProperty("registrar")
     private String registrar;
 
+    @JsonProperty("schemeOption")
+    private String schemeOption;
+
     @JsonProperty("schemeCategory")
     private String schemeCategory;
 
-    @JsonProperty("schemeCode")
-    private String schemeCode;
+    @JsonProperty("fatcaStatus")
+    private String fatcaStatus;
 
-    @JsonProperty("schemeOption")
-    private String schemeOption;
+    @JsonProperty("lienUnits")
+    private String lienUnits;
+
+    @JsonProperty("lockinUnits")
+    private String lockinUnits; 
+
+    @JsonProperty("navDate")
+    private Long navDate;
+
+    @JsonProperty("linkedAccRef")
+    private String linkedAccRef;
+
+    @JsonProperty("currentValue")
+    private Double currentValue;
 
     @JsonProperty("schemeTypes")
     private String schemeTypes;
 
-    @JsonProperty("ucc")
-    private String ucc;
+    @JsonProperty("maskedFolioNo")
+    private String maskedFolioNo;
+
+    @JsonProperty("amfiCode")
+    private String amfiCode;
 
     // Getters & Setters
-    public Double getCostValue() { return costValue; }
-    public void setCostValue(Double costValue) { this.costValue = costValue; }
+    public String getUcc() { return ucc; }
+    public void setUcc(String ucc) { this.ucc = ucc; }
 
-    public Double getCurrentValue() { return currentValue; }
-    public void setCurrentValue(Double currentValue) { this.currentValue = currentValue; }
+    public String getMaskedDematID() { return maskedDematID; }
+    public void setMaskedDematID(String maskedDematID) { this.maskedDematID = maskedDematID; }
 
-    public String getFatcaStatus() { return fatcaStatus; }
-    public void setFatcaStatus(String fatcaStatus) { this.fatcaStatus = fatcaStatus; }
+    public Double getNav() { return nav; }
+    public void setNav(Double nav) { this.nav = nav; }
 
-    public String getAmc() { return amc; }
-    public void setAmc(String amc) { this.amc = amc; }
-
-    public String getAmfiCode() { return amfiCode; }
-    public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
-
-    public Double getClosingUnits() { return closingUnits; }
-    public void setClosingUnits(Double closingUnits) { this.closingUnits = closingUnits; }
-
-    public String getFolioNo() { return folioNo; }
-    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
+    public String getMaskedAccNumber() { return maskedAccNumber; }
+    public void setMaskedAccNumber(String maskedAccNumber) { this.maskedAccNumber = maskedAccNumber; }
 
     public String getIsin() { return isin; }
     public void setIsin(String isin) { this.isin = isin; }
@@ -89,34 +103,57 @@ public class MFSummary {
     public String getIsinDescription() { return isinDescription; }
     public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
 
-    public Double getLienUnits() { return lienUnits; }
-    public void setLienUnits(Double lienUnits) { this.lienUnits = lienUnits; }
+    public String getSchemeCode() { return schemeCode; }
+    public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
 
-    public Double getLockinUnits() { return lockinUnits; }
-    public void setLockinUnits(Double lockinUnits) { this.lockinUnits = lockinUnits; }
+    public String getFolioNo() { return folioNo; }
+    public void setFolioNo(String folioNo) { this.folioNo = folioNo; }
 
-    public Double getNav() { return nav; }
-    public void setNav(Double nav) { this.nav = nav; }
+    public String getAccountType() { return accountType; }
+    public void setAccountType(String accountType) { this.accountType = accountType; }
 
-    public String getNavDate() { return navDate; }
-    public void setNavDate(String navDate) { this.navDate = navDate; }
+    public Double getCostValue() { return costValue; }
+    public void setCostValue(Double costValue) { this.costValue = costValue; }
+
+    public String getClosingUnits() { return closingUnits; }
+    public void setClosingUnits(String closingUnits) { this.closingUnits = closingUnits; }
+
+    public String getAmc() { return amc; }
+    public void setAmc(String amc) { this.amc = amc; }
 
     public String getRegistrar() { return registrar; }
     public void setRegistrar(String registrar) { this.registrar = registrar; }
 
+    public String getSchemeOption() { return schemeOption; }
+    public void setSchemeOption(String schemeOption) { this.schemeOption = schemeOption; }
+
     public String getSchemeCategory() { return schemeCategory; }
     public void setSchemeCategory(String schemeCategory) { this.schemeCategory = schemeCategory; }
 
-    public String getSchemeCode() { return schemeCode; }
-    public void setSchemeCode(String schemeCode) { this.schemeCode = schemeCode; }
+    public String getFatcaStatus() { return fatcaStatus; }
+    public void setFatcaStatus(String fatcaStatus) { this.fatcaStatus = fatcaStatus; }
 
-    public String getSchemeOption() { return schemeOption; }
-    public void setSchemeOption(String schemeOption) { this.schemeOption = schemeOption; }
+    public String getLienUnits() { return lienUnits; }
+    public void setLienUnits(String lienUnits) { this.lienUnits = lienUnits; }
+
+    public String getLockinUnits() { return lockinUnits; }
+    public void setLockinUnits(String lockinUnits) { this.lockinUnits = lockinUnits; }
+
+    public Long getNavDate() { return navDate; }
+    public void setNavDate(Long navDate) { this.navDate = navDate; }
+
+    public String getLinkedAccRef() { return linkedAccRef; }
+    public void setLinkedAccRef(String linkedAccRef) { this.linkedAccRef = linkedAccRef; }
+
+    public Double getCurrentValue() { return currentValue; }
+    public void setCurrentValue(Double currentValue) { this.currentValue = currentValue; }
 
     public String getSchemeTypes() { return schemeTypes; }
     public void setSchemeTypes(String schemeTypes) { this.schemeTypes = schemeTypes; }
 
-    public String getUcc() { return ucc; }
-    public void setUcc(String ucc) { this.ucc = ucc; }
-}
+    public String getMaskedFolioNo() { return maskedFolioNo; }
+    public void setMaskedFolioNo(String maskedFolioNo) { this.maskedFolioNo = maskedFolioNo; }
 
+    public String getAmfiCode() { return amfiCode; }
+    public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
+}
