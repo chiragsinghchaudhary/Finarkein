@@ -1,7 +1,6 @@
 package com.ashika.service;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.ashika.Constants;
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.RecurringNewRunRequest;
 import com.ashika.data.response.ConsentNewRunResponse;
