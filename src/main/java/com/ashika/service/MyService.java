@@ -676,70 +676,87 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 }
 
 	private List<MFHolder> mapMFHolderEntities(List<MFHolderEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No MFHolderEntity records found to map.");
-			return new ArrayList<>();
-		}
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No MFHolderEntity records found to map.");
+        return new ArrayList<>();
+    }
 
-		logger.debug("Mapping {} MFHolderEntity records to MFHolder response objects", entities.size());
+    logger.debug("Mapping {} MFHolderEntity records to MFHolder response objects", entities.size());
 
-		List<MFHolder> responseList = new ArrayList<>(entities.size());
-		for (MFHolderEntity entity : entities) {
-			MFHolder response = new MFHolder();
-			response.setAddress(entity.getAddress());
-			response.setDematId(entity.getDematId());
-			response.setDob(entity.getDob());
-			response.setEmail(entity.getEmail());
-			response.setFolioNo(entity.getFolioNo());
-			response.setKycCompliance(entity.getKycCompliance());
-			response.setLandline(entity.getLandline());
-			response.setMobile(entity.getMobile());
-			response.setName(entity.getName());
-			response.setNominee(entity.getNominee());
-			response.setPan(entity.getPan());
-			responseList.add(response);
-		}
+    List<MFHolder> responseList = new ArrayList<>(entities.size());
+    for (MFHolderEntity entity : entities) {
+        MFHolder response = new MFHolder();
 
-		logger.debug("Successfully mapped {} MFHolder response objects", responseList.size());
-		return responseList;
-	}
+        // Order as per given JSON
+        response.setName(entity.getName());
+        response.setMaskedDematID(entity.getMaskedDematID());
+        response.setEmail(entity.getEmail());
+        response.setDob(entity.getDob());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setFolioNo(entity.getFolioNo());
+        response.setAccountType(entity.getAccountType());
+        response.setLandline(entity.getLandline());
+        response.setDematId(entity.getDematId());
+        response.setAddress(entity.getAddress());
+        response.setCkycCompliance(entity.getCkycCompliance());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setMobile(entity.getMobile());
+        response.setPan(entity.getPan());
+        response.setMaskedFolioNo(entity.getMaskedFolioNo());
+        response.setNominee(entity.getNominee());
+
+        responseList.add(response);
+    }
+
+    logger.debug("Successfully mapped {} MFHolder response objects", responseList.size());
+    return responseList;
+}
+
 
 	private List<MFSummary> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
-		if (entities == null || entities.isEmpty()) {
-			logger.debug("No MFSummaryEntity records found to map.");
-			return new ArrayList<>();
-		}
+    if (entities == null || entities.isEmpty()) {
+        logger.debug("No MFSummaryEntity records found to map.");
+        return new ArrayList<>();
+    }
 
-		logger.debug("Mapping {} MFSummaryEntity records to MFSummary response objects", entities.size());
+    logger.debug("Mapping {} MFSummaryEntity records to MFSummary response objects", entities.size());
 
-		List<MFSummary> responseList = new ArrayList<>(entities.size());
-		for (MFSummaryEntity entity : entities) {
-			MFSummary response = new MFSummary();
-			response.setCostValue(entity.getCostValue());
-			response.setCurrentValue(entity.getCurrentValue());
-			response.setFatcaStatus(entity.getFatcaStatus());
-			response.setAmc(entity.getAmc());
-			response.setAmfiCode(entity.getAmfiCode());
-			response.setClosingUnits(entity.getClosingUnits());
-			response.setFolioNo(entity.getFolioNo());
-			response.setIsin(entity.getIsin());
-			response.setIsinDescription(entity.getIsinDescription());
-			response.setLienUnits(entity.getLienUnits());
-			response.setLockinUnits(entity.getLockinUnits());
-			response.setNav(entity.getNav());
-			response.setNavDate(entity.getNavDate());
-			response.setRegistrar(entity.getRegistrar());
-			response.setSchemeCategory(entity.getSchemeCategory());
-			response.setSchemeCode(entity.getSchemeCode());
-			response.setSchemeOption(entity.getSchemeOption());
-			response.setSchemeTypes(entity.getSchemeTypes());
-			response.setUcc(entity.getUcc());
-			responseList.add(response);
-		}
+    List<MFSummary> responseList = new ArrayList<>(entities.size());
+    for (MFSummaryEntity entity : entities) {
+        MFSummary response = new MFSummary();
 
-		logger.debug("Successfully mapped {} MFSummary response objects", responseList.size());
-		return responseList;
-	}
+        // Order as per given JSON
+        response.setUcc(entity.getUcc());
+        response.setMaskedDematID(entity.getMaskedDematID());
+        response.setNav(entity.getNav());
+        response.setMaskedAccNumber(entity.getMaskedAccNumber());
+        response.setIsin(entity.getIsin());
+        response.setIsinDescription(entity.getIsinDescription());
+        response.setSchemeCode(entity.getSchemeCode());
+        response.setFolioNo(entity.getFolioNo());
+        response.setAccountType(entity.getAccountType());
+        response.setCostValue(entity.getCostValue());
+        response.setClosingUnits(entity.getClosingUnits());
+        response.setAmc(entity.getAmc());
+        response.setRegistrar(entity.getRegistrar());
+        response.setSchemeOption(entity.getSchemeOption());
+        response.setSchemeCategory(entity.getSchemeCategory());
+        response.setFatcaStatus(entity.getFatcaStatus());
+        response.setLienUnits(entity.getLienUnits());
+        response.setLockinUnits(entity.getLockinUnits());
+        response.setNavDate(entity.getNavDate());
+        response.setLinkedAccRef(entity.getLinkedAccRef());
+        response.setCurrentValue(entity.getCurrentValue());
+        response.setSchemeTypes(entity.getSchemeTypes());
+        response.setMaskedFolioNo(entity.getMaskedFolioNo());
+        response.setAmfiCode(entity.getAmfiCode());
+
+        responseList.add(response);
+    }
+
+    logger.debug("Successfully mapped {} MFSummary response objects", responseList.size());
+    return responseList;
+}
 
 	private List<MFTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
