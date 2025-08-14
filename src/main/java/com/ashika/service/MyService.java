@@ -271,7 +271,7 @@ public class MyService {
 			return null; // Or throw custom exception
 		}
 
-		logger.info("DB fetch completed -> pan={} | duration={} ms", pan, System.currentTimeMillis() - dbFetchStart);
+		logger.info("DB fetch completed -> pan={} | consentHandle={} |duration={} ms", pan, clientConsentMappingEntity.getConsentHandle(), System.currentTimeMillis() - dbFetchStart);
 
 		logger.debug("Fetched consentHandle={} for pan={}", clientConsentMappingEntity.getConsentHandle(), pan);
 

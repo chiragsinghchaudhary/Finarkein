@@ -1,41 +1,41 @@
 package com.ashika.data.response;
 
 public class FinarkeinStatusResponse extends BaseResponse {
-    private String requestId;
-    private String state;
-    private String consentStatus;
-    private String dataFetchStatus;
+	private String requestId;
+	private String state;
+	private String consentStatus;
+	private String dataFetchStatus;
 
-    // Getters and setters
-    public String getRequestId() {
-        return requestId;
-    }
+	// Getters and setters
+	public String getRequestId() {
+		return requestId;
+	}
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public String getConsentStatus() {
-        return consentStatus;
-    }
+	public String getConsentStatus() {
+		return consentStatus;
+	}
 
-    public void setConsentStatus(String consentStatus) {
-        this.consentStatus = consentStatus;
-    }
+	public void setConsentStatus(String consentStatus) {
+		this.consentStatus = consentStatus;
+	}
 
-    public String getDataFetchStatus() {
-        return dataFetchStatus;
-    }
+	public String getDataFetchStatus() {
+		return dataFetchStatus;
+	}
 
-    public void setDataFetchStatus(String dataFetchStatus) {
-        this.dataFetchStatus = dataFetchStatus;
-    }
+	public void setDataFetchStatus(String dataFetchStatus) {
+		this.dataFetchStatus = dataFetchStatus;
+	}
 }

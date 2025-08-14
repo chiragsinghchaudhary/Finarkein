@@ -15,25 +15,25 @@ public class DataDictionary {
 
 	@JsonProperty("deposit.transactions")
 	private List<DepositTransaction> depositTransactions;
-	
+
 	@JsonProperty("equity.holders")
-    private List<EquityHolder> equityHolders ;
+	private List<EquityHolder> equityHolders;
 
-    @JsonProperty("equity.summary")
-    private List<EquitySummary> equitySummary;
+	@JsonProperty("equity.summary")
+	private List<EquitySummary> equitySummary;
 
-    @JsonProperty("equity.transactions")
-    private List<EquityTransaction> equityTransactions;
-    
-    @JsonProperty("mf.holder")
-    private List<MFHolder> MFHolders;
+	@JsonProperty("equity.transactions")
+	private List<EquityTransaction> equityTransactions;
 
-    @JsonProperty("mf.summary")
-    private List<MFSummary> MFSummary;
+	@JsonProperty("mf.holder")
+	private List<MFHolder> MFHolders;
 
-    @JsonProperty("mf.transactions")
-    private List<MFTransaction> MFTransactions;
-    
+	@JsonProperty("mf.summary")
+	private List<MFSummary> MFSummary;
+
+	@JsonProperty("mf.transactions")
+	private List<MFTransaction> MFTransactions;
+
 	public List<DepositHolder> getDepositHolders() {
 		return depositHolders;
 	}
@@ -106,4 +106,3 @@ public class DataDictionary {
 		MFTransactions = mFTransactions;
 	}
 }
-

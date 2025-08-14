@@ -1,26 +1,28 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RecurringNewRunResponse {
 
-    @JsonProperty("requestId")
-    private String requestId;
+	@JsonProperty("requestId")
+	private String requestId;
 
-    // No-arg constructor
-    public RecurringNewRunResponse() {}
+	// No-arg constructor
+	public RecurringNewRunResponse() {
+	}
 
-    // Parameterized constructor
-    public RecurringNewRunResponse(String requestId) {
-        this.requestId = requestId;
-    }
+	// Parameterized constructor
+	public RecurringNewRunResponse(String requestId) {
+		this.requestId = requestId;
+	}
 
-    // Getter and Setter
-    public String getRequestId() {
-        return requestId;
-    }
+	// Getter and Setter
+	public String getRequestId() {
+		return requestId;
+	}
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
 
 }
