@@ -3,78 +3,171 @@ package com.ashika.data.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EquityTransaction {
-
-    @JsonProperty("companyName")
-    private String companyName;
-
-    @JsonProperty("equityCategory")
-    private String equityCategory;
-
-    @JsonProperty("exchange")
-    private String exchange;
-
-    @JsonProperty("isin")
+	
+	@JsonProperty("rate")
+    private Double rate;
+	
+	@JsonProperty("txnId")
+    private String txnId;
+	
+	@JsonProperty("transactionDateTime")
+    private Long transactionDateTime;
+	
+	@JsonProperty("orderId")
+    private String orderId;
+	
+	@JsonProperty("maskedAccNumber")
+	private String maskedAccNumber;
+	
+	@JsonProperty("isin")
     private String isin;
 
     @JsonProperty("isinDescription")
     private String isinDescription;
+    
+    @JsonProperty("account_type")
+    private String accountType;
+    
+    @JsonProperty("equityCategory")
+    private String equityCategory;
+    
+    @JsonProperty("exchange")
+    private String exchange;
+
+    @JsonProperty("companyName")
+    private String companyName;
 
     @JsonProperty("narration")
     private String narration;
 
-    @JsonProperty("orderId")
-    private String orderId;
+    @JsonProperty("units")
+    private Double units;
 
-    @JsonProperty("rate")
-    private Double rate;
-
-    @JsonProperty("transactionDateTime")
-    private Long transactionDateTime;
-
-    @JsonProperty("txnId")
-    private String txnId;
+    @JsonProperty("linkedAccRef")
+	private String linkedAccRef;
 
     @JsonProperty("type")
     private String type;
 
-    @JsonProperty("units")
-    private Double units;
+	public Double getRate() {
+		return rate;
+	}
 
-    // Getters & Setters
-    public String getCompanyName() { return companyName; }
-    public void setCompanyName(String companyName) { this.companyName = companyName; }
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
 
-    public String getEquityCategory() { return equityCategory; }
-    public void setEquityCategory(String equityCategory) { this.equityCategory = equityCategory; }
+	public String getTxnId() {
+		return txnId;
+	}
 
-    public String getExchange() { return exchange; }
-    public void setExchange(String exchange) { this.exchange = exchange; }
+	public void setTxnId(String txnId) {
+		this.txnId = txnId;
+	}
 
-    public String getIsin() { return isin; }
-    public void setIsin(String isin) { this.isin = isin; }
+	public Long getTransactionDateTime() {
+		return transactionDateTime;
+	}
 
-    public String getIsinDescription() { return isinDescription; }
-    public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+	public void setTransactionDateTime(Long transactionDateTime) {
+		this.transactionDateTime = transactionDateTime;
+	}
 
-    public String getNarration() { return narration; }
-    public void setNarration(String narration) { this.narration = narration; }
+	public String getOrderId() {
+		return orderId;
+	}
 
-    public String getOrderId() { return orderId; }
-    public void setOrderId(String orderId) { this.orderId = orderId; }
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 
-    public Double getRate() { return rate; }
-    public void setRate(Double rate) { this.rate = rate; }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public Long getTransactionDateTime() { return transactionDateTime; }
-    public void setTransactionDateTime(Long transactionDateTime) { this.transactionDateTime = transactionDateTime; }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getTxnId() { return txnId; }
-    public void setTxnId(String txnId) { this.txnId = txnId; }
+	public String getIsin() {
+		return isin;
+	}
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+	public void setIsin(String isin) {
+		this.isin = isin;
+	}
 
-    public Double getUnits() { return units; }
-    public void setUnits(Double units) { this.units = units; }
+	public String getIsinDescription() {
+		return isinDescription;
+	}
+
+	public void setIsinDescription(String isinDescription) {
+		this.isinDescription = isinDescription;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getEquityCategory() {
+		return equityCategory;
+	}
+
+	public void setEquityCategory(String equityCategory) {
+		this.equityCategory = equityCategory;
+	}
+
+	public String getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(String exchange) {
+		this.exchange = exchange;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getNarration() {
+		return narration;
+	}
+
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
+
+	public Double getUnits() {
+		return units;
+	}
+
+	public void setUnits(Double units) {
+		this.units = units;
+	}
+
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
+
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+    
 }
 

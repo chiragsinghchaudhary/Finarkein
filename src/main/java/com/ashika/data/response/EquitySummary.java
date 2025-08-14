@@ -3,48 +3,115 @@ package com.ashika.data.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EquitySummary {
+	
+	@JsonProperty("lastTradedPrice")
+    private Double lastTradedPrice;
+	
+	@JsonProperty("maskedAccNumber")
+	private String maskedAccNumber;
+	
+	@JsonProperty("isin")
+    private String isin;
+	
+	@JsonProperty("isinDescription")
+    private String isinDescription;
+	
+	@JsonProperty("account_type")
+    private String accountType;
+	
+	@JsonProperty("units")
+    private Double units;
+	
+	@JsonProperty("linkedAccRef")
+	private String linkedAccRef;
+	
+	@JsonProperty("type")
+    private String type;
 
     @JsonProperty("currentValue")
     private Double currentValue;
 
-    @JsonProperty("holdingMode")
-    private String holdingMode;
-
-    @JsonProperty("isin")
-    private String isin;
-
-    @JsonProperty("isinDescription")
-    private String isinDescription;
-
     @JsonProperty("issuerName")
     private String issuerName;
 
-    @JsonProperty("lastTradedPrice")
-    private Double lastTradedPrice;
+	public Double getLastTradedPrice() {
+		return lastTradedPrice;
+	}
 
-    @JsonProperty("units")
-    private Double units;
+	public void setLastTradedPrice(Double lastTradedPrice) {
+		this.lastTradedPrice = lastTradedPrice;
+	}
 
-    // Getters & Setters
-    public Double getCurrentValue() { return currentValue; }
-    public void setCurrentValue(Double currentValue) { this.currentValue = currentValue; }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public String getHoldingMode() { return holdingMode; }
-    public void setHoldingMode(String holdingMode) { this.holdingMode = holdingMode; }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getIsin() { return isin; }
-    public void setIsin(String isin) { this.isin = isin; }
+	public String getIsin() {
+		return isin;
+	}
 
-    public String getIsinDescription() { return isinDescription; }
-    public void setIsinDescription(String isinDescription) { this.isinDescription = isinDescription; }
+	public void setIsin(String isin) {
+		this.isin = isin;
+	}
 
-    public String getIssuerName() { return issuerName; }
-    public void setIssuerName(String issuerName) { this.issuerName = issuerName; }
+	public String getIsinDescription() {
+		return isinDescription;
+	}
 
-    public Double getLastTradedPrice() { return lastTradedPrice; }
-    public void setLastTradedPrice(Double lastTradedPrice) { this.lastTradedPrice = lastTradedPrice; }
+	public void setIsinDescription(String isinDescription) {
+		this.isinDescription = isinDescription;
+	}
 
-    public Double getUnits() { return units; }
-    public void setUnits(Double units) { this.units = units; }
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public Double getUnits() {
+		return units;
+	}
+
+	public void setUnits(Double units) {
+		this.units = units;
+	}
+
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
+
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Double getCurrentValue() {
+		return currentValue;
+	}
+
+	public void setCurrentValue(Double currentValue) {
+		this.currentValue = currentValue;
+	}
+
+	public String getIssuerName() {
+		return issuerName;
+	}
+
+	public void setIssuerName(String issuerName) {
+		this.issuerName = issuerName;
+	}
 }
 
