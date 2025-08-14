@@ -1,13 +1,7 @@
 package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({
-        "name", "maskedDematID", "email", "dob", "maskedAccNumber", "folioNo",
-        "account_type", "landLine", "dematId", "address", "ckycCompliance",
-        "linkedAccRef", "mobile", "pan", "maskedFolioNo", "nominee"
-})
 public class MFHolder {
 
     @JsonProperty("name")
@@ -41,7 +35,7 @@ public class MFHolder {
     private String address;
 
     @JsonProperty("ckycCompliance")
-    private String ckycCompliance; // "Completed" in your example
+    private String ckycCompliance;
 
     @JsonProperty("linkedAccRef")
     private String linkedAccRef;
