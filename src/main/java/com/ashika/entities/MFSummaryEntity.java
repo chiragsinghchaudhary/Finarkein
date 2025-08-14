@@ -41,7 +41,7 @@ public class MFSummaryEntity {
     private String folioNo;
 
     @JsonProperty("account_type")
-    private String accountType = "MUTUAL_FUNDS";
+    private String accountType;
 
     @JsonProperty("costValue")
     private Double costValue;

@@ -24,139 +24,179 @@ public class EquityTransactionEntity {
     private String txnId;
     private Long transactionDateTime;
     private String orderId;
+    private String maskedAccNumber;
     private String isin;
     private String isinDescription;
+    private String accountType;
     private String equityCategory;
     private String exchange;
     private String companyName;
     private String narration;
     private Double units;
+    private String linkedAccRef;
     private String type;
     private String pan;
 
     public EquityTransactionEntity(Double rate, String txnId, Long transactionDateTime, String orderId,
-                                   String isin, String isinDescription, String equityCategory, String exchange,
-                                   String companyName, String narration, Double units, String type, String pan) {
-        this.rate = rate;
-        this.txnId = txnId;
-        this.transactionDateTime = transactionDateTime;
-        this.orderId = orderId;
-        this.isin = isin;
-        this.isinDescription = isinDescription;
-        this.equityCategory = equityCategory;
-        this.exchange = exchange;
-        this.companyName = companyName;
-        this.narration = narration;
-        this.units = units;
-        this.type = type;
-        this.pan = pan;
-    }
+			String maskedAccNumber, String isin, String isinDescription, String accountType, String equityCategory,
+			String exchange, String companyName, String narration, Double units, String linkedAccRef, String type,
+			String pan) {
+		super();
+		this.rate = rate;
+		this.txnId = txnId;
+		this.transactionDateTime = transactionDateTime;
+		this.orderId = orderId;
+		this.maskedAccNumber = maskedAccNumber;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.accountType = accountType;
+		this.equityCategory = equityCategory;
+		this.exchange = exchange;
+		this.companyName = companyName;
+		this.narration = narration;
+		this.units = units;
+		this.linkedAccRef = linkedAccRef;
+		this.type = type;
+		this.pan = pan;
+	}
 
-    protected EquityTransactionEntity() {
+	protected EquityTransactionEntity() {
         // Default constructor for JPA
     }
 
-    public Double getRate() {
-        return rate;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getTxnId() {
-        return txnId;
-    }
+	public Double getRate() {
+		return rate;
+	}
 
-    public void setTxnId(String txnId) {
-        this.txnId = txnId;
-    }
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
 
-    public Long getTransactionDateTime() {
-        return transactionDateTime;
-    }
+	public String getTxnId() {
+		return txnId;
+	}
 
-    public void setTransactionDateTime(Long transactionDateTime) {
-        this.transactionDateTime = transactionDateTime;
-    }
+	public void setTxnId(String txnId) {
+		this.txnId = txnId;
+	}
 
-    public String getOrderId() {
-        return orderId;
-    }
+	public Long getTransactionDateTime() {
+		return transactionDateTime;
+	}
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+	public void setTransactionDateTime(Long transactionDateTime) {
+		this.transactionDateTime = transactionDateTime;
+	}
 
-    public String getIsin() {
-        return isin;
-    }
+	public String getOrderId() {
+		return orderId;
+	}
 
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 
-    public String getIsinDescription() {
-        return isinDescription;
-    }
+	public String getMaskedAccNumber() {
+		return maskedAccNumber;
+	}
 
-    public void setIsinDescription(String isinDescription) {
-        this.isinDescription = isinDescription;
-    }
+	public void setMaskedAccNumber(String maskedAccNumber) {
+		this.maskedAccNumber = maskedAccNumber;
+	}
 
-    public String getEquityCategory() {
-        return equityCategory;
-    }
+	public String getIsin() {
+		return isin;
+	}
 
-    public void setEquityCategory(String equityCategory) {
-        this.equityCategory = equityCategory;
-    }
+	public void setIsin(String isin) {
+		this.isin = isin;
+	}
 
-    public String getExchange() {
-        return exchange;
-    }
+	public String getIsinDescription() {
+		return isinDescription;
+	}
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
+	public void setIsinDescription(String isinDescription) {
+		this.isinDescription = isinDescription;
+	}
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
-    public String getNarration() {
-        return narration;
-    }
+	public String getEquityCategory() {
+		return equityCategory;
+	}
 
-    public void setNarration(String narration) {
-        this.narration = narration;
-    }
+	public void setEquityCategory(String equityCategory) {
+		this.equityCategory = equityCategory;
+	}
 
-    public Double getUnits() {
-        return units;
-    }
+	public String getExchange() {
+		return exchange;
+	}
 
-    public void setUnits(Double units) {
-        this.units = units;
-    }
+	public void setExchange(String exchange) {
+		this.exchange = exchange;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getCompanyName() {
+		return companyName;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
-    public String getPan() {
-        return pan;
-    }
+	public String getNarration() {
+		return narration;
+	}
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
+
+	public Double getUnits() {
+		return units;
+	}
+
+	public void setUnits(Double units) {
+		this.units = units;
+	}
+
+	public String getLinkedAccRef() {
+		return linkedAccRef;
+	}
+
+	public void setLinkedAccRef(String linkedAccRef) {
+		this.linkedAccRef = linkedAccRef;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
 }

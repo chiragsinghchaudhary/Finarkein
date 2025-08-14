@@ -591,15 +591,16 @@ private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> enti
         response.setMaskedAccNumber(entity.getMaskedAccNumber());
         response.setFolioNo(entity.getFolioNo());
         response.setAccountType(entity.getAccountType());
-        response.setLandline(entity.getLandline());
+        response.setLandLine(entity.getLandLine());
         response.setDematId(entity.getDematId());
         response.setAddress(entity.getAddress());
-        response.setKycCompliance(entity.getKycCompliance());
+        response.setCkycCompliance(entity.getCkycCompliance());
         response.setLinkedAccRef(entity.getLinkedAccRef());
         response.setMobile(entity.getMobile());
         response.setPan(entity.getPan());
         response.setNominee(entity.getNominee());
-
+        
+        //Add to list
         responseList.add(response);
     }
 
@@ -695,7 +696,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
         response.setMaskedAccNumber(entity.getMaskedAccNumber());
         response.setFolioNo(entity.getFolioNo());
         response.setAccountType(entity.getAccountType());
-        response.setLandline(entity.getLandline());
+        response.setLandLine(entity.getLandLine());
         response.setDematId(entity.getDematId());
         response.setAddress(entity.getAddress());
         response.setCkycCompliance(entity.getCkycCompliance());
@@ -877,9 +878,21 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity(response.getAddress(), response.getDematId(),
-					response.getDob(), response.getEmail(), response.getKycCompliance(), response.getLandline(),
-					response.getMobile(), response.getName(), response.getNominee(), response.getPan());
+			EquityHolderEntity entity = new EquityHolderEntity(
+					response.getName(),
+					response.getEmail(),
+					response.getDob(),
+					response.getMaskedAccNumber(),
+					response.getFolioNo(),
+					response.getAccountType(),
+					response.getLandLine(),
+					response.getDematId(),
+					response.getAddress(),
+					response.getCkycCompliance(),
+					response.getLinkedAccRef(),
+					response.getMobile(),
+					response.getPan(),
+					response.getNominee());
 			entityList.add(entity);
 		}
 
@@ -897,9 +910,18 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (EquitySummary response : responses) {
-			EquitySummaryEntity entity = new EquitySummaryEntity(response.getCurrentValue(), response.getHoldingMode(),
-					response.getIsin(), response.getIsinDescription(), response.getIssuerName(),
-					response.getLastTradedPrice(), response.getUnits(), pan);
+			EquitySummaryEntity entity = new EquitySummaryEntity(
+					response.getLastTradedPrice(),
+					response.getMaskedAccNumber(),
+					response.getIsin(), 
+					response.getIsinDescription(),
+					response.getAccountType(),
+					response.getUnits(),
+					response.getLinkedAccRef(),
+					response.getType(),
+					response.getCurrentValue(), 					 
+					response.getIssuerName(),
+					pan);
 
 			entityList.add(entity);
 		}
@@ -918,10 +940,22 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<EquityTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (EquityTransaction response : responses) {
-			EquityTransactionEntity entity = new EquityTransactionEntity(response.getCompanyName(),
-					response.getEquityCategory(), response.getExchange(), response.getIsin(),
-					response.getIsinDescription(), response.getNarration(), response.getOrderId(), response.getRate(),
-					response.getTransactionDateTime(), response.getTxnId(), response.getType(), response.getUnits(),
+			EquityTransactionEntity entity = new EquityTransactionEntity(
+					response.getRate(),
+					response.getTxnId(),
+					response.getTransactionDateTime(),
+					response.getOrderId(),
+					response.getMaskedAccNumber(),
+					response.getIsin(),
+					response.getIsinDescription(),
+					response.getAccountType(),
+					response.getEquityCategory(),
+					response.getExchange(),
+					response.getCompanyName(),
+					response.getNarration(), 
+					response.getUnits(),
+					response.getLinkedAccRef(),
+					response.getType(),
 					pan);
 
 			entityList.add(entity);
@@ -941,9 +975,23 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
 		for (MFHolder response : responses) {
-			MFHolderEntity entity = new MFHolderEntity(response.getAddress(), response.getDematId(), response.getDob(),
-					response.getEmail(), response.getFolioNo(), response.getKycCompliance(), response.getLandline(),
-					response.getMobile(), response.getName(), response.getNominee(), response.getPan());
+			MFHolderEntity entity = new MFHolderEntity(
+					response.getName(),
+					response.getMaskedDematID(),
+					response.getEmail(),
+					response.getDob(),
+					response.getMaskedAccNumber(),
+					response.getFolioNo(),
+					response.getAccountType(),
+					response.getLandLine(),
+					response.getDematId(),
+					response.getAddress(), 
+					response.getCkycCompliance(),
+					response.getLinkedAccRef(),
+					response.getMobile(),  
+					response.getPan(),
+					response.getMaskedFolioNo(),
+					response.getNominee());
 
 			entityList.add(entity);
 		}
@@ -962,12 +1010,32 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<MFSummaryEntity> entityList = new ArrayList<>(responses.size());
 		for (MFSummary response : responses) {
-			MFSummaryEntity entity = new MFSummaryEntity(response.getCostValue(), response.getCurrentValue(),
-					response.getFatcaStatus(), response.getAmc(), response.getAmfiCode(), response.getClosingUnits(),
-					response.getFolioNo(), response.getIsin(), response.getIsinDescription(), response.getLienUnits(),
-					response.getLockinUnits(), response.getNav(), response.getNavDate(), response.getRegistrar(),
-					response.getSchemeCategory(), response.getSchemeCode(), response.getSchemeOption(),
-					response.getSchemeTypes(), response.getUcc(), pan);
+			MFSummaryEntity entity = new MFSummaryEntity(
+					response.getUcc(),
+					response.getMaskedDematID(),
+					response.getNav(),
+					response.getMaskedAccNumber(),
+					response.getIsin(), 
+					response.getIsinDescription(),
+					response.getSchemeCode(),
+					response.getFolioNo(),
+					response.getAccountType(),
+					response.getCostValue(),
+					response.getClosingUnits(),
+					response.getAmc(),
+					response.getRegistrar(),
+					response.getSchemeOption(),
+					response.getSchemeCategory(),
+					response.getFatcaStatus(),
+					response.getLienUnits(),
+					response.getLockinUnits(),
+					response.getNavDate(),
+					response.getLinkedAccRef(),
+					response.getCurrentValue(),
+					response.getSchemeTypes(),
+					response.getMaskedFolioNo(),
+					response.getAmfiCode(),
+					pan);
 
 			entityList.add(entity);
 		}
@@ -986,12 +1054,32 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (MFTransaction response : responses) {
-			MFTransactionEntity entity = new MFTransactionEntity(response.getAmc(), response.getAmfiCode(),
-					response.getAmount(), response.getIsin(), response.getIsinDescription(), response.getLockInDays(),
-					response.getLockInFlag(), response.getMode(), response.getNarration(), response.getNav(),
-					response.getNavDate(), response.getRegistrar(), response.getSchemeCode(), response.getSchemePlan(),
-					response.getTransactionDate(), response.getTxnId(), response.getType(), response.getUcc(),
-					response.getUnits(), pan);
+			MFTransactionEntity entity = new MFTransactionEntity(
+					response.getUcc(),
+					response.getTxnId(),
+					response.getMaskedDematID(),
+					response.getNav(),
+					response.getMaskedAccNumber(),
+					response.getIsin(),
+					response.getIsinDescription(),
+					response.getSchemeCode(),
+					response.getSchemePlan(),
+					response.getAccountType(),
+					response.getAmount(),
+					response.getAmc(),
+					response.getRegistrar(),
+					response.getNarration(),
+					response.getUnits(),
+					response.getMode(),
+					response.getLockInDays(),
+					response.getNavDate(),
+					response.getLinkedAccRef(),
+					response.getLockInFlag(),
+					response.getTransactionDate(),
+					response.getType(),
+					response.getMaskedFolioNo(),
+					response.getAmfiCode(),
+					pan);
 
 			entityList.add(entity);
 		}
