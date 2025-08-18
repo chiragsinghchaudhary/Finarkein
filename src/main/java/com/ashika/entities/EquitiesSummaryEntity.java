@@ -35,34 +35,26 @@ public class EquitiesSummaryEntity {
     private String pan; // kept from your original entity
     private LocalDateTime lastUpdatedTime;
 
+    public EquitiesSummaryEntity(Long id, Double lastTradedPrice, String maskedAccNumber, String isin,
+			String isinDescription, String accountType, Double units, String linkedAccRef, String type,
+			Double currentValue, String issuerName, String pan, LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
+		this.lastTradedPrice = lastTradedPrice;
+		this.maskedAccNumber = maskedAccNumber;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.accountType = accountType;
+		this.units = units;
+		this.linkedAccRef = linkedAccRef;
+		this.type = type;
+		this.currentValue = currentValue;
+		this.issuerName = issuerName;
+		this.pan = pan;
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 
-    public EquitiesSummaryEntity(
-            Double lastTradedPrice,
-            String maskedAccNumber,
-            String isin,
-            String isinDescription,
-            String accountType,
-            Double units,
-            String linkedAccRef,
-            String type,
-            Double currentValue,
-            String issuerName,
-            String pan
-    ) {
-        this.lastTradedPrice = lastTradedPrice;
-        this.maskedAccNumber = maskedAccNumber;
-        this.isin = isin;
-        this.isinDescription = isinDescription;
-        this.accountType = accountType;
-        this.units = units;
-        this.linkedAccRef = linkedAccRef;
-        this.type = type;
-        this.currentValue = currentValue;
-        this.issuerName = issuerName;
-        this.pan = pan;
-    }
-
-    protected EquitiesSummaryEntity() {
+	protected EquitiesSummaryEntity() {
         // Default constructor for JPA
     }
 

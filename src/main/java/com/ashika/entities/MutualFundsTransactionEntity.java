@@ -1,5 +1,7 @@
 package com.ashika.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,17 +43,19 @@ public class MutualFundsTransactionEntity {
     private String type;
     private String maskedFolioNo;
     private String amfiCode;
+    
+    private String pan;// DB search/index only
+    
     private LocalDateTime lastUpdatedTime;
-
-    private String pan;
-	
-
-    public MutualFundsTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav, String maskedAccNumber,
-			String isin, String isinDescription, String schemeCode, String schemePlan, String accountType,
-			Double amount, String amc, String registrar, String narration, Double units, String mode,
-			Integer lockInDays, String navDate, String linkedAccRef, String lockInFlag, Long transactionDate,
-			String type, String maskedFolioNo, String amfiCode, String pan) {
+    
+	public MutualFundsTransactionEntity(Long id, String ucc, String txnId, String maskedDematID, Double nav,
+			String maskedAccNumber, String isin, String isinDescription, String schemeCode, String schemePlan,
+			String accountType, Double amount, String amc, String registrar, String narration, Double units,
+			String mode, Integer lockInDays, String navDate, String linkedAccRef, String lockInFlag,
+			Long transactionDate, String type, String maskedFolioNo, String amfiCode, String pan,
+			LocalDateTime lastUpdatedTime) {
 		super();
+		this.id = id;
 		this.ucc = ucc;
 		this.txnId = txnId;
 		this.maskedDematID = maskedDematID;
@@ -77,6 +81,7 @@ public class MutualFundsTransactionEntity {
 		this.maskedFolioNo = maskedFolioNo;
 		this.amfiCode = amfiCode;
 		this.pan = pan;
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 
 	protected MutualFundsTransactionEntity() {

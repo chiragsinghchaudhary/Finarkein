@@ -36,32 +36,33 @@ public class MutualFundsHolderEntity {
     private String maskedFolioNo;
     private String nominee;
     private LocalDateTime lastUpdatedTime;
+    
+    public MutualFundsHolderEntity(Long id, String name, String maskedDematID, String email, Long dob,
+			String maskedAccNumber, String folioNo, String accountType, String landLine, String dematId, String address,
+			String ckycCompliance, String linkedAccRef, String mobile, String pan, String maskedFolioNo, String nominee,
+			LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.maskedDematID = maskedDematID;
+		this.email = email;
+		this.dob = dob;
+		this.maskedAccNumber = maskedAccNumber;
+		this.folioNo = folioNo;
+		this.accountType = accountType;
+		this.landLine = landLine;
+		this.dematId = dematId;
+		this.address = address;
+		this.ckycCompliance = ckycCompliance;
+		this.linkedAccRef = linkedAccRef;
+		this.mobile = mobile;
+		this.pan = pan;
+		this.maskedFolioNo = maskedFolioNo;
+		this.nominee = nominee;
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 
-
-
-    public MutualFundsHolderEntity(String name, String maskedDematID, String email, Long dob, String maskedAccNumber,
-                          String folioNo, String accountType, String landLine, String dematId, String address,
-                          String ckycCompliance, String linkedAccRef, String mobile, String pan,
-                          String maskedFolioNo, String nominee) {
-        this.name = name;
-        this.maskedDematID = maskedDematID;
-        this.email = email;
-        this.dob = dob;
-        this.maskedAccNumber = maskedAccNumber;
-        this.folioNo = folioNo;
-        this.accountType = accountType;
-        this.landLine = landLine;
-        this.dematId = dematId;
-        this.address = address;
-        this.ckycCompliance = ckycCompliance;
-        this.linkedAccRef = linkedAccRef;
-        this.mobile = mobile;
-        this.pan = pan;
-        this.maskedFolioNo = maskedFolioNo;
-        this.nominee = nominee;
-    }
-
-    protected MutualFundsHolderEntity() {
+	protected MutualFundsHolderEntity() {
         // Default constructor for JPA
     }
 

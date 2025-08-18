@@ -39,39 +39,31 @@ public class EquitiesHolderEntity {
     private LocalDateTime lastUpdatedTime;
 
 
-    public EquitiesHolderEntity(
-            String name,
-            String email,
-            String dob,
-            String maskedAccNumber,
-            String folioNo,
-            String accountType,
-            String landLine,
-            String dematId,
-            String address,
-            boolean ckycCompliance,
-            String linkedAccRef,
-            String mobile,
-            String pan,
-            String nominee
-    ) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-        this.maskedAccNumber = maskedAccNumber;
-        this.folioNo = folioNo;
-        this.accountType = accountType;
-        this.landLine = landLine;
-        this.dematId = dematId;
-        this.address = address;
-        this.ckycCompliance = ckycCompliance;
-        this.linkedAccRef = linkedAccRef;
-        this.mobile = mobile;
-        this.pan = pan;
-        this.nominee = nominee;
-    }
+    
 
-    protected EquitiesHolderEntity() {
+    public EquitiesHolderEntity(Long id, String name, String email, String dob, String maskedAccNumber, String folioNo,
+			String accountType, String landLine, String dematId, String address, boolean ckycCompliance,
+			String linkedAccRef, String mobile, String pan, String nominee, LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.dob = dob;
+		this.maskedAccNumber = maskedAccNumber;
+		this.folioNo = folioNo;
+		this.accountType = accountType;
+		this.landLine = landLine;
+		this.dematId = dematId;
+		this.address = address;
+		this.ckycCompliance = ckycCompliance;
+		this.linkedAccRef = linkedAccRef;
+		this.mobile = mobile;
+		this.pan = pan;
+		this.nominee = nominee;
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+
+	protected EquitiesHolderEntity() {
         // Default constructor for JPA
     }
 

@@ -34,26 +34,28 @@ public class DepositTransactionEntity {
     private String type;
     private LocalDateTime lastUpdatedTime;
 
-    public DepositTransactionEntity(String pan, String reference, String transactionId, String maskedAccNumber,
-                                     Long transactionTimestamp, String accountType, Double currentBalance,
-                                     Double amount, Long valueDate, String narration, String mode,
-                                     String linkedAccRef, String type) {
-        this.pan = pan;
-        this.reference = reference;
-        this.transactionId = transactionId;
-        this.maskedAccNumber = maskedAccNumber;
-        this.transactionTimestamp = transactionTimestamp;
-        this.accountType = accountType;
-        this.currentBalance = currentBalance;
-        this.amount = amount;
-        this.valueDate = valueDate;
-        this.narration = narration;
-        this.mode = mode;
-        this.linkedAccRef = linkedAccRef;
-        this.type = type;
-    }
+    public DepositTransactionEntity(Long id, String pan, String reference, String transactionId, String maskedAccNumber,
+			Long transactionTimestamp, String accountType, Double currentBalance, Double amount, Long valueDate,
+			String narration, String mode, String linkedAccRef, String type, LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
+		this.pan = pan;
+		this.reference = reference;
+		this.transactionId = transactionId;
+		this.maskedAccNumber = maskedAccNumber;
+		this.transactionTimestamp = transactionTimestamp;
+		this.accountType = accountType;
+		this.currentBalance = currentBalance;
+		this.amount = amount;
+		this.valueDate = valueDate;
+		this.narration = narration;
+		this.mode = mode;
+		this.linkedAccRef = linkedAccRef;
+		this.type = type;
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 
-    protected DepositTransactionEntity() {
+	protected DepositTransactionEntity() {
         // Default constructor for JPA
     }
 

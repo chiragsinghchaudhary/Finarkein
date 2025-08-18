@@ -34,9 +34,11 @@ public class DepositHolderEntity {
 
 	
 
-	public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
+	public DepositHolderEntity(Long id, String name, String email, Long dob, String maskedAccNumber, String accountType,
 			String landLine, String address, boolean ckycCompliance, String linkedAccRef, String type, String mobile,
-			String pan, String nominee) {
+			String pan, String nominee, LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
@@ -50,6 +52,7 @@ public class DepositHolderEntity {
 		this.mobile = mobile;
 		this.pan = pan;
 		this.nominee = nominee;
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 
 	protected DepositHolderEntity() {

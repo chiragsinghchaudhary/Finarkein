@@ -41,12 +41,15 @@ public class DepositSummaryEntity {
 	private String pan;
 	private LocalDateTime lastUpdatedTime;
 
+	
 
-	public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
-			String branch, String accountType, Double currentBalance, Double drawingLimit, Long accountAgeInDays,
-			String pendingTransactionType, String status, String micrCode, Long balanceDatetime, String currency,
-			Double pendingAmount, String linkedAccRef, String ifscCode, String type, String facility,
-			String exchangeRate, String pan) {
+	public DepositSummaryEntity(Long id, Long currentODLimit, String openingDate, String fipName,
+			String maskedAccNumber, String branch, String accountType, Double currentBalance, Double drawingLimit,
+			Long accountAgeInDays, String pendingTransactionType, String status, String micrCode, Long balanceDatetime,
+			String currency, Double pendingAmount, String linkedAccRef, String ifscCode, String type, String facility,
+			String exchangeRate, String pan, LocalDateTime lastUpdatedTime) {
+		super();
+		this.id = id;
 		this.currentODLimit = currentODLimit;
 		this.openingDate = openingDate;
 		this.fipName = fipName;
@@ -68,6 +71,7 @@ public class DepositSummaryEntity {
 		this.facility = facility;
 		this.exchangeRate = exchangeRate;
 		this.pan = pan;
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 
 	protected DepositSummaryEntity() {
