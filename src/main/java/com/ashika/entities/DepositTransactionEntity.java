@@ -30,6 +30,7 @@ public class DepositTransactionEntity {
     private String mode;
     private String linkedAccRef;
     private String type;
+    private LocalDateTime lastUpdatedTime;
 
     public DepositTransactionEntity(String pan, String reference, String transactionId, String maskedAccNumber,
                                      Long transactionTimestamp, String accountType, Double currentBalance,
@@ -164,5 +165,12 @@ public class DepositTransactionEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

@@ -34,6 +34,8 @@ public class EquitiesHolderEntity {
     private String mobile;
     private String pan;
     private String nominee;
+    private LocalDateTime lastUpdatedTime;
+
 
     public EquitiesHolderEntity(
             String name,
@@ -115,4 +117,12 @@ public class EquitiesHolderEntity {
 
     public String getNominee() { return nominee; }
     public void setNominee(String nominee) { this.nominee = nominee; }
+
+    public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 }

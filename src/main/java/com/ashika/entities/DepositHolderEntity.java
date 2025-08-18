@@ -27,7 +27,10 @@ public class DepositHolderEntity {
 	private String type;
 	private String mobile;
 	private String pan;
-	private String nominee;
+	private String nominee;   
+	private LocalDateTime lastUpdatedTime;
+
+	
 
 	public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
 			String landLine, String address, boolean ckycCompliance, String linkedAccRef, String type, String mobile,
@@ -161,5 +164,13 @@ public class DepositHolderEntity {
 
 	public void setNominee(String nominee) {
 		this.nominee = nominee;
+	}
+
+	public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

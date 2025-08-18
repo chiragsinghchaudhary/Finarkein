@@ -37,6 +37,8 @@ public class DepositSummaryEntity {
 	private String facility;
 	private String exchangeRate;
 	private String pan;
+	private LocalDateTime lastUpdatedTime;
+
 
 	public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName, String maskedAccNumber,
 			String branch, String accountType, Double currentBalance, Double drawingLimit, Long accountAgeInDays,
@@ -244,6 +246,14 @@ public class DepositSummaryEntity {
 
 	public void setPan(String pan) {
 		this.pan = pan;
+	}
+
+	public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 
 }
