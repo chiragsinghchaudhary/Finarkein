@@ -41,7 +41,7 @@ import com.ashika.entities.EquitiesSummaryEntity;
 import com.ashika.entities.EquitiesTransactionEntity;
 import com.ashika.entities.MutualFundsHolderEntity;
 import com.ashika.entities.MutualFundsSummaryEntity;
-import com.ashika.entities.MFTransactionEntity;
+import com.ashika.entities.MutualFundsTransactionEntity;
 import com.ashika.repositories.ClientConsentMappingRepository;
 import com.ashika.repositories.DepositHolderRepository;
 import com.ashika.repositories.DepositSummaryRepository;
@@ -49,9 +49,9 @@ import com.ashika.repositories.DepositTransactionRepository;
 import com.ashika.repositories.EquityHolderRepository;
 import com.ashika.repositories.EquitySummaryRepository;
 import com.ashika.repositories.EquityTransactionRepository;
-import com.ashika.repositories.MFHolderRepository;
-import com.ashika.repositories.MFSummaryRepository;
-import com.ashika.repositories.MFTransactionRepository;
+import com.ashika.repositories.MutualFundsHolderRepository;
+import com.ashika.repositories.MutualFundsSummaryRepository;
+import com.ashika.repositories.MutualFundsTransactionRepository;
 
 @Service
 @Transactional
@@ -72,11 +72,11 @@ public class MyService {
 	@Autowired
 	private EquityTransactionRepository equityTransactionRepository;
 	@Autowired
-	private MFHolderRepository mfHolderRepository;
+	private MutualFundsHolderRepository mfHolderRepository;
 	@Autowired
-	private MFSummaryRepository mfSummaryRepository;
+	private MutualFundsSummaryRepository mfSummaryRepository;
 	@Autowired
-	private MFTransactionRepository mfTransactionRepository;
+	private MutualFundsTransactionRepository mfTransactionRepository;
 	@Autowired
 	private ClientConsentMappingRepository clientConsentRepository;
 	@Autowired
@@ -152,7 +152,7 @@ public class MyService {
 
 		List<MutualFundsHolderEntity> mfHolders = mfHolderRepository.findAllByPan(pan);
 		List<MutualFundsSummaryEntity> mfSummaries = mfSummaryRepository.findAllByPan(pan);
-		List<MFTransactionEntity> mfTransactions = mfTransactionRepository.findAllByPan(pan);
+		List<MutualFundsTransactionEntity> mfTransactions = mfTransactionRepository.findAllByPan(pan);
 
 		// Combined debug log
 		logger.debug(
@@ -170,13 +170,13 @@ public class MyService {
 		dataDictionary.setDepositSummary(mapDepositSummaryEntities(depositSummaries));
 		dataDictionary.setDepositTransactions(mapDepositTransactionEntities(depositTransactions));
 
-		dataDictionary.setEquityHolders(mapEquityHolderEntities(equityHolders));
-		dataDictionary.setEquitySummary(mapEquitySummaryEntities(equitySummaries));
-		dataDictionary.setEquityTransactions(mapEquityTransactionEntities(equityTransactions));
+		dataDictionary.setEquitiesHolders(mapEquityHolderEntities(equityHolders));
+		dataDictionary.setEquitiesSummary(mapEquitySummaryEntities(equitySummaries));
+		dataDictionary.setEquitiesTransactions(mapEquityTransactionEntities(equityTransactions));
 
-		dataDictionary.setMFHolders(mapMFHolderEntities(mfHolders));
-		dataDictionary.setMFSummary(mapMFSummaryEntities(mfSummaries));
-		dataDictionary.setMFTransactions(mapMFTransactionEntities(mfTransactions));
+		dataDictionary.setMutualFundsHolders(mapMFHolderEntities(mfHolders));
+		dataDictionary.setMutualFundsSummary(mapMFSummaryEntities(mfSummaries));
+		dataDictionary.setMutualFundsTransactions(mapMutualFundsTransactionEntities(mfTransactions));
 
 		getResultResponse.setData(dataDictionary);
 
@@ -439,15 +439,15 @@ public class MyService {
 					mapDepositTransactionResponses(resultResponse.getData().getDepositTransactions(), pan));
 
 			equityHolderRepository
-					.saveAllAndFlush(mapEquityHolderResponses(resultResponse.getData().getEquityHolders()));
+					.saveAllAndFlush(mapEquityHolderResponses(resultResponse.getData().getEquitiesHolders()));
 			equitySummaryRepository
-					.saveAllAndFlush(mapEquitySummaryResponses(resultResponse.getData().getEquitySummary(), pan));
+					.saveAllAndFlush(mapEquitySummaryResponses(resultResponse.getData().getEquitiesSummary(), pan));
 			equityTransactionRepository.saveAllAndFlush(
-					mapEquityTransactionResponses(resultResponse.getData().getEquityTransactions(), pan));
-			mfHolderRepository.saveAllAndFlush(mapMFHolderResponses(resultResponse.getData().getMFHolders()));
-			mfSummaryRepository.saveAllAndFlush(mapMFSummaryResponses(resultResponse.getData().getMFSummary(), pan));
+					mapEquityTransactionResponses(resultResponse.getData().getEquitiesTransactions(), pan));
+			mfHolderRepository.saveAllAndFlush(mapMFHolderResponses(resultResponse.getData().getMutualFundsHolders()));
+			mfSummaryRepository.saveAllAndFlush(mapMFSummaryResponses(resultResponse.getData().getMutualFundsSummary(), pan));
 			mfTransactionRepository
-					.saveAllAndFlush(mapMFTransactionResponses(resultResponse.getData().getMFTransactions(), pan));
+					.saveAllAndFlush(mapMFTransactionResponses(resultResponse.getData().getMutualFundsTransactions(), pan));
 
 			logger.debug("Saved new records for pan={}", pan);
 
@@ -759,7 +759,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
     return responseList;
 }
 
-	private List<MutualFundsTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
+	private List<MutualFundsTransaction> mapMutualFundsTransactionEntities(List<MutualFundsTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No MFTransactionEntity records found to map.");
 			return new ArrayList<>();
@@ -768,7 +768,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 		logger.debug("Mapping {} MFTransactionEntity records to MFTransaction response objects", entities.size());
 
 		List<MutualFundsTransaction> responseList = new ArrayList<>(entities.size());
-		for (MFTransactionEntity entity : entities) {
+		for (MutualFundsTransactionEntity entity : entities) {
 			MutualFundsTransaction response = new MutualFundsTransaction();
 			response.setAmc(entity.getAmc());
 			response.setAmfiCode(entity.getAmfiCode());
@@ -1044,7 +1044,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 		return entityList;
 	}
 
-	private List<MFTransactionEntity> mapMFTransactionResponses(List<MutualFundsTransaction> responses, String pan) {
+	private List<MutualFundsTransactionEntity> mapMFTransactionResponses(List<MutualFundsTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFTransaction responses found to map.");
 			return new ArrayList<>();
@@ -1052,9 +1052,9 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 
 		logger.debug("Mapping {} MFTransaction responses to MFTransactionEntity objects", responses.size());
 
-		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
+		List<MutualFundsTransactionEntity> entityList = new ArrayList<>(responses.size());
 		for (MutualFundsTransaction response : responses) {
-			MFTransactionEntity entity = new MFTransactionEntity(
+			MutualFundsTransactionEntity entity = new MutualFundsTransactionEntity(
 					response.getUcc(),
 					response.getTxnId(),
 					response.getMaskedDematID(),

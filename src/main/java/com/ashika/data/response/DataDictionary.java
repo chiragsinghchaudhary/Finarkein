@@ -57,51 +57,51 @@ public class DataDictionary {
 		this.depositTransactions = depositTransactions;
 	}
 
-	public List<EquitiesHolder> getEquityHolders() {
+	public List<EquitiesHolder> getEquitiesHolders() {
 		return equitiesHolders;
 	}
 
-	public void setEquityHolders(List<EquitiesHolder> equityHolders) {
-		this.equitiesHolders = equityHolders;
+	public void setEquitiesHolders(List<EquitiesHolder> equitiesHolders) {
+		this.equitiesHolders = equitiesHolders;
 	}
 
-	public List<EquitiesSummary> getEquitySummary() {
+	public List<EquitiesSummary> getEquitiesSummary() {
 		return equitiesSummary;
 	}
 
-	public void setEquitySummary(List<EquitiesSummary> equitySummary) {
-		this.equitiesSummary = equitySummary;
+	public void setEquitiesSummary(List<EquitiesSummary> equitiesSummary) {
+		this.equitiesSummary = equitiesSummary;
 	}
 
-	public List<EquitiesTransaction> getEquityTransactions() {
+	public List<EquitiesTransaction> getEquitiesTransactions() {
 		return equitiesTransactions;
 	}
 
-	public void setEquityTransactions(List<EquitiesTransaction> equityTransactions) {
-		this.equitiesTransactions = equityTransactions;
+	public void setEquitiesTransactions(List<EquitiesTransaction> equitiesTransactions) {
+		this.equitiesTransactions = equitiesTransactions;
 	}
 
-	public List<MutualFundsHolder> getMFHolders() {
+	public List<MutualFundsHolder> getMutualFundsHolders() {
 		return mutualFundsHolders;
 	}
 
-	public void setMFHolders(List<MutualFundsHolder> mFHolders) {
-		mutualFundsHolders = mFHolders;
+	public void setMutualFundsHolders(List<MutualFundsHolder> mutualFundsHolders) {
+		this.mutualFundsHolders = mutualFundsHolders;
 	}
 
-	public List<MutualFundsSummary> getMFSummary() {
+	public List<MutualFundsSummary> getMutualFundsSummary() {
 		return mutualFundsSummary;
 	}
 
-	public void setMFSummary(List<MutualFundsSummary> mFSummary) {
-		mutualFundsSummary = mFSummary;
+	public void setMutualFundsSummary(List<MutualFundsSummary> mutualFundsSummary) {
+		this.mutualFundsSummary = mutualFundsSummary;
 	}
 
-	public List<MutualFundsTransaction> getMFTransactions() {
+	public List<MutualFundsTransaction> getMutualFundsTransactions() {
 		return mutualFundsTransactions;
 	}
 
-	public void setMFTransactions(List<MutualFundsTransaction> mFTransactions) {
-		mutualFundsTransactions = mFTransactions;
+	public void setMutualFundsTransactions(List<MutualFundsTransaction> mutualFundsTransactions) {
+		this.mutualFundsTransactions = mutualFundsTransactions;
 	}
 }

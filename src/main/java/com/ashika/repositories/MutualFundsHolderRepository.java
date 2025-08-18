@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ashika.entities.MFTransactionEntity;
+import com.ashika.entities.MutualFundsHolderEntity;
 
 @Repository
-public interface MFTransactionRepository extends JpaRepository<MFTransactionEntity, Long> {
+public interface MutualFundsHolderRepository extends JpaRepository<MutualFundsHolderEntity, Long> {
 	
-	public List<MFTransactionEntity> findAllByPan(String pan);
+	public List<MutualFundsHolderEntity> findAllByPan(String pan);
 	
 	public void deleteAllByPan(String pan);
 }

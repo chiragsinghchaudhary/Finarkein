@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ashika.entities.MutualFundsSummaryEntity;
 
 @Repository
-public interface MFSummaryRepository extends JpaRepository<MutualFundsSummaryEntity, Long> {
+public interface MutualFundsSummaryRepository extends JpaRepository<MutualFundsSummaryEntity, Long> {
 	
 	public List<MutualFundsSummaryEntity> findAllByPan(String pan);
 	
