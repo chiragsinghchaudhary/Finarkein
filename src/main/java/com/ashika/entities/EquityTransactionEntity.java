@@ -20,7 +20,7 @@ public class EquityTransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double rate;
+    private String rate;
     private String txnId;
     private Long transactionDateTime;
     private String orderId;
@@ -32,14 +32,14 @@ public class EquityTransactionEntity {
     private String exchange;
     private String companyName;
     private String narration;
-    private Double units;
+    private Long units;
     private String linkedAccRef;
     private String type;
     private String pan;
 
-    public EquityTransactionEntity(Double rate, String txnId, Long transactionDateTime, String orderId,
+    public EquityTransactionEntity(String rate, String txnId, Long transactionDateTime, String orderId,
 			String maskedAccNumber, String isin, String isinDescription, String accountType, String equityCategory,
-			String exchange, String companyName, String narration, Double units, String linkedAccRef, String type,
+			String exchange, String companyName, String narration, Long units, String linkedAccRef, String type,
 			String pan) {
 		super();
 		this.rate = rate;
@@ -72,11 +72,11 @@ public class EquityTransactionEntity {
 		this.id = id;
 	}
 
-	public Double getRate() {
+	public String getRate() {
 		return rate;
 	}
 
-	public void setRate(Double rate) {
+	public void setRate(String rate) {
 		this.rate = rate;
 	}
 
@@ -168,11 +168,11 @@ public class EquityTransactionEntity {
 		this.narration = narration;
 	}
 
-	public Double getUnits() {
+	public Long getUnits() {
 		return units;
 	}
 
-	public void setUnits(Double units) {
+	public void setUnits(Long units) {
 		this.units = units;
 	}
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EquityTransaction {
 	
 	@JsonProperty("rate")
-    private Double rate;
+    private String rate;
 	
 	@JsonProperty("txnId")
     private String txnId;
@@ -41,7 +41,7 @@ public class EquityTransaction {
     private String narration;
 
     @JsonProperty("units")
-    private Double units;
+    private Long units;
 
     @JsonProperty("linkedAccRef")
 	private String linkedAccRef;
@@ -49,11 +49,11 @@ public class EquityTransaction {
     @JsonProperty("type")
     private String type;
 
-	public Double getRate() {
+	public String getRate() {
 		return rate;
 	}
 
-	public void setRate(Double rate) {
+	public void setRate(String rate) {
 		this.rate = rate;
 	}
 
@@ -145,11 +145,11 @@ public class EquityTransaction {
 		this.narration = narration;
 	}
 
-	public Double getUnits() {
+	public Long getUnits() {
 		return units;
 	}
 
-	public void setUnits(Double units) {
+	public void setUnits(Long units) {
 		this.units = units;
 	}
 

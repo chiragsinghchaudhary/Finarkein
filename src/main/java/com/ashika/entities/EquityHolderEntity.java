@@ -22,14 +22,14 @@ public class EquityHolderEntity {
 
     private String name;
     private String email;
-    private Long dob;
+    private String dob;
     private String maskedAccNumber;
     private String folioNo;
     private String accountType;
     private String landLine;
     private String dematId;
     private String address;
-    private Boolean ckycCompliance;
+    private boolean ckycCompliance;
     private String linkedAccRef;
     private String mobile;
     private String pan;
@@ -38,14 +38,14 @@ public class EquityHolderEntity {
     public EquityHolderEntity(
             String name,
             String email,
-            Long dob,
+            String dob,
             String maskedAccNumber,
             String folioNo,
             String accountType,
             String landLine,
             String dematId,
             String address,
-            Boolean ckycCompliance,
+            boolean ckycCompliance,
             String linkedAccRef,
             String mobile,
             String pan,
@@ -80,8 +80,8 @@ public class EquityHolderEntity {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public Long getDob() { return dob; }
-    public void setDob(Long dob) { this.dob = dob; }
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
 
     public String getMaskedAccNumber() { return maskedAccNumber; }
     public void setMaskedAccNumber(String maskedAccNumber) { this.maskedAccNumber = maskedAccNumber; }
@@ -101,8 +101,8 @@ public class EquityHolderEntity {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public Boolean getCkycCompliance() { return ckycCompliance; }
-    public void setCkycCompliance(Boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
+    public boolean getCkycCompliance() { return ckycCompliance; }
+    public void setCkycCompliance(boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
 
     public String getLinkedAccRef() { return linkedAccRef; }
     public void setLinkedAccRef(String linkedAccRef) { this.linkedAccRef = linkedAccRef; }

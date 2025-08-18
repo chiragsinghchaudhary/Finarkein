@@ -11,7 +11,7 @@ public class EquityHolder {
     private String email;
 	
 	@JsonProperty("dob")
-    private Long dob;
+    private String dob;
 	
 	@JsonProperty("maskedAccNumber")
 	private String maskedAccNumber;
@@ -32,7 +32,7 @@ public class EquityHolder {
     private String address;
 
     @JsonProperty("ckycCompliance")
-    private Boolean ckycCompliance;
+    private boolean ckycCompliance;
     
     @JsonProperty("linkedAccRef")
 	private String linkedAccRef;
@@ -62,11 +62,11 @@ public class EquityHolder {
 		this.email = email;
 	}
 
-	public Long getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Long dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
@@ -118,11 +118,11 @@ public class EquityHolder {
 		this.address = address;
 	}
 
-	public Boolean getCkycCompliance() {
+	public boolean getCkycCompliance() {
 		return ckycCompliance;
 	}
 
-	public void setCkycCompliance(Boolean ckycCompliance) {
+	public void setCkycCompliance(boolean ckycCompliance) {
 		this.ckycCompliance = ckycCompliance;
 	}
 

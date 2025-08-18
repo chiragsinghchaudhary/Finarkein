@@ -22,7 +22,7 @@ public class DepositHolderEntity {
 	private String accountType;
 	private String landLine;
 	private String address;
-	private Boolean ckycCompliance;
+	private boolean ckycCompliance;
 	private String linkedAccRef;
 	private String type;
 	private String mobile;
@@ -30,7 +30,7 @@ public class DepositHolderEntity {
 	private String nominee;
 
 	public DepositHolderEntity(String name, String email, Long dob, String maskedAccNumber, String accountType,
-			String landLine, String address, Boolean ckycCompliance, String linkedAccRef, String type, String mobile,
+			String landLine, String address, boolean ckycCompliance, String linkedAccRef, String type, String mobile,
 			String pan, String nominee) {
 		this.name = name;
 		this.email = email;
@@ -115,11 +115,11 @@ public class DepositHolderEntity {
 		this.address = address;
 	}
 
-	public Boolean getCkycCompliance() {
+	public boolean getCkycCompliance() {
 		return ckycCompliance;
 	}
 
-	public void setCkycCompliance(Boolean ckycCompliance) {
+	public void setCkycCompliance(boolean ckycCompliance) {
 		this.ckycCompliance = ckycCompliance;
 	}
 
