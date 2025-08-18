@@ -90,6 +90,9 @@ public class MutualFundsSummaryEntity {
 
     private String pan; // DB search/index only
 
+    private LocalDateTime lastUpdatedTime;
+
+
     protected MutualFundsSummaryEntity() {
         // Default constructor for JPA
     }
@@ -204,4 +207,12 @@ public class MutualFundsSummaryEntity {
 
     public String getPan() { return pan; }
     public void setPan(String pan) { this.pan = pan; }
+
+    public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 }

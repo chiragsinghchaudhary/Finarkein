@@ -36,6 +36,8 @@ public class EquitiesTransactionEntity {
     private String linkedAccRef;
     private String type;
     private String pan;
+	private LocalDateTime lastUpdatedTime;
+
 
     public EquitiesTransactionEntity(String rate, String txnId, Long transactionDateTime, String orderId,
 			String maskedAccNumber, String isin, String isinDescription, String accountType, String equityCategory,
@@ -198,5 +200,12 @@ public class EquitiesTransactionEntity {
 
 	public void setPan(String pan) {
 		this.pan = pan;
+	}
+	public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

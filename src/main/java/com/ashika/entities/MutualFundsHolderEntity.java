@@ -28,6 +28,9 @@ public class MutualFundsHolderEntity {
     private String pan;
     private String maskedFolioNo;
     private String nominee;
+            private LocalDateTime lastUpdatedTime;
+
+
 
     public MutualFundsHolderEntity(String name, String maskedDematID, String email, Long dob, String maskedAccNumber,
                           String folioNo, String accountType, String landLine, String dematId, String address,
@@ -105,4 +108,12 @@ public class MutualFundsHolderEntity {
 
     public String getNominee() { return nominee; }
     public void setNominee(String nominee) { this.nominee = nominee; }
+
+public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 }
