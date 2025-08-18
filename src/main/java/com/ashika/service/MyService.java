@@ -834,7 +834,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getDrawingLimit(), response.getAccountAgeInDays(), response.getPendingTransactionType(),
 					response.getStatus(), response.getMicrCode(), response.getBalanceDatetime(), response.getCurrency(),
 					response.getPendingAmount(), response.getLinkedAccRef(), response.getIfscCode(), response.getType(),
-					response.getFacility(), response.getExchangeRate(), pan);
+					response.getFacility(), response.getExchangeRate(), pan, LocalDateTime.now());
 
 			entityList.add(entity);
 		}
@@ -858,7 +858,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getTxnId(), response.getMaskedAccNumber(), response.getTransactionTimestamp(),
 					response.getAccountType(), response.getCurrentBalance(), response.getAmount(),
 					response.getValueDate(), response.getNarration(), response.getMode(), response.getLinkedAccRef(),
-					response.getType());
+					response.getType(), LocalDateTime.now());
 
 			// Add to list
 			entityList.add(entity);
@@ -892,8 +892,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getLinkedAccRef(),
 					response.getMobile(),
 					response.getPan(),
-					response.getNominee());
-			entityList.add(entity);
+					response.getNominee(),
+					LocalDateTime.now());
+			
+			entityList.add(entity);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} EquityHolderEntity objects", entityList.size());
@@ -921,9 +923,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getType(),
 					response.getCurrentValue(), 					 
 					response.getIssuerName(),
-					pan);
+					pan, 
+					LocalDateTime.now());
 
-			entityList.add(entity);
+			entityList.add(entity);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} EquitySummaryEntity objects", entityList.size());
@@ -956,9 +959,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getUnits(),
 					response.getLinkedAccRef(),
 					response.getType(),
-					pan);
+					pan, 
+					LocalDateTime.now());
 
-			entityList.add(entity);
+			entityList.add(entity); //Add to list
 		}
 
 		logger.debug("Successfully mapped {} EquityTransactionEntity objects", entityList.size());
@@ -991,9 +995,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getMobile(),  
 					response.getPan(),
 					response.getMaskedFolioNo(),
-					response.getNominee());
+					response.getNominee(), 
+					LocalDateTime.now());
 
-			entityList.add(entity);
+			entityList.add(entity);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} MFHolderEntity objects", entityList.size());
@@ -1035,9 +1040,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getSchemeTypes(),
 					response.getMaskedFolioNo(),
 					response.getAmfiCode(),
-					pan);
+					pan, 
+					LocalDateTime.now());
 
-			entityList.add(entity);
+			entityList.add(entity);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} MFSummaryEntity objects", entityList.size());
@@ -1079,9 +1085,10 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 					response.getType(),
 					response.getMaskedFolioNo(),
 					response.getAmfiCode(),
-					pan);
+					pan, 
+					LocalDateTime.now());
 
-			entityList.add(entity);
+			entityList.add(entity);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} MFTransactionEntity objects", entityList.size());
