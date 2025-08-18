@@ -31,6 +31,8 @@ public class EquitySummaryEntity {
     private Double currentValue;
     private String issuerName;
     private String pan; // kept from your original entity
+    private LocalDateTime lastUpdatedTime;
+
 
     public EquitySummaryEntity(
             Double lastTradedPrice,
@@ -153,4 +155,11 @@ public class EquitySummaryEntity {
     public void setPan(String pan) {
         this.pan = pan;
     }
+    public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 }
