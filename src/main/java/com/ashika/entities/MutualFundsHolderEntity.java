@@ -1,6 +1,13 @@
 package com.ashika.entities;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mutualfunds_holder", indexes = {
@@ -28,7 +35,7 @@ public class MutualFundsHolderEntity {
     private String pan;
     private String maskedFolioNo;
     private String nominee;
-            private LocalDateTime lastUpdatedTime;
+    private LocalDateTime lastUpdatedTime;
 
 
 
