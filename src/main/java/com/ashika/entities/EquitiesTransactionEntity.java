@@ -1,53 +1,76 @@
-package com.ashika.data.response;
+package com.ashika.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 
-public class EquityTransaction {
-	
-	@JsonProperty("rate")
+@Entity
+@Table(
+    name = "equities_transaction",
+    indexes = {
+        @Index(name = "idx_equities_transaction_pan", columnList = "pan")
+    }
+)
+public class EquitiesTransactionEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String rate;
-	
-	@JsonProperty("txnId")
     private String txnId;
-	
-	@JsonProperty("transactionDateTime")
     private Long transactionDateTime;
-	
-	@JsonProperty("orderId")
     private String orderId;
-	
-	@JsonProperty("maskedAccNumber")
-	private String maskedAccNumber;
-	
-	@JsonProperty("isin")
+    private String maskedAccNumber;
     private String isin;
-
-    @JsonProperty("isinDescription")
     private String isinDescription;
-    
-    @JsonProperty("account_type")
     private String accountType;
-    
-    @JsonProperty("equityCategory")
     private String equityCategory;
-    
-    @JsonProperty("exchange")
     private String exchange;
-
-    @JsonProperty("companyName")
     private String companyName;
-
-    @JsonProperty("narration")
     private String narration;
-
-    @JsonProperty("units")
     private Long units;
-
-    @JsonProperty("linkedAccRef")
-	private String linkedAccRef;
-
-    @JsonProperty("type")
+    private String linkedAccRef;
     private String type;
+    private String pan;
+
+    public EquitiesTransactionEntity(String rate, String txnId, Long transactionDateTime, String orderId,
+			String maskedAccNumber, String isin, String isinDescription, String accountType, String equityCategory,
+			String exchange, String companyName, String narration, Long units, String linkedAccRef, String type,
+			String pan) {
+		super();
+		this.rate = rate;
+		this.txnId = txnId;
+		this.transactionDateTime = transactionDateTime;
+		this.orderId = orderId;
+		this.maskedAccNumber = maskedAccNumber;
+		this.isin = isin;
+		this.isinDescription = isinDescription;
+		this.accountType = accountType;
+		this.equityCategory = equityCategory;
+		this.exchange = exchange;
+		this.companyName = companyName;
+		this.narration = narration;
+		this.units = units;
+		this.linkedAccRef = linkedAccRef;
+		this.type = type;
+		this.pan = pan;
+	}
+
+	protected EquitiesTransactionEntity() {
+        // Default constructor for JPA
+    }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getRate() {
 		return rate;
@@ -168,6 +191,12 @@ public class EquityTransaction {
 	public void setType(String type) {
 		this.type = type;
 	}
-    
-}
 
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+}

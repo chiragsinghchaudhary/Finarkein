@@ -8,10 +8,10 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mf_transaction",indexes = {
-	    @Index(name = "idx_mf_transaction_pan", columnList = "pan")
+@Table(name = "mutualfunds_transaction",indexes = {
+	    @Index(name = "idx_mutualfunds_transaction_pan", columnList = "pan")
 	})
-public class MFTransactionEntity {
+public class MutualFundsTransactionEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class MFTransactionEntity {
     
     private String pan;
 
-    public MFTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav, String maskedAccNumber,
+    public MutualFundsTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav, String maskedAccNumber,
 			String isin, String isinDescription, String schemeCode, String schemePlan, String accountType,
 			Double amount, String amc, String registrar, String narration, Double units, String mode,
 			Integer lockInDays, String navDate, String linkedAccRef, String lockInFlag, Long transactionDate,
@@ -77,7 +77,7 @@ public class MFTransactionEntity {
 		this.pan = pan;
 	}
 
-	protected MFTransactionEntity() {
+	protected MutualFundsTransactionEntity() {
         // Default constructor for JPA
     }
 

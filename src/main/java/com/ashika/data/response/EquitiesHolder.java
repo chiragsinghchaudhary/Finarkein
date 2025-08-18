@@ -2,7 +2,7 @@ package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EquityHolder {
+public class EquitiesHolder {
 	
 	@JsonProperty("name")
     private String name;

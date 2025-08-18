@@ -1,63 +1,58 @@
-package com.ashika.entities;
+package com.ashika.data.response;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(name = "mf_holder", indexes = {
-        @Index(name = "idx_mf_holder_pan", columnList = "pan")
-})
-public class MFHolderEntity {
+public class MutualFundsHolder {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("maskedDematID")
     private String maskedDematID;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("dob")
     private Long dob;
+
+    @JsonProperty("maskedAccNumber")
     private String maskedAccNumber;
+
+    @JsonProperty("folioNo")
     private String folioNo;
-    private String accountType;       
-    private String landLine;         
+
+    @JsonProperty("account_type")
+    private String accountType;
+
+    @JsonProperty("landLine")
+    private String landLine;
+
+    @JsonProperty("dematId")
     private String dematId;
+
+    @JsonProperty("address")
     private String address;
-    private String ckycCompliance;    
+
+    @JsonProperty("ckycCompliance")
+    private String ckycCompliance;
+
+    @JsonProperty("linkedAccRef")
     private String linkedAccRef;
+
+    @JsonProperty("mobile")
     private String mobile;
+
+    @JsonProperty("pan")
     private String pan;
+
+    @JsonProperty("maskedFolioNo")
     private String maskedFolioNo;
+
+    @JsonProperty("nominee")
     private String nominee;
 
-    public MFHolderEntity(String name, String maskedDematID, String email, Long dob, String maskedAccNumber,
-                          String folioNo, String accountType, String landLine, String dematId, String address,
-                          String ckycCompliance, String linkedAccRef, String mobile, String pan,
-                          String maskedFolioNo, String nominee) {
-        this.name = name;
-        this.maskedDematID = maskedDematID;
-        this.email = email;
-        this.dob = dob;
-        this.maskedAccNumber = maskedAccNumber;
-        this.folioNo = folioNo;
-        this.accountType = accountType;
-        this.landLine = landLine;
-        this.dematId = dematId;
-        this.address = address;
-        this.ckycCompliance = ckycCompliance;
-        this.linkedAccRef = linkedAccRef;
-        this.mobile = mobile;
-        this.pan = pan;
-        this.maskedFolioNo = maskedFolioNo;
-        this.nominee = nominee;
-    }
-
-    protected MFHolderEntity() {
-        // Default constructor for JPA
-    }
-
     // Getters & Setters
-    public Long getId() { return id; }
-
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

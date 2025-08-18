@@ -9,12 +9,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(
-    name = "equity_summary",
+    name = "equities_summary",
     indexes = {
-        @Index(name = "idx_equity_summary_pan", columnList = "pan")
+        @Index(name = "idx_equities_summary_pan", columnList = "pan")
     }
 )
-public class EquitySummaryEntity {
+public class EquitiesSummaryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class EquitySummaryEntity {
     private String issuerName;
     private String pan; // kept from your original entity
 
-    public EquitySummaryEntity(
+    public EquitiesSummaryEntity(
             Double lastTradedPrice,
             String maskedAccNumber,
             String isin,
@@ -58,7 +58,7 @@ public class EquitySummaryEntity {
         this.pan = pan;
     }
 
-    protected EquitySummaryEntity() {
+    protected EquitiesSummaryEntity() {
         // Default constructor for JPA
     }
 

@@ -2,7 +2,7 @@ package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MFTransaction {
+public class MutualFundsTransaction {
 	
 	@JsonProperty("ucc")
     private String ucc;

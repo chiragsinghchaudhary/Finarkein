@@ -2,7 +2,7 @@ package com.ashika.data.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EquitySummary {
+public class EquitiesSummary {
 	
 	@JsonProperty("lastTradedPrice")
     private Double lastTradedPrice;

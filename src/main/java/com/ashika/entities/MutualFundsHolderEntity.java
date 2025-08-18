@@ -1,57 +1,40 @@
 package com.ashika.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "equity_holder",
-    indexes = {
-        @Index(name = "idx_equity_holder_pan", columnList = "pan")
-    }
-)
-public class EquityHolderEntity {
+@Table(name = "mutualfunds_holder", indexes = {
+        @Index(name = "idx_mutualfunds_holder_pan", columnList = "pan")
+})
+public class MutualFundsHolderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private String maskedDematID;
     private String email;
-    private String dob;
+    private Long dob;
     private String maskedAccNumber;
     private String folioNo;
-    private String accountType;
-    private String landLine;
+    private String accountType;       
+    private String landLine;         
     private String dematId;
     private String address;
-    private boolean ckycCompliance;
+    private String ckycCompliance;    
     private String linkedAccRef;
     private String mobile;
     private String pan;
+    private String maskedFolioNo;
     private String nominee;
 
-    public EquityHolderEntity(
-            String name,
-            String email,
-            String dob,
-            String maskedAccNumber,
-            String folioNo,
-            String accountType,
-            String landLine,
-            String dematId,
-            String address,
-            boolean ckycCompliance,
-            String linkedAccRef,
-            String mobile,
-            String pan,
-            String nominee
-    ) {
+    public MutualFundsHolderEntity(String name, String maskedDematID, String email, Long dob, String maskedAccNumber,
+                          String folioNo, String accountType, String landLine, String dematId, String address,
+                          String ckycCompliance, String linkedAccRef, String mobile, String pan,
+                          String maskedFolioNo, String nominee) {
         this.name = name;
+        this.maskedDematID = maskedDematID;
         this.email = email;
         this.dob = dob;
         this.maskedAccNumber = maskedAccNumber;
@@ -64,10 +47,11 @@ public class EquityHolderEntity {
         this.linkedAccRef = linkedAccRef;
         this.mobile = mobile;
         this.pan = pan;
+        this.maskedFolioNo = maskedFolioNo;
         this.nominee = nominee;
     }
 
-    protected EquityHolderEntity() {
+    protected MutualFundsHolderEntity() {
         // Default constructor for JPA
     }
 
@@ -77,11 +61,14 @@ public class EquityHolderEntity {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
+    public String getMaskedDematID() { return maskedDematID; }
+    public void setMaskedDematID(String maskedDematID) { this.maskedDematID = maskedDematID; }
+
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getDob() { return dob; }
-    public void setDob(String dob) { this.dob = dob; }
+    public Long getDob() { return dob; }
+    public void setDob(Long dob) { this.dob = dob; }
 
     public String getMaskedAccNumber() { return maskedAccNumber; }
     public void setMaskedAccNumber(String maskedAccNumber) { this.maskedAccNumber = maskedAccNumber; }
@@ -101,8 +88,8 @@ public class EquityHolderEntity {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public boolean getCkycCompliance() { return ckycCompliance; }
-    public void setCkycCompliance(boolean ckycCompliance) { this.ckycCompliance = ckycCompliance; }
+    public String getCkycCompliance() { return ckycCompliance; }
+    public void setCkycCompliance(String ckycCompliance) { this.ckycCompliance = ckycCompliance; }
 
     public String getLinkedAccRef() { return linkedAccRef; }
     public void setLinkedAccRef(String linkedAccRef) { this.linkedAccRef = linkedAccRef; }
@@ -112,6 +99,9 @@ public class EquityHolderEntity {
 
     public String getPan() { return pan; }
     public void setPan(String pan) { this.pan = pan; }
+
+    public String getMaskedFolioNo() { return maskedFolioNo; }
+    public void setMaskedFolioNo(String maskedFolioNo) { this.maskedFolioNo = maskedFolioNo; }
 
     public String getNominee() { return nominee; }
     public void setNominee(String nominee) { this.nominee = nominee; }

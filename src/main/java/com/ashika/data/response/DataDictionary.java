@@ -16,22 +16,22 @@ public class DataDictionary {
 	private List<DepositTransaction> depositTransactions;
 
 	@JsonProperty("equities.holders")
-	private List<EquityHolder> equityHolders;
+	private List<EquitiesHolder> equitiesHolders;
 
 	@JsonProperty("equities.summary")
-	private List<EquitySummary> equitySummary;
+	private List<EquitiesSummary> equitiesSummary;
 
 	@JsonProperty("equities.transactions")
-	private List<EquityTransaction> equityTransactions;
+	private List<EquitiesTransaction> equitiesTransactions;
 
 	@JsonProperty("mutual_funds.holders")
-	private List<MFHolder> MFHolders;
+	private List<MutualFundsHolder> mutualFundsHolders;
 
 	@JsonProperty("mutual_funds.summary")
-	private List<MFSummary> MFSummary;
+	private List<MutualFundsSummary> mutualFundsSummary;
 
 	@JsonProperty("mutual_funds.transactions")
-	private List<MFTransaction> MFTransactions;
+	private List<MutualFundsTransaction> mutualFundsTransactions;
 
 	public List<DepositHolder> getDepositHolders() {
 		return depositHolders;
@@ -57,51 +57,51 @@ public class DataDictionary {
 		this.depositTransactions = depositTransactions;
 	}
 
-	public List<EquityHolder> getEquityHolders() {
-		return equityHolders;
+	public List<EquitiesHolder> getEquityHolders() {
+		return equitiesHolders;
 	}
 
-	public void setEquityHolders(List<EquityHolder> equityHolders) {
-		this.equityHolders = equityHolders;
+	public void setEquityHolders(List<EquitiesHolder> equityHolders) {
+		this.equitiesHolders = equityHolders;
 	}
 
-	public List<EquitySummary> getEquitySummary() {
-		return equitySummary;
+	public List<EquitiesSummary> getEquitySummary() {
+		return equitiesSummary;
 	}
 
-	public void setEquitySummary(List<EquitySummary> equitySummary) {
-		this.equitySummary = equitySummary;
+	public void setEquitySummary(List<EquitiesSummary> equitySummary) {
+		this.equitiesSummary = equitySummary;
 	}
 
-	public List<EquityTransaction> getEquityTransactions() {
-		return equityTransactions;
+	public List<EquitiesTransaction> getEquityTransactions() {
+		return equitiesTransactions;
 	}
 
-	public void setEquityTransactions(List<EquityTransaction> equityTransactions) {
-		this.equityTransactions = equityTransactions;
+	public void setEquityTransactions(List<EquitiesTransaction> equityTransactions) {
+		this.equitiesTransactions = equityTransactions;
 	}
 
-	public List<MFHolder> getMFHolders() {
-		return MFHolders;
+	public List<MutualFundsHolder> getMFHolders() {
+		return mutualFundsHolders;
 	}
 
-	public void setMFHolders(List<MFHolder> mFHolders) {
-		MFHolders = mFHolders;
+	public void setMFHolders(List<MutualFundsHolder> mFHolders) {
+		mutualFundsHolders = mFHolders;
 	}
 
-	public List<MFSummary> getMFSummary() {
-		return MFSummary;
+	public List<MutualFundsSummary> getMFSummary() {
+		return mutualFundsSummary;
 	}
 
-	public void setMFSummary(List<MFSummary> mFSummary) {
-		MFSummary = mFSummary;
+	public void setMFSummary(List<MutualFundsSummary> mFSummary) {
+		mutualFundsSummary = mFSummary;
 	}
 
-	public List<MFTransaction> getMFTransactions() {
-		return MFTransactions;
+	public List<MutualFundsTransaction> getMFTransactions() {
+		return mutualFundsTransactions;
 	}
 
-	public void setMFTransactions(List<MFTransaction> mFTransactions) {
-		MFTransactions = mFTransactions;
+	public void setMFTransactions(List<MutualFundsTransaction> mFTransactions) {
+		mutualFundsTransactions = mFTransactions;
 	}
 }

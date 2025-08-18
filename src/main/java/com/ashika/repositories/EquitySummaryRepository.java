@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ashika.entities.EquitySummaryEntity;
+import com.ashika.entities.EquitiesSummaryEntity;
 
 @Repository
-public interface EquitySummaryRepository extends JpaRepository<EquitySummaryEntity, Long> {
+public interface EquitySummaryRepository extends JpaRepository<EquitiesSummaryEntity, Long> {
 	
-	public List<EquitySummaryEntity> findAllByPan(String pan);
+	public List<EquitiesSummaryEntity> findAllByPan(String pan);
 	
 	public void deleteAllByPan(String pan);
 		

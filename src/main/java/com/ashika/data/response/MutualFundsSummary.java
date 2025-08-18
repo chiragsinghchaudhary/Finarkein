@@ -1,20 +1,8 @@
-package com.ashika.entities;
+package com.ashika.data.response;
 
-import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(
-    name = "mf_summary",
-    indexes = {
-        @Index(name = "idx_mf_summary_pan", columnList = "pan")
-    }
-)
-public class MFSummaryEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class MutualFundsSummary {
 
     @JsonProperty("ucc")
     private String ucc;
@@ -47,7 +35,7 @@ public class MFSummaryEntity {
     private Double costValue;
 
     @JsonProperty("closingUnits")
-    private String closingUnits; // keep as String for "0.000" formatting
+    private String closingUnits;
 
     @JsonProperty("amc")
     private String amc;
@@ -71,7 +59,7 @@ public class MFSummaryEntity {
     private String lockinUnits;
 
     @JsonProperty("navDate")
-    private Long navDate; // Epoch timestamp
+    private Long navDate;
 
     @JsonProperty("linkedAccRef")
     private String linkedAccRef;
@@ -88,48 +76,7 @@ public class MFSummaryEntity {
     @JsonProperty("amfiCode")
     private String amfiCode;
 
-    private String pan; // DB search/index only
-
-    protected MFSummaryEntity() {
-        // Default constructor for JPA
-    }
-
-    public MFSummaryEntity(
-            String ucc, String maskedDematID, Double nav, String maskedAccNumber,
-            String isin, String isinDescription, String schemeCode, String folioNo,
-            String accountType, Double costValue, String closingUnits, String amc,
-            String registrar, String schemeOption, String schemeCategory, String fatcaStatus,
-            String lienUnits, String lockinUnits, Long navDate, String linkedAccRef,
-            Double currentValue, String schemeTypes, String maskedFolioNo, String amfiCode, String pan
-    ) {
-        this.ucc = ucc;
-        this.maskedDematID = maskedDematID;
-        this.nav = nav;
-        this.maskedAccNumber = maskedAccNumber;
-        this.isin = isin;
-        this.isinDescription = isinDescription;
-        this.schemeCode = schemeCode;
-        this.folioNo = folioNo;
-        this.accountType = accountType;
-        this.costValue = costValue;
-        this.closingUnits = closingUnits;
-        this.amc = amc;
-        this.registrar = registrar;
-        this.schemeOption = schemeOption;
-        this.schemeCategory = schemeCategory;
-        this.fatcaStatus = fatcaStatus;
-        this.lienUnits = lienUnits;
-        this.lockinUnits = lockinUnits;
-        this.navDate = navDate;
-        this.linkedAccRef = linkedAccRef;
-        this.currentValue = currentValue;
-        this.schemeTypes = schemeTypes;
-        this.maskedFolioNo = maskedFolioNo;
-        this.amfiCode = amfiCode;
-        this.pan = pan;
-    }
-
-    // --- Getters & Setters ---
+    // Getters & Setters
     public String getUcc() { return ucc; }
     public void setUcc(String ucc) { this.ucc = ucc; }
 
@@ -201,7 +148,4 @@ public class MFSummaryEntity {
 
     public String getAmfiCode() { return amfiCode; }
     public void setAmfiCode(String amfiCode) { this.amfiCode = amfiCode; }
-
-    public String getPan() { return pan; }
-    public void setPan(String pan) { this.pan = pan; }
 }

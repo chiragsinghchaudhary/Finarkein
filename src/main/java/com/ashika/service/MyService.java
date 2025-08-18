@@ -23,24 +23,24 @@ import com.ashika.data.response.DataDictionary;
 import com.ashika.data.response.DepositHolder;
 import com.ashika.data.response.DepositSummary;
 import com.ashika.data.response.DepositTransaction;
-import com.ashika.data.response.EquityHolder;
-import com.ashika.data.response.EquitySummary;
-import com.ashika.data.response.EquityTransaction;
+import com.ashika.data.response.EquitiesHolder;
+import com.ashika.data.response.EquitiesSummary;
+import com.ashika.data.response.EquitiesTransaction;
 import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
-import com.ashika.data.response.MFHolder;
-import com.ashika.data.response.MFSummary;
-import com.ashika.data.response.MFTransaction;
+import com.ashika.data.response.MutualFundsHolder;
+import com.ashika.data.response.MutualFundsSummary;
+import com.ashika.data.response.MutualFundsTransaction;
 import com.ashika.data.response.RecurringNewRunResponse;
 import com.ashika.entities.ClientConsentMappingEntity;
 import com.ashika.entities.DepositHolderEntity;
 import com.ashika.entities.DepositSummaryEntity;
 import com.ashika.entities.DepositTransactionEntity;
-import com.ashika.entities.EquityHolderEntity;
-import com.ashika.entities.EquitySummaryEntity;
-import com.ashika.entities.EquityTransactionEntity;
-import com.ashika.entities.MFHolderEntity;
-import com.ashika.entities.MFSummaryEntity;
+import com.ashika.entities.EquitiesHolderEntity;
+import com.ashika.entities.EquitiesSummaryEntity;
+import com.ashika.entities.EquitiesTransactionEntity;
+import com.ashika.entities.MutualFundsHolderEntity;
+import com.ashika.entities.MutualFundsSummaryEntity;
 import com.ashika.entities.MFTransactionEntity;
 import com.ashika.repositories.ClientConsentMappingRepository;
 import com.ashika.repositories.DepositHolderRepository;
@@ -146,12 +146,12 @@ public class MyService {
 		List<DepositSummaryEntity> depositSummaries = depositSummaryRepository.findAllByPan(pan);
 		List<DepositTransactionEntity> depositTransactions = depositTransactionRepository.findAllByPan(pan);
 
-		List<EquityHolderEntity> equityHolders = equityHolderRepository.findAllByPan(pan);
-		List<EquitySummaryEntity> equitySummaries = equitySummaryRepository.findAllByPan(pan);
-		List<EquityTransactionEntity> equityTransactions = equityTransactionRepository.findAllByPan(pan);
+		List<EquitiesHolderEntity> equityHolders = equityHolderRepository.findAllByPan(pan);
+		List<EquitiesSummaryEntity> equitySummaries = equitySummaryRepository.findAllByPan(pan);
+		List<EquitiesTransactionEntity> equityTransactions = equityTransactionRepository.findAllByPan(pan);
 
-		List<MFHolderEntity> mfHolders = mfHolderRepository.findAllByPan(pan);
-		List<MFSummaryEntity> mfSummaries = mfSummaryRepository.findAllByPan(pan);
+		List<MutualFundsHolderEntity> mfHolders = mfHolderRepository.findAllByPan(pan);
+		List<MutualFundsSummaryEntity> mfSummaries = mfSummaryRepository.findAllByPan(pan);
 		List<MFTransactionEntity> mfTransactions = mfTransactionRepository.findAllByPan(pan);
 
 		// Combined debug log
@@ -572,7 +572,7 @@ public class MyService {
 		return responseList;
 	}
 
-private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> entities) {
+private List<EquitiesHolder> mapEquityHolderEntities(List<EquitiesHolderEntity> entities) {
     if (entities == null || entities.isEmpty()) {
         logger.debug("No EquityHolderEntity records found to map.");
         return new ArrayList<>();
@@ -580,9 +580,9 @@ private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> enti
 
     logger.debug("Mapping {} EquityHolderEntity records to EquityHolder response objects", entities.size());
 
-    List<EquityHolder> responseList = new ArrayList<>(entities.size());
-    for (EquityHolderEntity entity : entities) {
-        EquityHolder response = new EquityHolder();
+    List<EquitiesHolder> responseList = new ArrayList<>(entities.size());
+    for (EquitiesHolderEntity entity : entities) {
+        EquitiesHolder response = new EquitiesHolder();
 
         // Following the specified JSON order
         response.setName(entity.getName());
@@ -608,7 +608,7 @@ private List<EquityHolder> mapEquityHolderEntities(List<EquityHolderEntity> enti
     return responseList;
 }
 
-private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> entities) {
+private List<EquitiesSummary> mapEquitySummaryEntities(List<EquitiesSummaryEntity> entities) {
     if (entities == null || entities.isEmpty()) {
         logger.debug("No EquitySummaryEntity records found to map.");
         return new ArrayList<>();
@@ -616,9 +616,9 @@ private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> e
 
     logger.debug("Mapping {} EquitySummaryEntity records to EquitySummary response objects", entities.size());
 
-    List<EquitySummary> responseList = new ArrayList<>(entities.size());
-    for (EquitySummaryEntity entity : entities) {
-        EquitySummary response = new EquitySummary();
+    List<EquitiesSummary> responseList = new ArrayList<>(entities.size());
+    for (EquitiesSummaryEntity entity : entities) {
+        EquitiesSummary response = new EquitiesSummary();
 
         // Matching the specified JSON order
         response.setLastTradedPrice(entity.getLastTradedPrice());
@@ -639,7 +639,7 @@ private List<EquitySummary> mapEquitySummaryEntities(List<EquitySummaryEntity> e
     return responseList;
 }
 
-private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransactionEntity> entities) {
+private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTransactionEntity> entities) {
     if (entities == null || entities.isEmpty()) {
         logger.debug("No EquityTransactionEntity records found to map.");
         return new ArrayList<>();
@@ -648,9 +648,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
     logger.debug("Mapping {} EquityTransactionEntity records to EquityTransaction response objects",
             entities.size());
 
-    List<EquityTransaction> responseList = new ArrayList<>(entities.size());
-    for (EquityTransactionEntity entity : entities) {
-        EquityTransaction response = new EquityTransaction();
+    List<EquitiesTransaction> responseList = new ArrayList<>(entities.size());
+    for (EquitiesTransactionEntity entity : entities) {
+        EquitiesTransaction response = new EquitiesTransaction();
 
         // Matching JSON order
         response.setRate(entity.getRate());
@@ -676,7 +676,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
     return responseList;
 }
 
-	private List<MFHolder> mapMFHolderEntities(List<MFHolderEntity> entities) {
+	private List<MutualFundsHolder> mapMFHolderEntities(List<MutualFundsHolderEntity> entities) {
     if (entities == null || entities.isEmpty()) {
         logger.debug("No MFHolderEntity records found to map.");
         return new ArrayList<>();
@@ -684,9 +684,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
     logger.debug("Mapping {} MFHolderEntity records to MFHolder response objects", entities.size());
 
-    List<MFHolder> responseList = new ArrayList<>(entities.size());
-    for (MFHolderEntity entity : entities) {
-        MFHolder response = new MFHolder();
+    List<MutualFundsHolder> responseList = new ArrayList<>(entities.size());
+    for (MutualFundsHolderEntity entity : entities) {
+        MutualFundsHolder response = new MutualFundsHolder();
 
         // Order as per given JSON
         response.setName(entity.getName());
@@ -714,7 +714,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 }
 
 
-	private List<MFSummary> mapMFSummaryEntities(List<MFSummaryEntity> entities) {
+	private List<MutualFundsSummary> mapMFSummaryEntities(List<MutualFundsSummaryEntity> entities) {
     if (entities == null || entities.isEmpty()) {
         logger.debug("No MFSummaryEntity records found to map.");
         return new ArrayList<>();
@@ -722,9 +722,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
     logger.debug("Mapping {} MFSummaryEntity records to MFSummary response objects", entities.size());
 
-    List<MFSummary> responseList = new ArrayList<>(entities.size());
-    for (MFSummaryEntity entity : entities) {
-        MFSummary response = new MFSummary();
+    List<MutualFundsSummary> responseList = new ArrayList<>(entities.size());
+    for (MutualFundsSummaryEntity entity : entities) {
+        MutualFundsSummary response = new MutualFundsSummary();
 
         // Order as per given JSON
         response.setUcc(entity.getUcc());
@@ -759,7 +759,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
     return responseList;
 }
 
-	private List<MFTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
+	private List<MutualFundsTransaction> mapMFTransactionEntities(List<MFTransactionEntity> entities) {
 		if (entities == null || entities.isEmpty()) {
 			logger.debug("No MFTransactionEntity records found to map.");
 			return new ArrayList<>();
@@ -767,9 +767,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} MFTransactionEntity records to MFTransaction response objects", entities.size());
 
-		List<MFTransaction> responseList = new ArrayList<>(entities.size());
+		List<MutualFundsTransaction> responseList = new ArrayList<>(entities.size());
 		for (MFTransactionEntity entity : entities) {
-			MFTransaction response = new MFTransaction();
+			MutualFundsTransaction response = new MutualFundsTransaction();
 			response.setAmc(entity.getAmc());
 			response.setAmfiCode(entity.getAmfiCode());
 			response.setAmount(entity.getAmount());
@@ -868,7 +868,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<EquityHolderEntity> mapEquityHolderResponses(List<EquityHolder> responses) {
+	private List<EquitiesHolderEntity> mapEquityHolderResponses(List<EquitiesHolder> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquityHolder responses found to map.");
 			return new ArrayList<>();
@@ -876,9 +876,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} EquityHolder responses to EquityHolderEntity objects", responses.size());
 
-		List<EquityHolderEntity> entityList = new ArrayList<>(responses.size());
-		for (EquityHolder response : responses) {
-			EquityHolderEntity entity = new EquityHolderEntity(
+		List<EquitiesHolderEntity> entityList = new ArrayList<>(responses.size());
+		for (EquitiesHolder response : responses) {
+			EquitiesHolderEntity entity = new EquitiesHolderEntity(
 					response.getName(),
 					response.getEmail(),
 					response.getDob(),
@@ -900,7 +900,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<EquitySummaryEntity> mapEquitySummaryResponses(List<EquitySummary> responses, String pan) {
+	private List<EquitiesSummaryEntity> mapEquitySummaryResponses(List<EquitiesSummary> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquitySummary responses found to map.");
 			return new ArrayList<>();
@@ -908,9 +908,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} EquitySummary responses to EquitySummaryEntity objects", responses.size());
 
-		List<EquitySummaryEntity> entityList = new ArrayList<>(responses.size());
-		for (EquitySummary response : responses) {
-			EquitySummaryEntity entity = new EquitySummaryEntity(
+		List<EquitiesSummaryEntity> entityList = new ArrayList<>(responses.size());
+		for (EquitiesSummary response : responses) {
+			EquitiesSummaryEntity entity = new EquitiesSummaryEntity(
 					response.getLastTradedPrice(),
 					response.getMaskedAccNumber(),
 					response.getIsin(), 
@@ -930,7 +930,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<EquityTransactionEntity> mapEquityTransactionResponses(List<EquityTransaction> responses, String pan) {
+	private List<EquitiesTransactionEntity> mapEquityTransactionResponses(List<EquitiesTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No EquityTransaction responses found to map.");
 			return new ArrayList<>();
@@ -938,9 +938,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} EquityTransaction responses to EquityTransactionEntity objects", responses.size());
 
-		List<EquityTransactionEntity> entityList = new ArrayList<>(responses.size());
-		for (EquityTransaction response : responses) {
-			EquityTransactionEntity entity = new EquityTransactionEntity(
+		List<EquitiesTransactionEntity> entityList = new ArrayList<>(responses.size());
+		for (EquitiesTransaction response : responses) {
+			EquitiesTransactionEntity entity = new EquitiesTransactionEntity(
 					response.getRate(),
 					response.getTxnId(),
 					response.getTransactionDateTime(),
@@ -965,7 +965,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<MFHolderEntity> mapMFHolderResponses(List<MFHolder> responses) {
+	private List<MutualFundsHolderEntity> mapMFHolderResponses(List<MutualFundsHolder> responses) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFHolder responses found to map.");
 			return new ArrayList<>();
@@ -973,9 +973,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} MFHolder responses to MFHolderEntity objects", responses.size());
 
-		List<MFHolderEntity> entityList = new ArrayList<>(responses.size());
-		for (MFHolder response : responses) {
-			MFHolderEntity entity = new MFHolderEntity(
+		List<MutualFundsHolderEntity> entityList = new ArrayList<>(responses.size());
+		for (MutualFundsHolder response : responses) {
+			MutualFundsHolderEntity entity = new MutualFundsHolderEntity(
 					response.getName(),
 					response.getMaskedDematID(),
 					response.getEmail(),
@@ -1000,7 +1000,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<MFSummaryEntity> mapMFSummaryResponses(List<MFSummary> responses, String pan) {
+	private List<MutualFundsSummaryEntity> mapMFSummaryResponses(List<MutualFundsSummary> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFSummary responses found to map.");
 			return new ArrayList<>();
@@ -1008,9 +1008,9 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 
 		logger.debug("Mapping {} MFSummary responses to MFSummaryEntity objects", responses.size());
 
-		List<MFSummaryEntity> entityList = new ArrayList<>(responses.size());
-		for (MFSummary response : responses) {
-			MFSummaryEntity entity = new MFSummaryEntity(
+		List<MutualFundsSummaryEntity> entityList = new ArrayList<>(responses.size());
+		for (MutualFundsSummary response : responses) {
+			MutualFundsSummaryEntity entity = new MutualFundsSummaryEntity(
 					response.getUcc(),
 					response.getMaskedDematID(),
 					response.getNav(),
@@ -1044,7 +1044,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		return entityList;
 	}
 
-	private List<MFTransactionEntity> mapMFTransactionResponses(List<MFTransaction> responses, String pan) {
+	private List<MFTransactionEntity> mapMFTransactionResponses(List<MutualFundsTransaction> responses, String pan) {
 		if (responses == null || responses.isEmpty()) {
 			logger.debug("No MFTransaction responses found to map.");
 			return new ArrayList<>();
@@ -1053,7 +1053,7 @@ private List<EquityTransaction> mapEquityTransactionEntities(List<EquityTransact
 		logger.debug("Mapping {} MFTransaction responses to MFTransactionEntity objects", responses.size());
 
 		List<MFTransactionEntity> entityList = new ArrayList<>(responses.size());
-		for (MFTransaction response : responses) {
+		for (MutualFundsTransaction response : responses) {
 			MFTransactionEntity entity = new MFTransactionEntity(
 					response.getUcc(),
 					response.getTxnId(),
