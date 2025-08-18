@@ -40,12 +40,11 @@ public class EquitiesTransactionEntity {
     private String pan;
 	private LocalDateTime lastUpdatedTime;
 
-	public EquitiesTransactionEntity(Long id, String rate, String txnId, Long transactionDateTime, String orderId,
+	public EquitiesTransactionEntity(String rate, String txnId, Long transactionDateTime, String orderId,
 			String maskedAccNumber, String isin, String isinDescription, String accountType, String equityCategory,
 			String exchange, String companyName, String narration, Long units, String linkedAccRef, String type,
 			String pan, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.rate = rate;
 		this.txnId = txnId;
 		this.transactionDateTime = transactionDateTime;

@@ -34,11 +34,10 @@ public class DepositTransactionEntity {
     private String type;
     private LocalDateTime lastUpdatedTime;
 
-    public DepositTransactionEntity(Long id, String pan, String reference, String transactionId, String maskedAccNumber,
+    public DepositTransactionEntity(String pan, String reference, String transactionId, String maskedAccNumber,
 			Long transactionTimestamp, String accountType, Double currentBalance, Double amount, Long valueDate,
 			String narration, String mode, String linkedAccRef, String type, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.pan = pan;
 		this.reference = reference;
 		this.transactionId = transactionId;

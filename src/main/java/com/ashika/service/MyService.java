@@ -809,7 +809,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 			DepositHolderEntity entity = new DepositHolderEntity(response.getName(), response.getEmail(),
 					response.getDob(), response.getMaskedAccNumber(), response.getAccountType(), response.getLandLine(),
 					response.getAddress(), response.getCkycCompliance(), response.getLinkedAccRef(), response.getType(),
-					response.getMobile(), response.getPan(), response.getNominee());
+					response.getMobile(), response.getPan(), response.getNominee(), LocalDateTime.now());
 
 			entityList.add(entity);
 		}

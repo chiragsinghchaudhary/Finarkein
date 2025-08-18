@@ -41,11 +41,10 @@ public class EquitiesHolderEntity {
 
     
 
-    public EquitiesHolderEntity(Long id, String name, String email, String dob, String maskedAccNumber, String folioNo,
+    public EquitiesHolderEntity(String name, String email, String dob, String maskedAccNumber, String folioNo,
 			String accountType, String landLine, String dematId, String address, boolean ckycCompliance,
 			String linkedAccRef, String mobile, String pan, String nominee, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dob = dob;

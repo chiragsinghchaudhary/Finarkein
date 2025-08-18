@@ -37,12 +37,11 @@ public class MutualFundsHolderEntity {
     private String nominee;
     private LocalDateTime lastUpdatedTime;
     
-    public MutualFundsHolderEntity(Long id, String name, String maskedDematID, String email, Long dob,
+    public MutualFundsHolderEntity(String name, String maskedDematID, String email, Long dob,
 			String maskedAccNumber, String folioNo, String accountType, String landLine, String dematId, String address,
 			String ckycCompliance, String linkedAccRef, String mobile, String pan, String maskedFolioNo, String nominee,
 			LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.maskedDematID = maskedDematID;
 		this.email = email;

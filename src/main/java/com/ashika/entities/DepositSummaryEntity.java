@@ -43,13 +43,12 @@ public class DepositSummaryEntity {
 
 	
 
-	public DepositSummaryEntity(Long id, Long currentODLimit, String openingDate, String fipName,
+	public DepositSummaryEntity(Long currentODLimit, String openingDate, String fipName,
 			String maskedAccNumber, String branch, String accountType, Double currentBalance, Double drawingLimit,
 			Long accountAgeInDays, String pendingTransactionType, String status, String micrCode, Long balanceDatetime,
 			String currency, Double pendingAmount, String linkedAccRef, String ifscCode, String type, String facility,
 			String exchangeRate, String pan, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.currentODLimit = currentODLimit;
 		this.openingDate = openingDate;
 		this.fipName = fipName;

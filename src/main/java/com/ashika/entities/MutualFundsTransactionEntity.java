@@ -48,14 +48,13 @@ public class MutualFundsTransactionEntity {
     
     private LocalDateTime lastUpdatedTime;
     
-	public MutualFundsTransactionEntity(Long id, String ucc, String txnId, String maskedDematID, Double nav,
+	public MutualFundsTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav,
 			String maskedAccNumber, String isin, String isinDescription, String schemeCode, String schemePlan,
 			String accountType, Double amount, String amc, String registrar, String narration, Double units,
 			String mode, Integer lockInDays, String navDate, String linkedAccRef, String lockInFlag,
 			Long transactionDate, String type, String maskedFolioNo, String amfiCode, String pan,
 			LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.ucc = ucc;
 		this.txnId = txnId;
 		this.maskedDematID = maskedDematID;

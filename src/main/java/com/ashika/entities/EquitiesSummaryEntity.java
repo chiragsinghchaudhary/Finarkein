@@ -35,11 +35,10 @@ public class EquitiesSummaryEntity {
     private String pan; // kept from your original entity
     private LocalDateTime lastUpdatedTime;
 
-    public EquitiesSummaryEntity(Long id, Double lastTradedPrice, String maskedAccNumber, String isin,
+    public EquitiesSummaryEntity(Double lastTradedPrice, String maskedAccNumber, String isin,
 			String isinDescription, String accountType, Double units, String linkedAccRef, String type,
 			Double currentValue, String issuerName, String pan, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.lastTradedPrice = lastTradedPrice;
 		this.maskedAccNumber = maskedAccNumber;
 		this.isin = isin;

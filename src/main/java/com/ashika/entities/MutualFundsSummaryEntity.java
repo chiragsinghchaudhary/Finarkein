@@ -105,14 +105,13 @@ public class MutualFundsSummaryEntity {
         // Default constructor for JPA
     }
 
-    public MutualFundsSummaryEntity(Long id, String ucc, String maskedDematID, Double nav, String maskedAccNumber,
+    public MutualFundsSummaryEntity(String ucc, String maskedDematID, Double nav, String maskedAccNumber,
 			String isin, String isinDescription, String schemeCode, String folioNo, String accountType,
 			Double costValue, String closingUnits, String amc, String registrar, String schemeOption,
 			String schemeCategory, String fatcaStatus, String lienUnits, String lockinUnits, Long navDate,
 			String linkedAccRef, Double currentValue, String schemeTypes, String maskedFolioNo, String amfiCode,
 			String pan, LocalDateTime lastUpdatedTime) {
 		super();
-		this.id = id;
 		this.ucc = ucc;
 		this.maskedDematID = maskedDematID;
 		this.nav = nav;
