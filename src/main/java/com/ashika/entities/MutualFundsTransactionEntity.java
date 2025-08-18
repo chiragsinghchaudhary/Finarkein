@@ -41,8 +41,10 @@ public class MutualFundsTransactionEntity {
     private String type;
     private String maskedFolioNo;
     private String amfiCode;
-    
+    private LocalDateTime lastUpdatedTime;
+
     private String pan;
+	
 
     public MutualFundsTransactionEntity(String ucc, String txnId, String maskedDematID, Double nav, String maskedAccNumber,
 			String isin, String isinDescription, String schemeCode, String schemePlan, String accountType,
@@ -287,5 +289,12 @@ public class MutualFundsTransactionEntity {
 
 	public void setPan(String pan) {
 		this.pan = pan;
+	}
+	public LocalDateTime getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }
