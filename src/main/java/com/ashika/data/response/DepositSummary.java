@@ -63,6 +63,8 @@ public class DepositSummary {
 
     @JsonProperty("exchangeRate")
     private String exchangeRate;
+    
+    private String lastUpdatedTime;
 
 	public Long getCurrentODLimit() {
 		return currentODLimit;
@@ -222,5 +224,13 @@ public class DepositSummary {
 
 	public void setExchangeRate(String exchangeRate) {
 		this.exchangeRate = exchangeRate;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

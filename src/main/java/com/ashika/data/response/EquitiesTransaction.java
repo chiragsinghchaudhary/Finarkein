@@ -49,6 +49,8 @@ public class EquitiesTransaction {
     @JsonProperty("type")
     private String type;
 
+	private String lastUpdatedTime;
+
 	public String getRate() {
 		return rate;
 	}
@@ -167,6 +169,14 @@ public class EquitiesTransaction {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
     
 }

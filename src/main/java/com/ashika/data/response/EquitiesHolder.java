@@ -46,6 +46,8 @@ public class EquitiesHolder {
     @JsonProperty("nominee")
     private String nominee;
 
+	private String lastUpdatedTime;
+
 	public String getName() {
 		return name;
 	}
@@ -156,6 +158,14 @@ public class EquitiesHolder {
 
 	public void setNominee(String nominee) {
 		this.nominee = nominee;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 
 }

@@ -42,6 +42,8 @@ public class DepositHolder {
 
 	@JsonProperty("nominee")
 	private String nominee;
+	
+	private String lastUpdatedTime;
 
 	public String getName() {
 		return name;
@@ -99,7 +101,7 @@ public class DepositHolder {
 		this.address = address;
 	}
 
-	public boolean getCkycCompliance() {
+	public boolean isCkycCompliance() {
 		return ckycCompliance;
 	}
 
@@ -145,5 +147,13 @@ public class DepositHolder {
 
 	public void setNominee(String nominee) {
 		this.nominee = nominee;
+	}
+
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

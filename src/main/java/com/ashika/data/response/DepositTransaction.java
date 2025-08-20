@@ -40,6 +40,8 @@ public class DepositTransaction {
 	@JsonProperty("type")
 	private String type;
 
+	private String lastUpdatedTime;
+
 	public String getReference() {
 		return reference;
 	}
@@ -134,5 +136,13 @@ public class DepositTransaction {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }

@@ -2,6 +2,7 @@ package com.ashika.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +59,8 @@ import com.ashika.repositories.MutualFundsTransactionRepository;
 public class MyService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyService.class);
+	
+	public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 	@Autowired
 	private DepositHolderRepository depositHolderRepository;
@@ -489,6 +492,7 @@ public class MyService {
 			response.setMobile(entity.getMobile());
 			response.setPan(entity.getPan());
 			response.setNominee(entity.getNominee());
+			response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
 			// Add to list
 			responseList.add(response);
@@ -529,6 +533,7 @@ public class MyService {
 			response.setType(entity.getType());
 			response.setFacility(entity.getFacility());
 			response.setExchangeRate(entity.getExchangeRate());
+			response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
 			// Add to list
 			responseList.add(response);
@@ -562,6 +567,7 @@ public class MyService {
 			response.setMode(entity.getMode());
 			response.setLinkedAccRef(entity.getLinkedAccRef());
 			response.setType(entity.getType());
+			response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
 			// Add to list
 			responseList.add(response);
@@ -599,6 +605,7 @@ private List<EquitiesHolder> mapEquityHolderEntities(List<EquitiesHolderEntity> 
         response.setMobile(entity.getMobile());
         response.setPan(entity.getPan());
         response.setNominee(entity.getNominee());
+        response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
         
         //Add to list
         responseList.add(response);
@@ -631,8 +638,9 @@ private List<EquitiesSummary> mapEquitySummaryEntities(List<EquitiesSummaryEntit
         response.setType(entity.getType());
         response.setCurrentValue(entity.getCurrentValue());
         response.setIssuerName(entity.getIssuerName());
+        response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
-        responseList.add(response);
+        responseList.add(response);//Add to list
     }
 
     logger.debug("Successfully mapped {} EquitySummary response objects", responseList.size());
@@ -668,8 +676,9 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
         response.setUnits(entity.getUnits());
         response.setLinkedAccRef(entity.getLinkedAccRef());
         response.setType(entity.getType());
+        response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
-        responseList.add(response);
+        responseList.add(response);//Add to list
     }
 
     logger.debug("Successfully mapped {} EquityTransaction response objects", responseList.size());
@@ -705,8 +714,9 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
         response.setPan(entity.getPan());
         response.setMaskedFolioNo(entity.getMaskedFolioNo());
         response.setNominee(entity.getNominee());
+        response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
-        responseList.add(response);
+        responseList.add(response);//Add to list
     }
 
     logger.debug("Successfully mapped {} MFHolder response objects", responseList.size());
@@ -751,8 +761,9 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
         response.setSchemeTypes(entity.getSchemeTypes());
         response.setMaskedFolioNo(entity.getMaskedFolioNo());
         response.setAmfiCode(entity.getAmfiCode());
+        response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
 
-        responseList.add(response);
+        responseList.add(response);//Add to list
     }
 
     logger.debug("Successfully mapped {} MFSummary response objects", responseList.size());
@@ -789,7 +800,9 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 			response.setType(entity.getType());
 			response.setUcc(entity.getUcc());
 			response.setUnits(entity.getUnits());
-			responseList.add(response);
+			response.setLastUpdatedTime((entity.getLastUpdatedTime()).format(formatter));
+			
+			responseList.add(response);//Add to list
 		}
 
 		logger.debug("Successfully mapped {} MFTransaction response objects", responseList.size());
@@ -808,7 +821,7 @@ private List<EquitiesTransaction> mapEquityTransactionEntities(List<EquitiesTran
 		for (DepositHolder response : responses) {
 			DepositHolderEntity entity = new DepositHolderEntity(response.getName(), response.getEmail(),
 					response.getDob(), response.getMaskedAccNumber(), response.getAccountType(), response.getLandLine(),
-					response.getAddress(), response.getCkycCompliance(), response.getLinkedAccRef(), response.getType(),
+					response.getAddress(), response.isCkycCompliance(), response.getLinkedAccRef(), response.getType(),
 					response.getMobile(), response.getPan(), response.getNominee(), LocalDateTime.now());
 
 			entityList.add(entity);

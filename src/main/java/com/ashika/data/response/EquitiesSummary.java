@@ -34,6 +34,8 @@ public class EquitiesSummary {
     @JsonProperty("issuerName")
     private String issuerName;
 
+	private String lastUpdatedTime;
+
 	public Double getLastTradedPrice() {
 		return lastTradedPrice;
 	}
@@ -112,6 +114,14 @@ public class EquitiesSummary {
 
 	public void setIssuerName(String issuerName) {
 		this.issuerName = issuerName;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }
 

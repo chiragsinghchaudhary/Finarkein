@@ -76,6 +76,8 @@ public class MutualFundsTransaction {
     @JsonProperty("amfiCode")
     private String amfiCode;
 
+	private String lastUpdatedTime;
+
 	public String getUcc() {
 		return ucc;
 	}
@@ -266,6 +268,14 @@ public class MutualFundsTransaction {
 
 	public void setAmfiCode(String amfiCode) {
 		this.amfiCode = amfiCode;
+	}
+	
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 }
 
