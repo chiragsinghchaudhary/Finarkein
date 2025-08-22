@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.GetRequest;
+import com.ashika.data.request.GetTypeRequest;
 import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.GetResultResponse;
@@ -75,35 +76,35 @@ public class MyController {
     }
 
     @GetMapping("/getStatus/{requestId}")
-    public GetStatusResponse getStatus(@PathVariable("requestId") String requestId) {
+    public GetStatusResponse getStatus(@PathVariable("requestId") String requestId, @RequestBody GetTypeRequest getTypeRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /getStatus " + " requestId : " + requestId );
+    	logger.info("Entry: /getStatus " + " requestId : " + requestId + " runType : " + getTypeRequest.getRunType());
     	
-    	GetStatusResponse getStatusResponse = myService.getStatus(requestId);
+    	GetStatusResponse getStatusResponse = myService.getStatus(requestId, getTypeRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /getStatus " + " requestId : " + requestId
+    	logger.info("Exit: /getStatus " + " requestId : " + requestId + " runType : " + getTypeRequest.getRunType()
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
         return getStatusResponse;
     }
 
     @GetMapping("/getResult/{requestId}")
-    public GetResultResponse getResult(@PathVariable("requestId") String requestId) {
+    public GetResultResponse getResult(@PathVariable("requestId") String requestId, @RequestBody GetTypeRequest getTypeRequest) {
     	
     	long startTimeInMilliseconds = System.currentTimeMillis();
     	
-    	logger.info("Entry: /getResult " + " requestId : " + requestId );
+    	logger.info("Entry: /getResult " + " requestId : " + requestId + " runType : " + getTypeRequest.getRunType());
     	
     	
-    	GetResultResponse getResultResponse = myService.getResult(requestId);
+    	GetResultResponse getResultResponse = myService.getResult(requestId, getTypeRequest);
     	
     	long timeTakenToProcessRequest = System.currentTimeMillis() - startTimeInMilliseconds;
     	
-    	logger.info("Exit: /getResult " + " requestId : " + requestId
+    	logger.info("Exit: /getResult " + " requestId : " + requestId + " runType : " + getTypeRequest.getRunType()
     			+ " ProcessingTime : " + timeTakenToProcessRequest);
     	
         return getResultResponse;

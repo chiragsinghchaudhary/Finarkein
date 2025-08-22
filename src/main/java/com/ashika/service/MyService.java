@@ -18,6 +18,7 @@ import com.ashika.Constants;
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.GetRequest;
 import com.ashika.data.request.RecurringNewRunRequest;
+import com.ashika.data.request.GetTypeRequest;
 import com.ashika.data.response.BaseResponse;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.DataDictionary;
@@ -319,7 +320,7 @@ public class MyService {
 		return recurringResponse;
 	}
 
-	public GetStatusResponse getStatus(String requestId) {
+	public GetStatusResponse getStatus(String requestId, GetTypeRequest getTypeRequest) {
 
 		long overallStart = System.currentTimeMillis();
 		logger.info("getStatus started -> requestId={}", requestId);
@@ -328,7 +329,7 @@ public class MyService {
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: getStatus -> requestId={}", requestId);
 
-		GetStatusResponse statusResponse = finarkeinClient.getStatus(requestId);
+		GetStatusResponse statusResponse = finarkeinClient.getStatus(requestId, getTypeRequest);
 
 		if (statusResponse == null || statusResponse.getState() == null) {
 			logger.error("API getStatus returned null or invalid state -> requestId={}", requestId);
@@ -372,7 +373,7 @@ public class MyService {
 	}
 
 	@Transactional
-	public GetResultResponse getResult(String requestId) {
+	public GetResultResponse getResult(String requestId, GetTypeRequest runType) {
 
 		long overallStart = System.currentTimeMillis();
 		logger.info("getResult started -> requestId={}", requestId);
@@ -381,7 +382,7 @@ public class MyService {
 		long apiStart = System.currentTimeMillis();
 		logger.info("API call: getResult -> requestId={}", requestId);
 
-		GetResultResponse resultResponse = finarkeinClient.getResult(requestId);
+		GetResultResponse resultResponse = finarkeinClient.getResult(requestId, runType);
 
 		if (resultResponse == null || resultResponse.getState() == null) {
 			logger.error("API getResult returned null or invalid state -> requestId={}", requestId);

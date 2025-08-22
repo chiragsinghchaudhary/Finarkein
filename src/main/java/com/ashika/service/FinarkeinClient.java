@@ -16,8 +16,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.ashika.Constants;
 import com.ashika.data.request.ConsentNewRunRequest;
 import com.ashika.data.request.RecurringNewRunRequest;
+import com.ashika.data.request.GetTypeRequest;
 import com.ashika.data.response.ConsentNewRunResponse;
 import com.ashika.data.response.GetResultResponse;
 import com.ashika.data.response.GetStatusResponse;
@@ -34,8 +36,11 @@ public class FinarkeinClient {
     @Value("${finarkein.api.workspace}")
     private String workspace;
 
-    @Value("${finarkein.api.flowId}")
-    private String flowId;
+    @Value("${finarkein.api.consent.flowId}")
+    private String consentFlowId;
+    
+    @Value("${finarkein.api.fetch.flowId}")
+    private String fetchFlowId;
 
     @Value("${finarkein.api.common-url}")
     private String finarkeinCommmonUrl;
@@ -64,10 +69,10 @@ public class FinarkeinClient {
 
     public ConsentNewRunResponse createNewConsentRun(ConsentNewRunRequest request) {
         long startTime = System.currentTimeMillis();
-        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId;
+        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + consentFlowId;
 
         logger.info("Entry: createNewConsentRun | URL: {} | workspace: {} | flowId: {} | pan: {}",
-                url, workspace, flowId, maskPan(request.getIdentifiers().getPan()));
+                url, workspace, consentFlowId, maskPan(request.getIdentifiers().getPan()));
 
         try {
             String accessToken = getAuthToken();
@@ -89,23 +94,23 @@ public class FinarkeinClient {
 
             long timeTaken = System.currentTimeMillis() - startTime;
             logger.info("Exit: createNewConsentRun | workspace: {} | flowId: {} | ProcessingTime: {} ms",
-                    workspace, flowId, timeTaken);
+                    workspace, consentFlowId, timeTaken);
 
             return response.getBody();
 
         } catch (Exception ex) {
             logger.error("Error in createNewConsentRun | workspace: {} | flowId: {} | Error: {}",
-                    workspace, flowId, ex.getMessage(), ex);
+                    workspace, consentFlowId, ex.getMessage(), ex);
             throw ex;
         }
     }
 
     public RecurringNewRunResponse createNewRecurringRun(RecurringNewRunRequest request) {
         long startTime = System.currentTimeMillis();
-        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + finarkeinFetchUrl + flowId;
+        String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + finarkeinFetchUrl + fetchFlowId;
 
         logger.info("Entry: createNewRecurringRun | URL: {} | workspace: {} | flowId: {} | consentHandle: {}",
-                url, workspace, flowId, request.getConsentHandle());
+                url, workspace, fetchFlowId, request.getConsentHandle());
 
         try {
             String accessToken = getAuthToken();
@@ -129,19 +134,23 @@ public class FinarkeinClient {
 
             long timeTaken = System.currentTimeMillis() - startTime;
             logger.info("Exit: createNewRecurringRun | workspace: {} | flowId: {} | ProcessingTime: {} ms",
-                    workspace, flowId, timeTaken);
+                    workspace, fetchFlowId, timeTaken);
 
             return response.getBody();
 
         } catch (Exception ex) {
             logger.error("Error in createNewRecurringRun | workspace: {} | flowId: {} | Error: {}",
-                    workspace, flowId, ex.getMessage(), ex);
+                    workspace, fetchFlowId, ex.getMessage(), ex);
             throw ex;
         }
     }
 
-    public GetStatusResponse getStatus(String requestId) {
+    public GetStatusResponse getStatus(String requestId, GetTypeRequest getTypeRequest) {
+    	
+    	String flowId = getFlowId(getTypeRequest);
         long startTime = System.currentTimeMillis();
+        
+        
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId + "/" + requestId + finarkeinStatusUrl;
 
         logger.info("Entry: getStatus | URL: {} | workspace: {} | flowId: {} | requestId: {}",
@@ -177,7 +186,19 @@ public class FinarkeinClient {
         }
     }
 
-    public GetResultResponse getResult(String requestId) {
+    private String getFlowId(GetTypeRequest runType) {
+
+    	if(runType.equals(Constants.CONSENT)) {
+    		return consentFlowId;
+    	}else {
+    		return fetchFlowId;
+    	}
+	}
+
+	public GetResultResponse getResult(String requestId, GetTypeRequest getTypeRequest) {
+		
+		String flowId = getFlowId(getTypeRequest);
+		
         long startTime = System.currentTimeMillis();
         String url = finarkeinBaseUrl + workspace + finarkeinCommmonUrl + flowId + "/" + requestId + finarkeinResultUrl;
 
