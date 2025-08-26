@@ -186,9 +186,9 @@ public class FinarkeinClient {
         }
     }
 
-    private String getFlowId(GetTypeRequest runType) {
+    private String getFlowId(GetTypeRequest getTypeRequest) {
 
-    	if(runType.equals(Constants.CONSENT)) {
+    	if(getTypeRequest.getRunType().equals(Constants.CONSENT)) {
     		return consentFlowId;
     	}else {
     		return fetchFlowId;
